@@ -24,13 +24,23 @@ namespace MBStore_MVC
     {
         public delegate void TempDelegate();
         public TempDelegate tempDelegate;
+        string[] user;
 
         Timer _timer = null;
         string a;
 
         public MainWindow()
         {
+            Login log = new Login();
+            log.Show();
+            this.Hide();
+        }
+        public MainWindow(string str)
+        {
+            this.Show();
+            user = str.Split('#');
             InitializeComponent();
+            tb_main.Text = "환영합니다 " + user[0] + "님. [부서 : " + user[1] + "]";
             InitTimer();
         }
         private void InitTimer()
@@ -53,6 +63,13 @@ namespace MBStore_MVC
         private void SetTextBox()
         {
             text.Text = DateTime.Now.ToString();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
+            this.Close();
         }
     }
 }
