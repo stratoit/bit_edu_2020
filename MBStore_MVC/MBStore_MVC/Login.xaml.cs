@@ -1,6 +1,7 @@
 ﻿using MBStore_MVC.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 
 namespace MBStore_MVC
@@ -20,9 +22,17 @@ namespace MBStore_MVC
     /// </summary>
     public partial class Login : Window
     {
+        string path = @"autoloing.txt";
+       
         public Login()
         {
             InitializeComponent();
+            if (File.Exists(path))
+            {
+                string[] value = File.ReadAllText(path).Split('#');
+                    func_login(value[0], value[1]);
+            }
+               
         }
         private void Path_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -53,29 +63,46 @@ namespace MBStore_MVC
         {
             if (e.Key == Key.Enter)
                 btn_sign_Click(sender, e);
-
         }
-
-        private void btn_sign_Click(object sender, RoutedEventArgs e)
+        #region 로그인 함수
+        private void func_login(string id, string pw)
         {
             mbDB db = new mbDB();
 
-            string id = db.SelectEmpId(tb_id.Text);
-            string[] str = id.Split('#');
+            string[] str = db.SelectEmpId(id).Split('#');
             string auth;
 
-            if (tb_id.Text == str[0] && tb_pw.Password == str[1])
+            try
             {
-                auth = str[3] +"#" +  str[2];
-                MainWindow main = new MainWindow(auth);
-                this.Close();
+                //id와 pw가 일치하면
+                if (id == str[0] && pw == str[1])
+                {
+                    auth = str[3] + "#" + str[2];
+                    //자동로그인 체크 검사
+                    if (cb_auto.IsChecked == true)
+                    {
+                        string value;
+                        value = tb_id.Text + "#" + tb_pw.Password;
+                        File.WriteAllText(path, value, Encoding.Default);
+                    }
+                    MainWindow main = new MainWindow(auth);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("아이디나 비밀번호가 일치하지 않습니다", "로그인 에러");
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show("아이디나 비밀번호가 일치하지 않습니다", "로그인 에러");
+                MessageBox.Show("아이디와 비밀번호를 정확하게 입력해주세요.");
             }
-               
-
         }
+        #endregion
+        private void btn_sign_Click(object sender, RoutedEventArgs e)
+        {
+            func_login(tb_id.Text, tb_pw.Password);
+        }
+
     }
 }

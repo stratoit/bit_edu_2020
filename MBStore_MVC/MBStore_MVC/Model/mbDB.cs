@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -63,6 +64,54 @@ namespace MBStore_MVC.Model
                 {
                     return "";
                 }
+            }
+        }
+
+        public List<string> SelectCustomer(string name, string gender, string phone)
+        {
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결           
+                string query = "";
+
+                if (!string.IsNullOrEmpty(name))
+                    query += " name = @name" + " and";
+
+                if (gender != "전체")
+                    query += " gender = @gender" + " and";
+
+                if (!string.IsNullOrEmpty(phone))
+                    query += " phone = @phone" + " and";
+
+                string sql = "select name,gender,birth,phone,savings from customer where" + query;
+
+                SqlCommand cmd = new SqlCommand(sql.Substring(0,sql.Length-3), conn);
+
+                SqlParameter param_name = new SqlParameter("@name", name);
+                cmd.Parameters.Add(param_name);
+                SqlParameter param_gender = new SqlParameter("@gender", gender);
+                cmd.Parameters.Add(param_gender);
+                SqlParameter param_phone = new SqlParameter("@phone", phone);
+                cmd.Parameters.Add(param_phone);
+
+                SqlDataReader myDataReader = cmd.ExecuteReader();
+
+                List<string> retstr = new List<string>();
+
+                while (myDataReader.Read())
+                {
+                    string str = string.Empty;
+                    str += myDataReader["name"].ToString() + "#";
+                    str += myDataReader["gender"].ToString() + "#";
+                    str += myDataReader["birth"].ToString() + "#";
+                    str += myDataReader["phone"].ToString() + "#";
+                    str += myDataReader["savings"].ToString();                  
+                    retstr.Add(str);
+                }
+                myDataReader.Close();
+                return retstr;
             }
         }
     }

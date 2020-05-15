@@ -5,7 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MBStore_MVC"
         mc:Ignorable="d"
-        Title="모바일기기 매장관리 시스템 v0.2" Height="768" Width="1024" Icon="icon.bmp" Closed="Window_Closed">
+        Title="모바일기기 매장관리 시스템 v0.2" Height="768" Width="1024" Closed="Window_Closed">
+    <Window.Resources>
+        <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Background" Value="#FF0051F0"/>
+        </Style>
+        <DataTemplate x:Key="myHeaderTemplate">
+            <DockPanel>
+                <TextBlock FontSize="13" Foreground="White">
+                    <TextBlock.Text>
+                        <Binding/>
+                    </TextBlock.Text>
+                </TextBlock>
+            </DockPanel>
+        </DataTemplate>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -57,7 +75,129 @@
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
-                        <TextBlock FontSize="20" FontWeight="Bold" x:Name="tb_main" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.2*"></RowDefinition>
+                            <RowDefinition Height="0.2*"></RowDefinition>
+                            <RowDefinition Height="1.5*"></RowDefinition>
+                            <RowDefinition Height="1.3*"></RowDefinition>
+                            <RowDefinition Height="0.1*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" FontSize="20" FontWeight="Bold" x:Name="tb_main" VerticalAlignment="Center" HorizontalAlignment="Center">Hello</TextBlock>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="313*"></ColumnDefinition>
+                                <ColumnDefinition Width="314*"></ColumnDefinition>
+                                <ColumnDefinition Width="180*"></ColumnDefinition>
+                                <ColumnDefinition Width="133*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Background="#FFFFFF" BorderBrush="{x:Null}" Grid.Column="1" Margin="0,-10,0,10" Click="Button_Click" >
+                                <TextBlock  Foreground="#FF0051F0" FontSize="10" FontWeight="Black" Text="다른 아이디로 로그인"/>
+                            </Button>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" Text="이달의 우수 사원"/>
+                            <TextBlock Grid.Column="1" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" Text="이달의 우수 고객"/>
+                        </Grid>
+                        <Grid Grid.Row="3" >
+                            <TabControl>
+                                <TabControl.Resources>
+                                    <Style TargetType="TabItem">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="TabItem">
+                                                    <Grid Name="Panel">
+                                                        <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                                    </Grid>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsSelected" Value="True">
+                                                            <Setter TargetName="Panel" Property="Background" Value="#FFFBB513" />
+                                                        </Trigger>
+                                                        <Trigger Property="IsSelected" Value="False">
+                                                            <Setter TargetName="Panel" Property="Background" Value="#FFF19709" /> 
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </TabControl.Resources>
+                                <TabItem Background="White" FontWeight="Bold" Foreground="White" Header="전체공지" BorderBrush="{x:Null}">
+                                    <Grid>
+                                        <ListView >
+                                            <ListView.View >
+                                                <GridView>
+                                                    <GridViewColumn Width="50" Header="No." DisplayMemberBinding="{Binding Path=Name}"/>
+                                                    <GridViewColumn Width="500" Header="제목" DisplayMemberBinding="{Binding Path=Gender}"/>
+                                                    <GridViewColumn Width="180" Header="작성일" DisplayMemberBinding="{Binding Path=Phone}"/>
+                                                    <GridViewColumn Width="100" Header="작성자" DisplayMemberBinding="{Binding Path=Date}"/>
+                                                    <GridViewColumn Width="60" Header="조회수" DisplayMemberBinding="{Binding Path=Saving}">
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Background="White"  FontWeight="Bold" Foreground="White" Header="물류팀공지" BorderBrush="{x:Null}">
+                                    <Grid>
+                                        <ListView >
+                                            <ListView.View >
+                                                <GridView>
+                                                    <GridViewColumn Width="50" Header="No." DisplayMemberBinding="{Binding Path=Name}"/>
+                                                    <GridViewColumn Width="500" Header="제목" DisplayMemberBinding="{Binding Path=Gender}"/>
+                                                    <GridViewColumn Width="180" Header="작성일" DisplayMemberBinding="{Binding Path=Phone}"/>
+                                                    <GridViewColumn Width="100" Header="작성자" DisplayMemberBinding="{Binding Path=Date}"/>
+                                                    <GridViewColumn Width="60" Header="조회수" DisplayMemberBinding="{Binding Path=Saving}">
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Background="White" FontWeight="Bold" Foreground="White" Header="판매팀공지" BorderBrush="{x:Null}">
+                                    <Grid>
+                                        <ListView >
+                                            <ListView.View >
+                                                <GridView>
+                                                    <GridViewColumn Width="50" Header="No." DisplayMemberBinding="{Binding Path=Name}"/>
+                                                    <GridViewColumn Width="500" Header="제목" DisplayMemberBinding="{Binding Path=Gender}"/>
+                                                    <GridViewColumn Width="180" Header="작성일" DisplayMemberBinding="{Binding Path=Phone}"/>
+                                                    <GridViewColumn Width="100" Header="작성자" DisplayMemberBinding="{Binding Path=Date}"/>
+                                                    <GridViewColumn Width="60" Header="조회수" DisplayMemberBinding="{Binding Path=Saving}">
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Background="White" FontWeight="Bold" Foreground="White" Header="지원팀공지" BorderBrush="{x:Null}">
+                                    <Grid>
+                                        <ListView >
+                                            <ListView.View >
+                                                <GridView>
+                                                    <GridViewColumn Width="50" Header="No." DisplayMemberBinding="{Binding Path=Name}"/>
+                                                    <GridViewColumn Width="500" Header="제목" DisplayMemberBinding="{Binding Path=Gender}"/>
+                                                    <GridViewColumn Width="180" Header="작성일" DisplayMemberBinding="{Binding Path=Phone}"/>
+                                                    <GridViewColumn Width="100" Header="작성자" DisplayMemberBinding="{Binding Path=Date}"/>
+                                                    <GridViewColumn Width="60" Header="조회수" DisplayMemberBinding="{Binding Path=Saving}">
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </Grid>
+                                </TabItem>
+                            </TabControl>
+                        </Grid>
+                        <Grid Grid.Row="4">
+                            <Button x:Name="btn_notice" Margin="880,0,5,0" Content="글쓰기" Height="21" VerticalAlignment="Top" Click="btn_notice_Click"/>
+                        </Grid>
                     </Grid>
                 </TabItem>
 
@@ -281,6 +421,70 @@
                                         <TextBlock HorizontalAlignment="Center" Foreground="White">고객조회</TextBlock>
                                     </StackPanel>
                                 </TabItem.Header>
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Row="1" Column="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="15,0,0,2" Height="25">고객이름:</Label>
+                                            <TextBox x:Name="tb_se_cusName" Margin="5,0,0,2" MinWidth="100"></TextBox>
+                                            <ComboBox Width="60" Height="20" Margin="15,0,0,5"  IsEditable="True" IsReadOnly="True" Text="전체" x:Name="cb_su_sex" VerticalAlignment="Bottom">
+                                                <ComboBoxItem>전체</ComboBoxItem>
+                                                <ComboBoxItem>남성</ComboBoxItem>
+                                                <ComboBoxItem>여성</ComboBoxItem>
+                                            </ComboBox>
+                                            <Label Margin="15,0,0,2">연락처:</Label>
+                                            <TextBox Width="100" Margin="5,0,0,2" x:Name="tb_se_phone"></TextBox>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="0" Column="1" Grid.RowSpan="2">
+                                        <Button Click="btn_se_search" Margin="10,10,10,0">조회</Button>
+                                    </Grid>
+                                    <Grid Row="1" Column="0" Margin="10,0,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="70"/>
+                                            <ColumnDefinition Width="150"/>
+                                        </Grid.ColumnDefinitions>
+                                    </Grid>
+                                    <Grid Row="0" Column="2" Grid.RowSpan="2">
+                                        <Button Margin="10,10,10,0" Click="btn_RR_Close">닫기</Button>
+                                    </Grid>
+                                    <Grid Row="2" Column="0" Grid.ColumnSpan="3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="167*"/>
+                                            <ColumnDefinition Width="120*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <ListView Name="lv_product_list" Margin="10,10,10,10" Grid.ColumnSpan="2">
+
+                                            <ListView.View >
+
+                                                <GridView  ColumnHeaderTemplate="{StaticResource myHeaderTemplate}" ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
+                                                    <GridViewColumn Width="100" Header="고객이름" DisplayMemberBinding="{Binding Path=Name}"/>
+                                                    <GridViewColumn Width="80" Header="성별" DisplayMemberBinding="{Binding Path=Gender}"/>
+                                                    <GridViewColumn Width="120" Header="연락처" DisplayMemberBinding="{Binding Path=Phone}"/>
+                                                    <GridViewColumn Width="120" Header="가입날짜" DisplayMemberBinding="{Binding Path=Date}"/>
+
+                                                    <GridViewColumn Width="70" Header="적립금" DisplayMemberBinding="{Binding Path=Saving}">
+                                                    
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </Grid>
+                                </Grid>
+
                             </TabItem>
 
                             <TabItem Height="100" Background="{x:Null}"  Foreground="White" BorderBrush="{x:Null}">
