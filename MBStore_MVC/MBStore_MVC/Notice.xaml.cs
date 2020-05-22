@@ -22,14 +22,17 @@ namespace MBStore_MVC
         public Notice()
         {
             InitializeComponent();
-            WindowStyle = WindowStyle.None;
-            ResizeMode = ResizeMode.NoResize;
-            AllowsTransparency = true;
+
         }
 
         private void btn_close_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
 }

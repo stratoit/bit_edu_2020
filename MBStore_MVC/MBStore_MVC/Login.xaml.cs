@@ -20,6 +20,7 @@ namespace MBStore_MVC
     /// <summary>
     /// Login.xaml에 대한 상호 작용 논리
     /// </summary>
+    /// 
     public partial class Login : Window
     {
         string path = @"autoloing.txt";
@@ -44,15 +45,7 @@ namespace MBStore_MVC
             }
         }
 
-        private void Path_MouseEnter(object sender, MouseEventArgs e)
-        {
-            btn_close.Fill = Brushes.Gray;
-        }
 
-        private void btn_close_MouseLeave(object sender, MouseEventArgs e)
-        {
-            btn_close.Fill = Brushes.White;
-        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -62,22 +55,21 @@ namespace MBStore_MVC
         private void PasswordBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-                btn_sign_Click(sender, e);
+                btn_Login_Click(sender, e);
         }
         #region 로그인 함수
         private void func_login(string id, string pw)
         {
             mbDB db = new mbDB();
+            Employee emp = new Employee();
 
-            string[] str = db.SelectEmpId(id).Split('#');
-            string auth;
-
+            emp = db.SelectEmpId(id);
+            
             try
             {
                 //id와 pw가 일치하면
-                if (id == str[0] && pw == str[1])
+                if (id == emp.Login_id && pw == emp.Login_pw)
                 {
-                    auth = str[3] + "#" + str[2];
                     //자동로그인 체크 검사
                     if (cb_auto.IsChecked == true)
                     {
@@ -85,7 +77,7 @@ namespace MBStore_MVC
                         value = tb_id.Text + "#" + tb_pw.Password;
                         File.WriteAllText(path, value, Encoding.Default);
                     }
-                    MainWindow main = new MainWindow(auth);
+                    MainWindow main = new MainWindow(emp);
                     this.Close();
                 }
                 else
@@ -99,10 +91,27 @@ namespace MBStore_MVC
             }
         }
         #endregion
-        private void btn_sign_Click(object sender, RoutedEventArgs e)
+        private void btn_Login_Click(object sender, RoutedEventArgs e)
         {
             func_login(tb_id.Text, tb_pw.Password);
         }
 
+        private void btn_signup_Click(object sender, RoutedEventArgs e)
+        {
+            SignUp su = new SignUp();
+            
+            su.Show(this);
+        }
+
+        private void btn_close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+        
     }
 }

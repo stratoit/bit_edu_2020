@@ -56,6 +56,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FindAddress.xaml.cs">
+      <DependentUpon>FindAddress.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InputCustomer.xaml.cs">
+      <DependentUpon>InputCustomer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Employee.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\Sell_Info.cs" />
+    <Compile Include="ShoppingBasket.xaml.cs">
+      <DependentUpon>ShoppingBasket.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SignUp.xaml.cs">
+      <DependentUpon>SignUp.xaml</DependentUpon>
+    </Compile>
+    <Page Include="FindAddress.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InputCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -76,6 +99,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Notice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShoppingBasket.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SignUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

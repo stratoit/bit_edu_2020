@@ -7,16 +7,16 @@
         mc:Ignorable="d"
         WindowStyle ="None"
         Height="600" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Grid Background="#FF0051F0">
+    <Grid Background="#FF0051F0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition  Height="1*"></RowDefinition>
             <RowDefinition Height="0.8*"></RowDefinition>
             <RowDefinition Height="0.8*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" >
-            <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontStyle="Italic" FontSize="50" FontWeight="Bold" Text="PROTEC"/>
-            <Path  Name="btn_close" Grid.Row="0" Stretch="Fill" Fill="White" Data="M300.188,246L484.14,62.04c5.06-5.064,7.852-11.82,7.86-19.024c0-7.208-2.792-13.972-7.86-19.028L468.02,7.872c-5.068-5.076-11.824-7.856-19.036-7.856c-7.2,0-13.956,2.78-19.024,7.856L246.008,191.82L62.048,7.872c-5.06-5.076-11.82-7.856-19.028-7.856c-7.2,0-13.96,2.78-19.02,7.856L7.872,23.988c-10.496,10.496-10.496,27.568,0,38.052L191.828,246L7.872,429.952c-5.064,5.072-7.852,11.828-7.852,19.032c0,7.204,2.788,13.96,7.852,19.028l16.124,16.116c5.06,5.072,11.824,7.856,19.02,7.856c7.208,0,13.968-2.784,19.028-7.856l183.96-183.952l183.952,183.952c5.068,5.072,11.824,7.856,19.024,7.856h0.008c7.204,0,13.96-2.784,19.028-7.856l16.12-16.116c5.06-5.064,7.852-11.824,7.852-19.028c0-7.204-2.792-13.96-7.852-19.028L300.188,246z" Margin="370.167,10,15.5,144.333" RenderTransformOrigin="0.491,0.483" MouseDown="Path_MouseDown" MouseEnter="Path_MouseEnter" MouseLeave="btn_close_MouseLeave" />
+            <TextBlock Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontStyle="Italic" FontSize="50" FontWeight="Bold" Text="PROTEC"   />
+            <Button Margin="371,0,0,144" x:Name="btn_close" Background="#FF0051F0" Foreground="White" FontWeight="Bold"  Content="X" BorderBrush="{x:Null}" Click="btn_close_Click"  />
         </Grid>
         <Grid Grid.Row="1">
             <TextBlock  Foreground="White" FontSize="20" Margin="44,21,46,3">Name</TextBlock>
@@ -29,8 +29,9 @@
             <TextBlock Foreground="White" FontSize="16" Margin="70,95,248,0">Auto Login</TextBlock>
         </Grid>
         <Grid Grid.Row="3">
-            <Button x:Name="btn_sign"  FontSize="24" FontWeight="Bold" Foreground="White" Content="Sign In" BorderBrush="{x:Null}" Background="#FF0051F0" Margin="124,4,124,127" Click="btn_sign_Click"/>
-            <Button Grid.Row="3" FontSize="23" FontWeight="Bold" Foreground="White" Content="Help" BorderBrush="{x:Null}" Background="#FF0051F0" Margin="124,70,124,61" ToolTip="계정 생성문의나 비밀번호를 잊어버리신 경우 지원팀에 문의하십시오." Click="Button_Click"/>
+            <Button x:Name="btn_login"  FontSize="24" FontWeight="Bold" Foreground="White" Content="Login" BorderBrush="{x:Null}" Background="{x:Null}" Margin="216,9,88,122" Click="btn_Login_Click"/>
+            <Button x:Name="btn_signup" FontSize="23" FontWeight="Bold" Foreground="White" Content="Sign Up" BorderBrush="{x:Null}" Background="{x:Null}" Margin="88,9,205,122" Click="btn_signup_Click"/>
+            <Button  FontSize="11" FontWeight="Bold" Foreground="White" Margin="134,64,129,77" Content="forgot your password?" BorderBrush="{x:Null}" Background="{x:Null}"/>
         </Grid>
     </Grid>
 </Window>

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MBStore_MVC"
-        mc:Ignorable="d"
+        mc:Ignorable="d" 
         Title="모바일기기 매장관리 시스템 v0.2" Height="768" Width="1024" Closed="Window_Closed">
     <Window.Resources>
         <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
@@ -243,33 +243,180 @@
                                         <TextBlock Foreground="White">제품등록</TextBlock>
                                     </StackPanel>
                                 </TabItem.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Row="0" Column="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                            <Label Height="25" Margin="8,0,4,0">제품명 :</Label>
+                                            <TextBox x:Name="tb_lo_reg_objectName" Width="120" Height="20"></TextBox>
+                                            <Label Height="25" Margin="4,0,4,0">출시일 :</Label>
+                                            <DatePicker x:Name="dtp_lo_reg_objectManufacture" Height="22" Width="100" Margin="0,0,0,0" Text="" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                            <!--<TextBox x:Name="tb_lo_eg_objectManufacture" Height="20" Grid.Column="4" Width="70"></TextBox>-->
+                                            <Label Margin="4,0,4,0">CPU :</Label>
+                                            <TextBox x:Name="tb_lo_reg_objectCPU" Width="200" Height="20"></TextBox>
+                                            <Label Margin="4,0,4,0">크기 :</Label>
+                                            <TextBox x:Name="tb_lo_reg_objectInch" Height="20" Grid.Column="4" Width="29"></TextBox>
+                                            <Label Margin="4,0,4,0">배터리 :</Label>
+                                            <TextBox x:Name="tb_lo_reg_objectmAh" Height="20" Grid.Column="4" Width="40"></TextBox>
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                            <Label Margin="8,0,4,0">RAM :</Label>
+                                            <TextBox x:Name="tb_lo_reg_objectRAM" Height="20" Grid.Column="4" Width="25"></TextBox>
+                                            <Label Margin="4,0,4,0">제조사 :</Label>
+                                            <TextBox x:Name="tb_lo_reg_objectBrand" Height="20" Grid.Column="4" Width="60"></TextBox>
+                                            <Label Margin="4,0,4,0">카메라 :</Label>
+                                            <TextBox x:Name="tb_lo_reg_objectCamera" Height="20" Grid.Column="4" Width="30"></TextBox>
+                                            <Label Margin="4,0,4,0">무게 :</Label>
+                                            <TextBox x:Name="tb_lo_reg_objectWeight" Height="20" Grid.Column="4" Width="30"></TextBox>
+                                            <Label Margin="4,0,4,0">가격 :</Label>
+                                            <TextBox x:Name="tb_lo_reg_objectPrice" Height="20" Grid.Column="4" Width="60"></TextBox>
+                                            <Label Margin="4,0,1,0">디스플레이 :</Label>
+                                            <TextBox x:Name="tb_lo_reg_objectDisplay" Height="20" Grid.Column="4" Width="80"></TextBox>
+                                            <Label Margin="4,0,4,0">메모리 :</Label>
+                                            <TextBox x:Name="tb_lo_reg_objectMemory" Height="20" Grid.Column="4" Width="40"></TextBox>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="0" Column="1">
+                                        <Button Name="btn_lo_reg_regist" Margin="10,2.8,10,31.2" Height="Auto" Click="btn_lo_reg_regist_Click">등록</Button>
+                                        <Button Name="btn_lo_reg_search" Margin="10,31,10,3.8" Height="20" Click="btn_lo_reg_search_Click">조회</Button>
+                                    </Grid>
+                                    <Grid Row="1" Column="0" Margin="10,0,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="16.213"/>
+                                            <ColumnDefinition Width="20.787"/>
+                                            <ColumnDefinition Width="32.749"/>
+                                            <ColumnDefinition Width="150"/>
+                                        </Grid.ColumnDefinitions>
+                                    </Grid>
+                                    <Grid Row="2" Column="0" Grid.ColumnSpan="3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="94*"/>
+                                            <ColumnDefinition Width="425*"/>
+                                            <ColumnDefinition Width="31*"/>
+                                            <ColumnDefinition Width="30*"/>
+                                            <ColumnDefinition Width="288*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ListView x:Name="lv_lo_reg_productList" Margin="10,10,10,10" Grid.ColumnSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                            <ListView.View >
+                                                <GridView>
+                                                    <GridViewColumn Width="70" Header="물품번호" DisplayMemberBinding="{Binding Product_id}"/>
+                                                    <GridViewColumn Width="150" Header="물품명" DisplayMemberBinding="{Binding Name}"/>
+                                                    <GridViewColumn Width="80" Header="출시일" DisplayMemberBinding="{Binding Manufacture, StringFormat='{}{0:yyyy/MM/dd}'}"/>
+                                                    <GridViewColumn Width="80" Header="제조사" DisplayMemberBinding="{Binding Brand}"/>
+                                                    <GridViewColumn Width="60" Header="제품크기" DisplayMemberBinding="{Binding Inch}"/>
+                                                    <GridViewColumn Width="90" Header="디스플레이" DisplayMemberBinding="{Binding Display}"/>
+                                                    <GridViewColumn Width="Auto" Header="배터리(mAh)" DisplayMemberBinding="{Binding MAh}"/>
+                                                    <GridViewColumn Width="Auto" Header="RAM(GB)" DisplayMemberBinding="{Binding Ram}"/>
+                                                    <GridViewColumn Width="Auto" Header="메모리(GB)" DisplayMemberBinding="{Binding Memory}"/>
+                                                    <GridViewColumn Width="50" Header="카메라" DisplayMemberBinding="{Binding Camera}"/>
+                                                    <GridViewColumn Width="200" Header="CPU" DisplayMemberBinding="{Binding Cpu}"/>
+                                                    <GridViewColumn Width="Auto" Header="무게(g)" DisplayMemberBinding="{Binding Weight}"/>
+                                                    <GridViewColumn Width="Auto" Header="가격" DisplayMemberBinding="{Binding Price, StringFormat='{}{0:#,###}' }"/>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </Grid>
+                                </Grid>
                             </TabItem>
-                            <TabItem Height="100" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
+                            <TabItem Height="100" Foreground="White" BorderBrush="{x:Null}">
                                 <TabItem.Header>
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                                         <Path HorizontalAlignment="Center" Fill="White" Stretch="Fill" Height="24" Width="24"
                                               Data="M291.219,78.753L153.176,9.732c-2.943-1.473-6.409-1.473-9.353,0L5.781,78.753C2.238,80.525,0,84.145,0,88.107v189.808 c0,5.775,4.682,10.458,10.458,10.458h34.511c5.775,0,10.458-4.682,10.458-10.458V115.82h186.148v162.095 c0,5.775,4.682,10.458,10.458,10.458h34.511c5.775,0,10.458-4.682,10.458-10.458V88.107C297,84.145,294.762,80.525,291.219,78.753z M276.085,267.457h-13.595V105.362c0-5.775-4.682-10.458-10.458-10.458H44.968c-5.775,0-10.458,4.682-10.458,10.458v162.095H20.915 V94.57L148.5,30.778L276.085,94.57V267.457z M217.521,132.552H148.5c-4.043,0-7.32,3.277-7.32,7.32v61.701H79.479c-4.043,0-7.32,3.277-7.32,7.32v69.021 c0,4.043,3.277,7.32,7.32,7.32h138.042c4.043,0,7.32-3.277,7.32-7.32V139.873C224.842,135.829,221.564,132.552,217.521,132.552z M155.82,226.568l16.837,16.837l-16.837,16.837V226.568z M141.18,260.241l-16.837-16.837l16.837-16.837V260.241z M166.174,216.214 h33.673l-16.837,16.837L166.174,216.214z M166.174,201.573l16.837-16.837l16.837,16.837H166.174z M210.201,191.22l-16.836-16.837 l16.836-16.837V191.22z M183.011,164.03l-16.837-16.837h33.673L183.011,164.03z M172.657,174.383L155.82,191.22v-33.673 L172.657,174.383z M113.989,233.051l-16.837-16.837h33.673L113.989,233.051z M103.636,243.404l-16.837,16.837v-33.673 L103.636,243.404z M113.989,253.758l16.837,16.837H97.153L113.989,253.758z M183.01,253.758l16.837,16.837h-33.673L183.01,253.758z M193.364,243.404l16.837-16.837v33.673L193.364,243.404z"/>
-                                        <TextBlock Foreground="White" HorizontalAlignment="Center">입고</TextBlock>
+                                        <TextBlock Foreground="White" HorizontalAlignment="Center">입고반품</TextBlock>
                                     </StackPanel>
                                 </TabItem.Header>
-                            </TabItem>
-                            <TabItem Height="100" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
-                                <TabItem.Header>
-                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                                        <Path HorizontalAlignment="Center" Height="30" Width="27" Stretch="Fill"  Fill="White" 
-                                              Data="M107 82C106.877 92.4294 99.052 90.5467 92.0039 95.6381C85.4288 100.388 83.8132 106.283 84.0147 114C84.6837 139.628 114.95 126.481 126.731 139.225C137.121 150.462 111.465 153.413 105 150.881C100.713 149.202 97.2068 143.737 92.9105 142.981C88.9302 142.282 83.7901 145.917 80 147C84.66 162.836 106.948 161.33 107 176L122 176L122 166C141.764 163.336 157.615 136.331 134.996 124.403C126.28 119.806 105.972 122.917 100.712 113.892C97.7064 108.735 104.961 105.059 109 104.329C117.343 102.823 124.64 105.584 130 112L143 106C139.927 96.7353 131.528 91.4364 122 91L122 82L107 82z M101 11L101 12L117 27C89.107 27 62.0959 35.976 42.0394 56.0394C-7.52921 105.625 11.9167 192.101 76 217.986C136.585 242.458 204.687 199.295 210.83 135C214.137 100.394 198.855 70.8937 174 48L173 48C170.384 51.2459 164.281 56.5611 164.331 61C164.382 65.5418 171.104 69.9708 173.91 73C180.226 79.8188 185.073 88.3992 188.547 97C197.521 119.219 195.11 144.217 183.688 165C178.161 175.057 170.141 184.177 161 191.1C101.624 236.075 16.2146 178.895 33.2361 107C35.5776 97.1099 40.1733 87.2046 46.159 79C53.3927 69.0847 63.2309 60.2267 74 54.3117C87.168 47.0791 102.077 44.0016 117 44L102 60C104.237 63.1751 108.604 69.7932 112.999 69.7932C118.9 69.7932 128.961 55.0576 132.999 51C136.383 47.5999 145.801 40.1574 145.793 35C145.785 29.5964 135.706 22.7949 132 19.5756C127.461 15.633 117.419 1.16275 111 1.9213C106.815 2.41592 103.426 8.02089 101 11z"/>
-                                        <TextBlock Foreground="White" HorizontalAlignment="Center">반품</TextBlock>
-                                    </StackPanel>
-                                </TabItem.Header>
-                            </TabItem>
-                            <TabItem Height="100" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
-                                <TabItem.Header>
-                                    <StackPanel Orientation="Vertical">
-                                        <Path HorizontalAlignment="Center" Fill="White" 
-                                              Data="M 10 0.1875 C 4.58 0.1875 0.1875 4.58 0.1875 10 C 0.1875 15.42 4.58 19.8125 10 19.8125 C 12.28995 19.8125 14.393062 19.001996 16.0625 17.6875 L 16.9375 18.5625 C 16.571328 19.252523 16.699291 20.136791 17.28125 20.71875 L 21.875 25.34375 C 22.588 26.05775 23.75475 26.05775 24.46875 25.34375 L 25.34375 24.46875 C 26.05675 23.75475 26.05675 22.588 25.34375 21.875 L 20.71875 17.28125 C 20.134554 16.697054 19.254632 16.595625 18.5625 16.96875 L 17.6875 16.09375 C 19.011378 14.421193 19.8125 12.298983 19.8125 10 C 19.8125 4.58 15.42 0.1875 10 0.1875 z M 10 2 C 14.418 2 18 5.582 18 10 C 18 14.418 14.418 18 10 18 C 5.582 18 2 14.418 2 10 C 2 5.582 5.582 2 10 2 z M 4.9375 7.46875 C 4.4205 8.30475 4.125 9.28975 4.125 10.34375 C 4.125 13.37075 6.56775 15.8125 9.59375 15.8125 C 10.76275 15.8125 11.859 15.4355 12.75 14.8125 C 12.511 14.8385 12.245 14.84375 12 14.84375 C 8.086 14.84375 4.9375 11.69625 4.9375 7.78125 C 4.9375 7.67725 4.9325 7.57275 4.9375 7.46875 z"/>
-                                        <TextBlock Foreground="White" >내역조회</TextBlock>
-                                    </StackPanel>
-                                </TabItem.Header>
+                                <Grid Margin="0,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Row="0" Column="0">
+                                        <StackPanel Orientation="Horizontal" Margin="2,0,0,0">
+                                            <Label Height="25" Margin="5,0,5,0">물품ID :</Label>
+                                            <ComboBox Name="cb_lo_io_productNumber" Width="70" Height="20" DropDownOpened="cb_lo_io_productNumber_DropDownOpened" DisplayMemberPath="{Binding Product_id}" Margin="0,3,0,0" VerticalAlignment="Top"/>
+                                            <Label Height="25" Margin="5,0,5,0" Content="색   상 :"></Label>
+                                            <TextBox Name="tb_lo_io_color" Height="20" Width="100" Margin="-1,0,0,0"></TextBox>
+                                            <Label Margin="5,0,5,0" Content="수   량 :"></Label>
+                                            <TextBox Name="tb_lo_io_numberOf" Width="30" Height="20" Margin="-1,0,0,0"></TextBox>
+                                            <Label Margin="5,0,5,0">RGB :</Label>
+                                            <TextBox Name="tb_lo_io_rgb" Height="20" Width="60"></TextBox>
+                                            <Button Name="btn_lo_io_listAdd" Margin="10,0,0,0" Height="20" Width="50" Click="btn_lo_io_listAdd_Click">추가</Button>
+                                            <Button Name="btn_lo_io_remove" Margin="10,0,0,0" Height="20" Width="50" Content="삭제" Click="btn_lo_io_remove_Click"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Button Grid.Column="1" Name="btn_lo_io_search" Margin="10,0,0,0" Width="50" Height="20" Content="조회" Click="btn_lo_io_search_Click"/>
+                                    <Button Grid.Column="2" Name="btn_lo_io_register" Margin="10,0,10,0" Width="50" Height="20" Content="등록" Click="btn_lo_io_register_Click"/>
+                                    <Grid Row="1" Grid.Column="0">
+                                        <StackPanel Margin="7,0,0,0" Orientation="Horizontal">
+                                            <Label Height="25" Margin="0,0,5,0" Content="사   번 :"></Label>
+                                            <ComboBox Name="cb_lo_io_employeeNum" Margin="-1,0,0,0" Width="70" Height="20" IsReadOnly="True" DisplayMemberPath="{Binding Employee_id}" DropDownOpened="cb_lo_io_employeeNum_DropDownOpened"></ComboBox>
+                                            <Label Height="25" Margin="5,0,5,0">입고일 :</Label>
+                                            <DatePicker x:Name="dp_lo_io_inputDate" Width="100" Height="25"></DatePicker>
+                                            <Label Height="25" Margin="5,0,5,0">입출고 :</Label>
+                                            <ComboBox Name="cb_lo_io_inOutput" Width="60" Height="20">
+                                                <ComboBoxItem Content="입고"/>
+                                                <ComboBoxItem Content="반품"/>
+                                            </ComboBox>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="2" Column="0" Grid.ColumnSpan="7">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="9*"/>
+                                            <ColumnDefinition Width="425*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ListView Name="lv_lo_io_addList" Margin="10,5,10,10"
+                                                  SizeChanged="ListView_SizeChanged" Loaded="ListView_Loaded" Grid.ColumnSpan="2" >
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn Width="150" Header="물품ID" DisplayMemberBinding="{Binding Product_id}"/>
+                                                    <GridViewColumn Width="120" Header="색상" DisplayMemberBinding="{Binding Color}"/>
+                                                    <GridViewColumn Width="110" Header="수량" DisplayMemberBinding="{Binding Stock}"/>
+                                                    <GridViewColumn Width="110" Header="RGB" DisplayMemberBinding="{Binding ColorValue}"/>
+                                                    <GridViewColumn Width="100" Header="상태" DisplayMemberBinding="{Binding Trade_type}"/>
+                                                    <GridViewColumn Width="100" Header="입고일" DisplayMemberBinding="{Binding Trade_date, StringFormat='{}{0:yyyy-MM-dd}'}"/>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </Grid>
+                                    <Grid Row="3" Column="0" Grid.ColumnSpan="7">
+                                        <ListView Name="lv_lo_io_objectList" Margin="10,5,10,10" SizeChanged="ListView_SizeChanged" Loaded="ListView_Loaded">
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn Width="150" Header="물품ID" DisplayMemberBinding="{Binding Product_id}"/>
+                                                    <GridViewColumn Width="180" Header="물품명" DisplayMemberBinding="{Binding Name}"/>
+                                                    <GridViewColumn Width="120" Header="색상" DisplayMemberBinding="{Binding Color}"/>
+                                                    <GridViewColumn Width="110" Header="수량" DisplayMemberBinding="{Binding Stock}"/>
+                                                    <GridViewColumn Width="120" Header="RGB" DisplayMemberBinding="{Binding ColorValue}"/>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </Grid>
+                                </Grid>
                             </TabItem>
                             <TabItem Height="100" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
                                 <TabItem.Header>
@@ -279,12 +426,126 @@
                                         <TextBlock Foreground="White" >제품조회</TextBlock>
                                     </StackPanel>
                                 </TabItem.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="60"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Row="0" Column="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="10,0,0,2" Height="25">물품번호:</Label>
+                                            <TextBox Width="80" Height="20" Margin="0,0,0,0" x:Name="tb_lo_pse_productID"></TextBox>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="0" Column="1">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="10,0,0,2" Height="25">물품명:</Label>
+                                            <TextBox Width="100" Height="20" Margin="0,0,0,0" x:Name="tb_lo_pse_name"></TextBox>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="0" Column="2">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="10,0,0,2" Height="25">제조사:</Label>
+                                            <TextBox Width="100" Height="20" Margin="0,0,0,0" x:Name="tb_lo_pse_brand"></TextBox>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="0" Column="3">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="10,0,0,2" Height="25">메모리:</Label>
+                                            <ComboBox Name="cb_lo_pse_memory" Width="80" Height="20" Margin="0,0,0,0" IsEditable="True" IsReadOnly="True" Text="memory">
+                                                <ComboBoxItem>8</ComboBoxItem>
+                                                <ComboBoxItem>16</ComboBoxItem>
+                                                <ComboBoxItem>32</ComboBoxItem>
+                                                <ComboBoxItem>64</ComboBoxItem>
+                                                <ComboBoxItem>128</ComboBoxItem>
+                                                <ComboBoxItem>256</ComboBoxItem>
+                                                <ComboBoxItem>512</ComboBoxItem>
+                                            </ComboBox>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="1" Column="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="34,0,0,2" Height="25">가격:</Label>
+                                            <TextBox Width="80" Height="20" Margin="0,0,0,0" x:Name="tb_lo_pse_price"/>
+                                            <Button Click="btn_lo_pse_price_Click" x:Name="btn_lo_pse_price" Margin="7,0,0,0" Height="18" Content="▲" />
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="1" Column="1">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="10,0,0,2" Height="25">출시일:</Label>
+                                            <DatePicker x:Name="dtp_lo_pse_manufacture" Height="22" Width="99" Margin="1,3,0,0" Text="" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                            <Button Click="btn_lo_pse_manufacture_Click" x:Name="btn_lo_pse_manufacture" Margin="7,0,0,0" Height="18" Content="▲" />
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="1" Column="2">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="20,0,0,2" Height="25">RAM:</Label>
+                                            <TextBox Width="100" Height="20" Margin="0,0,0,0" x:Name="tb_lo_pse_ram"></TextBox>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="0" Column="4" Grid.RowSpan="2">
+                                        <Button Click="btn_lo_pse_search_Click" Margin="10,10,10,0">Search</Button>
+                                    </Grid>
+                                    <Grid Row="0" Column="5" Grid.RowSpan="2">
+                                        <Button Click="btn_lo_pse_reset_Click"  Margin="10,10,10,0">Reset</Button>
+                                    </Grid>
+                                    <!--리스트뷰-->
+                                    <Grid Row="2" Column="0" Grid.ColumnSpan="6">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="171*"/>
+                                            <ColumnDefinition Width="697*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ListView x:Name="lv_lo_pse_productList" Margin="10,10,10,10" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                            <ListView.View >
+                                                <GridView>
+                                                    <GridViewColumn Width="70" Header="물품번호" DisplayMemberBinding="{Binding Product_id}"/>
+                                                    <GridViewColumn Width="120" Header="물품명" DisplayMemberBinding="{Binding Name}"/>
+                                                    <GridViewColumn Width="80" Header="출시일" DisplayMemberBinding="{Binding Manufacture, StringFormat='{}{0:yyyy/MM/dd}'}"/>
+                                                    <GridViewColumn Width="80" Header="색상">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <DockPanel>
+                                                                    <StackPanel Orientation="Horizontal" Width="80">
+                                                                        <Rectangle Width="18" Height="18" HorizontalAlignment="Right" IsEnabled="False" Stroke="Black" Fill="{Binding Path = ColorValue}"/>
+                                                                        <TextBlock Margin="3,0,0,0" Text="{Binding Path = Color}"/>
+                                                                    </StackPanel>
+                                                                    
+                                                                </DockPanel>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="80" Header="제조사" DisplayMemberBinding="{Binding Brand}"/>
+                                                    <GridViewColumn Width="80" Header="디스플레이" DisplayMemberBinding="{Binding Inch}"/>
+                                                    <GridViewColumn Width="90" Header="해상도" DisplayMemberBinding="{Binding Display}"/>
+                                                    <GridViewColumn Width="Auto" Header="베터리(mAh)" DisplayMemberBinding="{Binding MAh}"/>
+                                                    <GridViewColumn Width="Auto" Header="RAM(GB)" DisplayMemberBinding="{Binding Ram}"/>
+                                                    <GridViewColumn Width="Auto" Header="메모리(GB)" DisplayMemberBinding="{Binding Memory}"/>
+                                                    <GridViewColumn Width="50" Header="카메라" DisplayMemberBinding="{Binding Camera}"/>
+                                                    <GridViewColumn Width="200" Header="CPU" DisplayMemberBinding="{Binding Cpu}"/>
+                                                    <GridViewColumn Width="Auto" Header="무게(g)" DisplayMemberBinding="{Binding Weight}"/>
+                                                    <GridViewColumn Width="70" Header="가격" DisplayMemberBinding="{Binding Price, StringFormat='{}{0:#,###}' }"/>
+                                                    <GridViewColumn Width="40" Header="수량" DisplayMemberBinding="{Binding Stock}"/>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </Grid>
+                                </Grid>
                             </TabItem>
                         </TabControl>
                     </Grid>
                 </TabItem>
 
 
+                <!--/////////////////////////////판매///////////////////////////-->
                 <TabItem Height="100" Background="#FF0051F0" BorderBrush="{x:Null}">
                     <TabItem.Header>
                         <StackPanel Orientation="Vertical">
@@ -319,6 +580,8 @@
                                     </Setter>
                                 </Style>
                             </TabControl.Resources>
+
+                            <!--/////////////////////////////제품판매///////////////////////////-->
                             <TabItem Height="100" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
                                 <TabItem.Header>
                                     <StackPanel Orientation="Vertical">
@@ -326,7 +589,86 @@
                                         <TextBlock Foreground="White">제품판매</TextBlock>
                                     </StackPanel>
                                 </TabItem.Header>
+                                <Grid Margin="0,10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="5*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="2*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--리스트뷰-->
+                                    <Grid Row="1" Column="0" Grid.ColumnSpan="3">
+                                        <ListView x:Name="lv_se_expect_sell" Margin="10,20,10,10" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                            <ListView.Resources>
+                                                <Style TargetType="{x:Type ListViewItem}">
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                </Style>
+                                            </ListView.Resources>
+                                            <ListView.View >
+                                                <GridView>
+                                                    <GridViewColumn Width="90" DisplayMemberBinding="{Binding Product_id}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="물품번호"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="140" DisplayMemberBinding="{Binding Product_name}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="물품명"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="140" Header="색상">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <StackPanel Orientation="Horizontal" Width="140">
+                                                                    <Rectangle Width="18" Height="18"  IsEnabled="False" Stroke="Black" Fill="{Binding Path = ColorValue}"/>
+                                                                    <TextBlock Margin="3,0,0,0" Text="{Binding Path = Color}"/>
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="90" DisplayMemberBinding="{Binding Quantity}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="수량"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="90" DisplayMemberBinding="{Binding Total_price, StringFormat='{}{0:#,###}'}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="가격"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </Grid>
+
+                                    <Grid Row="2" Column="1" Margin="20,0,0,0">
+                                        <Label FontSize="25">
+                                            전체 금액
+                                        </Label>
+                                    </Grid>
+                                    <Grid Row="2" Column="2" Margin="0,0,0,0">
+                                        <Label x:Name="la_se_sell_total_price" HorizontalContentAlignment="Right" Margin="0,0,5,0" FontSize="23" FontWeight="Bold" Content="0 원" />
+                                    </Grid>
+
+                                    <Grid Row="3" Column="1"  HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <Button Click="Btn_se_sell_list_remove" Margin="2,0,2,0" Height="40" Width="120">취소</Button>
+                                    </Grid>
+
+                                    <Grid Row="3" Column="2" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                        <Button Click="Btn_se_sell" Margin="2,0,2,0" Height="40" Width="120">판매</Button>
+                                    </Grid>
+
+                                </Grid>
                             </TabItem>
+
+
+                            <!--/////////////////////////////제품조회///////////////////////////-->
                             <TabItem Height="100" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
                                 <TabItem.Header>
                                     <StackPanel Orientation="Vertical">
@@ -334,7 +676,184 @@
                                         <TextBlock Foreground="White">제품조회</TextBlock>
                                     </StackPanel>
                                 </TabItem.Header>
+                                <Grid HorizontalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="60"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Row="0" Column="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="10,0,0,2" Height="25">물품번호:</Label>
+                                            <TextBox Width="100" Height="20" Margin="0,0,0,0" x:Name="tb_se_proudct_id"></TextBox>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="0" Column="1">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="10,0,0,2" Height="25">물품명:</Label>
+                                            <TextBox Width="100" Height="20" Margin="0,0,0,0" x:Name="tb_se_proudct_name"></TextBox>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="0" Column="2">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="10,0,0,2" Height="25">제조사:</Label>
+                                            <TextBox Width="100" Height="20" Margin="0,0,0,0" x:Name="tb_se_brand"></TextBox>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="0" Column="3">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="10,0,0,2" Height="25">메모리:</Label>
+                                            <ComboBox Name="cb_se_memory" Width="80" Height="20" Margin="0,0,0,0" IsEditable="True" IsReadOnly="True" Text="memory">
+                                                <ComboBoxItem>8</ComboBoxItem>
+                                                <ComboBoxItem>16</ComboBoxItem>
+                                                <ComboBoxItem>32</ComboBoxItem>
+                                                <ComboBoxItem>64</ComboBoxItem>
+                                                <ComboBoxItem>128</ComboBoxItem>
+                                                <ComboBoxItem>256</ComboBoxItem>
+                                                <ComboBoxItem>512</ComboBoxItem>
+                                            </ComboBox>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="1" Column="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="34,0,0,2" Height="25">가격:</Label>
+                                            <TextBox Width="80" Height="20" Margin="0,0,0,0" x:Name="tb_se_price"/>
+                                            <Button Click="Btn_se_price" x:Name="btn_se_price" Margin="10,0,0,0" Height="18" Content="▲" />
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="1" Column="1">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="10,0,0,2" Height="25">출시일:</Label>
+                                            <DatePicker x:Name="dtp_se_manufac" Height="22" Margin="1,3,0,0" Text="" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                            <Button Click="Btn_se_manufacture" x:Name="btn_se_manufacture" Margin="10,0,0,0" Height="18" Content="▲" />
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="1" Column="2">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="20,0,0,2" Height="25">RAM:</Label>
+                                            <TextBox Width="100" Height="20" Margin="0,0,0,0" x:Name="tb_se_ram"></TextBox>
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <Grid Row="0" Column="4" Grid.RowSpan="2">
+                                        <Button Click="Btn_se_Search" Margin="10,10,10,0">Search</Button>
+                                    </Grid>
+                                    <Grid Row="0" Column="5" Grid.RowSpan="2">
+                                        <Button Click="Btn_se_Reset"  Margin="10,10,10,0">Reset</Button>
+                                    </Grid>
+
+
+                                    <!--리스트뷰-->
+                                    <Grid Row="2" Column="0" Grid.ColumnSpan="6">
+                                        <ListView x:Name="lv_se_product_info" Margin="10,10,10,10" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                            <ListView.Resources>
+                                                <Style TargetType="{x:Type ListViewItem}">
+                                                    <EventSetter Event="MouseDoubleClick" Handler="Lv_se_item_product_info_doubleClick" />
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                </Style>
+                                            </ListView.Resources>
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn Width="70"   DisplayMemberBinding="{Binding Product_id}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="물품번호"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="120" DisplayMemberBinding="{Binding Name}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="물품명"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="80" DisplayMemberBinding="{Binding Manufacture, StringFormat='{}{0:yyyy/MM/dd}'}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="출시일"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="80">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Content="색상"/>
+                                                        </GridViewColumn.Header>
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <StackPanel Orientation="Horizontal" Width="80">
+                                                                    <Rectangle Width="18" Height="18"  IsEnabled="False" Stroke="Black" Fill="{Binding Path = ColorValue}"/>
+                                                                    <TextBlock Margin="3,0,0,0" Text="{Binding Path = Color}"/>
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="80" DisplayMemberBinding="{Binding Brand}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="제조사"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="60" DisplayMemberBinding="{Binding Inch}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="전체크기"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="90" DisplayMemberBinding="{Binding Display}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="Display크기"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding MAh}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="베터리"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Ram}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="RAM"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Memory}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="메모리"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Camera}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="카메라"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="120" DisplayMemberBinding="{Binding Cpu}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="CPU"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="40" DisplayMemberBinding="{Binding Weight}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="무게"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="70" DisplayMemberBinding="{Binding Price, StringFormat='{}{0:#,###}' }">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="가격"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="40" DisplayMemberBinding="{Binding Stock}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="재고"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </Grid>
+                                </Grid>
                             </TabItem>
+
+
+                            <!--/////////////////////////////제품환불///////////////////////////-->
                             <TabItem Height="100" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
                                 <TabItem.Header>
                                     <StackPanel Orientation="Vertical">
@@ -342,7 +861,104 @@
                                         <TextBlock Foreground="White">제품환불</TextBlock>
                                     </StackPanel>
                                 </TabItem.Header>
+                                <Grid Margin="0,10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="5*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="2*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--리스트뷰-->
+                                    <Grid Row="1" Column="0" Grid.ColumnSpan="3">
+                                        <ListView x:Name="lv_se_expect_refund" Margin="10,20,10,10" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                            <ListView.Resources>
+                                                <Style TargetType="{x:Type ListViewItem}">
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                </Style>
+                                            </ListView.Resources>
+                                            <ListView.View >
+                                                <GridView>
+                                                    <GridViewColumn Width="90" DisplayMemberBinding="{Binding Sales_history_id}">
+                                                    <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="영수증번호"/>
+                                                    </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="180" DisplayMemberBinding="{Binding Product_name}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="물품명"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="100" Header="색상">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <StackPanel Orientation="Horizontal" Width="100">
+                                                                    <Rectangle Width="20" Height="20"  IsEnabled="False" Stroke="Black" Fill="{Binding Path = ColorValue}"/>
+                                                                    <TextBlock Margin="3,0,0,0" Text="{Binding Path = Color}"/>
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="90" DisplayMemberBinding="{Binding Sales_date, StringFormat='{}{0:yyyy/MM/dd}'}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="판매날짜"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Customer_name}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="구매자"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Employee_name}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="판매자"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="60" DisplayMemberBinding="{Binding Quantity}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="갯수"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="90" DisplayMemberBinding="{Binding Total_price, StringFormat='{}{0:#,###}'}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="가격"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </Grid>
+
+                                    <Grid Row="2" Column="1" Margin="20,0,0,0">
+                                        <Label FontSize="25">
+                                            전체 금액
+                                        </Label>
+                                    </Grid>
+                                    <Grid Row="2" Column="2" Margin="0,0,0,0">
+                                        <Label x:Name="la_se_refund_total_price" FontSize="25" FontWeight="Bold" Content="0 원" />
+                                    </Grid>
+
+
+                                    <Grid Row="3" Column="1"  HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <Button Click="Btn_se_refund_list_remove" Margin="2,0,2,0" Height="40" Width="120">취소</Button>
+                                    </Grid>
+
+                                    <Grid Row="3" Column="2" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                        <Button Click="Btn_se_refund" Margin="2,0,2,0" Height="40" Width="120">환불</Button>
+                                    </Grid>
+
+                                </Grid>
                             </TabItem>
+
+
+
+
+                            <!--/////////////////////////////내역조회///////////////////////////-->
                             <TabItem Height="100" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
                                 <TabItem.Header>
                                     <StackPanel Orientation="Vertical">
@@ -350,7 +966,131 @@
                                         <TextBlock Foreground="White">내역조회</TextBlock>
                                     </StackPanel>
                                 </TabItem.Header>
+                                <Grid HorizontalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Row="0" Column="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="0,0,0,2" Height="25">구매자:</Label>
+                                            <TextBox Width="90" Height="20" Margin="0,0,0,0" x:Name="tb_se_customer_name"></TextBox>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="0" Column="1">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="0,0,0,2" Height="25">판매자:</Label>
+                                            <TextBox Width="90" Height="20" Margin="0,0,0,0" x:Name="tb_se_employee_name"></TextBox>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="0" Column="2">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="10,0,0,2" Height="25">판매날짜:</Label>
+                                            <DatePicker x:Name="dtp_se_sold_date" Height="22" Margin="1,3,0,0" Text="" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="0" Column="3">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="10,0,0,2" Height="25">구분:</Label>
+                                            <ComboBox Name="cb_se_type" Width="80" Height="20" Margin="0,0,0,0" IsEditable="True" IsReadOnly="True" Text="모두">
+                                                <ComboBoxItem>모두</ComboBoxItem>
+                                                <ComboBoxItem>판매</ComboBoxItem>
+                                                <ComboBoxItem>환불</ComboBoxItem>
+                                            </ComboBox>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="0" Column="4" >
+                                        <Button Click="Btn_se_Salse_history_Search" Width="100" Margin="20,5,0,0">Search</Button>
+                                    </Grid>
+                                    <Grid Row="0" Column="5" >
+                                        <Button Click="Btn_se_Salse_history_Reset" Width="100" Margin="20,5,0,0">Reset</Button>
+                                    </Grid>
+
+                                    <!--리스트뷰-->
+                                    <Grid Row="1" Column="0" Grid.ColumnSpan="6">
+                                        <ListView x:Name="lv_se_sales_history" Margin="2,10,-1,10" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Column="1">
+                                            <ListView.Resources>
+                                                <Style TargetType="{x:Type ListViewItem}">
+                                                    <EventSetter Event="MouseDoubleClick" Handler="Lv_se_sales_history_doubleClick" />
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Path = Refunded}" Value="True">
+                                                            <Setter Property="Background" Value="LightGray"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                                
+                                            </ListView.Resources>
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn Width="60" DisplayMemberBinding="{Binding Sales_type}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="구분"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="80" DisplayMemberBinding="{Binding Sales_history_id}">
+                                                    <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="영수증번호"/>
+                                                    </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="170" DisplayMemberBinding="{Binding Product_name}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="물품명"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="90" Header="색상">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <StackPanel Orientation="Horizontal" Width="90">
+                                                                    <Rectangle Width="18" Height="18"  IsEnabled="False" Stroke="Black" Fill="{Binding Path = ColorValue}"/>
+                                                                    <TextBlock Margin="3,0,0,0" Text="{Binding Path = Color}"/>
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="90" DisplayMemberBinding="{Binding Sales_date, StringFormat='{}{0:yyyy/MM/dd}'}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="판매날짜"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="90" DisplayMemberBinding="{Binding Customer_name}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="구매자"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="90" DisplayMemberBinding="{Binding Employee_name}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="판매자"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="60" DisplayMemberBinding="{Binding Quantity}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="갯수"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="80" DisplayMemberBinding="{Binding Total_price, StringFormat='{}{0:#,###}'}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="가격"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </Grid>
+                                </Grid>
                             </TabItem>
+
+
+
+                            <!--/////////////////////////////고객관리///////////////////////////-->
                             <TabItem Height="100" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
                                 <TabItem.Header>
                                     <StackPanel Orientation="Vertical">
@@ -359,9 +1099,18 @@
                                     </StackPanel>
                                 </TabItem.Header>
                             </TabItem>
+
                         </TabControl>
                     </Grid>
                 </TabItem>
+                
+                
+                
+                
+                
+                
+                
+                
                 <TabItem Height="100" Background="#FF0051F0" BorderBrush="{x:Null}">
                     <TabItem.Header>
                         <StackPanel Orientation="Vertical">
@@ -421,70 +1170,6 @@
                                         <TextBlock HorizontalAlignment="Center" Foreground="White">고객조회</TextBlock>
                                     </StackPanel>
                                 </TabItem.Header>
-
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="100"/>
-                                        <ColumnDefinition Width="100"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Row="1" Column="0">
-                                        <StackPanel Orientation="Horizontal">
-                                            <Label Margin="15,0,0,2" Height="25">고객이름:</Label>
-                                            <TextBox x:Name="tb_se_cusName" Margin="5,0,0,2" MinWidth="100"></TextBox>
-                                            <ComboBox Width="60" Height="20" Margin="15,0,0,5"  IsEditable="True" IsReadOnly="True" Text="전체" x:Name="cb_su_sex" VerticalAlignment="Bottom">
-                                                <ComboBoxItem>전체</ComboBoxItem>
-                                                <ComboBoxItem>남성</ComboBoxItem>
-                                                <ComboBoxItem>여성</ComboBoxItem>
-                                            </ComboBox>
-                                            <Label Margin="15,0,0,2">연락처:</Label>
-                                            <TextBox Width="100" Margin="5,0,0,2" x:Name="tb_se_phone"></TextBox>
-                                        </StackPanel>
-                                    </Grid>
-                                    <Grid Row="0" Column="1" Grid.RowSpan="2">
-                                        <Button Click="btn_se_search" Margin="10,10,10,0">조회</Button>
-                                    </Grid>
-                                    <Grid Row="1" Column="0" Margin="10,0,0,0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="70"/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition Width="70"/>
-                                            <ColumnDefinition Width="150"/>
-                                        </Grid.ColumnDefinitions>
-                                    </Grid>
-                                    <Grid Row="0" Column="2" Grid.RowSpan="2">
-                                        <Button Margin="10,10,10,0" Click="btn_RR_Close">닫기</Button>
-                                    </Grid>
-                                    <Grid Row="2" Column="0" Grid.ColumnSpan="3">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="167*"/>
-                                            <ColumnDefinition Width="120*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <ListView Name="lv_product_list" Margin="10,10,10,10" Grid.ColumnSpan="2">
-
-                                            <ListView.View >
-
-                                                <GridView  ColumnHeaderTemplate="{StaticResource myHeaderTemplate}" ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
-                                                    <GridViewColumn Width="100" Header="고객이름" DisplayMemberBinding="{Binding Path=Name}"/>
-                                                    <GridViewColumn Width="80" Header="성별" DisplayMemberBinding="{Binding Path=Gender}"/>
-                                                    <GridViewColumn Width="120" Header="연락처" DisplayMemberBinding="{Binding Path=Phone}"/>
-                                                    <GridViewColumn Width="120" Header="가입날짜" DisplayMemberBinding="{Binding Path=Date}"/>
-
-                                                    <GridViewColumn Width="70" Header="적립금" DisplayMemberBinding="{Binding Path=Saving}">
-                                                    
-                                                    </GridViewColumn>
-                                                </GridView>
-                                            </ListView.View>
-                                        </ListView>
-                                    </Grid>
-                                </Grid>
-
                             </TabItem>
 
                             <TabItem Height="100" Background="{x:Null}"  Foreground="White" BorderBrush="{x:Null}">

@@ -4,46 +4,45 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MBStore_MVC"
-        mc:Ignorable="d"
+        mc:Ignorable="d" ResizeMode="NoResize" WindowStyle="None" 
          Height="500" Width="700">
     <Grid>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.25*" ></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="55"></RowDefinition>
+            <RowDefinition Height="390"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Background="#FF0051F0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                <ColumnDefinition Width="0.3*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" Foreground="White" Grid.Column="1" Text="공지작성"/>
+            <Button x:Name="btn_minimum" Background="#FF0051F0" Foreground="White" FontWeight="Bold" Grid.Column="2" Content="___" Margin="40,0,60,0" BorderBrush="{x:Null}" />
+            <Button x:Name="btn_maximum" Background="#FF0051F0" Foreground="White" FontWeight="Bold" Grid.Column="2" Content="□" Margin="70,0,30,0" BorderBrush="{x:Null}" />
+            <Button x:Name="btn_close" Background="#FF0051F0" Foreground="White" FontWeight="Bold" Grid.Column="2" Content="X" Margin="100,0,0,0" BorderBrush="{x:Null}" Click="btn_close_Click" />
+        </Grid>
+        <Grid Grid.Row="1" Background="#FFE8E8E8"  >
             <Grid.RowDefinitions>
-                <RowDefinition ></RowDefinition>
                 <RowDefinition></RowDefinition>
-                <RowDefinition ></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.08*"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Border Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" BorderThickness="1" BorderBrush="Gray"/>
-            <Border Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" BorderThickness="1" BorderBrush="Black"/>
-            <Border Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" BorderThickness="1" BorderBrush="Gray"/>
-            <Border Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Bottom" BorderThickness="1" BorderBrush="Gray"/>
-
-            <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="#FF0051F0" >
-          
-            </Grid>
-            <TextBlock VerticalAlignment="Center" Foreground="White" Grid.Column="1" Text="공지 작성"/>
-            <Button x:Name="btn_minimum" Background="#FF0051F0" Foreground="White" FontWeight="Bold" Grid.Column="1" Content="___" Margin="550,0,60,0" BorderBrush="{x:Null}" />
-            <Button x:Name="btn_maximum" Background="#FF0051F0" Foreground="White" FontWeight="Bold" Grid.Column="1" Content="□" Margin="580,0,30,0" BorderBrush="{x:Null}" />
-            <Button x:Name="btn_close" Background="#FF0051F0" Foreground="White" FontWeight="Bold" Grid.Column="1" Content="X" Margin="610,0,0,0" BorderBrush="{x:Null}" Click="btn_close_Click" />
-
-
-            <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="#FFF1EFEF" />
-
-            <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="#FFF1EFEF" />
-
-            <Grid Grid.Row="3" Grid.ColumnSpan="2" Background="#FFF1EFEF" />
-
+            <Border Grid.Row="0" Grid.Column="0" BorderBrush="DimGray" BorderThickness="0.5"/>
+            <Border Grid.Row="1" Grid.Column="0" BorderBrush="DimGray" BorderThickness="0.5"/>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="제  목"/>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="부  서"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Background="#FFE8E8E8" />
+            <ComboBox Grid.Row="1" Grid.Column="1" Background="#FFE8E8E8" />
         </Grid>
-        
-     
+        <TextBox Grid.Row="2"/>
+        <Button Grid.Row="3" Width="70" Margin="3" Content="공지작성" HorizontalAlignment="Right"/>
     </Grid>
 </Window>
+
