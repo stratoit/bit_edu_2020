@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Emp_Sign_up.xaml.cs">
+      <DependentUpon>Emp_Sign_up.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FindAddress.xaml.cs">
       <DependentUpon>FindAddress.xaml</DependentUpon>
     </Compile>
@@ -63,14 +66,25 @@
       <DependentUpon>InputCustomer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Employee.cs" />
+    <Compile Include="Model\FTPConnector.cs" />
+    <Compile Include="Model\Notices.cs" />
     <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\Return_Info.cs" />
     <Compile Include="Model\Sell_Info.cs" />
+    <Compile Include="Model\Sign_up.cs" />
     <Compile Include="ShoppingBasket.xaml.cs">
       <DependentUpon>ShoppingBasket.xaml</DependentUpon>
     </Compile>
     <Compile Include="SignUp.xaml.cs">
       <DependentUpon>SignUp.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StockReturn.xaml.cs">
+      <DependentUpon>StockReturn.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Emp_Sign_up.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FindAddress.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -110,6 +124,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="StockReturn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Customer.cs" />
@@ -143,8 +161,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\logo.PNG" />
+    <Folder Include="Resources\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace MBStore_MVC.Model
 {
-    public class Customer
+    public class Notices
     {
-        public int Id { get; set; }
+        public int Notice_id { get; set; }
         public string Name { get; set; }
-        public string Gender { get; set; }
-        public string Phone { get; set; }
         public DateTime Date { get; set; }
-        public long Savings { get; set; }
+        public string Title { get; set; }
+        public string Text { get; set; }
+        public int Views { get; set; }
+        public string category { get; set; }
     }
 }

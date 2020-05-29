@@ -6,18 +6,12 @@ using System.Threading.Tasks;
 
 namespace MBStore_MVC.Model
 {
-    public class Employee
+    public class Sign_up
     {
-        public int Employee_id
-        { get; set; }
-
         public string Login_id
         { get; set; }
 
         public string Login_pw
-        { get; set; }
-
-        public string Name
         { get; set; }
 
         public string Gender
@@ -32,19 +26,16 @@ namespace MBStore_MVC.Model
         public string Address
         { get; set; }
 
+        public string Sign_date
+        { get; set; }
+
         public string Email
         { get; set; }
 
+        public string Name
+        { get; set; }
+
         public string Post_number
-        { get; set; }
-
-        public string Start_date
-        { get; set; }
-
-        public string End_date
-        { get; set; }
-
-        public string Rank
         { get; set; }
     }
 }

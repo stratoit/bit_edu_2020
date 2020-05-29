@@ -38,11 +38,11 @@
             <Border Grid.Row="1" Grid.Column="0" BorderBrush="DimGray" BorderThickness="0.5"/>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="제  목"/>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="부  서"/>
-            <TextBox Grid.Row="0" Grid.Column="1" Background="#FFE8E8E8" />
-            <ComboBox Grid.Row="1" Grid.Column="1" Background="#FFE8E8E8" />
+            <TextBox x:Name="tb_title" Grid.Row="0" Grid.Column="1" Background="#FFE8E8E8" />
+            <ComboBox x:Name="cb_part" Grid.Row="1" Grid.Column="1" Background="#FFE8E8E8" IsEnabled="False"/>
         </Grid>
-        <TextBox Grid.Row="2"/>
-        <Button Grid.Row="3" Width="70" Margin="3" Content="공지작성" HorizontalAlignment="Right"/>
+        <TextBox x:Name="tb_text" Grid.Row="2"/>
+        <Button x:Name="btn_post" Grid.Row="3" Width="70" Margin="3" Content="공지작성" HorizontalAlignment="Right" Click="btn_post_Click" />
     </Grid>
 </Window>
 

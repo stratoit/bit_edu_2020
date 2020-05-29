@@ -22,9 +22,11 @@ namespace MBStore_MVC
     {
         MainWindow mainWindow;
         int userid;
+        mbDB db;
         public InputCustomer()
         {
             InitializeComponent();
+            db = new mbDB();
         }
 
         public void SetProduct(MainWindow mainWindow, int userid)
@@ -53,8 +55,8 @@ namespace MBStore_MVC
 
                 try
                 {
-                    mbDB db = new mbDB();
-                    cusList = db.SearchCustomer(phone_num);
+
+                    cusList = db.SelectCustomer(phone_num);
                     if (cusList.Count != 0)
                         lv_se_basket_expect_cutom_info.ItemsSource = cusList;
                     else
@@ -80,7 +82,6 @@ namespace MBStore_MVC
 
                 if (MessageBox.Show("판매 하시겠습니까?", "알림창", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    mbDB db = new mbDB();
                     List<Sell_Info> sell_list = new List<Sell_Info>();
 
                     try
@@ -90,7 +91,7 @@ namespace MBStore_MVC
                             Sell_Info item = (Sell_Info)mainWindow.lv_se_expect_sell.Items[i];
 
                             sell_list.Add(item);
-                            int stock = db.SelectStockProductStock(item.Product_id, item.Color);
+                            int stock = db.SelectStockProductStock(item.Stock_product);
                             if (item.Quantity > stock)
                             {
                                 throw new Exception("재고가 부족합니다");
@@ -100,19 +101,19 @@ namespace MBStore_MVC
                         int history_id;
                         string str_saving_price = tb_se_inputcus_saving.Text;
                         long saving = long.Parse(str_saving_price, NumberStyles.AllowThousands);
-
-                        db.InsertSalesHistroy(customer_info.Id, userid, DateTime.Now);
-                        history_id = db.SelectMaxHistoryId();
+                        db.InsertSalesHistroy(customer_info.Id, userid, DateTime.Now, false);
+                        history_id = db.SelectMaxHistoryId(userid);
                         for (int i = 0; i < sell_list.Count; i++)
                         {
                             Sell_Info item = sell_list[i];
+
                             db.InsertSalesProduct(history_id, item.Product_id, item.Quantity, item.Color, item.ColorValue, "판매");
                             db.UpdateStockProduct(item.Product_id, item.Color, -item.Quantity);
                         }
                         db.UpdateCustomerSavings(customer_info.Id, saving);
 
                         MessageBox.Show("판매가 완료 되었습니다", "알림창");
-                        mainWindow.lv_se_expect_sell.Items.Clear();
+                        mainWindow.lv_se_expect_sell.ItemsSource = null;
                         mainWindow.la_se_sell_total_price.Content = "0 원";
                     }
                     catch (Exception ex)
@@ -130,6 +131,12 @@ namespace MBStore_MVC
             {
                 MessageBox.Show("고객을 선택 하세요");
             }
+        }
+
+        private void KeyDown_se_phoneNumber(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                Btn_se_basket_search(sender, e);
         }
     }
 }

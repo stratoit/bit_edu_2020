@@ -8,7 +8,7 @@ namespace MBStore_MVC
 {
     public class Product
     {
-        public int Stock_product_id { get; set; }
+        public int Stock_product { get; set; }
         public int Product_id { get; set; }
         public string Name { get; set; }
         public DateTime Manufacture { get; set; }
@@ -28,7 +28,13 @@ namespace MBStore_MVC
         public int Stock { get; set; }
 
         public int Employee_id { get; set; }
+        public string Employee_name { get; set; }
+        public int Trade_history_id { get; set; }
         public DateTime Trade_date { get; set; }
         public string Trade_type { get; set; }
+
+
+
+
     }
 }

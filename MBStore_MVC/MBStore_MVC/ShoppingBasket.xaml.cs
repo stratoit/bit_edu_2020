@@ -22,18 +22,28 @@ namespace MBStore_MVC
         public ShoppingBasket()
         {
             InitializeComponent();
+            tb_se_basket_quantity.Focus();
         }
         public void SetProduct(Product product, MainWindow mainWindow)
         {
             this.product = product;
             this.mainWindow = mainWindow;
-            string productinfo;
-            productinfo = product.Product_id + " ";
-            productinfo += product.Name + " ";
-            productinfo += product.Color + " ";
-            la_se_basket_product_info.Text = productinfo;
-        }
 
+            img_sb_phone_f.Source = new BitmapImage(new Uri(@"http://20.41.81.89/phone/" + product.Name + "_" + product.Color + "_F.JPG", UriKind.Absolute));
+            img_sb_phone_b.Source = new BitmapImage(new Uri(@"http://20.41.81.89/phone/" + product.Name + "_" + product.Color + "_B.JPG", UriKind.Absolute));
+            lb_sb_name.Content = product.Name;
+            lb_sb_color.Content = "(" + product.Color + ")";
+            img_sb_brand.Source = new BitmapImage(new Uri(@"http://20.41.81.89/brand/" + product.Brand + ".png", UriKind.Absolute));
+            lb_sb_manufacture.Content = ((DateTime)product.Manufacture).ToString("yyyy. MM");
+            lb_sb_inch.Content = product.Inch + " inch";
+            lb_sb_ram.Content = product.Ram + " GB";
+            lb_sb_cpu.Content = product.Cpu;
+            lb_sb_display.Content = product.Display;
+            lb_sb_memory.Content = product.Memory + " GB";
+            lb_sb_camera.Content = product.Camera + " MP";
+            lb_sb_weight.Content = product.Weight + " g";
+            lb_sb_mah.Content = product.MAh + " mAh";
+        }
         private void Btn_se_basket_enroll(object sender, RoutedEventArgs e)
         {
             int quantity;
@@ -58,6 +68,12 @@ namespace MBStore_MVC
                 else
                     MessageBox.Show("수량을 입력 하세요");
             }
+        }
+
+        private void KeyDown_se_basket_enroll(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                Btn_se_basket_enroll(sender, e);
         }
     }
 }

@@ -19,7 +19,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="핸드폰 뒷자리(4) 입력" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="8,5,20,9" FontSize="18"></Label>
-        <TextBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="1" x:Name="tb_se_basket_phone" Margin="3,10,3,10" FontSize="24" Padding="10,0,0,0" VerticalContentAlignment="Center"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="1" x:Name="tb_se_basket_phone" Margin="3,10,3,10" FontSize="24" Padding="10,0,0,0" VerticalContentAlignment="Center" KeyDown="KeyDown_se_phoneNumber" MaxLength="4"></TextBox>
         <Button Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Width="100" Click="Btn_se_basket_search" Margin="5" Content="검 색" FontSize="20"></Button>
         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="20,0,20,20">
             <Grid.ColumnDefinitions>

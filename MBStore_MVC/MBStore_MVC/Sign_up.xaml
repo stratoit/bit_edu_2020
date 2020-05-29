@@ -1,0 +1,41 @@
+﻿<Window x:Class="MBStore_MVC.Emp_Sign_up"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MBStore_MVC"
+        mc:Ignorable="d"
+        Title="Emp_Sign_up" Height="200" Width="300"  WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
+            <Label Margin="5" VerticalAlignment="Center">직무</Label>
+            <ComboBox x:Name="cb_select_team" Margin="10" VerticalAlignment="Center" Height="30" MinWidth="80" DropDownClosed="cb_select_team_DropDownClosed" >
+                <ComboBoxItem>지원팀장</ComboBoxItem>
+                <ComboBoxItem>판매팀장</ComboBoxItem>
+                <ComboBoxItem>물류팀장</ComboBoxItem>
+                <ComboBoxItem>지원팀</ComboBoxItem>
+                <ComboBoxItem>판매팀</ComboBoxItem>
+                <ComboBoxItem>물류팀</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.ColumnSpan="2">
+            <Label Margin="5" VerticalAlignment="Center">사번</Label>
+            <TextBox x:Name="tb_emp_id" IsEnabled="False" Margin="10" VerticalAlignment="Center" Height="30" MinWidth="80"></TextBox>
+        </StackPanel>
+
+        <Button Click="Btn_Ok" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" MinHeight="25" Margin="10" MinWidth="60">확인</Button>
+        <Button Click="Btn_Cancel" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" MinHeight="25" MinWidth="60">취소</Button>
+    </Grid>
+</Window>

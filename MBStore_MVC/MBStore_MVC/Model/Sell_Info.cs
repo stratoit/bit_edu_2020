@@ -8,7 +8,7 @@ namespace MBStore_MVC
 {
     public class Sell_Info
     {
-        public int Stock_id { get; set; }
+        public int Stock_product { get; set; }
         public int Product_id { get; set; }
         public string Product_name { get; set; }
         public string Color { get; set; }
