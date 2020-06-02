@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -65,6 +71,10 @@
     <Compile Include="InputCustomer.xaml.cs">
       <DependentUpon>InputCustomer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Basic_Chart_Sales.cs" />
+    <Compile Include="Model\Chart_Brsell.cs" />
+    <Compile Include="Model\Chart_SellKing.cs" />
+    <Compile Include="Model\Chart_Sellproduct.cs" />
     <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\FTPConnector.cs" />
     <Compile Include="Model\Notices.cs" />
@@ -152,6 +162,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

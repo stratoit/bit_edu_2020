@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MBStore_MVC"
+        xmlns:Points="clr-namespace:LiveCharts.Wpf.Points;assembly=LiveCharts.Wpf" 
+        xmlns:local="clr-namespace:MBStore_MVC" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d" 
         Title="모바일기기 매장관리 시스템 v0.2" Height="768" Width="1024" Closed="Window_Closed">
     <Window.Resources>
@@ -96,6 +97,7 @@
                                 <ColumnDefinition Width="180*"></ColumnDefinition>
                                 <ColumnDefinition Width="133*"/>
                             </Grid.ColumnDefinitions>
+                            
                             <Button Background="#FFFFFF" BorderBrush="{x:Null}" Grid.Column="1" Margin="0,-10,0,10" Click="Button_Click" >
                                 <TextBlock  Foreground="#FF0051F0" FontSize="10" FontWeight="Black" Text="다른 아이디로 로그인"/>
                             </Button>
@@ -437,7 +439,7 @@
                                             <TextBox Name="tb_lo_input_numberOf" Width="30" Height="20" Margin="-1,0,0,0"></TextBox>
                                             <Label Margin="5,0,0,0" Content="RGB : #"/>
                                             <TextBox Name="tb_lo_input_rgb" MaxLength="6" Height="20" Width="60"></TextBox>
-                                            <Button Name="btn_lo_input_listAdd" Margin="10,0,0,0" Height="20" Width="50" Click="btn_lo_input_listAdd_Click">추가</Button>
+                                            <Button Name="btn_lo_input_listAdd" Margin="10,0,0,0" Height="20" Width="50" Content="추가" Click="btn_lo_input_listAdd_Click"/>
                                             <Button Name="btn_lo_input_remove" Margin="10,0,0,0" Height="20" Width="50" Content="삭제" Click="btn_lo_input_remove_Click"/>
                                         </StackPanel>
                                     </Grid>
@@ -453,6 +455,9 @@
                                             <ComboBox Name="cb_lo_input_inOutput" Width="60" Height="20">
                                                 <ComboBoxItem Content="입고"/>
                                             </ComboBox>
+                                            <Label Margin="24,0,4,0">이미지</Label>
+                                            <Button Height="20" Width="40" Click="btn_lo_upload_img_Click" Content="업로드"></Button>
+                                            <TextBox x:Name="tb_lo_reg_img" IsReadOnly="True" Width="200" Height="20"></TextBox>
                                         </StackPanel>
                                     </Grid>
                                     <Grid Row="2" Column="0" Grid.ColumnSpan="7">
@@ -494,6 +499,11 @@
                                                     <GridViewColumn Width="100" DisplayMemberBinding="{Binding Trade_date, StringFormat='{}{0:yyyy-MM-dd}'}">
                                                         <GridViewColumn.Header>
                                                             <GridViewColumnHeader Click="gv_se_head_click" Content="입고일"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Image_dir}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="이미지"/>
                                                         </GridViewColumn.Header>
                                                     </GridViewColumn>
                                                 </GridView>
@@ -1162,10 +1172,10 @@
                                         </ListView>
                                     </Grid>
                                 </Grid>
-                                
+
                             </TabItem>
 
-                            
+
 
                             <!--/////////////////////////////제품환불///////////////////////////-->
                             <TabItem Height="100" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
@@ -1431,8 +1441,139 @@
                                         <TextBlock Foreground="White">고객관리</TextBlock>
                                     </StackPanel>
                                 </TabItem.Header>
-                            </TabItem>
+                                <Grid >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
 
+                                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                        <Label x:Name="lable_first2" Margin="10" BorderBrush="Black" BorderThickness="2">신규등록</Label>
+                                        <Label x:Name="label_cus_id2" Margin="10" Visibility="Hidden">Customer ID</Label>
+                                        <TextBox x:Name="tb_se_cus_search_cus_id" Visibility="Hidden" IsEnabled="False" Margin="2,10,10,10" MinWidth="100" Height="30"></TextBox>
+                                    </StackPanel>
+                                    <Button x:Name="btn_se_cus_search_res" Click="Btn_se_cus_register" Margin="10" Grid.Row="1" Grid.Column="1" Content="등록"/>
+                                    <Button x:Name="btn_se_cus_search_reset" Click="Btn_se_cus_reset" Margin="10" Grid.Row="1" Grid.Column="2">초기화</Button>
+
+                                    <Grid Row="2" Column="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label VerticalAlignment="Center" Margin="5">고객 이름</Label>
+                                            <TextBox x:Name="tb_se_cus_search_name" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100"></TextBox>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                            <Label VerticalAlignment="Center" Margin="5">성별</Label>
+                                            <RadioButton x:Name="rb_su_em_gender32" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender">남성</RadioButton>
+                                            <RadioButton x:Name="rb_su_em_gender42" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender">여성</RadioButton>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                            <Label VerticalAlignment="Center" Margin="5">휴대폰</Label>
+                                            <TextBox x:Name="tb_su_cus_search_phone2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100"></TextBox>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                            <Label VerticalAlignment="Center" Margin="5">생일</Label>
+                                            <DatePicker x:Name="dtp_su_cus_search_birth2" Height="30" Margin="5"></DatePicker>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                            <Label VerticalAlignment="Center" Margin="5" IsEnabled="False">적립금</Label>
+                                            <TextBox x:Name="tb_su_cus_search_saving2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100" IsEnabled="False"></TextBox>
+                                        </StackPanel>
+
+                                    </Grid>
+
+                                    <Grid Row="3" Column="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Margin="15,0,0,2" Height="25">고객이름:</Label>
+                                            <TextBox x:Name="tb_se_cusName2" Margin="5,0,0,2" Height="30" MinWidth="100"></TextBox>
+                                            <ComboBox Width="60" Height="20" Margin="15,0,0,2"  IsEditable="True" IsReadOnly="True" Text="모두" x:Name="cb_su_sex2">
+                                                <ComboBoxItem>모두</ComboBoxItem>
+                                                <ComboBoxItem>남성</ComboBoxItem>
+                                                <ComboBoxItem>여성</ComboBoxItem>
+                                            </ComboBox>
+                                            <Label Margin="15,0,0,2" VerticalAlignment="Center">연락처:</Label>
+                                            <TextBox Width="100" Margin="5,0,0,2" x:Name="tb_se_phone2" Height="30" ></TextBox>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Row="3" Column="2" >
+                                        <Button Click="btn_se_cu_search" Margin="10,10,10,10" MinHeight="30" >조회</Button>
+                                    </Grid>
+
+                                    <Grid Row="4" Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="10*"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <ListView Name="lv_cus_search2" Margin="10,10,10,10" Grid.ColumnSpan="2">
+                                            <ListView.ItemContainerStyle>
+                                                <Style TargetType="{x:Type ListViewItem}">
+                                                    <!--리스트뷰 가운데 정렬-->
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                    <Setter Property="Height" Value="30"/>
+                                                    <EventSetter Event="MouseDoubleClick" Handler="Lv_se_item_cus_info_DoubleClick"/>
+                                                </Style>
+                                            </ListView.ItemContainerStyle>
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Id}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="고유번호"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Name}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="고객명"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Gender}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="성별"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Path=Date, StringFormat='{}{0:yyyy/MM/dd}'}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="생년월일"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Path=Phone}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="휴대폰"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Savings}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="적립금"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </Grid>
+                                </Grid>
+                            </TabItem>
                         </TabControl>
                     </Grid>
                 </TabItem>
@@ -1501,7 +1642,7 @@
                                     <Button Click="Btn_su_employee_lv_search" Margin="10,10,10,10" Grid.RowSpan="2" Grid.Column="2">조회</Button>
 
                                     <StackPanel Orientation="Horizontal">
-                                        <Label Margin="15,5,1,5" Height="25">고객이름</Label>
+                                        <Label Margin="15,5,1,5" Height="25">직원이름</Label>
                                         <TextBox x:Name="tb_su_emp_search_name" Margin="5,5,5,5" MaxHeight="25" MinWidth="100"></TextBox>
                                         <Label Margin="15,5,1,5" Height="25">성별</Label>
                                         <ComboBox x:Name="cb_su_emp_search_gender" Width="60" Height="25" Margin="5,5,5,5" IsEditable="True" IsReadOnly="True" Text="모두">
@@ -1677,11 +1818,11 @@
 
                                     <Border  Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="5" Margin="10" BorderBrush="Black" BorderThickness="2">
                                         <Border.Background>
-                                            <ImageBrush Stretch="Fill" ImageSource="http://20.41.81.89/phone/G7 ThinQ(128)_뉴 모로칸 블루_B.JPG" AlignmentY="Top" AlignmentX="Center"/>
+                                            <ImageBrush Stretch="Fill" x:Name="img_su_emp" AlignmentY="Top" AlignmentX="Center"/>
                                         </Border.Background>
                                     </Border>
-                                    <Button Grid.Row="7" Grid.ColumnSpan="2" Height="30" MaxHeight="30" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="74,0">사진 변경</Button>
-
+                                    <Button Grid.Row="7" Grid.ColumnSpan="2" Click="btn_su_upload_img_Click" Height="30" MaxHeight="30" Width="95" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="74,0">사진 변경</Button>
+                                    <TextBox x:Name="tb_su_emp_img" Visibility="Hidden"></TextBox>
                                     <Label Margin="10,10,10,11" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Right">아이디</Label>
                                     <TextBox x:Name="tb_su_em_login_id" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Margin="10" MaxHeight="30" MinWidth="100"></TextBox>
                                     <TextBlock x:Name="tb_su_em_login_id_check" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="5" FontWeight="Bold" Margin="0,16,0,15"/>
@@ -1790,8 +1931,8 @@
                             <TabItem Height="100" Background="{x:Null}"  Foreground="White" BorderBrush="{x:Null}">
                                 <TabItem.Header>
                                     <StackPanel Orientation="Vertical">
-                                        <Path HorizontalAlignment="Center" Fill="White" Width="30" Height="30" Stretch="Fill" Data="M 10 0.1875 C 4.58 0.1875 0.1875 4.58 0.1875 10 C 0.1875 15.42 4.58 19.8125 10 19.8125 C 12.28995 19.8125 14.393062 19.001996 16.0625 17.6875 L 16.9375 18.5625 C 16.571328 19.252523 16.699291 20.136791 17.28125 20.71875 L 21.875 25.34375 C 22.588 26.05775 23.75475 26.05775 24.46875 25.34375 L 25.34375 24.46875 C 26.05675 23.75475 26.05675 22.588 25.34375 21.875 L 20.71875 17.28125 C 20.134554 16.697054 19.254632 16.595625 18.5625 16.96875 L 17.6875 16.09375 C 19.011378 14.421193 19.8125 12.298983 19.8125 10 C 19.8125 4.58 15.42 0.1875 10 0.1875 z M 10 2 C 14.418 2 18 5.582 18 10 C 18 14.418 14.418 18 10 18 C 5.582 18 2 14.418 2 10 C 2 5.582 5.582 2 10 2 z M 4.9375 7.46875 C 4.4205 8.30475 4.125 9.28975 4.125 10.34375 C 4.125 13.37075 6.56775 15.8125 9.59375 15.8125 C 10.76275 15.8125 11.859 15.4355 12.75 14.8125 C 12.511 14.8385 12.245 14.84375 12 14.84375 C 8.086 14.84375 4.9375 11.69625 4.9375 7.78125 C 4.9375 7.67725 4.9325 7.57275 4.9375 7.46875 z"/>
-                                        <TextBlock HorizontalAlignment="Center" Foreground="White">고객조회</TextBlock>
+                                        <Path HorizontalAlignment="Center" Fill="White" Width="30" Height="30" Stretch="Fill" Data="M 1 0 C 0.449 0 0 0.449 0 1 L 0 17 C 0 17.551 0.449 18 1 18 L 17 18 C 17.551 18 18 17.551 18 17 L 18 1 C 18 0.449 17.551 0 17 0 L 1 0 z M 2 2 L 16 2 L 16 14 L 2 14 L 2 2 z M 19 2.90625 L 19 4.9375 L 20.8125 5.25 L 19 15.75 L 19 17 C 19 18.104 18.103 19 17 19 L 6.40625 19 L 19.09375 21.1875 C 19.63775 21.2815 20.157 20.918 20.25 20.375 L 22.9375 4.59375 C 23.0315 4.05075 22.669 3.5295 22.125 3.4375 L 19 2.90625 z M 9 3.9375 C 7.849 3.9375 6.875 4.72875 6.875 6.21875 C 6.875 7.19275 7.30925 8.17125 7.90625 8.78125 C 8.14025 9.39125 7.74225 9.62325 7.65625 9.65625 C 6.45025 10.09225 5.03125 10.9015 5.03125 11.6875 L 5.03125 12.96875 L 12.96875 12.96875 L 12.96875 11.6875 C 12.96975 10.8775 11.54725 10.07425 10.28125 9.65625 C 10.22325 9.63725 9.86375 9.47525 10.09375 8.78125 C 10.68875 8.17025 11.15625 7.18775 11.15625 6.21875 C 11.15625 4.72975 10.151 3.9375 9 3.9375 z M 23.40625 7.90625 L 23.0625 9.875 L 23.78125 10.03125 L 21.03125 21.71875 L 20.625 21.625 C 20.263 21.976 19.787 22.1875 19.25 22.1875 C 19.139 22.1875 19.02025 22.17525 18.90625 22.15625 L 5.0625 19.78125 L 4.78125 20.96875 C 4.65825 21.50575 4.99425 22.0625 5.53125 22.1875 L 21.09375 25.84375 C 21.63075 25.97075 22.1855 25.62875 22.3125 25.09375 L 25.9375 9.53125 C 26.0645 8.99525 25.75675 8.4395 25.21875 8.3125 L 23.40625 7.90625 z"/>
+                                        <TextBlock HorizontalAlignment="Center" Foreground="White">고객관리</TextBlock>
                                     </StackPanel>
                                 </TabItem.Header>
 
@@ -1837,8 +1978,8 @@
 
                                         <StackPanel Grid.Column="1" Orientation="Horizontal">
                                             <Label VerticalAlignment="Center" Margin="5">성별</Label>
-                                            <RadioButton x:Name="rb_su_em_gender3" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender">남자</RadioButton>
-                                            <RadioButton x:Name="rb_su_em_gender4" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender">여자</RadioButton>
+                                            <RadioButton x:Name="rb_su_em_gender3" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender">남성</RadioButton>
+                                            <RadioButton x:Name="rb_su_em_gender4" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender">여성</RadioButton>
                                         </StackPanel>
 
                                         <StackPanel Grid.Column="2" Orientation="Horizontal">
@@ -1887,22 +2028,41 @@
                                                     <!--리스트뷰 가운데 정렬-->
                                                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
                                                     <Setter Property="Height" Value="30"/>
-                                                     <EventSetter Event="MouseDoubleClick" Handler="Lv_su_item_cus_info_DoubleClick"/>
+                                                    <EventSetter Event="MouseDoubleClick" Handler="Lv_su_item_cus_info_DoubleClick"/>
                                                 </Style>
                                             </ListView.ItemContainerStyle>
                                             <ListView.View>
                                                 <GridView>
-                                                    <GridViewColumn Width="100" Header="고유번호" DisplayMemberBinding="{Binding Path=Id}"/>
-
-                                                    <GridViewColumn Width="100" Header="고객명" DisplayMemberBinding="{Binding Path=Name}"/>
-
-                                                    <GridViewColumn Width="100" Header="성별" DisplayMemberBinding="{Binding Path=Gender}"/>
-
-                                                    <GridViewColumn Width="150" Header="생년월일"  DisplayMemberBinding="{Binding Path=Date}"/>
-
-                                                    <GridViewColumn Width="150" Header="휴대폰" DisplayMemberBinding="{Binding Path=Phone}"/>
-
-                                                    <GridViewColumn Width="100" Header="적립금" DisplayMemberBinding="{Binding Path=Savings}"/>
+                                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Id}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="고유번호"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Name}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="고객명"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Gender}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="성별"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Path=Date, StringFormat='{}{0:yyyy/MM/dd}'}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="생년월일"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Path=Phone}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="휴대폰"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Savings}">
+                                                        <GridViewColumn.Header>
+                                                            <GridViewColumnHeader Click="gv_se_head_click" Content="적립금"/>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
                                                 </GridView>
                                             </ListView.View>
                                         </ListView>
@@ -1910,13 +2070,112 @@
                                 </Grid>
                             </TabItem>
 
-                            <TabItem Height="100" Background="{x:Null}"  Foreground="White" BorderBrush="{x:Null}">
+                            <TabItem x:Name="chart_tab_selecetd" Height="100" Background="{x:Null}"  Foreground="White" BorderBrush="{x:Null}">
                                 <TabItem.Header>
                                     <StackPanel Orientation="Vertical">
-                                        <Path HorizontalAlignment="Center" Fill="White" Width="30" Height="30" Stretch="Fill" Data="M 1 0 C 0.449 0 0 0.449 0 1 L 0 17 C 0 17.551 0.449 18 1 18 L 17 18 C 17.551 18 18 17.551 18 17 L 18 1 C 18 0.449 17.551 0 17 0 L 1 0 z M 2 2 L 16 2 L 16 14 L 2 14 L 2 2 z M 19 2.90625 L 19 4.9375 L 20.8125 5.25 L 19 15.75 L 19 17 C 19 18.104 18.103 19 17 19 L 6.40625 19 L 19.09375 21.1875 C 19.63775 21.2815 20.157 20.918 20.25 20.375 L 22.9375 4.59375 C 23.0315 4.05075 22.669 3.5295 22.125 3.4375 L 19 2.90625 z M 9 3.9375 C 7.849 3.9375 6.875 4.72875 6.875 6.21875 C 6.875 7.19275 7.30925 8.17125 7.90625 8.78125 C 8.14025 9.39125 7.74225 9.62325 7.65625 9.65625 C 6.45025 10.09225 5.03125 10.9015 5.03125 11.6875 L 5.03125 12.96875 L 12.96875 12.96875 L 12.96875 11.6875 C 12.96975 10.8775 11.54725 10.07425 10.28125 9.65625 C 10.22325 9.63725 9.86375 9.47525 10.09375 8.78125 C 10.68875 8.17025 11.15625 7.18775 11.15625 6.21875 C 11.15625 4.72975 10.151 3.9375 9 3.9375 z M 23.40625 7.90625 L 23.0625 9.875 L 23.78125 10.03125 L 21.03125 21.71875 L 20.625 21.625 C 20.263 21.976 19.787 22.1875 19.25 22.1875 C 19.139 22.1875 19.02025 22.17525 18.90625 22.15625 L 5.0625 19.78125 L 4.78125 20.96875 C 4.65825 21.50575 4.99425 22.0625 5.53125 22.1875 L 21.09375 25.84375 C 21.63075 25.97075 22.1855 25.62875 22.3125 25.09375 L 25.9375 9.53125 C 26.0645 8.99525 25.75675 8.4395 25.21875 8.3125 L 23.40625 7.90625 z"/>
-                                        <TextBlock HorizontalAlignment="Center" Foreground="White">고객관리</TextBlock>
+                                        <Path HorizontalAlignment="Center" Fill="White" Width="30" Height="30" Stretch="Fill" Data="m218.18 400c94.793 0 174.814-70.876 186.136-164.863.495-4.108-2.432-7.842-6.541-8.342l-157.311-19.139 135.179-82.719c1.698-1.039 2.913-2.71 3.378-4.646s.142-3.976-.899-5.673c-16.47-26.857-39.621-49.321-66.948-64.962-28.181-16.13-60.339-24.656-92.994-24.656-44.646 0-87.896 15.957-121.786 44.933-3.148 2.691-3.518 7.426-.826 10.574s7.426 3.517 10.574.826c29.272-25.028 66.14-39.495 104.535-41.168v172.335c0 3.82 2.377 5.983 4.576 6.906l158.745 67.217c-27.897 58.605-87.708 98.377-155.818 98.377-95.117 0-172.5-77.383-172.5-172.5 0-39.979 13.988-78.945 39.388-109.723 2.636-3.194 2.184-7.922-1.011-10.558-3.195-2.639-7.922-2.184-10.559 1.011-27.611 33.458-42.818 75.815-42.818 119.27 0 103.388 84.112 187.5 187.5 187.5zm7.498-359.817c27.451 1.192 54.289 8.894 78.047 22.493 22.977 13.15 42.744 31.541 57.547 53.471l-135.594 82.973zm44.526 186.202 118.164 14.376c-1.826 11.099-4.709 21.812-8.523 32.049z"/>
+                                        <TextBlock HorizontalAlignment="Center" Foreground="White">통계정보</TextBlock>
                                     </StackPanel>
                                 </TabItem.Header>
+                                <Grid ShowGridLines="true">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                        <Label FontSize="20" Margin="5">브랜드별 판매량</Label>
+                                        <ComboBox x:Name="cb_chart_select_sell" Margin="5" SelectedIndex="0" Width="70" Height="30" DropDownClosed="combo_dropdown">
+                                            <ComboBoxItem Content="월별"/>
+                                            <ComboBoxItem Content="분기별"/>
+                                            <ComboBoxItem Content="년별"/>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <lvc:PieChart x:Name="pieChart1" Grid.Row="1" LegendLocation="Bottom" DataClick="Chart_OnDataClick" Hoverable="False"
+                      DataTooltip="{x:Null}">
+                                        <lvc:PieChart.Series>
+                                            <lvc:PieSeries Title="Maria"  Values="3" DataLabels="True"
+                               LabelPoint="{Binding PointLabel}"/>
+                                            <lvc:PieSeries Title="Charles" Values="4" DataLabels="True" 
+                               LabelPoint="{Binding PointLabel}"/>
+                                            <lvc:PieSeries Title="Frida" Values="6" DataLabels="True" 
+                               LabelPoint="{Binding PointLabel}"/>
+                                            <lvc:PieSeries Title="Frederic" Values="2" DataLabels="True" 
+                               LabelPoint="{Binding PointLabel}"/>
+                                        </lvc:PieChart.Series>
+                                    </lvc:PieChart>
+
+                                    <StackPanel VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal">
+                                        <Label FontSize="20" Margin="5">직원 판매왕</Label>
+                                        <ComboBox x:Name="cb_chart_select_sell_king" Margin="5" SelectedIndex="0" Width="70" Height="30" DropDownClosed="combo_dropdown1">
+                                            <ComboBoxItem Content="월별"/>
+                                            <ComboBoxItem Content="분기별"/>
+                                            <ComboBoxItem Content="년별"/>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <lvc:PieChart x:Name="pieChart2" Grid.Row="1" Grid.Column="1" LegendLocation="Bottom"  DataClick="Chart_OnDataClick_sell_king" Hoverable="False"
+                      DataTooltip="{x:Null}">
+                                        <lvc:PieChart.Series>
+                                            <lvc:PieSeries Title="Maria" Values="3" DataLabels="True"
+                               LabelPoint="{Binding PointLabel}"/>
+                                            <lvc:PieSeries Title="Charles" Values="4" DataLabels="True" 
+                               LabelPoint="{Binding PointLabel}"/>
+                                            <lvc:PieSeries Title="Frida" Values="6" DataLabels="True" 
+                               LabelPoint="{Binding PointLabel}"/>
+                                            <lvc:PieSeries Title="Frederic" Values="2" DataLabels="True" 
+                               LabelPoint="{Binding PointLabel}"/>
+                                        </lvc:PieChart.Series>
+                                    </lvc:PieChart>
+
+
+                                    <StackPanel VerticalAlignment="Center" Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
+                                        <Label FontSize="20" Margin="5">휴대폰 Top10</Label>
+                                        <ComboBox x:Name="cb_chart_select_sell_product" Margin="5" SelectedIndex="0"  Width="70" Height="30" DropDownClosed="combo_dropdown2">
+                                            <ComboBoxItem Content="월별"/>
+                                            <ComboBoxItem Content="분기별"/>
+                                            <ComboBoxItem Content="년별"/>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <lvc:PieChart x:Name="pieChart3" Grid.Row="3" LegendLocation="Bottom"  DataClick="Chart_OnDataClick_sell_product" Hoverable="False"
+                      DataTooltip="{x:Null}">
+                                        <lvc:PieChart.Series>
+                                            <lvc:PieSeries Title="Maria" Values="3" DataLabels="True"
+                               LabelPoint="{Binding PointLabel}"/>
+                                            <lvc:PieSeries Title="Charles" Values="4" DataLabels="True" 
+                               LabelPoint="{Binding PointLabel}"/>
+                                            <lvc:PieSeries Title="Frida" Values="6" DataLabels="True" 
+                               LabelPoint="{Binding PointLabel}"/>
+                                            <lvc:PieSeries Title="Frederic" Values="2" DataLabels="True" 
+                               LabelPoint="{Binding PointLabel}"/>
+                                        </lvc:PieChart.Series>
+                                    </lvc:PieChart>
+
+
+                                    <StackPanel VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal">
+                                        <Label FontSize="20" Margin="5">매출액</Label>
+                                        <Button Margin="10" Click="Chart_btn_Reset">새로고침</Button>
+                                    </StackPanel>
+                                    <lvc:CartesianChart x:Name="barChart" Grid.Row="3" Grid.Column="1" Series="{Binding Series}" LegendLocation="Left">
+                                        <lvc:CartesianChart.AxisX>
+                                            <lvc:Axis Title="Sales" Labels="{Binding Labels}">
+                                                <lvc:Axis.Separator>
+                                                    <lvc:Separator IsEnabled="False" Step="1"></lvc:Separator>
+                                                </lvc:Axis.Separator>
+                                            </lvc:Axis>
+                                        </lvc:CartesianChart.AxisX>
+                                        <lvc:CartesianChart.AxisY>
+                                            <lvc:Axis Title="Months" LabelFormatter="{Binding Formatter}"></lvc:Axis>
+                                        </lvc:CartesianChart.AxisY>
+                                    </lvc:CartesianChart>
+
+                                </Grid>
                             </TabItem>
                         </TabControl>
                     </Grid>
@@ -1928,6 +2187,7 @@
                             <TextBlock Foreground="White">설정</TextBlock>
                         </StackPanel>
                     </TabItem.Header>
+                   
                 </TabItem>
             </TabControl>
         </Grid>

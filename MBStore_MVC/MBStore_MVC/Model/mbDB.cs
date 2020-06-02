@@ -27,6 +27,7 @@ namespace MBStore_MVC.Model
             MessageBox.Show("해제");   
         }
 
+        #region 로그인
         public Employee SelectEmpId(string id)
         {
             Employee emp = new Employee();
@@ -130,7 +131,10 @@ namespace MBStore_MVC.Model
                     return false;
             }
         }
+        #endregion
 
+
+        #region 공지사항
         public bool Insert_Notice(int emp_id, DateTime date, string title, string text, string part)
         {
 
@@ -209,6 +213,9 @@ namespace MBStore_MVC.Model
             }
             return noticeList;
         }
+
+        #endregion
+
 
         #region 판매팀
         //재고가 있는 물품 SELECT
@@ -827,7 +834,6 @@ namespace MBStore_MVC.Model
         #endregion
 
 
-
         #region 물류팀
         //함수 이름예시
         //_Lo_, _lo_ : 물류팀 (Logistics)
@@ -1236,6 +1242,101 @@ namespace MBStore_MVC.Model
             return productList;
         }
 
+        //입고된 제품목록 출력
+        public List<Product> Select_Lo_Pse_stockProduct(string query)
+        {
+            List<Product> proList = new List<Product>();
+
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결     
+                string sql = "SELECT product_id, color, stock, color_value FROM stock_product " + query;
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                {
+                    while (myDataReader.Read())
+                    {
+                        Product product = new Product();
+                        product.Product_id = myDataReader.GetInt32(0);
+                        product.Color = myDataReader.GetString(1);
+                        product.Stock = myDataReader.GetInt32(2);
+                        product.ColorValue = myDataReader.GetString(3);
+                        proList.Add(product);
+                    }
+                }
+            }
+            return proList;
+        }
+
+        //stock_product의 중복체크
+        public bool DupleCheck_stock_product(int product_id, string color)
+        {
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결     
+                string sql = "SELECT * FROM stock_product WHERE product_id = @Product_id AND color=@Color";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                SqlParameter param_product_id = new SqlParameter("@Product_id", product_id);
+                param_product_id.SqlDbType = System.Data.SqlDbType.Int;
+                cmd.Parameters.Add(param_product_id);
+
+                SqlParameter param_color = new SqlParameter("@Color", color);
+                cmd.Parameters.Add(param_color);
+
+
+                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                {
+                    if (myDataReader.Read())
+                    {
+                        myDataReader.Close();
+                        return true;
+                    }
+                    else
+                    {
+                        myDataReader.Close();
+                        return false;
+                    }
+                }
+            }
+        }
+
+        //product_id로 product_name 찾기
+        public string Select_productname_id(int product_id)
+        {
+            string name="";
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결     
+                string sql = "SELECT name FROM product WHERE product_id = @Product_id";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                SqlParameter param_product_id = new SqlParameter("@Product_id", product_id);
+                param_product_id.SqlDbType = System.Data.SqlDbType.Int;
+                cmd.Parameters.Add(param_product_id);
+
+                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                {
+                    while (myDataReader.Read())
+                    {
+                        name = myDataReader.GetString(0);
+                    }
+                }
+                return name;
+            }
+        }
+
+
         #endregion
 
         #region 반품
@@ -1349,6 +1450,9 @@ namespace MBStore_MVC.Model
         #endregion
 
         #endregion
+
+        
+
 
 
         #region 지원팀
@@ -1924,6 +2028,134 @@ namespace MBStore_MVC.Model
                     return false;
             }
         }
+
+
+
+        public List<Chart_Brsell> Get_Sell_Unit(string qr)//판매량 개수 가져오기
+        {
+            List<Chart_Brsell> chart_brsellList = new List<Chart_Brsell>();
+
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결           
+                string sql = "SELECT p.brand,SUM(A.quantity) AS 수량 FROM product p " +
+                    "JOIN (SELECT sp.product_id, sp.quantity FROM sales_history sh " +
+                    "JOIN sales_product sp ON sh.sales_history_id = sp.sales_history_id " +
+                    "WHERE sh.refunded = 0 AND DATEPART(YY,sh.sales_date) = YEAR(GETDATE()) " + qr + ") A ON p.product_id = A.product_id " +
+                    "GROUP BY p.brand";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                {
+                    while (myDataReader.Read())
+                    {
+                        Chart_Brsell chart_brsell = new Chart_Brsell();
+                        chart_brsell.Brand = myDataReader.GetString(0);
+                        chart_brsell.Count = myDataReader.GetInt32(1);
+                        chart_brsellList.Add(chart_brsell);
+                    }
+                }
+                return chart_brsellList;
+            }
+        }
+
+        public List<Chart_SellKing> PieChart_Sell_King(string qr)
+        {
+            List<Chart_SellKing> chart_sellkingList = new List<Chart_SellKing>();
+
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결           
+                string sql = "SELECT SUM(p.price*A.quantity) AS 판매금액, A.name FROM product p " +
+                    "JOIN (SELECT sp.product_id, sp.quantity, e.name, e.employee_id FROM sales_history sh " +
+                    "JOIN employee e ON sh.employee_id = e.employee_id JOIN sales_product sp ON sh.sales_history_id = sp.sales_history_id " +
+                    "WHERE sh.refunded = 0 AND DATEPART(YY,sh.sales_date)=YEAR(GETDATE()) " + qr +
+                    " A ON p.product_id = A.product_id GROUP BY A.employee_id, A.name";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                {
+                    while (myDataReader.Read())
+                    {
+                        Chart_SellKing chart_sellking = new Chart_SellKing();
+                        chart_sellking.Sell_Price = myDataReader.GetInt64(0);
+                        chart_sellking.Name = myDataReader.GetString(1);
+                        chart_sellkingList.Add(chart_sellking);
+                    }
+                }
+                return chart_sellkingList;
+            }
+        }
+
+        public List<Chart_Sellproduct> PieChart_Sell_Product(string qr)
+        {
+            List<Chart_Sellproduct> chart_sellproList = new List<Chart_Sellproduct>();
+
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결           
+
+                string sql = "SELECT p.name, sum(A.quantity) AS 판매량 FROM product p " +
+                    "JOIN (SELECT sp.product_id, sp.quantity FROM sales_history sh " +
+                    "JOIN sales_product sp ON sh.sales_history_id = sp.sales_history_id  " +
+                    "WHERE sh.refunded = 0 AND DATEPART(YY,sh.sales_date)=YEAR(GETDATE()) " + qr +
+                    " A ON p.product_id = A.product_id GROUP BY p.name ORDER BY 판매량 DESC";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                {
+                    while (myDataReader.Read())
+                    {
+                        Chart_Sellproduct chart_sellpro = new Chart_Sellproduct();
+                        chart_sellpro.Product_Name = myDataReader.GetString(0);
+                        chart_sellpro.Prouct_Cnt = myDataReader.GetInt32(1);
+                        chart_sellproList.Add(chart_sellpro);
+                    }
+                }
+                return chart_sellproList;
+            }
+        }
+
+        public List<Basic_Chart_Sales> BChart_Sales_Product()
+        {
+            List<Basic_Chart_Sales> bchartList = new List<Basic_Chart_Sales>();
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결           
+
+                string sql = "SELECT  A.년,A.월, SUM(p.price*A.quantity) AS 판매금액 FROM product p " +
+                    "JOIN (SELECT sp.product_id, sp.quantity, DATEPART(MM,sh.sales_date) AS 월, DATEPART(YY,sh.sales_date) AS 년 FROM sales_history sh " +
+                    "JOIN sales_product sp ON sh.sales_history_id = sp.sales_history_id WHERE sh.refunded = 0 AND (DATEPART(YY,sh.sales_date)=YEAR(GETDATE()) OR DATEPART(YY,sh.sales_date) = YEAR(GETDATE())-1)) " +
+                    "A ON p.product_id = A.product_id GROUP BY A.년, A.월 ORDER BY A.년";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                {
+                    while (myDataReader.Read())
+                    {
+                        Basic_Chart_Sales bchart_salspro = new Basic_Chart_Sales();
+                        bchart_salspro.Year_Check = myDataReader.GetInt32(0);
+                        bchart_salspro.Month_Check = myDataReader.GetInt32(1);
+                        bchart_salspro.Sell_Price = myDataReader.GetInt64(2);
+                        bchartList.Add(bchart_salspro);
+                    }
+                }
+                return bchartList;
+            }
+        }
+
         #endregion
     }
 }

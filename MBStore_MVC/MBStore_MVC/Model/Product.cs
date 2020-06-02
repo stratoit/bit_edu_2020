@@ -32,8 +32,8 @@ namespace MBStore_MVC
         public int Trade_history_id { get; set; }
         public DateTime Trade_date { get; set; }
         public string Trade_type { get; set; }
-
-
+        public string Image_dir { get; set; }
+        
 
 
     }

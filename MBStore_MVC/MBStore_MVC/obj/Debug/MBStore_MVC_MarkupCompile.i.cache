@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Debug\
+\\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\
 MBStore_MVC
 none
 false
 DEBUG;TRACE
-C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\App.xaml
+\\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\App.xaml
 9-400646193
 
-23-124274007
-141066371409
+272070685292
+16295804915
 Emp_Sign_up.xaml;FindAddress.xaml;InputCustomer.xaml;Login.xaml;MainWindow.xaml;Notice.xaml;ShoppingBasket.xaml;SignUp.xaml;StockReturn.xaml;
 
 True
