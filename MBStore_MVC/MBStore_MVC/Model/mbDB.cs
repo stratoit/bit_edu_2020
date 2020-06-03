@@ -84,7 +84,6 @@ namespace MBStore_MVC.Model
         }
         public bool Insert_SignUp(string name, string id, string pw, string gender, string social_number, string phone, string address, string email ,DateTime sign_date)
         {
-
             using (conn = new SqlConnection())
             {
                 conn.ConnectionString =

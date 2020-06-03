@@ -69,22 +69,6 @@ namespace MBStore_MVC
         public MainWindow()
         {
             InitializeComponent();
-            #region 통계자료 초기화
-            PointLabel = chartPoint =>
-                   string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
-
-            PointLabel1 = chartPoint1 =>
-                    string.Format("{0} ({1:P})", chartPoint1.Y, chartPoint1.Participation);
-
-            PointLabel2 = chartPoint2 =>
-                    string.Format("{0} ({1:P})", chartPoint2.Y, chartPoint2.Participation);
-
-            barChart.Series = new SeriesCollection { };
-            Setting_Chart();
-
-            Labels = new[] { "Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec." };
-            DataContext = this;
-            #endregion
         }
         public MainWindow(Employee employee): base()
         {
@@ -167,7 +151,7 @@ namespace MBStore_MVC
             noti.Show(emp);
         }
 
-        private void Print_Notice(string part)
+        public void Print_Notice(string part)
         {
             notice = db.PrintNotice(part);
             if (notice.Count != 0)
@@ -182,6 +166,7 @@ namespace MBStore_MVC
         #region 파일 업로드
         private void FtpUploadFile(string filename, string to_uri)
         {
+            to_uri = to_uri.Replace("+", "plus");
             // Get the object used to communicate with the server.
             FtpWebRequest request =
                 (FtpWebRequest)WebRequest.Create(to_uri);
@@ -202,6 +187,7 @@ namespace MBStore_MVC
             }
         }
         #endregion
+
         #region ListView 헤더클릭 정렬
         GridViewColumnHeader _lastHeaderClicked = null;
         ListSortDirection _lastDirection = ListSortDirection.Ascending;
@@ -724,7 +710,7 @@ namespace MBStore_MVC
         string qr2 = string.Empty;
         int and_ck2 = 0;
 
-        private void Check_and2(int cnt)
+        public void Check_and2(int cnt)
         {
             cnt++;
             and_ck2 = cnt;
@@ -835,7 +821,7 @@ namespace MBStore_MVC
             and_ck2 = 0;
         }
 
-        void su_cus_All_Clear2()
+        public void su_cus_All_Clear2()
         {
             tb_se_cus_search_cus_id.Text = "";
             tb_se_cus_search_name.Text = "";
@@ -887,7 +873,6 @@ namespace MBStore_MVC
 
         //여기부터 시작
         int plusStock; //클래스 변수
-
 
         #region 제품등록
         //제품등록 : 조회버튼
@@ -1506,7 +1491,6 @@ namespace MBStore_MVC
         int and_ck = 0;
         private void btn_su_search(object sender, RoutedEventArgs e)//지원 -> 고객조회 -> 조회버튼
         {
-
             List<Customer> customers;
             string ap = string.Empty;
 
