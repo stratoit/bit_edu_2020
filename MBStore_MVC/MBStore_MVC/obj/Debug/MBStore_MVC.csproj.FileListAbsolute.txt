@@ -87,7 +87,6 @@ C:\Users\bit\Desktop\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.csproj.CoreCo
 \\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\MBStore_MVC.exe.config
 \\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\MBStore_MVC.exe
 \\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\MBStore_MVC.pdb
-\\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.csprojAssemblyReference.cache
 \\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\FindAddress.g.cs
 \\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\InputCustomer.g.cs
 \\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\Login.g.cs
@@ -212,3 +211,76 @@ C:\Users\bit\Documents\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.csproj.Gene
 C:\Users\bit\Documents\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.csproj.CoreCompileInputs.cache
 C:\Users\bit\Documents\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.exe
 C:\Users\bit\Documents\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.pdb
+\\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\Emp_Sign_up.g.cs
+\\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\StockReturn.g.cs
+\\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\Emp_Sign_up.baml
+\\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\StockReturn.baml
+\\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.dll
+\\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.Wpf.dll
+\\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.pdb
+\\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.xml
+\\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.Wpf.pdb
+\\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.Wpf.xml
+\\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.csproj.CopyComplete
+D:\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\MBStore_MVC.exe.config
+D:\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\MBStore_MVC.exe
+D:\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\MBStore_MVC.pdb
+D:\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.dll
+D:\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.Wpf.dll
+D:\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.pdb
+D:\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.xml
+D:\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.Wpf.pdb
+D:\shared_sim\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.Wpf.xml
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.csprojAssemblyReference.cache
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\Emp_Sign_up.g.cs
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\FindAddress.g.cs
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\InputCustomer.g.cs
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\Login.g.cs
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\MainWindow.g.cs
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\Notice.g.cs
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\ShoppingBasket.g.cs
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\SignUp.g.cs
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\StockReturn.g.cs
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\App.g.cs
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC_MarkupCompile.cache
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC_MarkupCompile.lref
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\Emp_Sign_up.baml
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\FindAddress.baml
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\InputCustomer.baml
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\Login.baml
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\MainWindow.baml
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\Notice.baml
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\ShoppingBasket.baml
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\SignUp.baml
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\StockReturn.baml
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.g.resources
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.Properties.Resources.resources
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.csproj.GenerateResource.cache
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.csproj.CoreCompileInputs.cache
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.csproj.CopyComplete
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.exe
+D:\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.pdb
+\\192.168.1.4\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.csprojAssemblyReference.cache
+C:\Users\bit\Desktop\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.dll
+C:\Users\bit\Desktop\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\bit\Desktop\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.pdb
+C:\Users\bit\Desktop\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.xml
+C:\Users\bit\Desktop\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\bit\Desktop\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\bit\Desktop\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.csproj.CopyComplete
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.dll
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Debug\MaterialDesignColors.dll
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.pdb
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.xml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Debug\MaterialDesignColors.pdb
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Debug\App.baml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Debug\MBStore_MVC.csproj.CopyComplete
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Debug\MessageDialog.g.cs
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Debug\MessageDialog.baml

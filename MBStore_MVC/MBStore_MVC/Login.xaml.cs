@@ -21,10 +21,12 @@ namespace MBStore_MVC
     /// Login.xaml에 대한 상호 작용 논리
     /// </summary>
     /// 
+
     public partial class Login : Window
     {
         string path = @"autoloing.txt";
-       
+        Employee emp = new Employee();
+
         public Login()
         {
             InitializeComponent();
@@ -33,6 +35,7 @@ namespace MBStore_MVC
                 string[] value = File.ReadAllText(path).Split('#');
                     func_login(value[0], value[1]);
             }
+            tb_id.DataContext = emp;
                
         }
         private void Path_MouseDown(object sender, MouseButtonEventArgs e)
@@ -50,6 +53,7 @@ namespace MBStore_MVC
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("계정 생성문의나 비밀번호를 잊어버리신 경우 지원팀에 문의하십시오.", "Help");
+          //  MainWindow.Snackbar.MessageQueue.Enqueue("Chip clicked!");
         }
 
         private void PasswordBox_KeyDown(object sender, KeyEventArgs e)

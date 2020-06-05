@@ -38,7 +38,7 @@ namespace MBStore_MVC
         {
             try
             {               
-                wb_find.Navigate("file:///C:/Users/cs950/Downloads/index.html");
+                wb_find.Navigate("http://20.41.81.89/adress/index.html");
                 wb_find.ObjectForScripting = this;
 
                 this.Tag = null;
@@ -74,7 +74,7 @@ namespace MBStore_MVC
 
         #endregion
 
-        #region RUN
+        #region FUN
         //WEB -> C#
         public void lfn_WEB_Cshap_Script2(
                                                          object obj01, object obj02, object obj03, object obj04, object obj05, object obj06, object obj07, object obj08, object obj09
@@ -305,11 +305,6 @@ namespace MBStore_MVC
 
 
         //C# -> WEB
-        private void lfn_Cshap_WEB_initLayerPosition(int w, int h)
-        {
-            wb_find.InvokeScript("initLayerPosition", new object[] { w, h }); //웹 자바스크립트에전달
-        }
-
 
 
         private void lfn_Cshap_WEB_Script2()
@@ -317,7 +312,7 @@ namespace MBStore_MVC
             string str1 = "A";
             string str2 = "B";
 
-            wb_find.InvokeScript("Cshap_WEB_Script2", new object[] { str1, str2 }); //웹 자바스크립트에전달
+            wb_find.InvokeScript("Cshap_WEB_Script2", new object[] { str1, str2 }).ToString(); //웹 자바스크립트에전달
             //webBrowser1.Document.InvokeScript("CallScript", new object[] { svalue1, svalue2 });
         }
 

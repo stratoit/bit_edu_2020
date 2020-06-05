@@ -13,5 +13,6 @@ namespace MBStore_MVC
     /// </summary>
     public partial class App : Application
     {
+        
     }
 }

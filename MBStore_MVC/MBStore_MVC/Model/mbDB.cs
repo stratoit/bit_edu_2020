@@ -24,9 +24,10 @@ namespace MBStore_MVC.Model
 
         public void Dispose()
         {
-            MessageBox.Show("해제");   
+            MessageBox.Show("해제");
         }
 
+        #region 로그인
         public Employee SelectEmpId(string id)
         {
             Employee emp = new Employee();
@@ -81,7 +82,7 @@ namespace MBStore_MVC.Model
 
             }
         }
-        public bool Insert_SignUp(string name, string id, string pw, string gender, string social_number, string phone, string address, string email ,DateTime sign_date)
+        public bool Insert_SignUp(string name, string id, string pw, string post_num, string gender, string social_number, string phone, string address, string email, DateTime sign_date)
         {
 
             using (conn = new SqlConnection())
@@ -90,8 +91,8 @@ namespace MBStore_MVC.Model
                     ConfigurationManager.ConnectionStrings["UserDB"].ToString();
                 conn.Open();    //  데이터베이스 연결  
 
-                string sql = "insert into signup(name,login_id,login_pw,gender,social_number,phone,address,email,sign_date) " +
-                    "values(@id,@pw,@gender,@social_number,@phone,@address,@email,@sign_date)";
+                string sql = "insert into signup(name,login_id,login_pw,gender,social_number,phone,address, post_number, email,sign_date) " +
+                    "values(@name,@id,@pw,@gender,@social_number,@phone,@address,@post_num,@email,@sign_date)";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
@@ -103,6 +104,9 @@ namespace MBStore_MVC.Model
 
                 SqlParameter param_pw = new SqlParameter("@pw", pw);
                 cmd.Parameters.Add(param_pw);
+
+                SqlParameter param_post_num = new SqlParameter("@post_num", post_num);
+                cmd.Parameters.Add(param_post_num);
 
                 SqlParameter param_gender = new SqlParameter("@gender", gender);
                 cmd.Parameters.Add(param_gender);
@@ -130,7 +134,10 @@ namespace MBStore_MVC.Model
                     return false;
             }
         }
+        #endregion
 
+
+        #region 공지사항
         public bool Insert_Notice(int emp_id, DateTime date, string title, string text, string part)
         {
 
@@ -161,7 +168,7 @@ namespace MBStore_MVC.Model
 
                 SqlParameter param_part = new SqlParameter("@part", part);
                 cmd.Parameters.Add(param_part);
-             
+
 
                 //4. 쿼리문 실행
                 if (cmd.ExecuteNonQuery() >= 1)
@@ -188,7 +195,7 @@ namespace MBStore_MVC.Model
                 SqlParameter param_part = new SqlParameter("@part", part);
                 cmd.Parameters.Add(param_part);
 
-                
+
 
                 using (SqlDataReader myDataReader = cmd.ExecuteReader())
                 {
@@ -209,6 +216,9 @@ namespace MBStore_MVC.Model
             }
             return noticeList;
         }
+
+        #endregion
+
 
         #region 판매팀
         //재고가 있는 물품 SELECT
@@ -501,147 +511,263 @@ namespace MBStore_MVC.Model
             }
         }
 
-        //상품의 재고 UPDATE
-        public bool UpdateStockProduct(int product_id, string color, int quantity)
+        //거래(판매,환불)내역 Insert
+        public bool sell_transaction(List<Sell_Info> sell_list, int id, int employee_id, DateTime sales_date, long savings)
         {
-            using (conn = new SqlConnection())
+            try
             {
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["UserDB"].ToString();
-                conn.Open();
-                string sql = "UPDATE stock_product SET stock+=@Quantity WHERE stock_product=(SELECT stock_product FROM stock_product WHERE product_id=@Product_id AND color=@Color)";
-
-                SqlCommand cmd = new SqlCommand(sql, conn);
-
-                SqlParameter param_product_id = new SqlParameter("@Product_id", product_id);
-                param_product_id.SqlDbType = System.Data.SqlDbType.Int;
-                cmd.Parameters.Add(param_product_id);
-
-                SqlParameter param_color = new SqlParameter("@Color", color);
-                cmd.Parameters.Add(param_color);
-
-                SqlParameter param_quantity = new SqlParameter("@Quantity", quantity);
-                param_quantity.SqlDbType = System.Data.SqlDbType.Int;
-                cmd.Parameters.Add(param_quantity);
-
-                if (cmd.ExecuteNonQuery() >= 1)
-                    return true;
-                else
-                    return false;
-            }
-        }
-
-
-
-        //영수증(판매,환불) INSERT
-        public bool InsertSalesHistroy(int customer_id, int employee_id, DateTime sales_date, Boolean refunded)
-        {
-            using (conn = new SqlConnection())
-            {
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["UserDB"].ToString();
-                conn.Open();
-                string sql = "INSERT INTO sales_history(customer_id,employee_id,sales_date, refunded) VALUES (@Customer_id,@Employee_id,@Sales_date, @Refunded)";
-                
-                //string sql;
-                //if(refunded)
-                //    sql = "INSERT INTO sales_history(customer_id,employee_id,sales_date, refunded) VALUES (@Customer_id,@Employee_id,@Sales_date, 0)";
-                //else
-                //    sql = "INSERT INTO sales_history(customer_id,employee_id,sales_date, refunded) VALUES (@Customer_id,@Employee_id,@Sales_date, 1)";
-
-                SqlCommand cmd = new SqlCommand(sql, conn);
-
-                SqlParameter param_customer_id = new SqlParameter("@Customer_id", customer_id);
-                param_customer_id.SqlDbType = System.Data.SqlDbType.Int;
-                cmd.Parameters.Add(param_customer_id);
-
-                SqlParameter param_employee_id = new SqlParameter("@Employee_id", employee_id);
-                param_employee_id.SqlDbType = System.Data.SqlDbType.Int;
-                cmd.Parameters.Add(param_employee_id);
-
-                SqlParameter param_sales_date = new SqlParameter("@Sales_date", sales_date);
-                param_sales_date.SqlDbType = System.Data.SqlDbType.Date;
-                cmd.Parameters.Add(param_sales_date);
-
-                SqlParameter param_refunded = new SqlParameter("@Refunded", refunded);
-                param_refunded.SqlDbType = System.Data.SqlDbType.Bit;
-                cmd.Parameters.Add(param_refunded);
-
-                if (cmd.ExecuteNonQuery() >= 1)
-                    return true;
-                else
-                    return false;
-            }
-        }
-
-
-        //영수증(판매,환불) id의 최댓값 SELECT
-        public int SelectMaxHistoryId(int employee_id)
-        {
-            using (conn = new SqlConnection())
-            {
-                int max_history_id = -1;
-                conn.ConnectionString =
-                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
-                conn.Open();    //  데이터베이스 연결           
-                string sql = "SELECT MAX(sales_history_id) FROM sales_history WHERE employee_id = @Employee_id";
-
-                SqlCommand cmd = new SqlCommand(sql, conn);
-
-                SqlParameter param_employee_id = new SqlParameter("@Employee_id", employee_id);
-                param_employee_id.SqlDbType = System.Data.SqlDbType.Int;
-                cmd.Parameters.Add(param_employee_id);
-
-                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                using (conn = new SqlConnection())
                 {
-                    while (myDataReader.Read())
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["userDB"].ToString();
+                    conn.Open();
+
+                    SqlCommand command = conn.CreateCommand();
+                    SqlTransaction transaction;
+
+                    //start a local transaction.
+                    transaction = conn.BeginTransaction("Transaction");
+
+                    command.Connection = conn;
+                    command.Transaction = transaction;
+
+                    try
                     {
 
-                        max_history_id = myDataReader.GetInt32(0);
+                        command.CommandText =
+                            "INSERT INTO sales_history(customer_id,employee_id,sales_date, refunded) VALUES (@Customer_id,@Employee_id,@Sales_date, 0)";
+                        SqlParameter param_customer_id = new SqlParameter("@Customer_id", id);
+                        param_customer_id.SqlDbType = System.Data.SqlDbType.Int;
+                        command.Parameters.Add(param_customer_id);
+
+                        SqlParameter param_employee_id = new SqlParameter("@Employee_id", employee_id);
+                        param_employee_id.SqlDbType = System.Data.SqlDbType.Int;
+                        command.Parameters.Add(param_employee_id);
+
+                        SqlParameter param_sales_date = new SqlParameter("@Sales_date", sales_date);
+                        param_sales_date.SqlDbType = System.Data.SqlDbType.Date;
+                        command.Parameters.Add(param_sales_date);
+                        command.ExecuteNonQuery();
+
+                        for (int i = 0; i < sell_list.Count; i++)
+                        {
+                            command.Parameters.Clear();
+                            command.CommandText =
+                                "INSERT INTO sales_product(sales_history_id,product_id,quantity,color,color_value,type) VALUES ((SELECT max(sales_history_id) FROM sales_history), @Product_id, @Quantity, @Color, @Color_value, @Type)";
+
+                            SqlParameter param_product_id = new SqlParameter("@Product_id", sell_list[i].Product_id);
+                            param_product_id.SqlDbType = System.Data.SqlDbType.Int;
+                            command.Parameters.Add(param_product_id);
+
+                            SqlParameter param_quantity = new SqlParameter("@Quantity", sell_list[i].Quantity);
+                            param_quantity.SqlDbType = System.Data.SqlDbType.Int;
+                            command.Parameters.Add(param_quantity);
+
+                            SqlParameter param_color = new SqlParameter("@Color", sell_list[i].Color);
+                            command.Parameters.Add(param_color);
+
+                            SqlParameter param_color_value = new SqlParameter("@Color_value", sell_list[i].ColorValue);
+                            command.Parameters.Add(param_color_value);
+
+                            SqlParameter param_type = new SqlParameter("@Type", "판매");
+                            command.Parameters.Add(param_type);
+
+                            command.ExecuteNonQuery();
+
+                            command.CommandText =
+                                "UPDATE stock_product SET stock-=@Quantity WHERE stock_product=(SELECT stock_product FROM stock_product WHERE product_id=@Product_id AND color=@Color)";
+                            command.ExecuteNonQuery();
+                        }
+                        command.CommandText = "UPDATE customer SET savings+=@Savings WHERE customer_id = @Customer_id";
+                        SqlParameter param_customer_id1 = new SqlParameter("@Customer_id", id);
+                        param_customer_id1.SqlDbType = System.Data.SqlDbType.Int;
+                        command.Parameters.Add(param_customer_id1);
+
+                        SqlParameter param_saving = new SqlParameter("@Savings", savings);
+                        param_saving.SqlDbType = System.Data.SqlDbType.BigInt;
+                        command.Parameters.Add(param_saving);
+                        command.ExecuteNonQuery();
+                        transaction.Commit();
                     }
-                    return max_history_id;
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex + "오류");
+                        try
+                        {
+                            transaction.Rollback();
+                        }
+                        catch (Exception ex1)
+                        {
+                            MessageBox.Show(ex1 + "롤백안됌");
+                        }
+                        return false;
+                    }
                 }
             }
+            catch
+            {
+
+            }
+
+            return true;
         }
 
+        //public bool InsertSalesProduct(int history_id, int product_id, int quantity, string color, string color_value, string type)
+        //{
+        //    using (conn = new SqlConnection())
+        //    {
+        //        conn.ConnectionString = ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+        //        conn.Open();
+        //        string sql = "INSERT INTO sales_product(sales_history_id,product_id,quantity,color,color_value,type) VALUES (@History_id, @Product_id, @Quantity, @Color, @Color_value, @Type)";
 
-        //거래(판매,환불)내역 Insert
-        public bool InsertSalesProduct(int history_id, int product_id, int quantity, string color, string color_value, string type)
+        //        SqlCommand cmd = new SqlCommand(sql, conn);
+
+        //        SqlParameter param_history_id = new SqlParameter("@History_id", history_id);
+        //        param_history_id.SqlDbType = System.Data.SqlDbType.Int;
+        //        cmd.Parameters.Add(param_history_id);
+
+        //        SqlParameter param_product_id = new SqlParameter("@Product_id", product_id);
+        //        param_product_id.SqlDbType = System.Data.SqlDbType.Int;
+        //        cmd.Parameters.Add(param_product_id);
+
+        //        SqlParameter param_quantity = new SqlParameter("@Quantity", quantity);
+        //        param_quantity.SqlDbType = System.Data.SqlDbType.Int;
+        //        cmd.Parameters.Add(param_quantity);
+
+        //        SqlParameter param_color = new SqlParameter("@Color", color);
+        //        cmd.Parameters.Add(param_color);
+
+        //        SqlParameter param_color_value = new SqlParameter("@Color_value", color_value);
+        //        cmd.Parameters.Add(param_color_value);
+
+        //        SqlParameter param_type = new SqlParameter("@Type", type);
+        //        cmd.Parameters.Add(param_type);
+
+        //        if (cmd.ExecuteNonQuery() >= 1)
+        //            return true;
+        //        else
+        //            return false;
+        //    }
+        //}
+
+        public bool transaction_refund(int sales_history_id, int r_customer_id, int employee_id, DateTime sales_date, List<Sell_Info> refund_list, int s_customer_id, long savings)
         {
-            using (conn = new SqlConnection())
+            try
             {
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["UserDB"].ToString();
-                conn.Open();
-                string sql = "INSERT INTO sales_product(sales_history_id,product_id,quantity,color,color_value,type) VALUES (@History_id, @Product_id, @Quantity, @Color, @Color_value, @Type)";
+                using (conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["userDB"].ToString();
+                    conn.Open();
 
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                    SqlCommand command = conn.CreateCommand();
+                    SqlTransaction transaction;
 
-                SqlParameter param_history_id = new SqlParameter("@History_id", history_id);
-                param_history_id.SqlDbType = System.Data.SqlDbType.Int;
-                cmd.Parameters.Add(param_history_id);
+                    //start a local transaction.
+                    transaction = conn.BeginTransaction("Transaction");
 
-                SqlParameter param_product_id = new SqlParameter("@Product_id", product_id);
-                param_product_id.SqlDbType = System.Data.SqlDbType.Int;
-                cmd.Parameters.Add(param_product_id);
+                    command.Connection = conn;
+                    command.Transaction = transaction;
 
-                SqlParameter param_quantity = new SqlParameter("@Quantity", quantity);
-                param_quantity.SqlDbType = System.Data.SqlDbType.Int;
-                cmd.Parameters.Add(param_quantity);
+                    try
+                    {
 
-                SqlParameter param_color = new SqlParameter("@Color", color);
-                cmd.Parameters.Add(param_color);
+                        command.CommandText =
+                           "UPDATE sales_history SET refunded=1 WHERE sales_history_id = @Sales_history_id";
 
-                SqlParameter param_color_value = new SqlParameter("@Color_value", color_value);
-                cmd.Parameters.Add(param_color_value);
+                        SqlParameter param_sales_history_id = new SqlParameter("@Sales_history_id", sales_history_id);
+                        param_sales_history_id.SqlDbType = System.Data.SqlDbType.Int;
+                        command.Parameters.Add(param_sales_history_id);
 
-                SqlParameter param_type = new SqlParameter("@Type", type);
-                cmd.Parameters.Add(param_type);
+                        command.ExecuteNonQuery();
 
-                if (cmd.ExecuteNonQuery() >= 1)
-                    return true;
-                else
-                    return false;
+                        command.CommandText =
+                            "INSERT INTO sales_history(customer_id,employee_id,sales_date, refunded) VALUES (@r_Customer_id,@Employee_id,@Sales_date, @Refunded)";
+
+                        SqlParameter param_rcustomer_id = new SqlParameter("@r_Customer_id", r_customer_id);
+                        param_rcustomer_id.SqlDbType = System.Data.SqlDbType.Int;
+                        command.Parameters.Add(param_rcustomer_id);
+
+                        SqlParameter param_employee_id = new SqlParameter("@Employee_id", employee_id);
+                        param_employee_id.SqlDbType = System.Data.SqlDbType.Int;
+                        command.Parameters.Add(param_employee_id);
+
+                        SqlParameter param_sales_date = new SqlParameter("@Sales_date", sales_date);
+                        param_sales_date.SqlDbType = System.Data.SqlDbType.Date;
+                        command.Parameters.Add(param_sales_date);
+
+                        SqlParameter param_refunded = new SqlParameter("@Refunded", true);
+                        param_refunded.SqlDbType = System.Data.SqlDbType.Bit;
+                        command.Parameters.Add(param_refunded);
+
+                        command.ExecuteNonQuery();
+
+                        for (int i = 0; i < refund_list.Count; i++)
+                        {
+                            command.Parameters.Clear();
+
+                            command.CommandText =
+                                "INSERT INTO sales_product(sales_history_id,product_id,quantity,color,color_value,type) VALUES ((SELECT max(sales_history_id) FROM sales_history)" +
+                                ", @Product_id, @Quantity, @Color, @Color_value, @Type)";
+
+                            SqlParameter param_product_id = new SqlParameter("@Product_id", refund_list[i].Product_id);
+                            param_product_id.SqlDbType = System.Data.SqlDbType.Int;
+                            command.Parameters.Add(param_product_id);
+
+                            SqlParameter param_quantity = new SqlParameter("@Quantity", refund_list[i].Quantity);
+                            param_quantity.SqlDbType = System.Data.SqlDbType.Int;
+                            command.Parameters.Add(param_quantity);
+
+                            SqlParameter param_color = new SqlParameter("@Color", refund_list[i].Color);
+                            command.Parameters.Add(param_color);
+
+                            SqlParameter param_color_value = new SqlParameter("@Color_value", refund_list[i].ColorValue);
+                            command.Parameters.Add(param_color_value);
+
+                            SqlParameter param_type = new SqlParameter("@Type", "환불");
+                            command.Parameters.Add(param_type);
+                            command.ExecuteNonQuery();
+
+                            command.CommandText =
+                               "UPDATE stock_product SET stock+=@Quantity WHERE stock_product=(SELECT stock_product FROM stock_product WHERE product_id=@Product_id AND color=@Color)";
+                            command.ExecuteNonQuery();
+                        }
+
+                        command.CommandText =
+                            "UPDATE customer SET savings-=@Savings WHERE customer_id = @Customer_id";
+
+                        SqlParameter param_savings = new SqlParameter("@Savings", savings);
+                        param_savings.SqlDbType = System.Data.SqlDbType.BigInt;
+                        command.Parameters.Add(param_savings);
+
+                        SqlParameter param_scustomer_id = new SqlParameter("@Customer_id", s_customer_id);
+                        param_scustomer_id.SqlDbType = System.Data.SqlDbType.Int;
+                        command.Parameters.Add(param_scustomer_id);
+
+                        command.ExecuteNonQuery();
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message + "-오류-");
+
+                        try
+                        {
+                            transaction.Rollback();
+                        }
+                        catch (Exception ex1)
+                        {
+                            MessageBox.Show(ex1 + "롤백안됌");
+                        }
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
             }
         }
-
 
         //거래(판매,환불) SELECT
         public List<Sell_Info> SelectSalesHistory(string customer_name, string employee_name, string type, DateTime sales_s_date, DateTime sales_e_date, int sales_history_id, string proudct_name, string query)
@@ -714,29 +840,6 @@ namespace MBStore_MVC.Model
         }
 
 
-        //환불로 인한 영수증 refund UPDATE
-        public bool UpdateSalesHistory(int sales_history_id)
-        {
-            using (conn = new SqlConnection())
-            {
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["UserDB"].ToString();
-                conn.Open();
-                string sql = "UPDATE sales_history SET refunded=1 WHERE sales_history_id = @Sales_history_id";
-
-                SqlCommand cmd = new SqlCommand(sql, conn);
-
-                SqlParameter param_sales_history_id = new SqlParameter("@Sales_history_id", sales_history_id);
-                param_sales_history_id.SqlDbType = System.Data.SqlDbType.Int;
-                cmd.Parameters.Add(param_sales_history_id);
-
-                if (cmd.ExecuteNonQuery() >= 1)
-                    return true;
-                else
-                    return false;
-            }
-        }
-
-
         //영수증(판매,환불) refund SELECT
         public bool SelectSalesHistoryRefunded(int sales_history_id)
         {
@@ -764,41 +867,13 @@ namespace MBStore_MVC.Model
             }
         }
 
-
-        //고객 적립금 UPDATE
-        public bool UpdateCustomerSavings(int customer_id, long savings)
-        {
-            using (conn = new SqlConnection())
-            {
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["UserDB"].ToString();
-                conn.Open();
-                string sql = "UPDATE customer SET savings+=@Savings WHERE customer_id = @Customer_id";
-
-                SqlCommand cmd = new SqlCommand(sql, conn);
-
-                SqlParameter param_savings = new SqlParameter("@Savings", savings);
-                param_savings.SqlDbType = System.Data.SqlDbType.BigInt;
-                cmd.Parameters.Add(param_savings);
-
-                SqlParameter param_customer_id = new SqlParameter("@Customer_id", customer_id);
-                param_customer_id.SqlDbType = System.Data.SqlDbType.Int;
-                cmd.Parameters.Add(param_customer_id);
-
-                if (cmd.ExecuteNonQuery() >= 1)
-                    return true;
-                else
-                    return false;
-            }
-        }
-
-
-
         //판매 영수증 가격 SELECT
-        public Sell_Info SelectHistoryTotalPrice(int sales_history_id)
+
+        public List<Sell_Info> SelectHistoryTotalPrice(int sales_history_id)
         {
+            List<Sell_Info> List_sell_info = new List<Sell_Info>();
             using (conn = new SqlConnection())
             {
-                Sell_Info sell_Info = new Sell_Info();
                 conn.ConnectionString =
                     ConfigurationManager.ConnectionStrings["UserDB"].ToString();
                 conn.Open();    //  데이터베이스 연결           
@@ -817,15 +892,18 @@ namespace MBStore_MVC.Model
                 {
                     while (myDataReader.Read())
                     {
+                        Sell_Info sell_Info = new Sell_Info();
+
                         sell_Info.Customer_id = myDataReader.GetInt32(0);
                         sell_Info.Total_price = myDataReader.GetInt64(1);
+
+                        List_sell_info.Add(sell_Info);
                     }
-                    return sell_Info;
+                    return List_sell_info;
                 }
             }
         }
         #endregion
-
 
 
         #region 물류팀
@@ -1146,6 +1224,96 @@ namespace MBStore_MVC.Model
             }
             return productList;
         }
+
+        public bool input_transaction(List<Product> inputdata, bool[] check, int[] newstock)
+        {
+            try
+            {
+                using (conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["userDB"].ToString();
+                    conn.Open();
+
+                    SqlCommand command = conn.CreateCommand();
+                    SqlTransaction transaction;
+
+                    //start a local transaction.
+                    transaction = conn.BeginTransaction("Transaction");
+
+                    command.Connection = conn;
+                    command.Transaction = transaction;
+
+                    try
+                    {
+                        SqlParameter param_employee_id = new SqlParameter("@Employee_id", inputdata[0].Employee_id);
+                        param_employee_id.SqlDbType = System.Data.SqlDbType.Int;
+                        command.Parameters.Add(param_employee_id);
+
+                        SqlParameter param_trade_date = new SqlParameter("@Trade_date", inputdata[0].Trade_date);
+                        param_trade_date.SqlDbType = System.Data.SqlDbType.Date;
+                        command.Parameters.Add(param_trade_date);
+
+                        command.CommandText = "insert into trade_history(employee_id, trade_date) values (@Employee_id, @Trade_date)";
+                        command.ExecuteNonQuery();
+
+                        for (int i = 0; i < inputdata.Count; i++)   //추가할 리스트뷰에 존재하는 항목 수 만큼
+                        {
+                            command.Parameters.Clear();
+
+                            SqlParameter param_proudct_id = new SqlParameter("@Product_id", inputdata[i].Product_id);
+                            param_proudct_id.SqlDbType = System.Data.SqlDbType.Int;
+                            command.Parameters.Add(param_proudct_id);
+
+                            SqlParameter param_proudct_color = new SqlParameter("@Color", inputdata[i].Color);
+                            command.Parameters.Add(param_proudct_color);
+
+                            SqlParameter param_proudct_stock = new SqlParameter("@Stock", newstock[i]);
+                            param_proudct_stock.SqlDbType = System.Data.SqlDbType.Int;
+                            command.Parameters.Add(param_proudct_stock);
+
+                            SqlParameter param_proudct_color_value = new SqlParameter("@Color_value", inputdata[i].ColorValue);
+                            command.Parameters.Add(param_proudct_color_value);
+
+                            //처음 추가
+                            if (check[i] == false)
+                            {
+                                command.CommandText = "insert into stock_product(product_id, color, stock, color_value) values(@Product_id, @Color, @Stock, @Color_value)";
+                            }
+                            //기존에 이미 추가
+                            else if (check[i] == true)
+                            {
+                                command.CommandText = "update stock_product set stock = stock + @Stock where stock_product = (select stock_product from stock_product where product_id = @Product_id and color = @Color)";
+                            }
+                            command.ExecuteNonQuery();
+
+                            command.CommandText = "insert trade_product(product_id, trade_history_id, color, quantity, trade_type, color_value) values " +
+                                "(@Product_id, (SELECT MAX(trade_history_id) FROM trade_history), @Color, @Stock, '입고', @Color_value)";
+                            command.ExecuteNonQuery();
+                        }
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex + "오류");
+                        try
+                        {
+                            transaction.Rollback();
+                        }
+                        catch (Exception ex1)
+                        {
+                            MessageBox.Show(ex1 + "롤백안됌");
+                        }
+                        return false;
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return true;
+        }
         //입고 : 현재 product 테이블에 등록된 물품번호의 목록 출력
         public List<Int32> Get_Lo_Input_ProductNumList()
         {
@@ -1179,62 +1347,100 @@ namespace MBStore_MVC.Model
             return productList;
         }
 
-        //입고 : insert 작업 시 사용
-        public Product Set_Lo_Input_Product(string sql)
+        //입고된 제품목록 출력
+        public List<Product> Select_Lo_Pse_stockProduct(string query)
         {
-            Product productList = new Product();
-            try
-            {
-                using (conn = new SqlConnection())
-                {
-                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["userDB"].ToString();
-                    conn.Open();    //데이터베이스 연결
-                    SqlCommand cmd = new SqlCommand(sql, conn);
+            List<Product> proList = new List<Product>();
 
-                    try
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결     
+                string sql = "SELECT product_id, color, stock, color_value FROM stock_product " + query;
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                {
+                    while (myDataReader.Read())
                     {
-                        int x = cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
+                        Product product = new Product();
+                        product.Product_id = myDataReader.GetInt32(0);
+                        product.Color = myDataReader.GetString(1);
+                        product.Stock = myDataReader.GetInt32(2);
+                        product.ColorValue = myDataReader.GetString(3);
+                        proList.Add(product);
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return productList;
+            return proList;
         }
-        //입고 : 영수증 및 기록 추가
-        public Product Set_Lo_Input_History(string sql)
-        {
-            Product productList = new Product();
-            try
-            {
-                using (conn = new SqlConnection())
-                {
-                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["userDB"].ToString();
-                    conn.Open();    //데이터베이스 연결
-                    SqlCommand cmd = new SqlCommand(sql, conn);
 
-                    try
+        //stock_product의 중복체크
+        public bool DupleCheck_stock_product(int product_id, string color)
+        {
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결     
+                string sql = "SELECT * FROM stock_product WHERE product_id = @Product_id AND color=@Color";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                SqlParameter param_product_id = new SqlParameter("@Product_id", product_id);
+                param_product_id.SqlDbType = System.Data.SqlDbType.Int;
+                cmd.Parameters.Add(param_product_id);
+
+                SqlParameter param_color = new SqlParameter("@Color", color);
+                cmd.Parameters.Add(param_color);
+
+
+                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                {
+                    if (myDataReader.Read())
                     {
-                        int x = cmd.ExecuteNonQuery();
+                        myDataReader.Close();
+                        return true;
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show(ex.Message);
+                        myDataReader.Close();
+                        return false;
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return productList;
         }
+
+        //product_id로 product_name 찾기
+        public string Select_productname_id(int product_id)
+        {
+            string name = "";
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결     
+                string sql = "SELECT name FROM product WHERE product_id = @Product_id";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                SqlParameter param_product_id = new SqlParameter("@Product_id", product_id);
+                param_product_id.SqlDbType = System.Data.SqlDbType.Int;
+                cmd.Parameters.Add(param_product_id);
+
+                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                {
+                    while (myDataReader.Read())
+                    {
+                        name = myDataReader.GetString(0);
+                    }
+                }
+                return name;
+            }
+        }
+
 
         #endregion
 
@@ -1271,7 +1477,7 @@ namespace MBStore_MVC.Model
             }
         }
         //반품 : 반품작업 수행
-        public bool Set_Lo_Return_Stock(Return_Info return_Info, int eid)
+        public bool return_transacion(Return_Info return_Info, int eid)
         {
             try
             {
@@ -1279,63 +1485,69 @@ namespace MBStore_MVC.Model
                 {
                     conn.ConnectionString = ConfigurationManager.ConnectionStrings["userDB"].ToString();
                     conn.Open();
-                    string sql = "update stock_product SET stock-=@QUANTITY WHERE stock_product = (SELECT stock_product FROM stock_product WHERE product_id=@Product_id AND color=@Color)";
-                    string sql2 = "insert into trade_history values(@EMPLOYEE_ID, @TRADE_DATE)";
-                    string sql3 = "insert into trade_product values(@Product_id, (SELECT MAX(trade_history_id) FROM trade_history), @COLOR, @Quantity, '반품', @COLOR_VALUE)";
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    SqlCommand cmd2 = new SqlCommand(sql2, conn);
-                    SqlCommand cmd3 = new SqlCommand(sql3, conn);
+
+                    SqlCommand command = conn.CreateCommand();
+                    SqlTransaction transaction;
+
+                    //start a local transaction.
+                    transaction = conn.BeginTransaction("Transaction");
+
+                    command.Connection = conn;
+                    command.Transaction = transaction;
+
                     try
                     {
-                        SqlParameter param_employee_id = new SqlParameter("@EMPLOYEE_ID", eid);
-                        param_employee_id.SqlDbType = System.Data.SqlDbType.Int;
-                        cmd2.Parameters.Add(param_employee_id);
-
-                        SqlParameter param_TRADE_DATE = new SqlParameter("@TRADE_DATE", DateTime.Now);
-                        param_TRADE_DATE.SqlDbType = System.Data.SqlDbType.DateTime;
-                        cmd2.Parameters.Add(param_TRADE_DATE);
+                        command.CommandText =
+                            "update stock_product SET stock-=@QUANTITY WHERE stock_product = (SELECT stock_product FROM stock_product WHERE product_id=@Product_id AND color=@Color)";
 
                         SqlParameter param_name = new SqlParameter("@Product_id", return_Info.Product_id);
                         param_name.SqlDbType = System.Data.SqlDbType.Int;
-                        SqlParameter param_name2 = new SqlParameter("@Product_id", return_Info.Product_id);
-                        param_name2.SqlDbType = System.Data.SqlDbType.Int;
-                        cmd.Parameters.Add(param_name);
-                        cmd3.Parameters.Add(param_name2);
+                        command.Parameters.Add(param_name);
 
                         SqlParameter param_color = new SqlParameter("@Color", return_Info.Color);
-                        SqlParameter param_color2 = new SqlParameter("@Color", return_Info.Color);
-                        cmd.Parameters.Add(param_color);
-                        cmd3.Parameters.Add(param_color2);
-
-                        SqlParameter param_color_value = new SqlParameter("@COLOR_VALUE", return_Info.ColorValue);
-                        cmd3.Parameters.Add(param_color_value);
+                        command.Parameters.Add(param_color);
 
                         SqlParameter param_quantity2 = new SqlParameter("@Quantity", return_Info.Quantity);
                         param_quantity2.SqlDbType = System.Data.SqlDbType.Int;
-                        SqlParameter param_quantity = new SqlParameter("@Quantity", return_Info.Quantity);
-                        param_quantity.SqlDbType = System.Data.SqlDbType.Int;
-                        cmd.Parameters.Add(param_quantity2);
-                        cmd3.Parameters.Add(param_quantity);
-                        if (return_Info.Quantity != 0)
-                            if (cmd.ExecuteNonQuery() >= 1 && cmd2.ExecuteNonQuery() >= 1 && cmd3.ExecuteNonQuery() >= 1)
-                            {
-                                string sqldel = "delete from stock_product where product_id = @ID and color = @COLOR and stock = 0";
-                                SqlCommand cmd4 = new SqlCommand(sqldel, conn);
-                                SqlParameter param_ID = new SqlParameter("@ID", return_Info.Product_id);
-                                param_ID.SqlDbType = System.Data.SqlDbType.Int;
-                                cmd4.Parameters.Add(param_ID);
-                                SqlParameter param_COLOR = new SqlParameter("@COLOR", return_Info.Color);
-                                cmd4.Parameters.Add(param_COLOR);
-                                if (cmd4.ExecuteNonQuery() >= 1)
-                                    return true;
-                                return true;
-                            }
-                            else return false;
-                        else return false;
+                        command.Parameters.Add(param_quantity2);
+
+                        command.ExecuteNonQuery();
+
+                        command.CommandText =
+                            "insert into trade_history values(@EMPLOYEE_ID, @TRADE_DATE)";
+
+                        SqlParameter param_employee_id = new SqlParameter("@EMPLOYEE_ID", eid);
+                        param_employee_id.SqlDbType = System.Data.SqlDbType.Int;
+                        command.Parameters.Add(param_employee_id);
+
+                        SqlParameter param_TRADE_DATE = new SqlParameter("@TRADE_DATE", DateTime.Now);
+                        param_TRADE_DATE.SqlDbType = System.Data.SqlDbType.DateTime;
+                        command.Parameters.Add(param_TRADE_DATE);
+
+                        command.ExecuteNonQuery();
+
+                        command.CommandText =
+                            "insert into trade_product values(@Product_id, (SELECT MAX(trade_history_id) FROM trade_history), @COLOR, @Quantity, '반품', @COLOR_VALUE)";
+
+                        SqlParameter param_color_value = new SqlParameter("@COLOR_VALUE", return_Info.ColorValue);
+                        command.Parameters.Add(param_color_value);
+                        command.ExecuteNonQuery();
+
+                        transaction.Commit();
+                        return true;
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message + "-오류-");
+
+                        try
+                        {
+                            transaction.Rollback();
+                        }
+                        catch (Exception ex1)
+                        {
+                            MessageBox.Show(ex1 + "롤백안됌");
+                        }
                         return false;
                     }
                 }
@@ -1444,7 +1656,7 @@ namespace MBStore_MVC.Model
         }
 
         //직원 -> 직원관리 -> 정보번경
-        public Employee Get_Emloyee_info(int id)//11
+        public Employee Get_Employee_info(int id)//11
         {
             string str = string.Empty;
             Employee employee1 = new Employee();
@@ -1474,7 +1686,7 @@ namespace MBStore_MVC.Model
                         employee1.Phone = myDataReader.GetString(6);
                         employee1.Address = myDataReader.GetString(7);
                         employee1.Start_date = myDataReader.GetDateTime(8).ToShortDateString();
-                        employee1.End_date = myDataReader.IsDBNull(9) ? "해당사항없음" : myDataReader.GetDateTime(6).ToShortDateString();
+                        employee1.End_date = myDataReader.IsDBNull(9) ? "해당사항없음" : myDataReader.GetDateTime(9).ToShortDateString();
                         employee1.Rank = myDataReader.GetString(10);
                         employee1.Email = myDataReader.GetString(11);
                         employee1.Post_number = myDataReader.GetString(12);
@@ -1924,6 +2136,136 @@ namespace MBStore_MVC.Model
                     return false;
             }
         }
+
+
+
+        public List<Chart_Brsell> Get_Sell_Unit(string qr)//판매량 개수 가져오기
+        {
+            List<Chart_Brsell> chart_brsellList = new List<Chart_Brsell>();
+
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결           
+                string sql = "SELECT p.brand,SUM(A.quantity) AS 수량 FROM product p " +
+                    "JOIN (SELECT sp.product_id, sp.quantity FROM sales_history sh " +
+                    "JOIN sales_product sp ON sh.sales_history_id = sp.sales_history_id " +
+                    "WHERE sh.refunded = 0 AND DATEPART(YY,sh.sales_date) = YEAR(GETDATE()) " + qr + ") A ON p.product_id = A.product_id " +
+                    "GROUP BY p.brand " +
+                    "ORDER BY 수량 DESC";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                {
+                    while (myDataReader.Read())
+                    {
+                        Chart_Brsell chart_brsell = new Chart_Brsell();
+                        chart_brsell.Brand = myDataReader.GetString(0);
+                        chart_brsell.Count = myDataReader.GetInt32(1);
+                        chart_brsellList.Add(chart_brsell);
+                    }
+                }
+                return chart_brsellList;
+            }
+        }
+
+        public List<Chart_SellKing> PieChart_Sell_King(string qr)
+        {
+            List<Chart_SellKing> chart_sellkingList = new List<Chart_SellKing>();
+
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결           
+                string sql = "SELECT SUM(p.price*A.quantity) AS 판매금액, A.name FROM product p " +
+                    "JOIN (SELECT sp.product_id, sp.quantity, e.name, e.employee_id FROM sales_history sh " +
+                    "JOIN employee e ON sh.employee_id = e.employee_id JOIN sales_product sp ON sh.sales_history_id = sp.sales_history_id " +
+                    "WHERE sh.refunded = 0 AND DATEPART(YY,sh.sales_date)=YEAR(GETDATE()) " + qr +
+                    " A ON p.product_id = A.product_id GROUP BY A.employee_id, A.name "
+                    + "ORDER BY 판매금액 DESC";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                {
+                    while (myDataReader.Read())
+                    {
+                        Chart_SellKing chart_sellking = new Chart_SellKing();
+                        chart_sellking.Sell_Price = myDataReader.GetInt64(0);
+                        chart_sellking.Name = myDataReader.GetString(1);
+                        chart_sellkingList.Add(chart_sellking);
+                    }
+                }
+                return chart_sellkingList;
+            }
+        }
+
+        public List<Chart_Sellproduct> PieChart_Sell_Product(string qr)
+        {
+            List<Chart_Sellproduct> chart_sellproList = new List<Chart_Sellproduct>();
+
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결           
+
+                string sql = "SELECT TOP 10 p.name, sum(A.quantity) AS 판매량 FROM product p " +
+                    "JOIN (SELECT sp.product_id, sp.quantity FROM sales_history sh " +
+                    "JOIN sales_product sp ON sh.sales_history_id = sp.sales_history_id  " +
+                    "WHERE sh.refunded = 0 AND DATEPART(YY,sh.sales_date)=YEAR(GETDATE()) " + qr +
+                    " A ON p.product_id = A.product_id GROUP BY p.name ORDER BY 판매량 DESC";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                {
+                    while (myDataReader.Read())
+                    {
+                        Chart_Sellproduct chart_sellpro = new Chart_Sellproduct();
+                        chart_sellpro.Product_Name = myDataReader.GetString(0);
+                        chart_sellpro.Prouct_Cnt = myDataReader.GetInt32(1);
+                        chart_sellproList.Add(chart_sellpro);
+                    }
+                }
+                return chart_sellproList;
+            }
+        }
+
+        public List<Basic_Chart_Sales> BChart_Sales_Product()
+        {
+            List<Basic_Chart_Sales> bchartList = new List<Basic_Chart_Sales>();
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결           
+
+                string sql = "SELECT  A.년,A.월, SUM(p.price*A.quantity) AS 판매금액 FROM product p " +
+                    "JOIN (SELECT sp.product_id, sp.quantity, DATEPART(MM,sh.sales_date) AS 월, DATEPART(YY,sh.sales_date) AS 년 FROM sales_history sh " +
+                    "JOIN sales_product sp ON sh.sales_history_id = sp.sales_history_id WHERE sh.refunded = 0 AND (DATEPART(YY,sh.sales_date)=YEAR(GETDATE()) OR DATEPART(YY,sh.sales_date) = YEAR(GETDATE())-1)) " +
+                    "A ON p.product_id = A.product_id GROUP BY A.년, A.월 ORDER BY A.년";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                {
+                    while (myDataReader.Read())
+                    {
+                        Basic_Chart_Sales bchart_salspro = new Basic_Chart_Sales();
+                        bchart_salspro.Year_Check = myDataReader.GetInt32(0);
+                        bchart_salspro.Month_Check = myDataReader.GetInt32(1);
+                        bchart_salspro.Sell_Price = myDataReader.GetInt64(2);
+                        bchartList.Add(bchart_salspro);
+                    }
+                }
+                return bchartList;
+            }
+        }
+
         #endregion
     }
 }

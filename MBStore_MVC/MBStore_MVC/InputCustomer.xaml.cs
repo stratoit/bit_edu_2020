@@ -98,19 +98,10 @@ namespace MBStore_MVC
                             }
                         }
 
-                        int history_id;
                         string str_saving_price = tb_se_inputcus_saving.Text;
                         long saving = long.Parse(str_saving_price, NumberStyles.AllowThousands);
-                        db.InsertSalesHistroy(customer_info.Id, userid, DateTime.Now, false);
-                        history_id = db.SelectMaxHistoryId(userid);
-                        for (int i = 0; i < sell_list.Count; i++)
-                        {
-                            Sell_Info item = sell_list[i];
 
-                            db.InsertSalesProduct(history_id, item.Product_id, item.Quantity, item.Color, item.ColorValue, "판매");
-                            db.UpdateStockProduct(item.Product_id, item.Color, -item.Quantity);
-                        }
-                        db.UpdateCustomerSavings(customer_info.Id, saving);
+                        db.sell_transaction(sell_list, customer_info.Id, userid, DateTime.Now, saving);
 
                         MessageBox.Show("판매가 완료 되었습니다", "알림창");
                         mainWindow.lv_se_expect_sell.ItemsSource = null;
@@ -131,6 +122,7 @@ namespace MBStore_MVC
             {
                 MessageBox.Show("고객을 선택 하세요");
             }
+
         }
 
         private void KeyDown_se_phoneNumber(object sender, KeyEventArgs e)
