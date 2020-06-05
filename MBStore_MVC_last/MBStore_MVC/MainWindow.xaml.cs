@@ -479,22 +479,36 @@ namespace MBStore_MVC
         public void Set_Sell_listview(Product product, int quantity)
         {
             List<Sell_Info> sell_Info_list = new List<Sell_Info>();
+            bool duple = false;
             for (int i = 0; i < lv_se_expect_sell.Items.Count; i++)
             {
                 Sell_Info sell_Info = (Sell_Info)lv_se_expect_sell.Items[i];
                 sell_Info_list.Add(sell_Info);
             }
-
-            sell_Info_list.Add(new Sell_Info()
+            for (int i = 0; i < sell_Info_list.Count; i++)
             {
-                Stock_product = product.Stock_product,
-                Product_id = product.Product_id,
-                Product_name = product.Name,
-                Color = product.Color,
-                ColorValue = product.ColorValue,
-                Quantity = quantity,
-                Total_price = product.Price * quantity
-            });
+                if (sell_Info_list[i].Stock_product == product.Stock_product)
+                {
+                    sell_Info_list[i].Quantity += quantity;
+                    sell_Info_list[i].Total_price = sell_Info_list[i].Quantity * product.Price;
+                    duple = true;
+                    break;
+                }
+            }
+
+            if (!duple)
+            {
+                sell_Info_list.Add(new Sell_Info()
+                {
+                    Stock_product = product.Stock_product,
+                    Product_id = product.Product_id,
+                    Product_name = product.Name,
+                    Color = product.Color,
+                    ColorValue = product.ColorValue,
+                    Quantity = quantity,
+                    Total_price = product.Price * quantity
+                });
+            }
             lv_se_expect_sell.ItemsSource = sell_Info_list;
 
             string str_total_price = la_se_sell_total_price.Content.ToString();
@@ -689,21 +703,14 @@ namespace MBStore_MVC
 
                 try
                 {
-                    db.UpdateSalesHistory(refund_list[0].Sales_history_id);
-
-                    int new_history_id;
-                    db.InsertSalesHistroy(refund_list[0].Customer_id, emp.Employee_id, DateTime.Now, true);
-                    new_history_id = db.SelectMaxHistoryId(emp.Employee_id);
-                    for (int i = 0; i < refund_list.Count; i++)
+                    List<Sell_Info> list_sell_info = db.SelectHistoryTotalPrice(refund_list[0].Sales_history_id);
+                    long savings = 0;
+                    for (int i = 0; i < list_sell_info.Count; i++)
                     {
-                        Sell_Info item = refund_list[i];
-                        db.InsertSalesProduct(new_history_id, item.Product_id, item.Quantity, item.Color, item.ColorValue, "환불");
-                        db.UpdateStockProduct(item.Product_id, item.Color, item.Quantity);
+                        savings += list_sell_info[i].Total_price;
                     }
-
-                    Sell_Info sell_Info = db.SelectHistoryTotalPrice(refund_list[0].Sales_history_id);
-                    long savings = sell_Info.Total_price / 100;
-                    db.UpdateCustomerSavings(sell_Info.Customer_id, -savings);
+                    savings /= 100;
+                    db.transaction_refund(refund_list[0].Sales_history_id, refund_list[0].Customer_id, emp.Employee_id, DateTime.Now, refund_list, list_sell_info[0].Customer_id, savings);
 
                     MessageBox.Show("환불이 완료 되었습니다", "알림창");
                     Btn_se_refund_list_remove(sender, e);
@@ -1446,11 +1453,18 @@ namespace MBStore_MVC
                         }
                     }
                 }
-                for (int l = 0; l < lv_lo_refund_objectList.Items.Count; l++)
-                    db.Set_Lo_Return_Stock(return_Infos[l], emp.Employee_id);
 
-                MessageBox.Show("반품이 완료되었습니다");
-                btn_lo_refund_reset_Click(sender, e);
+                try
+                {
+                    for (int l = 0; l < lv_lo_refund_objectList.Items.Count; l++)
+                        db.Set_Lo_Return_Stock(return_Infos[l], emp.Employee_id);
+                    MessageBox.Show("반품이 완료되었습니다");
+                    btn_lo_refund_reset_Click(sender, e);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("동작이 이뤄지지 않음");
+                }
             }
 
         }
@@ -2238,7 +2252,6 @@ namespace MBStore_MVC
                 pieChart1.Series = piechartData_1;
                 // Set the legend location to appear in the Right side of the chart
                 pieChart1.LegendLocation = LegendLocation.Right;
-                MessageBox.Show("완료");
             }
             catch
             {
@@ -2286,7 +2299,6 @@ namespace MBStore_MVC
                 pieChart2.Series = piechartData_2;
                 // Set the legend location to appear in the Right side of the chart
                 pieChart2.LegendLocation = LegendLocation.Right;
-                MessageBox.Show("완료");
             }
             catch
             {
@@ -2334,7 +2346,6 @@ namespace MBStore_MVC
                 pieChart3.Series = piechartData_3;
                 // Set the legend location to appear in the Right side of the chart
                 pieChart3.LegendLocation = LegendLocation.Right;
-                MessageBox.Show("완료");
             }
             catch
             {
@@ -2419,8 +2430,6 @@ namespace MBStore_MVC
                     Title = this_basic_list[0].Year_Check.ToString(),
                     Values = new ChartValues<long>(price_list_this)
                 });
-
-                MessageBox.Show("완료");
             }
             catch
             {
