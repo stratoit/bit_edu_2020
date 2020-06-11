@@ -184,7 +184,7 @@ namespace MBStore_MVC
         {
             // Get the object used to communicate with the server.
             FtpWebRequest request =
-                (FtpWebRequest)WebRequest.Create(to_uri);
+                (FtpWebRequest)WebRequest.Create(to_uri.Replace("+", "plus"));
             request.Method = WebRequestMethods.Ftp.UploadFile;
             request.UsePassive = false;
             // Get network credentials.
@@ -469,7 +469,7 @@ namespace MBStore_MVC
             product = (Product)lv_se_product_info.SelectedItems[0];
 
             ShoppingBasket shoppingBasket_w = new ShoppingBasket();
-            shoppingBasket_w.SetProduct(product, this);
+            shoppingBasket_w.SetProduct(product, this, uri);
             shoppingBasket_w.ShowDialog();
         }
         #endregion
@@ -683,7 +683,10 @@ namespace MBStore_MVC
                 MessageBox.Show("환불이 불가능한 제품입니다");
             }
         }
+        #endregion
 
+
+        #region 환불
         private void Btn_se_refund_list_remove(object sender, RoutedEventArgs e)
         {
             lv_se_expect_refund.ItemsSource = null;
@@ -884,16 +887,6 @@ namespace MBStore_MVC
         #endregion
 
     #region 물류팀
-        //함수 이름예시
-        //_Lo_, _lo_ : 물류팀 (Logistics)
-        //_Reg_, _reg_ : 제품등록 영역
-        //_Input_, _input_ : 입고 영역(Input)
-        //_Pse_, _pse_ : 제품 조회 영역(Product Search)
-        //_Rse_, _rse_ : 내역 조회 영역(Receipt Search)
-        //_refund_ : 반품 영역
-
-        //여기부터 시작
-        int plusStock; //클래스 변수
 
 
         #region 제품등록
@@ -1133,6 +1126,8 @@ namespace MBStore_MVC
         #endregion
 
         #region 입고
+        
+        int plusStock; //클래스 변수
         //입고 : 조회버튼
         private void btn_lo_input_search_Click(object sender, RoutedEventArgs e)
         {
@@ -1341,53 +1336,17 @@ namespace MBStore_MVC
                             }
                             else check[i] = false;
                         }
-
-                        for (int i = 0; i < lv_lo_input_addList.Items.Count; i++)	//추가할 리스트뷰에 존재하는 항목 수 만큼
+                        db.input_transaction(inputdata, check, newstock);
+                        for(int i=0; i<inputdata.Count;i++)
                         {
-                            if (check[i] == false && inputdata[i].Trade_type == "입고") //DB에 없는 새로운 항목
+                            if (check[i] == false) 
                             {
-                                string sql = "insert into stock_product(product_id, color, stock, color_value) values("
-                                    + inputdata[i].Product_id.ToString() + ",'" + inputdata[i].Color.ToString() + "',"
-                                    + newstock[i] + ",'" + inputdata[i].ColorValue.ToString() + "')";
-                                string sql2 = "insert into trade_history values (" + inputdata[i].Employee_id.ToString()
-                                    + ",'" + inputdata[i].Trade_date.ToShortDateString() + "')";
-                                string sql3 = "insert into trade_product(product_id, trade_history_id, color, quantity, trade_type, color_value) values ("
-                                    + inputdata[i].Product_id.ToString() + ",(SELECT MAX(trade_history_id) FROM trade_history),'" + inputdata[i].Color.ToString() + "'," + newstock[i] + ",'" + inputdata[i].Trade_type.ToString()
-                                    + "','" + inputdata[i].ColorValue.ToString() + "')";
-
-                                Product productdata;
-
-                                productdata = db.Set_Lo_Input_Product(sql);
-                                if (i == 0) productdata = db.Set_Lo_Input_History(sql2);
-                                productdata = db.Set_Lo_Input_History(sql3);
-
                                 string product_name = db.Select_productname_id(inputdata[i].Product_id);
-                                FtpUploadFile(inputdata[i].Image_dir, uri + "/phone/" + product_name + "_" + inputdata[i].Color + "_F_TEST.JPG");
-                            }
-                            else if (check[i] == true && inputdata[i].Trade_type == "입고") //기존 항목
-                            {
-                                int tempstock = dbdata[position[i]].Stock;
-                                //고쳐야할 방향 : 단순히 이름과 색깔로 겹치는걸 찾는 게 아니라 자동으로 부여되는 stock_product를 찾아서 바꿔야한다
-                                string sql = "update stock_product set stock = stock + " + newstock[i] + " where stock_product = (select stock_product from stock_product where product_id = " + inputdata[i].Product_id + " and color = '" + inputdata[i].Color + "')";
-                                //string sql2 = "update trade_product set quantity = quantity + " + newstock[i] + " where trade_id = (select trade_id from trade_product where product_id = " + inputdata[i].Product_id + " and color = '" + inputdata[i].Color + "' and trade_type = '입고')";
-                                string sql2 = "insert into trade_product(product_id, trade_history_id, color, quantity, trade_type, color_value) values ("
-                                    + inputdata[i].Product_id.ToString() + ",(SELECT MAX(trade_history_id) FROM trade_history),'" + inputdata[i].Color.ToString() + "'," + newstock[i] + ",'" + inputdata[i].Trade_type.ToString()
-                                    + "','" + inputdata[i].ColorValue.ToString() + "')";
-                                string sql3 = "insert into trade_history values (" + inputdata[i].Employee_id.ToString()
-                                    + ",'" + inputdata[i].Trade_date.ToShortDateString() + "')";
-
-                                Product productdata;
-
-                                productdata = db.Set_Lo_Input_Product(sql);
-                                if (i == 0) productdata = db.Set_Lo_Input_History(sql3);
-                                productdata = db.Set_Lo_Input_History(sql2);
-
-                                
+                                FtpUploadFile(inputdata[i].Image_dir, uri + "/phone/" + product_name + "_" + inputdata[i].Color + "_F.JPG");
                             }
                         }
                         MessageBox.Show("등록완료");
                         
-                        btn_lo_pse_search_Click(sender, e);
                         cb_lo_input_productNumber.SelectedIndex = -1;
                         tb_lo_input_color.Text = "";
                         tb_lo_input_numberOf.Text = "";
@@ -1457,7 +1416,7 @@ namespace MBStore_MVC
                 try
                 {
                     for (int l = 0; l < lv_lo_refund_objectList.Items.Count; l++)
-                        db.Set_Lo_Return_Stock(return_Infos[l], emp.Employee_id);
+                        db.return_transacion(return_Infos[l], emp.Employee_id);
                     MessageBox.Show("반품이 완료되었습니다");
                     btn_lo_refund_reset_Click(sender, e);
                 }
@@ -1852,7 +1811,7 @@ namespace MBStore_MVC
                 try
                 {
                     str = "";
-                    employee = db.Get_Emloyee_info(int.Parse(tb_su_em_id.Text));
+                    employee = db.Get_Employee_info(int.Parse(tb_su_em_id.Text));
 
                     su_em_Reset_text();
                     tb_su_em_login_id.Text = employee.Login_id;
@@ -1966,7 +1925,7 @@ namespace MBStore_MVC
                 {
                     try
                     {
-                        employee = db.Get_Emloyee_info(int.Parse(tb_su_em_id.Text));
+                        employee = db.Get_Employee_info(int.Parse(tb_su_em_id.Text));
                         db.Reset_PW_EMP(employee.Login_id);
                         MessageBox.Show("비밀번호 변경완료");
                     }
@@ -2015,6 +1974,8 @@ namespace MBStore_MVC
                 // Open document 
                 string filename = dlg.FileName;
                 tb_su_emp_img.Text = filename;
+
+                img_su_emp.ImageSource = new BitmapImage(new Uri(@dlg.FileName, UriKind.Absolute));
             }
         }
 

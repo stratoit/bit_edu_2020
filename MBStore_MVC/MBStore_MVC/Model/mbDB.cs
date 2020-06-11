@@ -864,35 +864,6 @@ namespace MBStore_MVC.Model
             }
         }
 
-
-       // 고객 적립금 UPDATE
-        //public bool UpdateCustomerSavings(int customer_id, long savings)
-        //{
-        //    using (conn = new SqlConnection())
-        //    {
-        //        conn.ConnectionString = ConfigurationManager.ConnectionStrings["UserDB"].ToString();
-        //        conn.Open();
-        //        string sql = "UPDATE customer SET savings-=@Savings WHERE customer_id = @Customer_id";
-
-        //        SqlCommand cmd = new SqlCommand(sql, conn);
-
-        //        SqlParameter param_savings = new SqlParameter("@Savings", savings);
-        //        param_savings.SqlDbType = System.Data.SqlDbType.BigInt;
-        //        cmd.Parameters.Add(param_savings);
-
-        //        SqlParameter param_customer_id = new SqlParameter("@Customer_id", customer_id);
-        //        param_customer_id.SqlDbType = System.Data.SqlDbType.Int;
-        //        cmd.Parameters.Add(param_customer_id);
-
-        //        if (cmd.ExecuteNonQuery() >= 1)
-        //            return true;
-        //        else
-        //            return false;
-        //    }
-        //}
-
-
-
         //판매 영수증 가격 SELECT
 
         public List<Sell_Info> SelectHistoryTotalPrice(int sales_history_id)
@@ -1250,6 +1221,96 @@ namespace MBStore_MVC.Model
             }
             return productList;
         }
+
+        public bool input_transaction(List<Product> inputdata, bool[] check, int[] newstock)
+        {
+            try
+            {
+                using (conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["userDB"].ToString();
+                    conn.Open();
+
+                    SqlCommand command = conn.CreateCommand();
+                    SqlTransaction transaction;
+
+                    //start a local transaction.
+                    transaction = conn.BeginTransaction("Transaction");
+
+                    command.Connection = conn;
+                    command.Transaction = transaction;
+
+                    try
+                    {
+                        SqlParameter param_employee_id = new SqlParameter("@Employee_id", inputdata[0].Employee_id);
+                        param_employee_id.SqlDbType = System.Data.SqlDbType.Int;
+                        command.Parameters.Add(param_employee_id);
+
+                        SqlParameter param_trade_date = new SqlParameter("@Trade_date", inputdata[0].Trade_date);
+                        param_trade_date.SqlDbType = System.Data.SqlDbType.Date;
+                        command.Parameters.Add(param_trade_date);
+
+                        command.CommandText = "insert into trade_history(employee_id, trade_date) values (@Employee_id, @Trade_date)";
+                        command.ExecuteNonQuery();
+
+                        for (int i = 0; i < inputdata.Count; i++)   //추가할 리스트뷰에 존재하는 항목 수 만큼
+                        {
+                            command.Parameters.Clear();
+
+                            SqlParameter param_proudct_id = new SqlParameter("@Product_id", inputdata[i].Product_id);
+                            param_proudct_id.SqlDbType = System.Data.SqlDbType.Int;
+                            command.Parameters.Add(param_proudct_id);
+
+                            SqlParameter param_proudct_color = new SqlParameter("@Color", inputdata[i].Color);
+                            command.Parameters.Add(param_proudct_color);
+
+                            SqlParameter param_proudct_stock = new SqlParameter("@Stock", newstock[i]);
+                            param_proudct_stock.SqlDbType = System.Data.SqlDbType.Int;
+                            command.Parameters.Add(param_proudct_stock);
+
+                            SqlParameter param_proudct_color_value = new SqlParameter("@Color_value", inputdata[i].ColorValue);
+                            command.Parameters.Add(param_proudct_color_value);
+
+                            //처음 추가
+                            if (check[i] == false)
+                            {
+                                command.CommandText = "insert into stock_product(product_id, color, stock, color_value) values(@Product_id, @Color, @Stock, @Color_value)";
+                            }
+                            //기존에 이미 추가
+                            else if (check[i] == true)
+                            {
+                                command.CommandText = "update stock_product set stock = stock + @Stock where stock_product = (select stock_product from stock_product where product_id = @Product_id and color = @Color)";
+                            }
+                            command.ExecuteNonQuery();
+
+                            command.CommandText = "insert trade_product(product_id, trade_history_id, color, quantity, trade_type, color_value) values " +
+                                "(@Product_id, (SELECT MAX(trade_history_id) FROM trade_history), @Color, @Stock, '입고', @Color_value)";
+                            command.ExecuteNonQuery();
+                        }
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex + "오류");
+                        try
+                        {
+                            transaction.Rollback();
+                        }
+                        catch (Exception ex1)
+                        {
+                            MessageBox.Show(ex1 + "롤백안됌");
+                        }
+                        return false;
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return true;
+        }
         //입고 : 현재 product 테이블에 등록된 물품번호의 목록 출력
         public List<Int32> Get_Lo_Input_ProductNumList()
         {
@@ -1273,63 +1334,6 @@ namespace MBStore_MVC.Model
                             product = reader.GetInt32(0);
                             productList.Add(product);
                         }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return productList;
-        }
-
-        //입고 : insert 작업 시 사용
-        public Product Set_Lo_Input_Product(string sql)
-        {
-            Product productList = new Product();
-            try
-            {
-                using (conn = new SqlConnection())
-                {
-                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["userDB"].ToString();
-                    conn.Open();    //데이터베이스 연결
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-
-                    try
-                    {
-                        int x = cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return productList;
-        }
-        //입고 : 영수증 및 기록 추가
-        public Product Set_Lo_Input_History(string sql)
-        {
-            Product productList = new Product();
-            try
-            {
-                using (conn = new SqlConnection())
-                {
-                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["userDB"].ToString();
-                    conn.Open();    //데이터베이스 연결
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-
-                    try
-                    {
-                        int x = cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
                     }
                 }
             }
@@ -1470,7 +1474,7 @@ namespace MBStore_MVC.Model
             }
         }
         //반품 : 반품작업 수행
-        public bool Set_Lo_Return_Stock(Return_Info return_Info, int eid)
+        public bool return_transacion(Return_Info return_Info, int eid)
         {
             try
             {
@@ -1649,7 +1653,7 @@ namespace MBStore_MVC.Model
         }
 
         //직원 -> 직원관리 -> 정보번경
-        public Employee Get_Emloyee_info(int id)//11
+        public Employee Get_Employee_info(int id)//11
         {
             string str = string.Empty;
             Employee employee1 = new Employee();
@@ -1679,7 +1683,7 @@ namespace MBStore_MVC.Model
                         employee1.Phone = myDataReader.GetString(6);
                         employee1.Address = myDataReader.GetString(7);
                         employee1.Start_date = myDataReader.GetDateTime(8).ToShortDateString();
-                        employee1.End_date = myDataReader.IsDBNull(9) ? "해당사항없음" : myDataReader.GetDateTime(6).ToShortDateString();
+                        employee1.End_date = myDataReader.IsDBNull(9) ? "해당사항없음" : myDataReader.GetDateTime(9).ToShortDateString();
                         employee1.Rank = myDataReader.GetString(10);
                         employee1.Email = myDataReader.GetString(11);
                         employee1.Post_number = myDataReader.GetString(12);
@@ -1777,7 +1781,7 @@ namespace MBStore_MVC.Model
                         sign_up.Social_number = myDataReader.GetString(3);
                         sign_up.Phone = myDataReader.GetString(4);
                         sign_up.Email = myDataReader.GetString(5);
-                        sign_up.Post_number = myDataReader.IsDBNull(6) ? "" : myDataReader.GetString(6);
+                        sign_up.Post_number = myDataReader.GetString(6);
                         sign_up.Address = myDataReader.GetString(7);
                         sign_up.Sign_date = myDataReader.IsDBNull(8) ? "없음" : myDataReader.GetDateTime(8).ToShortDateString();
 
