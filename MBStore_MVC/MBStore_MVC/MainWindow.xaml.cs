@@ -69,6 +69,22 @@ namespace MBStore_MVC
         public MainWindow()
         {
             InitializeComponent();
+            #region 통계자료 초기화
+            PointLabel = chartPoint =>
+                   string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
+
+            PointLabel1 = chartPoint1 =>
+                    string.Format("{0} ({1:P})", chartPoint1.Y, chartPoint1.Participation);
+
+            PointLabel2 = chartPoint2 =>
+                    string.Format("{0} ({1:P})", chartPoint2.Y, chartPoint2.Participation);
+
+            barChart.Series = new SeriesCollection { };
+            Setting_Chart();
+
+            Labels = new[] { "Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec." };
+            DataContext = this;
+            #endregion
         }
         public MainWindow(Employee employee): base()
         {
@@ -151,7 +167,7 @@ namespace MBStore_MVC
             noti.Show(emp);
         }
 
-        public void Print_Notice(string part)
+        private void Print_Notice(string part)
         {
             notice = db.PrintNotice(part);
             if (notice.Count != 0)
@@ -166,10 +182,9 @@ namespace MBStore_MVC
         #region 파일 업로드
         private void FtpUploadFile(string filename, string to_uri)
         {
-            to_uri = to_uri.Replace("+", "plus");
             // Get the object used to communicate with the server.
             FtpWebRequest request =
-                (FtpWebRequest)WebRequest.Create(to_uri);
+                (FtpWebRequest)WebRequest.Create(to_uri.Replace("+", "plus"));
             request.Method = WebRequestMethods.Ftp.UploadFile;
             request.UsePassive = false;
             // Get network credentials.
@@ -187,7 +202,6 @@ namespace MBStore_MVC
             }
         }
         #endregion
-
         #region ListView 헤더클릭 정렬
         GridViewColumnHeader _lastHeaderClicked = null;
         ListSortDirection _lastDirection = ListSortDirection.Ascending;
@@ -455,7 +469,7 @@ namespace MBStore_MVC
             product = (Product)lv_se_product_info.SelectedItems[0];
 
             ShoppingBasket shoppingBasket_w = new ShoppingBasket();
-            shoppingBasket_w.SetProduct(product, this);
+            shoppingBasket_w.SetProduct(product, this, uri);
             shoppingBasket_w.ShowDialog();
         }
         #endregion
@@ -465,22 +479,36 @@ namespace MBStore_MVC
         public void Set_Sell_listview(Product product, int quantity)
         {
             List<Sell_Info> sell_Info_list = new List<Sell_Info>();
+            bool duple = false;
             for (int i = 0; i < lv_se_expect_sell.Items.Count; i++)
             {
                 Sell_Info sell_Info = (Sell_Info)lv_se_expect_sell.Items[i];
                 sell_Info_list.Add(sell_Info);
             }
-
-            sell_Info_list.Add(new Sell_Info()
+            for (int i = 0; i < sell_Info_list.Count; i++)
             {
-                Stock_product = product.Stock_product,
-                Product_id = product.Product_id,
-                Product_name = product.Name,
-                Color = product.Color,
-                ColorValue = product.ColorValue,
-                Quantity = quantity,
-                Total_price = product.Price * quantity
-            });
+                if (sell_Info_list[i].Stock_product == product.Stock_product)
+                {
+                    sell_Info_list[i].Quantity += quantity;
+                    sell_Info_list[i].Total_price = sell_Info_list[i].Quantity * product.Price;
+                    duple = true;
+                    break;
+                }
+            }
+
+            if (!duple)
+            {
+                sell_Info_list.Add(new Sell_Info()
+                {
+                    Stock_product = product.Stock_product,
+                    Product_id = product.Product_id,
+                    Product_name = product.Name,
+                    Color = product.Color,
+                    ColorValue = product.ColorValue,
+                    Quantity = quantity,
+                    Total_price = product.Price * quantity
+                });
+            }
             lv_se_expect_sell.ItemsSource = sell_Info_list;
 
             string str_total_price = la_se_sell_total_price.Content.ToString();
@@ -655,7 +683,10 @@ namespace MBStore_MVC
                 MessageBox.Show("환불이 불가능한 제품입니다");
             }
         }
+        #endregion
 
+
+        #region 환불
         private void Btn_se_refund_list_remove(object sender, RoutedEventArgs e)
         {
             lv_se_expect_refund.ItemsSource = null;
@@ -675,21 +706,14 @@ namespace MBStore_MVC
 
                 try
                 {
-                    db.UpdateSalesHistory(refund_list[0].Sales_history_id);
-
-                    int new_history_id;
-                    db.InsertSalesHistroy(refund_list[0].Customer_id, emp.Employee_id, DateTime.Now, true);
-                    new_history_id = db.SelectMaxHistoryId(emp.Employee_id);
-                    for (int i = 0; i < refund_list.Count; i++)
+                    List<Sell_Info> list_sell_info = db.SelectHistoryTotalPrice(refund_list[0].Sales_history_id);
+                    long savings = 0;
+                    for (int i = 0; i < list_sell_info.Count; i++)
                     {
-                        Sell_Info item = refund_list[i];
-                        db.InsertSalesProduct(new_history_id, item.Product_id, item.Quantity, item.Color, item.ColorValue, "환불");
-                        db.UpdateStockProduct(item.Product_id, item.Color, item.Quantity);
+                        savings += list_sell_info[i].Total_price;
                     }
-
-                    Sell_Info sell_Info = db.SelectHistoryTotalPrice(refund_list[0].Sales_history_id);
-                    long savings = sell_Info.Total_price / 100;
-                    db.UpdateCustomerSavings(sell_Info.Customer_id, -savings);
+                    savings /= 100;
+                    db.transaction_refund(refund_list[0].Sales_history_id, refund_list[0].Customer_id, emp.Employee_id, DateTime.Now, refund_list, list_sell_info[0].Customer_id, savings);
 
                     MessageBox.Show("환불이 완료 되었습니다", "알림창");
                     Btn_se_refund_list_remove(sender, e);
@@ -710,7 +734,7 @@ namespace MBStore_MVC
         string qr2 = string.Empty;
         int and_ck2 = 0;
 
-        public void Check_and2(int cnt)
+        private void Check_and2(int cnt)
         {
             cnt++;
             and_ck2 = cnt;
@@ -821,7 +845,7 @@ namespace MBStore_MVC
             and_ck2 = 0;
         }
 
-        public void su_cus_All_Clear2()
+        void su_cus_All_Clear2()
         {
             tb_se_cus_search_cus_id.Text = "";
             tb_se_cus_search_name.Text = "";
@@ -863,16 +887,7 @@ namespace MBStore_MVC
         #endregion
 
     #region 물류팀
-        //함수 이름예시
-        //_Lo_, _lo_ : 물류팀 (Logistics)
-        //_Reg_, _reg_ : 제품등록 영역
-        //_Input_, _input_ : 입고 영역(Input)
-        //_Pse_, _pse_ : 제품 조회 영역(Product Search)
-        //_Rse_, _rse_ : 내역 조회 영역(Receipt Search)
-        //_refund_ : 반품 영역
 
-        //여기부터 시작
-        int plusStock; //클래스 변수
 
         #region 제품등록
         //제품등록 : 조회버튼
@@ -1111,6 +1126,8 @@ namespace MBStore_MVC
         #endregion
 
         #region 입고
+        
+        int plusStock; //클래스 변수
         //입고 : 조회버튼
         private void btn_lo_input_search_Click(object sender, RoutedEventArgs e)
         {
@@ -1319,53 +1336,17 @@ namespace MBStore_MVC
                             }
                             else check[i] = false;
                         }
-
-                        for (int i = 0; i < lv_lo_input_addList.Items.Count; i++)	//추가할 리스트뷰에 존재하는 항목 수 만큼
+                        db.input_transaction(inputdata, check, newstock);
+                        for(int i=0; i<inputdata.Count;i++)
                         {
-                            if (check[i] == false && inputdata[i].Trade_type == "입고") //DB에 없는 새로운 항목
+                            if (check[i] == false) 
                             {
-                                string sql = "insert into stock_product(product_id, color, stock, color_value) values("
-                                    + inputdata[i].Product_id.ToString() + ",'" + inputdata[i].Color.ToString() + "',"
-                                    + newstock[i] + ",'" + inputdata[i].ColorValue.ToString() + "')";
-                                string sql2 = "insert into trade_history values (" + inputdata[i].Employee_id.ToString()
-                                    + ",'" + inputdata[i].Trade_date.ToShortDateString() + "')";
-                                string sql3 = "insert into trade_product(product_id, trade_history_id, color, quantity, trade_type, color_value) values ("
-                                    + inputdata[i].Product_id.ToString() + ",(SELECT MAX(trade_history_id) FROM trade_history),'" + inputdata[i].Color.ToString() + "'," + newstock[i] + ",'" + inputdata[i].Trade_type.ToString()
-                                    + "','" + inputdata[i].ColorValue.ToString() + "')";
-
-                                Product productdata;
-
-                                productdata = db.Set_Lo_Input_Product(sql);
-                                if (i == 0) productdata = db.Set_Lo_Input_History(sql2);
-                                productdata = db.Set_Lo_Input_History(sql3);
-
                                 string product_name = db.Select_productname_id(inputdata[i].Product_id);
-                                FtpUploadFile(inputdata[i].Image_dir, uri + "/phone/" + product_name + "_" + inputdata[i].Color + "_F_TEST.JPG");
-                            }
-                            else if (check[i] == true && inputdata[i].Trade_type == "입고") //기존 항목
-                            {
-                                int tempstock = dbdata[position[i]].Stock;
-                                //고쳐야할 방향 : 단순히 이름과 색깔로 겹치는걸 찾는 게 아니라 자동으로 부여되는 stock_product를 찾아서 바꿔야한다
-                                string sql = "update stock_product set stock = stock + " + newstock[i] + " where stock_product = (select stock_product from stock_product where product_id = " + inputdata[i].Product_id + " and color = '" + inputdata[i].Color + "')";
-                                //string sql2 = "update trade_product set quantity = quantity + " + newstock[i] + " where trade_id = (select trade_id from trade_product where product_id = " + inputdata[i].Product_id + " and color = '" + inputdata[i].Color + "' and trade_type = '입고')";
-                                string sql2 = "insert into trade_product(product_id, trade_history_id, color, quantity, trade_type, color_value) values ("
-                                    + inputdata[i].Product_id.ToString() + ",(SELECT MAX(trade_history_id) FROM trade_history),'" + inputdata[i].Color.ToString() + "'," + newstock[i] + ",'" + inputdata[i].Trade_type.ToString()
-                                    + "','" + inputdata[i].ColorValue.ToString() + "')";
-                                string sql3 = "insert into trade_history values (" + inputdata[i].Employee_id.ToString()
-                                    + ",'" + inputdata[i].Trade_date.ToShortDateString() + "')";
-
-                                Product productdata;
-
-                                productdata = db.Set_Lo_Input_Product(sql);
-                                if (i == 0) productdata = db.Set_Lo_Input_History(sql3);
-                                productdata = db.Set_Lo_Input_History(sql2);
-
-                                
+                                FtpUploadFile(inputdata[i].Image_dir, uri + "/phone/" + product_name + "_" + inputdata[i].Color + "_F.JPG");
                             }
                         }
                         MessageBox.Show("등록완료");
                         
-                        btn_lo_pse_search_Click(sender, e);
                         cb_lo_input_productNumber.SelectedIndex = -1;
                         tb_lo_input_color.Text = "";
                         tb_lo_input_numberOf.Text = "";
@@ -1431,11 +1412,18 @@ namespace MBStore_MVC
                         }
                     }
                 }
-                for (int l = 0; l < lv_lo_refund_objectList.Items.Count; l++)
-                    db.Set_Lo_Return_Stock(return_Infos[l], emp.Employee_id);
 
-                MessageBox.Show("반품이 완료되었습니다");
-                btn_lo_refund_reset_Click(sender, e);
+                try
+                {
+                    for (int l = 0; l < lv_lo_refund_objectList.Items.Count; l++)
+                        db.return_transacion(return_Infos[l], emp.Employee_id);
+                    MessageBox.Show("반품이 완료되었습니다");
+                    btn_lo_refund_reset_Click(sender, e);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("동작이 이뤄지지 않음");
+                }
             }
 
         }
@@ -1491,6 +1479,7 @@ namespace MBStore_MVC
         int and_ck = 0;
         private void btn_su_search(object sender, RoutedEventArgs e)//지원 -> 고객조회 -> 조회버튼
         {
+
             List<Customer> customers;
             string ap = string.Empty;
 
@@ -1822,7 +1811,7 @@ namespace MBStore_MVC
                 try
                 {
                     str = "";
-                    employee = db.Get_Emloyee_info(int.Parse(tb_su_em_id.Text));
+                    employee = db.Get_Employee_info(int.Parse(tb_su_em_id.Text));
 
                     su_em_Reset_text();
                     tb_su_em_login_id.Text = employee.Login_id;
@@ -1936,7 +1925,7 @@ namespace MBStore_MVC
                 {
                     try
                     {
-                        employee = db.Get_Emloyee_info(int.Parse(tb_su_em_id.Text));
+                        employee = db.Get_Employee_info(int.Parse(tb_su_em_id.Text));
                         db.Reset_PW_EMP(employee.Login_id);
                         MessageBox.Show("비밀번호 변경완료");
                     }
@@ -1985,6 +1974,8 @@ namespace MBStore_MVC
                 // Open document 
                 string filename = dlg.FileName;
                 tb_su_emp_img.Text = filename;
+
+                img_su_emp.ImageSource = new BitmapImage(new Uri(@dlg.FileName, UriKind.Absolute));
             }
         }
 
@@ -2222,7 +2213,6 @@ namespace MBStore_MVC
                 pieChart1.Series = piechartData_1;
                 // Set the legend location to appear in the Right side of the chart
                 pieChart1.LegendLocation = LegendLocation.Right;
-                MessageBox.Show("완료");
             }
             catch
             {
@@ -2270,7 +2260,6 @@ namespace MBStore_MVC
                 pieChart2.Series = piechartData_2;
                 // Set the legend location to appear in the Right side of the chart
                 pieChart2.LegendLocation = LegendLocation.Right;
-                MessageBox.Show("완료");
             }
             catch
             {
@@ -2318,7 +2307,6 @@ namespace MBStore_MVC
                 pieChart3.Series = piechartData_3;
                 // Set the legend location to appear in the Right side of the chart
                 pieChart3.LegendLocation = LegendLocation.Right;
-                MessageBox.Show("완료");
             }
             catch
             {
@@ -2403,8 +2391,6 @@ namespace MBStore_MVC
                     Title = this_basic_list[0].Year_Check.ToString(),
                     Values = new ChartValues<long>(price_list_this)
                 });
-
-                MessageBox.Show("완료");
             }
             catch
             {

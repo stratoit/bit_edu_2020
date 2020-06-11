@@ -29,6 +29,8 @@ namespace MBStore_MVC
             InitializeComponent();
         }
 
+
+
         #region 숫자 여부 확인
         public bool IsNumeric(string source)
         {

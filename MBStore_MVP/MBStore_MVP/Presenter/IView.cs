@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using MBStore_MVP.Model;
 
 namespace MBStore_MVP.Presenter
@@ -63,6 +65,8 @@ namespace MBStore_MVP.Presenter
     interface IMainWindow_view
     {
         void Print_Notice(string part);
+        void Sort(string sortBy, ListSortDirection direction, ListView listview);
+
         #region 판매팀
         void Set_Sell_listview(Product product, int quantity);
         void Check_and2(int cnt);

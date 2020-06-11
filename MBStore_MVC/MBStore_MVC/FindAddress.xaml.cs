@@ -27,6 +27,7 @@ namespace MBStore_MVC
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class FindAddress : Window
     {
+      
         public FindAddress()
         {
             InitializeComponent();

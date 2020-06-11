@@ -72,16 +72,6 @@ namespace MBStore_MVP.Presenter
             return mbdb.Get_Cus_Id();
         }
 
-        public bool InsertSalesHistroy(int customer_id, int employee_id, DateTime sales_date, bool refunded)
-        {
-            return mbdb.InsertSalesHistroy(customer_id, employee_id, sales_date, refunded);
-        }
-
-        public bool InsertSalesProduct(int history_id, int product_id, int quantity, string color, string color_value, string type)
-        {
-            return mbdb.InsertSalesProduct(history_id, product_id, quantity, color, color_value, type);
-        }
-
         public bool Insert_Cus_Info(string name, string gender, DateTime? birth, string phone, long savings)
         {
             return mbdb.Insert_Cus_Info(name, gender, birth, phone, savings);
@@ -90,11 +80,6 @@ namespace MBStore_MVP.Presenter
         public List<Sell_Info> SelectHistoryTotalPrice(int sales_history_id)
         {
             return mbdb.SelectHistoryTotalPrice(sales_history_id);
-        }
-
-        public int SelectMaxHistoryId(int employee_id)
-        {
-            return mbdb.SelectMaxHistoryId(employee_id);
         }
 
         public List<Product> SelectProduct(int product_id, int memory, int price, int ram, string name, string brand, DateTime manufacture, string query)
@@ -142,25 +127,16 @@ namespace MBStore_MVP.Presenter
             return mbdb.SelectStockRam();
         }
 
-        public bool UpdateCustomerSavings(int customer_id, long savings)
-        {
-            return mbdb.UpdateCustomerSavings(customer_id, savings);
-        }
-
-        public bool UpdateSalesHistory(int sales_history_id)
-        {
-            return mbdb.UpdateSalesHistory(sales_history_id);
-        }
-
-        public bool UpdateStockProduct(int product_id, string color, int quantity)
-        {
-            return mbdb.UpdateStockProduct(product_id, color, quantity);
-        }
-
         public bool Update_Cus_Info(int cus_id, string name, string gender, DateTime? birth, string phone, long savings)
         {
             return mbdb.Update_Cus_Info(cus_id, name, gender, birth, phone, savings);
         }
+
+        public bool transaction_refund(int sales_history_id, int r_customer_id, int employee_id, DateTime sales_date, List<Sell_Info> refund_list, int s_customer_id, long savings)
+        {
+            return mbdb.transaction_refund(sales_history_id, r_customer_id, employee_id, sales_date, refund_list, s_customer_id, savings);
+        }
+
         #endregion
 
         #region 물류팀
@@ -199,19 +175,14 @@ namespace MBStore_MVP.Presenter
             return mbdb.Select_Lo_Pse_stockProduct(query);
         }
 
-        public Product Set_Lo_Input_Product(string sql)
-        {
-            return mbdb.Set_Lo_Input_Product(sql);
-        }
-
-        public Product Set_Lo_Input_History(string sql)
-        {
-            return mbdb.Set_Lo_Input_History(sql);
-        }
-
         public string Select_productname_id(int product_id)
         {
             return mbdb.Select_productname_id(product_id);
+        }
+
+        public bool input_transaction(List<Product> inputdata, bool[] check, int[] newstock)
+        {
+            return mbdb.input_transaction(inputdata, check, newstock);
         }
 
         public int Lo_Check_Stock(int id, string color)
@@ -219,9 +190,9 @@ namespace MBStore_MVP.Presenter
             return mbdb.Lo_Check_Stock(id, color);
         }
 
-        public bool Set_Lo_Return_Stock(Return_Info return_Info, int eid)
+        public bool return_transacion(Return_Info return_Info, int eid)
         {
-            return mbdb.Set_Lo_Return_Stock(return_Info, eid);
+            return mbdb.return_transacion(return_Info, eid);
         }
 
 
@@ -231,11 +202,6 @@ namespace MBStore_MVP.Presenter
         public List<Employee> GetList_Emp_info(string query, string login_id, string name, string phone, string gender, DateTime? start_date, DateTime? end_date)
         {
             return mbdb.GetList_Emp_info(query, login_id, name, phone, gender, start_date, end_date);
-        }
-
-        public Employee Get_Employee_info(int id)
-        {
-            return mbdb.Get_Employee_info(id);
         }
 
         public bool Update_Emp_Info(string login_id, string rank, string name, string gender, string social_num, string phone, string email, string address, DateTime? end_date)
@@ -272,6 +238,12 @@ namespace MBStore_MVP.Presenter
         {
             return mbdb.BChart_Sales_Product();
         }
+
+        public Employee Get_Employee_info(int id)
+        {
+            return mbdb.Get_Employee_info(id);
+        }
+
         #endregion
 
 

@@ -99,19 +99,10 @@ namespace MBStore_MVP.View
                             }
                         }
 
-                        int history_id;
                         string str_saving_price = tb_se_inputcus_saving.Text;
                         long saving = long.Parse(str_saving_price, NumberStyles.AllowThousands);
-                        presenter.InsertSalesHistroy(customer_info.Id, userid, DateTime.Now, false);
-                        history_id = presenter.SelectMaxHistoryId(userid);
-                        for (int i = 0; i < sell_list.Count; i++)
-                        {
-                            Sell_Info item = sell_list[i];
 
-                            presenter.InsertSalesProduct(history_id, item.Product_id, item.Quantity, item.Color, item.ColorValue, "판매");
-                            presenter.UpdateStockProduct(item.Product_id, item.Color, -item.Quantity);
-                        }
-                        presenter.UpdateCustomerSavings(customer_info.Id, saving);
+                        presenter.sell_transaction(sell_list, customer_info.Id, userid, DateTime.Now, saving);
 
                         MessageBox.Show("판매가 완료 되었습니다", "알림창");
                         mainWindow.lv_se_expect_sell.ItemsSource = null;
