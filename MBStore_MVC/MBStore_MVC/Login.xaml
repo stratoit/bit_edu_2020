@@ -16,7 +16,7 @@
         mc:Ignorable="d"
         WindowStyle ="None"
         Height="600" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Grid Background="#FF0051F0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+    <Grid Background="{DynamicResource PrimaryHueMidBrush}" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
         <Grid.RowDefinitions>
             <RowDefinition  Height="1*"></RowDefinition>
             <RowDefinition Height="0.8*"></RowDefinition>
@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" >
             <TextBlock Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontStyle="Italic" FontSize="50" FontWeight="Bold" Text="PROTEC" Margin="106,0,106,2"   />
-            <Button Margin="356,0,0,138" x:Name="btn_close" Background="#FF0051F0" Foreground="White" FontWeight="Bold"  Content="X" BorderBrush="{x:Null}" Click="btn_close_Click" Height="Auto"  />
+            <Button Margin="356,0,0,138" x:Name="btn_close" Background="{DynamicResource PrimaryHueMidBrush}" Foreground="White" FontWeight="Bold"  Content="X" BorderBrush="{x:Null}" Click="btn_close_Click" Height="Auto"  />
         </Grid>
         <Grid Grid.Row="1">
             <TextBlock Text="모바일기기 매장관리 시스템" HorizontalAlignment="Center"  Foreground="White" FontWeight="Bold" FontStyle="Italic" />
@@ -43,7 +43,7 @@
         </Grid>
         <Grid Grid.Row="2">
             <PasswordBox  Padding="3" x:Name="tb_pw"  materialDesign:HintAssist.Hint="Password" FontSize="24" Margin="50,25,50,58" KeyDown="PasswordBox_KeyDown"  Background="White" BorderBrush="{x:Null}"/>
-            <CheckBox Foreground="White" FontSize="18" Style="{StaticResource MaterialDesignFilterChipCheckBox}"  x:Name="cb_auto" HorizontalAlignment="Left" Background="#FF0051F0" Margin="50,95,0,6"  ToolTip="자동 로그인 체크" >
+            <CheckBox Foreground="White" FontSize="18" Style="{StaticResource MaterialDesignFilterChipCheckBox}"  x:Name="cb_auto" HorizontalAlignment="Left" Background="{DynamicResource PrimaryHueMidBrush}" Margin="50,95,0,6"  ToolTip="자동 로그인 체크" >
                 Auto Login
             </CheckBox>
         </Grid>

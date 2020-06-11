@@ -15,32 +15,70 @@ using System.Windows.Shapes;
 using System.Security.Permissions;
 using System.Runtime.InteropServices;
 using System.Data;
+using System.Reflection;
 
 namespace MBStore_MVC
 {
     /// <summary>
     /// FindAddress.xaml에 대한 상호 작용 논리
     /// </summary>
-    
+
     //Web    
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    [ComVisibleAttribute(true)]
     public partial class FindAddress : Window
     {
       
         public FindAddress()
         {
-            InitializeComponent();
            
+            InitializeComponent();
+          
+
+        }
+        public static void SetSilent(WebBrowser browser, bool silent)
+        {
+            if (browser == null)
+                throw new ArgumentNullException("browser");
+
+            // get an IWebBrowser2 from the document
+            IOleServiceProvider sp = browser.Document as IOleServiceProvider;
+            if (sp != null)
+            {
+                Guid IID_IWebBrowserApp = new Guid("0002DF05-0000-0000-C000-000000000046");
+                Guid IID_IWebBrowser2 = new Guid("D30C1661-CDAF-11d0-8A3E-00C04FC9E26E");
+
+                object webBrowser;
+                sp.QueryService(ref IID_IWebBrowserApp, ref IID_IWebBrowser2, out webBrowser);
+                if (webBrowser != null)
+                {
+                    webBrowser.GetType().InvokeMember("Silent", BindingFlags.Instance | BindingFlags.Public | BindingFlags.PutDispProperty, null, webBrowser, new object[] { silent });
+                }
+            }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+
+        [ComImport, Guid("6D5140C1-7436-11CE-8034-00AA006009FA"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        private interface IOleServiceProvider
+        {
+            [PreserveSig]
+            int QueryService([In] ref Guid guidService, [In] ref Guid riid, [MarshalAs(UnmanagedType.IDispatch)] out object ppvObject);
+        }
+
+        public void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
-            {               
+            {
+                dynamic activeX = this.wb_find.GetType().InvokeMember("ActiveXInstance",
+                    BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+                    null, this.wb_find, new object[] { });
+
+              //  activeX.Silent = true;
+                //  Model.webError.SuppressscriptErrors(wb_find, true);
+               // SetSilent(wb_find, true);
                 wb_find.Navigate("http://20.41.81.89/adress/index.html");
                 wb_find.ObjectForScripting = this;
-
+               
                 this.Tag = null;
             }
             catch (Exception ex)
@@ -59,22 +97,9 @@ namespace MBStore_MVC
             this.DragMove();
         }
 
-        #region Message
-        public void Base_Message(Exception ex)
-        {
-            MessageBox.Show(ex.Message, "Warning", MessageBoxButton.OK,
-                        MessageBoxImage.Warning);
-        }
+        #region "FUN"
 
-        public void Base_Message(string messgage)
-        {
-            MessageBox.Show(messgage, "Information", MessageBoxButton.OK,
-                        MessageBoxImage.Information);
-        }
 
-        #endregion
-
-        #region FUN
         //WEB -> C#
         public void lfn_WEB_Cshap_Script2(
                                                          object obj01, object obj02, object obj03, object obj04, object obj05, object obj06, object obj07, object obj08, object obj09
@@ -304,19 +329,34 @@ namespace MBStore_MVC
 
 
 
-        //C# -> WEB
-
 
         private void lfn_Cshap_WEB_Script2()
         {
             string str1 = "A";
             string str2 = "B";
 
-            wb_find.InvokeScript("Cshap_WEB_Script2", new object[] { str1, str2 }).ToString(); //웹 자바스크립트에전달
+            wb_find.InvokeScript("Cshap_WEB_Script2", new object[] { str1, str2 }); //웹 자바스크립트에전달
             //webBrowser1.Document.InvokeScript("CallScript", new object[] { svalue1, svalue2 });
         }
 
         #endregion //FUN
+
+        #region Message
+        public void Base_Message(Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Warning", MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+        }
+
+        public void Base_Message(string messgage)
+        {
+            MessageBox.Show(messgage, "Information", MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+        }
+
+
+
+        #endregion
 
     }
 }

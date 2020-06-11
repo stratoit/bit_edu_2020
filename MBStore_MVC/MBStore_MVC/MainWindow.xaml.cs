@@ -79,7 +79,7 @@ namespace MBStore_MVC
             emp = employee;
             img_main_emp.ImageSource = new BitmapImage(new Uri(@"http://20.41.81.89/employee/" + employee.Login_id + "_" + employee.Rank + "_" + employee.Name + ".JPG", UriKind.Absolute));
             text_myinfo_name.Text = emp.Name + " [" + emp.Rank + "]";
-            Print_Notice("전체공지");
+           // Print_Notice("전체공지");
             InitTimer();
             #region 통계자료 초기화
             PointLabel = chartPoint =>
@@ -116,6 +116,13 @@ namespace MBStore_MVC
 
             Snackbar = this.sb_main;
 
+            #endregion
+
+            #region UI_ColorTool
+            UI_ColorTool color = new UI_ColorTool();
+
+      
+            ti_setting.Content = color;
             #endregion
         }
 
@@ -162,29 +169,39 @@ namespace MBStore_MVC
         }
 
         //공지사항 게시버튼
-        private async void btn_notice_Click(object sender, RoutedEventArgs e)
+        //private async void btn_notice_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //Notice noti = new Notice();
+        //    //Snackbar.MessageQueue.Enqueue("hi");
+        //    //var MessageDialog = new MessageDialog
+        //    //{
+        //    //    Message = { Text = "안녕" }
+        //    //};
+        //    //await DialogHost.Show(MessageDialog, "RootDialog");
+        //    //noti.Show(emp);
+        //    ModifyTheme(theme => theme.SetBaseTheme(Theme.Light));
+        //}
+        private static void ModifyTheme(Action<ITheme> modificationAction)
         {
-            //Notice noti = new Notice();
-            Snackbar.MessageQueue.Enqueue("hi");
-            var MessageDialog = new MessageDialog
-            {
-                Message = { Text = "안녕" }
-            };
-            await DialogHost.Show(MessageDialog, "RootDialog");
-            //noti.Show(emp);
+            PaletteHelper paletteHelper = new PaletteHelper();
+            ITheme theme = paletteHelper.GetTheme();
+
+            modificationAction?.Invoke(theme);
+
+            paletteHelper.SetTheme(theme);
         }
 
-        private void Print_Notice(string part)
-        {
-            notice = db.PrintNotice(part);
-            if (notice.Count != 0)
-            {
-                lv_notice_all.ItemsSource = notice;
-            }
+        //private void Print_Notice(string part)
+        //{
+        //    notice = db.PrintNotice(part);
+        //    if (notice.Count != 0)
+        //    {
+        //        lv_notice_all.ItemsSource = notice;
+        //    }
 
-            else
-                MessageBox.Show("찾으시는 데이터가 없습니다");
-        }
+        //    else
+        //        MessageBox.Show("찾으시는 데이터가 없습니다");
+        //}
 
         #region 파일 업로드
         private void FtpUploadFile(string filename, string to_uri)
@@ -2504,11 +2521,15 @@ namespace MBStore_MVC
                 pieChart3.Series = piechartData_3;
                 pieChart3.LegendLocation = LegendLocation.Right;
             }
-        #endregion
 
         #endregion
 
+        #endregion
 
+        private void btn_notice_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 

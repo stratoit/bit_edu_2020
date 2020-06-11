@@ -4,44 +4,36 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Points="clr-namespace:LiveCharts.Wpf.Points;assembly=LiveCharts.Wpf"        
-        xmlns:local="clr-namespace:MBStore_MVC" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:local="clr-namespace:MBStore_MVC" 
+        
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"     
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
+        FontFamily="{DynamicResource MaterialDesignFont}"       
         mc:Ignorable="d" 
         Title="모바일기기 매장관리 시스템 v0.2" Height="768" Width="1024" Closed="Window_Closed">
+
     <Window.Resources>
-        <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
-            <Setter Property="Background" Value="#FF0051F0"/>
-        </Style>
-        <Style TargetType="{x:Type TextBox}">
-            <Setter Property="Foreground" Value="Black"/>
-        </Style>
-        <Style TargetType="{x:Type ComboBox}">
-            <Setter Property="Foreground" Value="Black"/>
-        </Style>
-        <Style TargetType="{x:Type DatePicker}">
-            <Setter Property="Foreground" Value="Black"/>
-        </Style>
-        <DataTemplate x:Key="myHeaderTemplate">
-            <DockPanel>
-                <TextBlock FontSize="13" Foreground="White">
-                    <TextBlock.Text>
-                        <Binding/>
-                    </TextBlock.Text>
-                </TextBlock>
-            </DockPanel>
-        </DataTemplate>
-        <Style TargetType="ListViewItem">
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        </Style>
-        
+        <!-- Color Resource-->
+        <ResourceDictionary>
+            <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}"/>
+            </Style>
+
+            <Style TargetType="ListViewItem">
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
     </Window.Resources>
+
+
+
     <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
         <Grid>
 
@@ -50,19 +42,25 @@
                 <RowDefinition Height="15*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
-            
-            <Grid Grid.Row="0">
+
+
+            <Grid Background="{DynamicResource PrimaryHueMidBrush}" Grid.Row="0">
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="95"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+
                 <Image Grid.Column="0" Margin="5"  Source="http://20.41.81.89/brand/Protec.png"/>
-                <TextBlock Grid.Column="1" FontSize="30" HorizontalAlignment="Center" Margin="134,0,178,0">모바일기기 매장관리 시스템</TextBlock>
+                <TextBlock  Grid.Column="1" FontSize="30" HorizontalAlignment="Center" Margin="134,0,178,0" >모바일기기 매장관리 시스템</TextBlock>
                 <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Grid.Column="2" x:Name="text" FontSize="15">Time</TextBlock>
+
+
+
             </Grid>
 
-            <Grid Background="#FF0051F0" Grid.Row="1" Grid.RowSpan="2">
+            <Grid Grid.Row="1" Grid.RowSpan="2" Background="{DynamicResource PrimaryHueMidBrush}">
 
                 <TabControl Grid.Row="1"  TabStripPlacement="Left" BorderBrush="{x:Null}" >
                     <TabControl.Resources>
@@ -79,10 +77,10 @@
                                         </Grid>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsSelected" Value="True">
-                                                <Setter TargetName="Panel" Property="Background" Value="#FF0A6AFF" />
+                                                <Setter TargetName="Panel" Property="Background" Value="{DynamicResource SecondaryAccentBrush}" />
                                             </Trigger>
                                             <Trigger Property="IsSelected" Value="False">
-                                                <Setter TargetName="Panel" Property="Background" Value="#FF0051F0" />
+                                                <Setter TargetName="Panel" Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
                                             </Trigger>
                                         </ControlTemplate.Triggers>
                                     </ControlTemplate>
@@ -90,23 +88,23 @@
                             </Setter>
                         </Style>
                     </TabControl.Resources>
-                    <TabItem Height="100" Width="68" Background="#FF0051F0" BorderBrush="{x:Null}" >
+                    <TabItem Height="100" Width="68" BorderBrush="{x:Null}" >
                         <TabItem.Header>
                             <StackPanel Orientation="Vertical">
-                                <Path HorizontalAlignment="Center" Fill="White" Data="M 13 0 C 12.201841 0 11.552402 0.52302989 11.28125 1 L 10 1 C 8.9057453 1 8 1.9057453 8 3 L 6 3 C 4.344 3 3 4.344 3 6 L 3 23 C 3 24.656 4.344 26 6 26 L 20 26 C 21.656 26 23 24.656 23 23 L 23 6 C 23 4.344 21.656 3 20 3 L 18 3 C 18 1.9057453 17.094255 1 16 1 L 14.71875 1 C 14.447598 0.52302989 13.798159 0 13 0 z M 10 3 L 12 3 L 12.96875 3 L 13.03125 3 L 14 3 L 16 3 L 16 5 L 10 5 L 10 3 z M 6 6 L 8.28125 6 C 8.6295946 6.5968551 9.2673024 7 10 7 L 16 7 C 16.732698 7 17.370405 6.5968551 17.71875 6 L 20 6 L 20 23 L 6 23 L 6 6 z M 8 10 L 8 12 L 18 12 L 18 10 L 8 10 z M 8 14 L 8 16 L 15 16 L 15 14 L 8 14 z M 8 18 L 8 20 L 18 20 L 18 18 L 8 18 z"></Path>
-                                <TextBlock Foreground="White">공지</TextBlock>
+                                <materialDesign:PackIcon HorizontalAlignment="Center" Kind="Home" Width="28" Height="26" />
+                                <TextBlock HorizontalAlignment="Center">홈</TextBlock>
                             </StackPanel>
                         </TabItem.Header>
                         <Grid>
-                            <Grid.RowDefinitions>                                
+                            <Grid.RowDefinitions>
                                 <RowDefinition Height="1.5*"></RowDefinition>
                                 <RowDefinition Height="1.3*"></RowDefinition>
                                 <RowDefinition Height="0.1*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <!--TextBlock Grid.Row="0" FontSize="20" FontWeight="Bold" x:Name="tb_main" VerticalAlignment="Center" HorizontalAlignment="Center">Hello</-->
-                         
-                               
-                                
+
+
+
 
                             <Grid Grid.Row="0" Margin="10">
                                 <Grid.ColumnDefinitions>
@@ -116,29 +114,30 @@
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
-                                <materialDesign:Flipper >
+
+                                <materialDesign:Flipper Height="335" Width="230"  Style="{StaticResource MaterialDesignCardFlipper}" >
                                     <materialDesign:Flipper.FrontContent>
                                         <Grid >
-                                            <Grid.RowDefinitions>
+                                            <Grid.RowDefinitions >
                                                 <RowDefinition Height="220" />
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
-                                            <materialDesign:ColorZone Margin="10" Mode="Custom"  VerticalAlignment="Stretch" Background="Gray">
+                                            <materialDesign:ColorZone   Margin="10" Mode="Custom"  VerticalAlignment="Stretch" Background="Gray">
                                                 <materialDesign:PackIcon Kind="AccountCircle" Foreground="White" Height="128" Width="128"  VerticalAlignment="Center" HorizontalAlignment="Center" />
                                             </materialDesign:ColorZone>
                                             <Border Margin="10" VerticalAlignment="Stretch" >
                                                 <Border.Background>
-                                                    <ImageBrush Stretch="Fill" x:Name="img_main_emp"  AlignmentY="Center" AlignmentX="Center"/>
+                                                    <ImageBrush  Stretch="Fill" x:Name="img_main_emp"  AlignmentY="Center" AlignmentX="Center"/>
                                                 </Border.Background>
                                             </Border>
                                             <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Stretch">
                                                 <TextBlock x:Name="text_myinfo_name"/>
 
-                                                <Button
+                                                <Button 
                                                     Style="{StaticResource MaterialDesignFlatButton}"
                                                     Command="{x:Static materialDesign:Flipper.FlipCommand}"
                                                     Margin="0 4 0 0"
-                                                    Foreground="#FF0051F0">
+                                                    Foreground="{DynamicResource PrimaryHueMidBrush}">
                                                     EDIT
                                                 </Button>
                                                 <Button   
@@ -146,7 +145,7 @@
                                                     Style="{StaticResource MaterialDesignFlatButton}"
                                                     Command="{x:Static materialDesign:Flipper.FlipCommand}"
                                                     Margin="0 4 0 0"
-                                                    Foreground="#FF0051F0">
+                                                    Foreground="{DynamicResource PrimaryHueMidBrush}">
                                                     LOGOUT
                                                 </Button>
                                             </StackPanel>
@@ -161,7 +160,7 @@
                                                     Height="*" />
                                             </Grid.RowDefinitions>
                                             <materialDesign:ColorZone
-                                                Background="#FF0051F0"
+                                                Background="{DynamicResource PrimaryHueMidBrush}"
                                                 Mode="Accent"
                                                 Padding="4">
                                                 <StackPanel
@@ -197,13 +196,13 @@
                                                     materialDesign:HintAssist.Hint="First name"
                                                     materialDesign:HintAssist.IsFloating="True"
                                                     Margin="0 12 0 0">
-                                                    
+
                                                 </TextBox>
                                                 <TextBox
                                                     Grid.Row="1"
                                                     materialDesign:HintAssist.Hint="Last name"
                                                               materialDesign:HintAssist.IsFloating="True"
-                                                              Margin="0 12 0 0">                                             
+                                                              Margin="0 12 0 0">
                                                 </TextBox>
                                                 <TextBox
                                                     Grid.Row="2"
@@ -211,119 +210,20 @@
                                                               materialDesign:HintAssist.IsFloating="True"
                                                               Margin="0 12 0 0">
                                                 </TextBox>
-                                                
-                                                
+
+
                                             </Grid>
                                         </Grid>
                                     </materialDesign:Flipper.BackContent>
                                 </materialDesign:Flipper>
+
                             </Grid>
-                            
-                            
-                            
+
+
+
+
                             <Grid Grid.Row="1" >
-                                <TabControl>
-                                    <TabControl.Resources>
-                                        <Style TargetType="TabItem">
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="TabItem">
-                                                        <Grid Name="Panel">
-                                                            <ContentPresenter x:Name="ContentSite"
-                                                                              VerticalAlignment="Center"
-                                                                              HorizontalAlignment="Center"
-                                                                              ContentSource="Header"
-                                                                              Margin="10,2"/>
-                                                        </Grid>
-                                                        <ControlTemplate.Triggers>
-                                                            <Trigger Property="IsSelected" Value="True">
-                                                                <Setter TargetName="Panel" Property="Background" Value="#FFFBB513" />
-                                                            </Trigger>
-                                                            <Trigger Property="IsSelected" Value="False">
-                                                                <Setter TargetName="Panel" Property="Background" Value="#FFF19709" />
-                                                            </Trigger>
-                                                        </ControlTemplate.Triggers>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </TabControl.Resources>
-                                    <TabItem Background="White" FontWeight="Bold" Foreground="White" Header="전체공지" BorderBrush="{x:Null}">
-                                        <Grid>
-                                            <ListView x:Name="lv_notice_all" >
-                                                <ListView.View >
-                                                    <GridView>
-                                                        <GridViewColumn Width="50" Header="No." DisplayMemberBinding="{Binding Path=Notice_id}"/>
-                                                        <GridViewColumn Width="500">
-                                                            <GridViewColumn.Header>
-                                                                <GridViewColumnHeader Content="제목"/>
-                                                            </GridViewColumn.Header>
-                                                            <GridViewColumn.CellTemplate>
-                                                                <DataTemplate >
-                                                                    <StackPanel Orientation="Horizontal" Width="500">
-                                                                        <TextBlock  Margin="3,0,0,0" Text="{Binding Path = Title}"/>
-                                                                    </StackPanel>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.CellTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Width="180" Header="작성일" DisplayMemberBinding="{Binding Path=Date}"/>
-                                                        <GridViewColumn Width="100" Header="작성자" DisplayMemberBinding="{Binding Path=Name}"/>
-                                                        <GridViewColumn Width="60" Header="조회수" DisplayMemberBinding="{Binding Path=Views}">
-                                                        </GridViewColumn>
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                        </Grid>
-                                    </TabItem>
-                                    <TabItem Background="White"  FontWeight="Bold" Foreground="White" Header="물류팀공지" BorderBrush="{x:Null}">
-                                        <Grid>
-                                            <ListView >
-                                                <ListView.View >
-                                                    <GridView>
-                                                        <GridViewColumn Width="50" Header="No." DisplayMemberBinding="{Binding Path=Name}"/>
-                                                        <GridViewColumn Width="500" Header="제목" DisplayMemberBinding="{Binding Path=Gender}"/>
-                                                        <GridViewColumn Width="180" Header="작성일" DisplayMemberBinding="{Binding Path=Phone}"/>
-                                                        <GridViewColumn Width="100" Header="작성자" DisplayMemberBinding="{Binding Path=Date}"/>
-                                                        <GridViewColumn Width="60" Header="조회수" DisplayMemberBinding="{Binding Path=Saving}">
-                                                        </GridViewColumn>
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                        </Grid>
-                                    </TabItem>
-                                    <TabItem Background="White" FontWeight="Bold" Foreground="White" Header="판매팀공지" BorderBrush="{x:Null}">
-                                        <Grid>
-                                            <ListView >
-                                                <ListView.View >
-                                                    <GridView>
-                                                        <GridViewColumn Width="50" Header="No." DisplayMemberBinding="{Binding Path=Name}"/>
-                                                        <GridViewColumn Width="500" Header="제목" DisplayMemberBinding="{Binding Path=Gender}"/>
-                                                        <GridViewColumn Width="180" Header="작성일" DisplayMemberBinding="{Binding Path=Phone}"/>
-                                                        <GridViewColumn Width="100" Header="작성자" DisplayMemberBinding="{Binding Path=Date}"/>
-                                                        <GridViewColumn Width="60" Header="조회수" DisplayMemberBinding="{Binding Path=Saving}">
-                                                        </GridViewColumn>
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                        </Grid>
-                                    </TabItem>
-                                    <TabItem Background="White" FontWeight="Bold" Foreground="White" Header="지원팀공지" BorderBrush="{x:Null}">
-                                        <Grid>
-                                            <ListView >
-                                                <ListView.View >
-                                                    <GridView>
-                                                        <GridViewColumn Width="50" Header="No." DisplayMemberBinding="{Binding Path=Name}"/>
-                                                        <GridViewColumn Width="500" Header="제목" DisplayMemberBinding="{Binding Path=Gender}"/>
-                                                        <GridViewColumn Width="180" Header="작성일" DisplayMemberBinding="{Binding Path=Phone}"/>
-                                                        <GridViewColumn Width="100" Header="작성자" DisplayMemberBinding="{Binding Path=Date}"/>
-                                                        <GridViewColumn Width="60" Header="조회수" DisplayMemberBinding="{Binding Path=Saving}">
-                                                        </GridViewColumn>
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                        </Grid>
-                                    </TabItem>
-                                </TabControl>
+
                             </Grid>
                             <Grid Grid.Row="2">
                                 <Grid.ColumnDefinitions>
@@ -348,14 +248,14 @@
                         </Grid>
                     </TabItem>
 
-                    <TabItem Height="100" Background="#FF0051F0" BorderBrush="{x:Null}">
+                    <TabItem Height="100" Background="{DynamicResource PrimaryHueMidBrush}" BorderBrush="{x:Null}">
                         <TabItem.Header>
                             <StackPanel Orientation="Vertical">
                                 <Path HorizontalAlignment="Center" Fill="White" Data="M 0 4 L 0 5 L 2 5 L 8 5 L 8 6 L 2 6 L 2 7 L 0 7 L 0 8 L 2 8 L 7 8 L 7 9 L 2 9 L 2 10 L 0 10 L 0 11 L 2 11 L 6 11 L 6 12 L 2 12 L 2 13 L 0 13 L 0 14 L 2 14 L 5 14 L 5 15 L 2 15 L 2 19 C 2 19.6 2.4 20 3 20 L 4 20 C 4.2 18.3 5.7 16.90625 7.5 16.90625 C 9.3 16.90625 10.8 18.2 11 20 L 14 20 C 14.6 20 15 19.6 15 19 L 15 5 C 15 4.4 14.6 4 14 4 L 8 4 L 2 4 L 0 4 z M 17 8 C 16.4 8 16 8.4 16 9 L 16 19 C 16 19.5 16.4 20 17 20 C 17.2 18.3 18.7 16.90625 20.5 16.90625 C 22.3 16.90625 23.8 18.2 24 20 L 25 20 C 25.6 20 26 19.6 26 19 L 26 14 C 26 13.1 25.1875 12 25.1875 12 L 23 9 C 22.5 8.4 22.2 8 21.5 8 L 17 8 z M 19 10 L 21.40625 10 C 21.60625 10 21.8125 10.1875 21.8125 10.1875 L 23.90625 13.09375 C 24.10625 13.39375 24.3125 13.70625 24.3125 13.90625 L 19 13.90625 L 19 10 z M 7.5 18.1875 C 6.2297451 18.1875 5.1875 19.229745 5.1875 20.5 C 5.1875 21.770255 6.2297451 22.8125 7.5 22.8125 C 8.7702549 22.8125 9.8125 21.770255 9.8125 20.5 C 9.8125 19.229745 8.7702549 18.1875 7.5 18.1875 z M 20.5 18.1875 C 19.229745 18.1875 18.1875 19.229745 18.1875 20.5 C 18.1875 21.770255 19.229745 22.8125 20.5 22.8125 C 21.770255 22.8125 22.8125 21.770255 22.8125 20.5 C 22.8125 19.229745 21.770255 18.1875 20.5 18.1875 z"/>
                                 <TextBlock Foreground="White" >물류</TextBlock>
                             </StackPanel>
                         </TabItem.Header>
-                        <Grid Margin="-2" Background="#FFF19709">
+                        <Grid Margin="-2" Background="{DynamicResource PrimaryHueMidBrush}">
                             <TabControl  TabStripPlacement="Left">
                                 <TabControl.Resources>
                                     <Style TargetType="TabItem">
@@ -371,10 +271,10 @@
                                                     </Grid>
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsSelected" Value="True">
-                                                            <Setter TargetName="Panel" Property="Background" Value="#FFFBB513" />
+                                                            <Setter TargetName="Panel" Property="Background" Value="{DynamicResource SecondaryAccentBrush}" />
                                                         </Trigger>
                                                         <Trigger Property="IsSelected" Value="False">
-                                                            <Setter TargetName="Panel" Property="Background" Value="#FFF19709" />
+                                                            <Setter TargetName="Panel" Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
                                                         </Trigger>
                                                     </ControlTemplate.Triggers>
                                                 </ControlTemplate>
@@ -435,7 +335,7 @@
                                         </Grid>
                                         <Grid Row="0" Column="1">
                                             <Button Name="btn_lo_reg_regist" Margin="10,2.8,10,31.2" Height="Auto" Click="btn_lo_reg_regist_Click">등록</Button>
-                                            <Button Name="btn_lo_reg_search" Margin="10,31,10,3.8" Height="20" Click="btn_lo_reg_search_Click">조회</Button>
+                                            <Button Name="btn_lo_reg_search" Margin="10,33,10,0" Height="Auto" Click="btn_lo_reg_search_Click">조회</Button>
                                         </Grid>
                                         <Grid Row="2" Column="0" Grid.ColumnSpan="3">
                                             <ListView x:Name="lv_lo_reg_productList" Margin="10,10,10,10" Grid.ColumnSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
@@ -550,12 +450,12 @@
                                                 <TextBox Name="tb_lo_input_numberOf" Width="30" Height="20" Margin="-1,0,0,0"></TextBox>
                                                 <Label Margin="5,0,0,0" Content="RGB : #"/>
                                                 <TextBox Name="tb_lo_input_rgb" MaxLength="6" Height="20" Width="60"></TextBox>
-                                                <Button Name="btn_lo_input_listAdd" Margin="10,0,0,0" Height="20" Width="50" Content="추가" Click="btn_lo_input_listAdd_Click"/>
-                                                <Button Name="btn_lo_input_remove" Margin="10,0,0,0" Height="20" Width="50" Content="삭제" Click="btn_lo_input_remove_Click"/>
+                                                <Button Name="btn_lo_input_listAdd" Margin="10,2,0,0" Height="Auto" Width="64" Content="추가" Click="btn_lo_input_listAdd_Click"/>
+                                                <Button x:Name="btn_lo_input_remove" Margin="10,2,0,0" Height="24" Width="66" Content="삭제" Click="btn_lo_input_remove_Click" VerticalAlignment="Top"/>
                                             </StackPanel>
                                         </Grid>
-                                        <Button Grid.Column="1" Name="btn_lo_input_search" Margin="10,0,0,0" Width="50" Height="20" Content="조회" Click="btn_lo_input_search_Click"/>
-                                        <Button Grid.Column="2" Name="btn_lo_input_register" Margin="10,0,10,0" Width="50" Height="20" Content="등록" Click="btn_lo_input_register_Click"/>
+                                        <Button Grid.Column="1" Name="btn_lo_input_search" Margin="0,4,0,0" Height="Auto" Content="조회" Click="btn_lo_input_search_Click"/>
+                                        <Button Grid.Column="2" Name="btn_lo_input_register" Margin="10,4,0,0" Height="Auto" Content="등록" Click="btn_lo_input_register_Click"/>
                                         <Grid Row="1" Grid.Column="0">
                                             <StackPanel Margin="7,0,0,0" Orientation="Horizontal">
                                                 <Label Height="25" Margin="0,0,5,0" Content="사   번 :"></Label>
@@ -567,7 +467,7 @@
                                                     <ComboBoxItem Content="입고"/>
                                                 </ComboBox>
                                                 <Label Margin="24,0,4,0">이미지</Label>
-                                                <Button Height="20" Width="40" Click="btn_lo_upload_img_Click" Content="업로드"></Button>
+                                                <Button Height="Auto" Width="77" Click="btn_lo_upload_img_Click" Content="업로드" Margin="0,2,0,0"></Button>
                                                 <TextBox x:Name="tb_lo_reg_img" IsReadOnly="True" Width="200" Height="20"></TextBox>
                                             </StackPanel>
                                         </Grid>
@@ -746,10 +646,10 @@
                                             <DatePicker x:Name="dp_lo_rse_endDate" Width="105" Height="25" SelectedDateChanged="dp_lo_rse_endDate_SelectedDateChanged"></DatePicker>
                                         </StackPanel>
                                         <Grid Row="0" Column="1">
-                                            <Button Name="btn_lo_rse_search" Width="100" Click="btn_lo_rse_search_Click" Margin="10,5,10,5">조회</Button>
+                                            <Button Name="btn_lo_rse_search" Width="100" Click="btn_lo_rse_search_Click" Margin="10,5,10,0" Height="Auto">조회</Button>
                                         </Grid>
                                         <Grid Row="1" Column="1">
-                                            <Button Name="btn_lo_rse_delete" Width="100" Click="btn_lo_rse_delete_Click" Margin="10,5,10,5">초기화</Button>
+                                            <Button Name="btn_lo_rse_delete" Width="100" Click="btn_lo_rse_delete_Click" Margin="10,5,10,0" Height="Auto">초기화</Button>
                                         </Grid>
                                         <Grid Row="2" Column="0" Grid.ColumnSpan="2">
                                             <ListView x:Name="lv_lo_rse_productList" Margin="10,10,10,10" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.RowSpan="3">
@@ -763,17 +663,17 @@
                                                     <GridView>
                                                         <GridViewColumn Width="50" DisplayMemberBinding="{Binding Trade_type}">
                                                             <GridViewColumn.Header>
-                                                                <GridViewColumnHeader Click="gv_se_head_click" Content="구분"/>
+                                                                <GridViewColumnHeader Click="gv_se_head_click" Content="구분" Width="63"/>
                                                             </GridViewColumn.Header>
                                                         </GridViewColumn>
                                                         <GridViewColumn Width="80" DisplayMemberBinding="{Binding Trade_history_id}">
                                                             <GridViewColumn.Header>
-                                                                <GridViewColumnHeader Click="gv_se_head_click" Content="영수증번호"/>
+                                                                <GridViewColumnHeader Click="gv_se_head_click" Content="영수증번호" Width="98"/>
                                                             </GridViewColumn.Header>
                                                         </GridViewColumn>
                                                         <GridViewColumn Width="80" DisplayMemberBinding="{Binding Product_id}">
                                                             <GridViewColumn.Header>
-                                                                <GridViewColumnHeader Click="gv_se_head_click" Content="물품번호"/>
+                                                                <GridViewColumnHeader Click="gv_se_head_click" Content="물품번호" Width="96"/>
                                                             </GridViewColumn.Header>
                                                         </GridViewColumn>
                                                         <GridViewColumn Width="150" DisplayMemberBinding="{Binding Name}">
@@ -875,12 +775,12 @@
                                             </StackPanel>
                                         </Grid>
                                         <Grid Row="0" Column="4" Grid.RowSpan="2">
-                                            <Button Grid.RowSpan="2" Click="btn_lo_pse_search_Click" Margin="10,10,10,0">조회</Button>
+                                            <Button Click="btn_lo_pse_search_Click" Margin="-31,18,31,10">조회</Button>
                                         </Grid>
                                         <Grid Row="0" Column="5" Grid.RowSpan="2">
-                                            <Button Click="btn_lo_pse_reset_Click"  Margin="10,10,10,0">초기화</Button>
+                                            <Button Click="btn_lo_pse_reset_Click"  Margin="-26,18,10,10">초기화</Button>
                                         </Grid>
-                                        <Label Grid.Row="1" Grid.ColumnSpan="4" Margin="10,0,0,0" Content="물품을 반품하려면 해당 항목을 더블클릭하세요"/>
+                                        <Label Grid.Row="1" Grid.ColumnSpan="4" Margin="9,0,1,0" Content="물품을 반품하려면 해당 항목을 더블클릭하세요"/>
                                         <!--리스트뷰-->
                                         <Grid Row="2" Column="0" Grid.ColumnSpan="6">
                                             <ListView x:Name="lv_lo_pse_productList" Margin="10,10,10,10" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Visible" 
@@ -896,12 +796,12 @@
                                                     <GridView>
                                                         <GridViewColumn Width="80" DisplayMemberBinding="{Binding Stock_product}">
                                                             <GridViewColumn.Header>
-                                                                <GridViewColumnHeader Click="gv_se_head_click" Content="재고번호"/>
+                                                                <GridViewColumnHeader Click="gv_se_head_click" Content="재고번호" Width="95"/>
                                                             </GridViewColumn.Header>
                                                         </GridViewColumn>
                                                         <GridViewColumn Width="80" DisplayMemberBinding="{Binding Product_id}">
                                                             <GridViewColumn.Header>
-                                                                <GridViewColumnHeader Click="gv_se_head_click" Content="물품번호"/>
+                                                                <GridViewColumnHeader Click="gv_se_head_click" Content="물품번호" Width="96"/>
                                                             </GridViewColumn.Header>
                                                         </GridViewColumn>
                                                         <GridViewColumn Width="150" DisplayMemberBinding="{Binding Name}">
@@ -926,7 +826,7 @@
                                                         </GridViewColumn>
                                                         <GridViewColumn Width="50" DisplayMemberBinding="{Binding Stock}">
                                                             <GridViewColumn.Header>
-                                                                <GridViewColumnHeader Click="gv_se_head_click" Content="수량"/>
+                                                                <GridViewColumnHeader Click="gv_se_head_click" Content="수량" Width="74"/>
                                                             </GridViewColumn.Header>
                                                         </GridViewColumn>
                                                     </GridView>
@@ -1002,14 +902,14 @@
                     </TabItem>
 
                     <!--/////////////////////////////판매///////////////////////////-->
-                    <TabItem Height="100" Background="#FF0051F0" BorderBrush="{x:Null}" >
+                    <TabItem Height="100" Background="{DynamicResource PrimaryHueMidBrush}" BorderBrush="{x:Null}" >
                         <TabItem.Header>
                             <StackPanel Orientation="Vertical">
                                 <Path HorizontalAlignment="Center" Fill="White" Data="M 19.53125 1.53125 L 14.25 4.40625 L 5.5 9.1875 L 0.21875 12.09375 L 2.5 16.21875 L 2.5 13 C 2.5 12.172 3.172 11.5 4 11.5 L 4.8125 11.5 L 4.84375 11.375 L 16.4375 5.03125 L 17.3125 5.28125 C 17.3375 5.36125 17.36325 5.45425 17.40625 5.53125 C 17.75025 6.16125 18.52625 6.4065 19.15625 6.0625 C 19.23225 6.0205 19.28075 5.93 19.34375 5.875 L 20.25 6.15625 L 22.25 9.8125 L 22 10.71875 C 21.921 10.74275 21.827 10.73925 21.75 10.78125 C 21.457 10.94125 21.25925 11.209 21.15625 11.5 L 25 11.5 L 22.40625 6.78125 L 19.53125 1.53125 z M 18.4375 8.09375 C 17.846479 8.2146904 17.40625 8.7482258 17.40625 9.375 C 17.40625 10.091314 17.971186 10.6875 18.6875 10.6875 C 19.403813 10.6875 20 10.091314 20 9.375 C 20 8.6586866 19.403813 8.09375 18.6875 8.09375 C 18.597961 8.09375 18.521932 8.0764728 18.4375 8.09375 z M 13.5625 8.96875 C 12.836154 8.9468301 12.08825 9.109625 11.375 9.5 C 10.504 9.976 9.852 10.704 9.5 11.5 L 16.75 11.5 C 16.692 11.195 16.5915 10.906 16.4375 10.625 C 15.870625 9.59125 14.773076 9.0052832 13.5625 8.96875 z M 4 13 L 4 19 L 4 26 L 26 26 L 26 19 L 26 13 L 4 13 z M 8.40625 14.59375 L 21.59375 14.59375 L 22.25 15.25 C 22.233 15.333 22.1875 15.412 22.1875 15.5 C 22.1875 16.217 22.783 16.8125 23.5 16.8125 C 23.588 16.8125 23.667 16.766 23.75 16.75 L 24.40625 17.40625 L 24.40625 21.59375 L 23.75 22.25 C 23.667 22.233 23.588 22.1875 23.5 22.1875 C 22.783 22.1875 22.1875 22.783 22.1875 23.5 C 22.1875 23.588 22.233 23.667 22.25 23.75 L 21.59375 24.40625 L 8.40625 24.40625 L 7.75 23.75 C 7.767 23.667 7.8125 23.588 7.8125 23.5 C 7.8125 22.783 7.217 22.1875 6.5 22.1875 C 6.412 22.1875 6.333 22.234 6.25 22.25 L 5.59375 21.59375 L 5.59375 17.40625 L 6.25 16.75 C 6.333 16.767 6.412 16.8125 6.5 16.8125 C 7.217 16.8125 7.8125 16.217 7.8125 15.5 C 7.8125 15.412 7.767 15.333 7.75 15.25 L 8.40625 14.59375 z M 15 16.09375 C 12.83173 16.09375 11.0625 17.6145 11.0625 19.5 C 11.0625 21.3855 12.83173 22.90625 15 22.90625 C 17.16827 22.90625 18.9375 21.3855 18.9375 19.5 C 18.9375 17.6145 17.16827 16.09375 15 16.09375 z M 8.5 18.1875 C 7.7836867 18.1875 7.1875 18.783687 7.1875 19.5 C 7.1875 20.216313 7.7836867 20.8125 8.5 20.8125 C 9.2163133 20.8125 9.8125 20.216313 9.8125 19.5 C 9.8125 18.783687 9.2163133 18.1875 8.5 18.1875 z M 21.5 18.1875 C 20.783134 18.1875 20.1875 18.783134 20.1875 19.5 C 20.1875 20.216866 20.783134 20.8125 21.5 20.8125 C 22.216866 20.8125 22.8125 20.216866 22.8125 19.5 C 22.8125 18.783134 22.216866 18.1875 21.5 18.1875 z"/>
                                 <TextBlock Foreground="White">판매</TextBlock>
                             </StackPanel>
                         </TabItem.Header>
-                        <Grid Margin="-2" Background="#FFF19709">
+                        <Grid Margin="-2" Background="{DynamicResource PrimaryHueMidBrush}">
                             <TabControl  TabStripPlacement="Left">
                                 <TabControl.Resources>
                                     <Style TargetType="TabItem">
@@ -1025,10 +925,10 @@
                                                     </Grid>
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsSelected" Value="True">
-                                                            <Setter TargetName="Panel" Property="Background" Value="#FFFBB513" />
+                                                            <Setter TargetName="Panel" Property="Background" Value="{DynamicResource SecondaryAccentBrush}" />
                                                         </Trigger>
                                                         <Trigger Property="IsSelected" Value="False">
-                                                            <Setter TargetName="Panel" Property="Background" Value="#FFF19709" />
+                                                            <Setter TargetName="Panel" Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
                                                         </Trigger>
                                                     </ControlTemplate.Triggers>
                                                 </ControlTemplate>
@@ -1184,31 +1084,31 @@
                                             </StackPanel>
                                         </Grid>
                                         <Grid Row="1" Column="0">
-                                            <StackPanel Orientation="Horizontal">
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,-21,0">
                                                 <Label Margin="34,0,0,2" Height="25">가격:</Label>
                                                 <TextBox Width="80" Height="20" Margin="0,0,0,0" x:Name="tb_se_price" KeyDown="KeyDown_se_search_product" Foreground="Black"/>
-                                                <Button Click="Btn_se_price" x:Name="btn_se_price" Margin="10,0,0,0" Height="18" Content="▲"/>
+                                                <Button Click="Btn_se_price" x:Name="btn_se_price" Margin="10,6,0,5" Height="Auto" Content="▲" Width="43"/>
                                             </StackPanel>
                                         </Grid>
                                         <Grid Row="1" Column="1">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Label Margin="10,0,0,2" Height="25">출시일:</Label>
+                                            <StackPanel Orientation="Horizontal" Margin="27,0,-27,0">
+                                                <Label Margin="10,2,0,3" Height="25">출시일:</Label>
                                                 <DatePicker x:Name="dtp_se_manufac" Height="22" Margin="1,3,0,0" Text="" HorizontalAlignment="Right" VerticalAlignment="Top" KeyDown="KeyDown_se_search_product" Foreground="Black"/>
-                                                <Button Click="Btn_se_manufacture" x:Name="btn_se_manufacture" Margin="10,0,0,0" Height="18" Content="▲"/>
+                                                <Button Click="Btn_se_manufacture" x:Name="btn_se_manufacture" Margin="10,6,0,6" Height="18" Content="▲"/>
                                             </StackPanel>
                                         </Grid>
                                         <Grid Row="1" Column="2">
-                                            <StackPanel Orientation="Horizontal">
+                                            <StackPanel Orientation="Horizontal" Margin="41,0,-41,0">
                                                 <Label Margin="20,0,0,2" Height="25">RAM:</Label>
                                                 <ComboBox Width="100" Height="20" Margin="0,0,0,0" x:Name="cb_se_ram" IsEditable="True" DisplayMemberPath="{Binding Ram}" KeyDown="KeyDown_se_search_product " DropDownOpened="cb_se_ram_DropDownOpened" Foreground="Black"></ComboBox>
                                             </StackPanel>
                                         </Grid>
 
                                         <Grid Row="0" Column="4" Grid.RowSpan="2">
-                                            <Button Click="Btn_se_Search" Margin="10,10,10,0">조회</Button>
+                                            <Button Click="Btn_se_Search" Margin="-30,19,31,9">조회</Button>
                                         </Grid>
                                         <Grid Row="0" Column="5" Grid.RowSpan="2">
-                                            <Button Click="Btn_se_Reset"  Margin="10,10,10,0">초기화</Button>
+                                            <Button Click="Btn_se_Reset"  Margin="-27,19,10,9">초기화</Button>
                                         </Grid>
 
 
@@ -1448,8 +1348,8 @@
                                         </Grid>
                                         <Grid Row="1" Column="0">
                                             <StackPanel Orientation="Horizontal">
-                                                <Label Margin="10,0,0,2" Height="25">구분:</Label>
-                                                <ComboBox Name="cb_se_type" Width="80" Height="20" Margin="0,0,0,0" IsEditable="True" IsReadOnly="True" Text="모두" KeyDown="KeyDown_se_search_history" Foreground="Black">
+                                                <Label Margin="10,7,0,-2" Height="25">구분:</Label>
+                                                <ComboBox Name="cb_se_type" Width="84" Height="25" Margin="0,5,0,0" IsEditable="True" IsReadOnly="True" Text="모두" KeyDown="KeyDown_se_search_history" Foreground="Black">
                                                     <ComboBoxItem>모두</ComboBoxItem>
                                                     <ComboBoxItem>판매</ComboBoxItem>
                                                     <ComboBoxItem>환불</ComboBoxItem>
@@ -1464,10 +1364,10 @@
                                         </Grid>
 
                                         <Grid Row="0" Column="4" Grid.RowSpan="2">
-                                            <Button Click="Btn_se_Salse_Search_history" Margin="10,10,10,0">조회</Button>
+                                            <Button Click="Btn_se_Salse_Search_history" Margin="-34,19,32,9">조회</Button>
                                         </Grid>
                                         <Grid Row="0" Column="5" Grid.RowSpan="2">
-                                            <Button Click="Btn_se_Salse_Reset_history" Margin="10,10,10,0">초기화</Button>
+                                            <Button Click="Btn_se_Salse_Reset_history" Margin="-26,19,10,9">초기화</Button>
                                         </Grid>
 
 
@@ -1496,7 +1396,7 @@
                                                         </GridViewColumn>
                                                         <GridViewColumn Width="80" DisplayMemberBinding="{Binding Sales_history_id}">
                                                             <GridViewColumn.Header>
-                                                                <GridViewColumnHeader Click="gv_se_head_click" Content="영수증번호"/>
+                                                                <GridViewColumnHeader Click="gv_se_head_click" Content="영수증번호" Width="100"/>
                                                             </GridViewColumn.Header>
                                                         </GridViewColumn>
                                                         <GridViewColumn Width="170" DisplayMemberBinding="{Binding Product_name}">
@@ -1702,14 +1602,14 @@
 
 
 
-                    <TabItem Height="100" Background="#FF0051F0" BorderBrush="{x:Null}">
+                    <TabItem Height="100" Background="{DynamicResource PrimaryHueMidBrush}" BorderBrush="{x:Null}">
                         <TabItem.Header>
                             <StackPanel Orientation="Vertical">
                                 <Path HorizontalAlignment="Center" Fill="White" Data="M 12 0 C 6.412269 0 1.2476806 3.476786 2.21875 11.75 C 2.0459324 11.88836 1.8792272 12.036256 1.75 12.21875 C 1.2467674 12.929413 1 13.852008 1 14.84375 C 1 16.088719 1.733925 17.047089 2.5 17.75 C 3.0609458 18.264695 3.6326414 18.623952 4.28125 18.8125 C 4.7904735 20.452902 5.729597 21.812541 6.84375 22.75 A 1.0001 1.0001 0 1 0 8.125 21.21875 C 7.1187038 20.372043 6.2777963 19.241345 5.96875 17.78125 A 1.0001 1.0001 0 0 0 5 17 C 5.1230969 17 4.354175 16.749589 3.84375 16.28125 C 3.333325 15.812911 3 15.225781 3 14.84375 C 3 14.380058 3.1114214 13.991785 3.25 13.6875 A 1.0001 1.0001 0 0 0 5 13 L 5 12.15625 A 1.0001 1.0001 0 0 0 5 12.0625 C 5.0406039 11.348585 5.1335572 10.69377 5.28125 10.09375 C 6.6587598 9.6196484 7.8075 10.38875 9 6.875 C 10.740497 12.047507 15.245669 9.0888751 18.34375 8.9375 C 18.708178 9.8228568 18.933167 10.862738 19 12.0625 A 1.0001 1.0001 0 0 0 19 12.15625 L 19 13 A 1.0001 1.0001 0 0 0 20 14 L 20 16.46875 C 19.566223 16.810413 19.084955 17 19 17 A 1.0001 1.0001 0 0 0 18.03125 17.78125 C 17.827033 18.747027 17.373253 19.55991 16.8125 20.25 A 1.0103227 1.0103227 0 1 0 18.375 21.53125 C 18.975556 20.792176 19.372999 19.825379 19.6875 18.8125 C 20.277816 18.661508 20.82562 18.393618 21.3125 18 L 22 18 C 21.755425 19.281275 21.303516 20.247851 20.84375 20.9375 C 20.193436 21.912971 19.634296 22.254249 19.59375 22.28125 C 19.56498 22.2959 19.209672 22.491601 18.1875 22.71875 C 17.406902 22.892217 16.284138 23.077348 14.78125 23.15625 C 14.57986 22.041333 13.411957 21.1875 12 21.1875 C 10.446423 21.1875 9.1875 22.222565 9.1875 23.5 C 9.1875 24.777435 10.446423 25.8125 12 25.8125 C 12.970986 25.8125 13.838234 25.396512 14.34375 24.78125 C 16.194626 24.707173 17.599994 24.49514 18.5625 24.28125 C 19.748751 24.017639 20.34375 23.71875 20.34375 23.71875 A 0.80008001 0.80008001 0 0 0 20.4375 23.65625 C 20.4375 23.65625 21.330394 23.051285 22.15625 21.8125 C 22.823645 20.811407 23.486071 19.357799 23.71875 17.4375 C 24.44698 16.892558 24.90625 16.001933 24.90625 15 L 24.90625 13 C 24.90625 11.343 23.656 10 22 10 L 21.84375 10 C 21.84827 3.002426 17.174469 0 12 0 z M 20.65625 9.875 C 20.686801 9.9169325 20.720891 9.9547314 20.75 10 L 20.65625 10 C 20.648005 9.9587336 20.664871 9.916022 20.65625 9.875 z M 8 12 C 6.8954305 12 6 12.895431 6 14 C 6 15.104569 6.8954305 16 8 16 C 9.1045695 16 10 15.104569 10 14 C 10 12.895431 9.1045695 12 8 12 z M 16 12 C 14.895431 12 14 12.895431 14 14 C 14 15.104569 14.895431 16 16 16 C 17.104569 16 18 15.104569 18 14 C 18 12.895431 17.104569 12 16 12 z"/>
                                 <TextBlock Foreground="White">지원</TextBlock>
                             </StackPanel>
                         </TabItem.Header>
-                        <Grid Margin="-2" Background="#FFF19709">
+                        <Grid Margin="-2" Background="{DynamicResource PrimaryHueMidBrush}">
                             <TabControl  TabStripPlacement="Left" x:Name="myTab" SelectionChanged="TabControl_Selectionchanged">
                                 <TabControl.Resources>
                                     <Style TargetType="TabItem">
@@ -1725,10 +1625,10 @@
                                                     </Grid>
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsSelected" Value="True">
-                                                            <Setter TargetName="Panel" Property="Background" Value="#FFFBB513" />
+                                                            <Setter TargetName="Panel" Property="Background" Value="{DynamicResource SecondaryAccentBrush}" />
                                                         </Trigger>
                                                         <Trigger Property="IsSelected" Value="False">
-                                                            <Setter TargetName="Panel" Property="Background" Value="#FFF19709" />
+                                                            <Setter TargetName="Panel" Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
                                                         </Trigger>
                                                     </ControlTemplate.Triggers>
                                                 </ControlTemplate>
@@ -1757,7 +1657,7 @@
                                             <ColumnDefinition Width="100"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <Button Click="Btn_su_employee_lv_search" Margin="10,10,10,10" Grid.RowSpan="2" Grid.Column="2">조회</Button>
+                                        <Button Click="Btn_su_employee_lv_search" Margin="10,10,10,10" Grid.RowSpan="2" Grid.Column="2" >조회</Button>
 
                                         <StackPanel Orientation="Horizontal">
                                             <Label Margin="15,5,1,5" Height="25">직원이름</Label>
@@ -2298,7 +2198,7 @@
                             </TabControl>
                         </Grid>
                     </TabItem>
-                    <TabItem Height="100" Background="#FF0051F0" BorderBrush="{x:Null}">
+                    <TabItem x:Name="ti_setting" Height="100" Background="{DynamicResource PrimaryHueMidBrush}" BorderBrush="{x:Null}">
                         <TabItem.Header>
                             <StackPanel Orientation="Vertical">
                                 <Path HorizontalAlignment="Center" Fill="White" Data="M 11.46875 0.96875 L 10.90625 4.53125 C 10.05225 4.74125 9.234 5.059 8.5 5.5 L 5.5625 3.40625 L 3.4375 5.53125 L 5.5 8.46875 C 5.055 9.20575 4.715 10.015 4.5 10.875 L 0.96875 11.46875 L 0.96875 14.46875 L 4.5 15.09375 C 4.713 15.95175 5.053 16.762 5.5 17.5 L 3.40625 20.4375 L 5.53125 22.5625 L 8.46875 20.5 C 9.20475 20.942 10.02 21.25775 10.875 21.46875 L 11.46875 25.03125 L 14.46875 25.03125 L 15.125 21.46875 C 15.976 21.25375 16.77 20.91275 17.5 20.46875 L 20.46875 22.5625 L 22.59375 20.4375 L 20.46875 17.5 C 20.90675 16.77 21.25875 15.974 21.46875 15.125 L 25.03125 14.46875 L 25.03125 11.46875 L 21.46875 10.875 C 21.25675 10.026 20.90675 9.23 20.46875 8.5 L 22.5625 5.53125 L 20.4375 3.40625 L 17.5 5.53125 C 16.768 5.08825 15.94875 4.74425 15.09375 4.53125 L 14.46875 0.96875 L 11.46875 0.96875 z M 13 6.46875 C 16.604 6.46875 19.53125 9.396 19.53125 13 C 19.53125 16.604 16.604 19.53125 13 19.53125 C 9.396 19.53125 6.46875 16.603 6.46875 13 C 6.46875 9.397 9.396 6.46875 13 6.46875 z M 13 8.0625 C 10.282 8.0625 8.0625 10.282 8.0625 13 C 8.0625 15.718 10.282 17.9375 13 17.9375 C 15.718 17.9375 17.9375 15.718 17.9375 13 C 17.9375 10.282 15.718 8.0625 13 8.0625 z M 12.96875 10.9375 C 14.11475 10.9375 15.0625 11.853 15.0625 13 C 15.0625 14.146 14.11475 15.0625 12.96875 15.0625 C 11.82275 15.0625 10.90625 14.146 10.90625 13 C 10.90625 11.853 11.82275 10.9375 12.96875 10.9375 z"/>

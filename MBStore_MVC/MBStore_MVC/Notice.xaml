@@ -14,16 +14,16 @@
             <RowDefinition Height="390"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="#FF0051F0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <Grid Grid.Row="0" Background="{DynamicResource PrimaryHueMidBrush}" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 <ColumnDefinition Width="1.2*"></ColumnDefinition>
                 <ColumnDefinition Width="0.3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock VerticalAlignment="Center" Foreground="White" Grid.Column="1" Text="공지작성"/>
-            <Button x:Name="btn_minimum" Background="#FF0051F0" Foreground="White" FontWeight="Bold" Grid.Column="2" Content="___" Margin="40,0,60,0" BorderBrush="{x:Null}" />
-            <Button x:Name="btn_maximum" Background="#FF0051F0" Foreground="White" FontWeight="Bold" Grid.Column="2" Content="□" Margin="70,0,30,0" BorderBrush="{x:Null}" />
-            <Button x:Name="btn_close" Background="#FF0051F0" Foreground="White" FontWeight="Bold" Grid.Column="2" Content="X" Margin="100,0,0,0" BorderBrush="{x:Null}" Click="btn_close_Click" />
+            <Button x:Name="btn_minimum" Background="{DynamicResource PrimaryHueMidBrush}" Foreground="White" FontWeight="Bold" Grid.Column="2" Content="___" Margin="40,0,60,0" BorderBrush="{x:Null}" />
+            <Button x:Name="btn_maximum" Background="{DynamicResource PrimaryHueMidBrush}" Foreground="White" FontWeight="Bold" Grid.Column="2" Content="□" Margin="70,0,30,0" BorderBrush="{x:Null}" />
+            <Button x:Name="btn_close" Background="{DynamicResource PrimaryHueMidBrush}" Foreground="White" FontWeight="Bold" Grid.Column="2" Content="X" Margin="100,0,0,0" BorderBrush="{x:Null}" Click="btn_close_Click" />
         </Grid>
         <Grid Grid.Row="1" Background="#FFE8E8E8"  >
             <Grid.RowDefinitions>

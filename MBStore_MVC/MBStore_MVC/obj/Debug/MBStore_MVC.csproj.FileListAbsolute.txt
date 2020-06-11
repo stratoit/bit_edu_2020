@@ -284,3 +284,5 @@ C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBSt
 C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Debug\MessageDialog.g.cs
 C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Debug\MessageDialog.baml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Debug\UI_ColorTool.g.cs
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Debug\UI_ColorTool.baml

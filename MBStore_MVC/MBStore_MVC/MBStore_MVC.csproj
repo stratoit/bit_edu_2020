@@ -70,6 +70,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BrushToHexConverter.cs" />
+    <Compile Include="Converters\ColorToBrushConverter.cs" />
+    <Compile Include="Converters\MultiValueEqualityConverter.cs" />
+    <Compile Include="Converters\StringJoinConverter.cs" />
     <Compile Include="Emp_Sign_up.xaml.cs">
       <DependentUpon>Emp_Sign_up.xaml</DependentUpon>
     </Compile>
@@ -82,19 +86,25 @@
     <Compile Include="MessageDialog.xaml.cs">
       <DependentUpon>MessageDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\AnotherCommand.cs" />
     <Compile Include="Model\Basic_Chart_Sales.cs" />
+    <Compile Include="Model\ButtonAssist.cs" />
     <Compile Include="Model\Chart_Brsell.cs" />
     <Compile Include="Model\Chart_SellKing.cs" />
     <Compile Include="Model\Chart_Sellproduct.cs" />
+    <Compile Include="Model\ColorScheme.cs" />
+    <Compile Include="Model\ColorTool.cs" />
     <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\FTPConnector.cs" />
     <Compile Include="Model\NotEmptyValidationRule.cs" />
     <Compile Include="Model\Notices.cs" />
+    <Compile Include="Model\PaletteHelperExtensions.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Return_Info.cs" />
     <Compile Include="Model\Sell_Info.cs" />
     <Compile Include="Model\Sign_up.cs" />
     <Compile Include="Model\SnackMessageQueue.cs" />
+    <Compile Include="Model\webError.cs" />
     <Compile Include="ShoppingBasket.xaml.cs">
       <DependentUpon>ShoppingBasket.xaml</DependentUpon>
     </Compile>
@@ -103,6 +113,9 @@
     </Compile>
     <Compile Include="StockReturn.xaml.cs">
       <DependentUpon>StockReturn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI_ColorTool.xaml.cs">
+      <DependentUpon>UI_ColorTool.xaml</DependentUpon>
     </Compile>
     <Page Include="Emp_Sign_up.xaml">
       <SubType>Designer</SubType>
@@ -152,6 +165,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StockReturn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI_ColorTool.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
