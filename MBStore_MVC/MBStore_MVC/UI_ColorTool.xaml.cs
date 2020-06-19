@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +27,21 @@ namespace MBStore_MVC
             this.DataContext = new Model.ColorTool();
             InitializeComponent();
             
+        }
+
+        private async void btn_SaveColor_Click(object sender, RoutedEventArgs e)
+        {
+            string path = @"theme.txt";
+            string value;
+            value = tb_PrimaryColor.Text + "/" + tb_PrimaryColor_Font.Text + "/" + tb_SecondaryColor.Text + "/" + tb_SecondaryColor_Font.Text;
+
+            File.WriteAllText(path, value, Encoding.Default);
+
+            var MessageDialog = new MessageDialog
+            {
+                Message = { Text = "테마 색상이 저장되었습니다." }
+            };
+            await DialogHost.Show(MessageDialog, "RootDialog");
         }
     }
 }

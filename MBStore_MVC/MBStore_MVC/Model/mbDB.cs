@@ -36,7 +36,7 @@ namespace MBStore_MVC.Model
                 conn.ConnectionString =
                     ConfigurationManager.ConnectionStrings["UserDB"].ToString();
                 conn.Open();    //  데이터베이스 연결           
-                string sql = "select login_id,login_pw,rank,name, employee_id from employee where login_id = @ID";
+                string sql = "select login_id,login_pw,rank,name, employee_id, address, post_number, phone, email  from employee where login_id = @ID";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
@@ -53,6 +53,10 @@ namespace MBStore_MVC.Model
                         emp.Rank = myDataReader.GetString(2);
                         emp.Name = myDataReader.GetString(3);
                         emp.Employee_id = myDataReader.GetInt32(4);
+                        emp.Address = myDataReader.GetString(5);
+                        emp.Post_number = myDataReader.GetString(6);
+                        emp.Phone = myDataReader.GetString(7);
+                        emp.Email = myDataReader.GetString(8);
                     }
                     catch (Exception e) { }
                     return emp;
@@ -2267,5 +2271,44 @@ namespace MBStore_MVC.Model
         }
 
         #endregion
+
+        public bool Update_MyInfo(int emp_id,string phone, string email,string post_number, string address, string password )
+        {
+            using (conn = new SqlConnection())
+            {
+                string sql = "update employee set phone=@phone, email=@email, post_number = @post_number,address=@address, " +
+                    "login_pw = @login_pw where employee_id=@employee_id";
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결           
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                SqlParameter param_login_id = new SqlParameter("@employee_id", emp_id);
+                cmd.Parameters.Add(param_login_id);
+
+                SqlParameter param_phone = new SqlParameter("@phone", phone);
+                cmd.Parameters.Add(param_phone);
+
+                SqlParameter param_email = new SqlParameter("@email", email);
+                cmd.Parameters.Add(param_email);
+
+                SqlParameter param_post_number = new SqlParameter("@post_number", post_number);
+                cmd.Parameters.Add(param_post_number);
+
+                SqlParameter param_address = new SqlParameter("@address", address);
+                cmd.Parameters.Add(param_address);
+
+                SqlParameter param_login_pw = new SqlParameter("@login_pw", password);
+                cmd.Parameters.Add(param_login_pw);
+
+
+
+                if (cmd.ExecuteNonQuery() >= 1)
+                    return true;
+                else
+                    return false;
+            }
+        }
     }
 }

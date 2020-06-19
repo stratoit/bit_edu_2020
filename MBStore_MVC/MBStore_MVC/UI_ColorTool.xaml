@@ -112,6 +112,7 @@
             <ToggleButton Margin="8 0 16 0" Command="{Binding ToggleBaseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked}" />
             <TextBlock VerticalAlignment="Center">Dark</TextBlock>
         </StackPanel>
+        <Button Click="btn_SaveColor_Click" x:Name="btn_SaveColor" DockPanel.Dock="Top" HorizontalAlignment="Right" Content="테마 저장"/>
         <DockPanel>
             <!-- Selection controls -->
             <Border DockPanel.Dock="Bottom">
@@ -157,11 +158,12 @@
                                     <RowDefinition Height="2*" />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <TextBlock Style="{StaticResource LabelTextBox}">Primary</TextBlock>
+                                <TextBlock Style="{StaticResource LabelTextBox}">메인색상</TextBlock>
                                 <!-- Primary mid section -->
                                 <Border Background="{DynamicResource PrimaryHueMidBrush}" Grid.Row="1">
                                     <Grid>
-                                        <TextBlock DataContext="{DynamicResource PrimaryHueMidBrush}" 
+                                        <TextBlock x:Name="tb_PrimaryColor"
+                                                    DataContext="{DynamicResource PrimaryHueMidBrush}" 
                                                    Text="{Binding Converter={StaticResource BrushToHexConverter}}" 
                                                    Style="{StaticResource HexLabelTextBlock}" 
                                                    Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
@@ -228,11 +230,13 @@
                                     <RowDefinition Height="2*" />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <TextBlock Style="{StaticResource LabelTextBox}">Secondary</TextBlock>
+                                <TextBlock Style="{StaticResource LabelTextBox}">서브색상</TextBlock>
                                 <!-- Secondary mid section -->
                                 <Border Background="{DynamicResource SecondaryAccentBrush}" Grid.Row="1">
                                     <Grid>
-                                        <TextBlock DataContext="{DynamicResource SecondaryHueMidBrush}" 
+                                        <TextBlock 
+                                                    x:Name="tb_SecondaryColor"
+                                                    DataContext="{DynamicResource SecondaryHueMidBrush}" 
                                                    Text="{Binding Converter={StaticResource BrushToHexConverter}}" 
                                                    Style="{StaticResource HexLabelTextBlock}" 
                                                    Foreground="{DynamicResource SecondaryAccentForegroundBrush}" />
@@ -299,10 +303,12 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
-                                    <TextBlock Style="{StaticResource LabelTextBox}">Text on P</TextBlock>
+                                    <TextBlock Style="{StaticResource LabelTextBox}">기본 글자색상</TextBlock>
                                     <Border Background="{DynamicResource PrimaryHueMidBrush}" Grid.Row="1">
                                         <Grid>
-                                            <TextBlock DataContext="{DynamicResource PrimaryHueMidForegroundBrush}" 
+                                            <TextBlock 
+                                                x:Name="tb_PrimaryColor_Font"
+                                                DataContext="{DynamicResource PrimaryHueMidForegroundBrush}" 
                                                        Text="{Binding Converter={StaticResource BrushToHexConverter}}" 
                                                        Style="{StaticResource HexLabelTextBlock}" 
                                                        Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
@@ -352,10 +358,12 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
-                                    <TextBlock Style="{StaticResource LabelTextBox}">Text on S</TextBlock>
+                                    <TextBlock Style="{StaticResource LabelTextBox}">UI 글자색상</TextBlock>
                                     <Border Background="{DynamicResource SecondaryAccentBrush}" Grid.Row="1">
                                         <Grid>
-                                            <TextBlock DataContext="{DynamicResource SecondaryAccentForegroundBrush}" 
+                                            <TextBlock 
+                                                x:Name="tb_SecondaryColor_Font"
+                                                DataContext="{DynamicResource SecondaryAccentForegroundBrush}" 
                                                        Text="{Binding Converter={StaticResource BrushToHexConverter}}" 
                                                        Style="{StaticResource HexLabelTextBlock}" 
                                                        Foreground="{DynamicResource SecondaryAccentForegroundBrush}" />
@@ -399,8 +407,8 @@
             <!-- Color picker section -->
             <DockPanel Margin="16">
                 <UniformGrid Columns="1" DockPanel.Dock="Right">
-                    <RadioButton x:Name="MdPaletteButton" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="True" Content="MD Palette" Foreground="Black"/>
-                    <RadioButton x:Name="CustomPaletteButton" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="False" Content="Custom"/>
+                    <RadioButton x:Name="MdPaletteButton" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="True" Content="MD 팔레트" Foreground="Black"/>
+                    <RadioButton x:Name="CustomPaletteButton" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="False" Content="사용자 지정"/>
                 </UniformGrid>
                 <Grid DockPanel.Dock="Left">
                     <Grid Visibility="{Binding IsChecked, ElementName=CustomPaletteButton, Converter={StaticResource BooleanToVisibilityConverter}}">

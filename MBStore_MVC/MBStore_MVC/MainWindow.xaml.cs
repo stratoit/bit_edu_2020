@@ -27,6 +27,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
+using MaterialDesignColors;
+
+
+
 namespace MBStore_MVC
 {
     /// <summary>
@@ -68,8 +72,8 @@ namespace MBStore_MVC
         public MainWindow()
         {
             InitializeComponent();
-
             
+
         }
         public MainWindow(Employee employee): base()
         {
@@ -118,11 +122,42 @@ namespace MBStore_MVC
 
             #endregion
 
-            #region UI_ColorTool
-            UI_ColorTool color = new UI_ColorTool();
+            #region UI_ColorTool + 테마 불러오기
 
-      
+            UI_ColorTool color = new UI_ColorTool();  
             ti_setting.Content = color;
+
+            string path = @"theme.txt";
+
+            if (File.Exists(path))
+            {
+                string[] value = File.ReadAllText(path).Split('/');
+                var convert = new ColorConverter();
+                var paletteHelper = new PaletteHelper();
+
+                ITheme theme = paletteHelper.GetTheme();
+
+                //theme.SetPrimaryColor(Colors.Red);
+                //theme.SetSecondaryColor(Colors.Blue);
+
+                theme.PrimaryMid = new ColorPair((Color)convert.ConvertFrom(value[0]), (Color)convert.ConvertFrom(value[1]));
+                theme.SecondaryMid = new ColorPair((Color)convert.ConvertFrom(value[2]), (Color)convert.ConvertFrom(value[3]));
+
+                paletteHelper.SetTheme(theme);
+            }
+
+
+
+            #endregion
+
+            #region MyInfo 불러오기
+
+            tb_myinfo_address.Text = emp.Post_number +"/" + emp.Address;
+            tb_myinfo_email.Text = emp.Email;
+            tb_myinfo_phone.Text = emp.Phone;
+            
+            
+            
             #endregion
         }
 
@@ -2526,9 +2561,75 @@ namespace MBStore_MVC
 
         #endregion
 
-        private void btn_notice_Click(object sender, RoutedEventArgs e)
+        private async void btn_notice_Click(object sender, RoutedEventArgs e)
         {
+               
+            var MessageDialog = new MessageDialog
+            {
+                Message = { Text = "안녕" }
+            };
+            await DialogHost.Show(MessageDialog, "RootDialog");           
+           
+        }
 
+        private void btn_myinfo_update_Click(object sender, RoutedEventArgs e)
+        {
+            if(tb_myinfo_usePw.Text == "")
+            {
+                var MessageDialog = new MessageDialog
+                {
+                    Message = { Text = "현재 비밀번호를 입력해주세요." }
+                };
+                DialogHost.Show(MessageDialog, "RootDialog");
+            }else if(tb_myinfo_usePw.Text != emp.Login_pw)
+            {
+                var MessageDialog = new MessageDialog
+                {
+                    Message = { Text = "기존 비밀번호가 일치하지 않습니다." }
+                };
+                DialogHost.Show(MessageDialog, "RootDialog");
+            }
+            else
+            {
+                if (tb_myinfo_phone.Text != emp.Phone)
+                    emp.Phone = tb_myinfo_phone.Text;
+
+                if (tb_myinfo_email.Text != emp.Email)
+                    emp.Email = tb_myinfo_email.Text;
+
+                if(tb_myinfo_address.Text != emp.Post_number + "/" + emp.Address)
+                {
+                    string[] strTemp = tb_myinfo_address.Text.Split('/');
+                    emp.Post_number = strTemp[0];
+                    emp.Address = strTemp[1];
+                }
+
+                if(tb_myinfo_newPw.Text != "")
+                {
+                    if(tb_myinfo_newPw.Text == tb_myinfo_NewPw_Check.Text)
+                        emp.Login_pw = tb_myinfo_newPw.Text;
+                    else
+                    {
+                        var MessageDialog_check = new MessageDialog
+                        {
+                            Message = { Text = "변경할 비밀번호가 일치하지 않습니다." }
+                        };
+                        DialogHost.Show(MessageDialog_check, "RootDialog");
+                        return;
+                    }
+                }
+
+                db.Update_MyInfo(emp.Employee_id, emp.Phone, emp.Email, emp.Post_number, emp.Address, emp.Login_pw);
+                var MessageDialog = new MessageDialog
+                {
+                    Message = { Text = "개인정보 변경에 성공했습니다." }
+                };
+                DialogHost.Show(MessageDialog, "RootDialog");
+                tb_myinfo_usePw.Text = "";
+                tb_myinfo_newPw.Text = "";
+                tb_myinfo_NewPw_Check.Text = "";
+
+            }
         }
     }
 }

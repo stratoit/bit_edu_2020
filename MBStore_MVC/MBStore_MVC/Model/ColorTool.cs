@@ -111,7 +111,7 @@ namespace MBStore_MVC.Model
             }
         }
 
-        private void ChangeScheme(ColorScheme scheme)
+        public void ChangeScheme(ColorScheme scheme)
         {
             ActiveScheme = scheme;
             if (ActiveScheme == ColorScheme.Primary)
