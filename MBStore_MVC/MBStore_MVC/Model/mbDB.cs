@@ -14,6 +14,8 @@ namespace MBStore_MVC.Model
     class mbDB
     {
         SqlConnection conn = null;
+        Sha256 sha256 = new Sha256();
+
         public void Connect()
         {
             conn = new SqlConnection();
@@ -1959,7 +1961,7 @@ namespace MBStore_MVC.Model
         {
             using (conn = new SqlConnection())
             {
-                string set_pw = "1234";
+                string set_pw = sha256.ComputeSha256Hash(login_id + "1234");
                 string sql = "update employee set login_pw=@login_pw where login_id=@login_id";
                 conn.ConnectionString =
                     ConfigurationManager.ConnectionStrings["UserDB"].ToString();
@@ -2299,6 +2301,7 @@ namespace MBStore_MVC.Model
                 SqlParameter param_address = new SqlParameter("@address", address);
                 cmd.Parameters.Add(param_address);
 
+                password = sha256.ComputeSha256Hash(emp_id + password);
                 SqlParameter param_login_pw = new SqlParameter("@login_pw", password);
                 cmd.Parameters.Add(param_login_pw);
 

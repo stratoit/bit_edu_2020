@@ -26,7 +26,7 @@ namespace MBStore_MVC
     {
         string path = @"autoloing.txt";
         Employee emp = new Employee();
-
+        Sha256 sha256 = new Sha256();
         public Login()
         {
             InitializeComponent();
@@ -78,7 +78,7 @@ namespace MBStore_MVC
                     if (cb_auto.IsChecked == true)
                     {
                         string value;
-                        value = tb_id.Text + "#" + tb_pw.Password;
+                        value = tb_id.Text + "#" + sha256.ComputeSha256Hash(tb_id.Text + tb_pw.Password);
                         File.WriteAllText(path, value, Encoding.Default);
                     }
                     MainWindow main = new MainWindow(emp);
@@ -97,7 +97,7 @@ namespace MBStore_MVC
         #endregion
         private void btn_Login_Click(object sender, RoutedEventArgs e)
         {
-            func_login(tb_id.Text, tb_pw.Password);
+            func_login(tb_id.Text, sha256.ComputeSha256Hash(tb_id.Text + tb_pw.Password));
         }
 
         private void btn_signup_Click(object sender, RoutedEventArgs e)

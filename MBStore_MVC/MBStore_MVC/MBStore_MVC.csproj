@@ -102,6 +102,7 @@
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Return_Info.cs" />
     <Compile Include="Model\Sell_Info.cs" />
+    <Compile Include="Model\Sha256.cs" />
     <Compile Include="Model\Sign_up.cs" />
     <Compile Include="Model\SnackMessageQueue.cs" />
     <Compile Include="Model\webError.cs" />
@@ -116,6 +117,12 @@
     </Compile>
     <Compile Include="UI_ColorTool.xaml.cs">
       <DependentUpon>UI_ColorTool.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI_FullText.xaml.cs">
+      <DependentUpon>UI_FullText.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI_Notice.xaml.cs">
+      <DependentUpon>UI_Notice.xaml</DependentUpon>
     </Compile>
     <Page Include="Emp_Sign_up.xaml">
       <SubType>Designer</SubType>
@@ -169,6 +176,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI_ColorTool.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI_FullText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI_Notice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

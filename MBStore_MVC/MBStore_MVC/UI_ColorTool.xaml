@@ -9,6 +9,11 @@
              xmlns:model="clr-namespace:MBStore_MVC.Model"
              xmlns:materialDesignColors="clr-namespace:MaterialDesignColors;assembly=MaterialDesignColors"
              mc:Ignorable="d"
+             Background="{DynamicResource MaterialDesignPaper}"
+             TextElement.FontWeight="Medium"
+             Margin="-3"
+        TextElement.FontSize="13"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              d:DataContext="{d:DesignInstance Type=model:ColorTool, IsDesignTimeCreatable = True}"
              d:DesignHeight="600" d:DesignWidth="600">
     <UserControl.Resources>
@@ -113,10 +118,10 @@
             <TextBlock VerticalAlignment="Center">Dark</TextBlock>
         </StackPanel>
         <Button Click="btn_SaveColor_Click" x:Name="btn_SaveColor" DockPanel.Dock="Top" HorizontalAlignment="Right" Content="테마 저장"/>
-        <DockPanel>
+        <DockPanel >
             <!-- Selection controls -->
             <Border DockPanel.Dock="Bottom">
-                <Grid>
+                <Grid >
                     <Grid.Resources>
                         <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}" x:Key="PaletteButton">
                             <Setter Property="BorderBrush" Value="Transparent" />
@@ -298,7 +303,7 @@
                                         </Style.Triggers>
                                     </Style>
                                 </Button.Style>
-                                <Grid>
+                                <Grid >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
@@ -405,12 +410,12 @@
             </Border>
 
             <!-- Color picker section -->
-            <DockPanel Margin="16">
+            <DockPanel Margin="16" >
                 <UniformGrid Columns="1" DockPanel.Dock="Right">
-                    <RadioButton x:Name="MdPaletteButton" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="True" Content="MD 팔레트" Foreground="Black"/>
+                    <RadioButton x:Name="MdPaletteButton" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="True" Content="MD 팔레트"/>
                     <RadioButton x:Name="CustomPaletteButton" Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" IsChecked="False" Content="사용자 지정"/>
                 </UniformGrid>
-                <Grid DockPanel.Dock="Left">
+                <Grid DockPanel.Dock="Left" >
                     <Grid Visibility="{Binding IsChecked, ElementName=CustomPaletteButton, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="160" />

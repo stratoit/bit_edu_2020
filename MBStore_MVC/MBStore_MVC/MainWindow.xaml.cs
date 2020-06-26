@@ -2631,6 +2631,15 @@ namespace MBStore_MVC
 
             }
         }
+
+        private void Schedule_DialogHost_OnDialogClosing(object sender, DialogClosingEventArgs eventArgs)
+        {
+
+            if (!Equals(eventArgs.Parameter, true)) return;
+
+            if (!string.IsNullOrWhiteSpace(ScheduleTextBox.Text))
+                ScheduleListBox.Items.Add(ScheduleTextBox.Text.Trim());
+        }
     }
 }
 

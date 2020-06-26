@@ -157,8 +157,8 @@ namespace MBStore_MVC
                     gender = "여성";
                 }
 
-
-                string pw = pb_checkPW.Password;
+                Sha256 sha256 = new Sha256();
+                string pw = sha256.ComputeSha256Hash(checked_id + pb_checkPW.Password);
                 string social = tb_inputSocial_1.Text + "-" + tb_inputSocial_2.Password;
                 string phone = cb_phone.Text + tb_inputPhone_1.Text + tb_inputPhone_2.Text;
                 string address = tb_inputAddress_2.Text;
