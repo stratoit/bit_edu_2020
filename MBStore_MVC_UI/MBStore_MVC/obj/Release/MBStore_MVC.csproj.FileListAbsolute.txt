@@ -1,0 +1,102 @@
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Release\MBStore_MVC.exe.config
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Release\MBStore_MVC.exe
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Release\MBStore_MVC.pdb
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Release\LiveCharts.dll
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Release\LiveCharts.Wpf.dll
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Release\MaterialDesignColors.dll
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Release\MaterialDesignThemes.Wpf.dll
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Release\LiveCharts.pdb
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Release\LiveCharts.xml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Release\LiveCharts.Wpf.pdb
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Release\LiveCharts.Wpf.xml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Release\MaterialDesignColors.pdb
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Release\MaterialDesignThemes.Wpf.pdb
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\bin\Release\MaterialDesignThemes.Wpf.xml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\MBStore_MVC.csprojAssemblyReference.cache
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\Emp_Sign_up.g.cs
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\FindAddress.g.cs
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\InputCustomer.g.cs
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\Login.g.cs
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\MainWindow.g.cs
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\MessageDialog.g.cs
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\Notice.g.cs
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\ShoppingBasket.g.cs
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\SignUp.g.cs
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\StockReturn.g.cs
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\App.g.cs
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\GeneratedInternalTypeHelper.g.cs
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\MBStore_MVC_MarkupCompile.cache
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\MBStore_MVC_MarkupCompile.lref
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\App.baml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\Emp_Sign_up.baml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\FindAddress.baml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\InputCustomer.baml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\Login.baml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\MainWindow.baml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\MessageDialog.baml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\Notice.baml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\ShoppingBasket.baml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\SignUp.baml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\StockReturn.baml
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\MBStore_MVC.g.resources
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\MBStore_MVC.Properties.Resources.resources
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\MBStore_MVC.csproj.GenerateResource.cache
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\MBStore_MVC.csproj.CoreCompileInputs.cache
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\MBStore_MVC.csproj.CopyComplete
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\MBStore_MVC.exe
+C:\Users\cs950\OneDrive\바탕 화면\프로젝트\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Release\MBStore_MVC.pdb
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\bin\Release\MBStore_MVC.exe.config
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\bin\Release\MBStore_MVC.exe
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\bin\Release\MBStore_MVC.pdb
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\bin\Release\LiveCharts.dll
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\bin\Release\LiveCharts.Wpf.dll
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\bin\Release\MaterialDesignColors.dll
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\bin\Release\MaterialDesignThemes.Wpf.dll
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\bin\Release\LiveCharts.pdb
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\bin\Release\LiveCharts.xml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\bin\Release\LiveCharts.Wpf.pdb
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\bin\Release\LiveCharts.Wpf.xml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\bin\Release\MaterialDesignColors.pdb
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\bin\Release\MaterialDesignThemes.Wpf.pdb
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\bin\Release\MaterialDesignThemes.Wpf.xml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\Emp_Sign_up.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\FindAddress.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\InputCustomer.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\Login.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\MainWindow.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\MessageDialog.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\Notice.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\ShoppingBasket.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\SignUp.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\StockReturn.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\UI_ColorTool.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\UI_FullText.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\UI_FullText2.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\UI_Notice.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\App.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\GeneratedInternalTypeHelper.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\MBStore_MVC_MarkupCompile.cache
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\MBStore_MVC_MarkupCompile.lref
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\App.baml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\Emp_Sign_up.baml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\FindAddress.baml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\InputCustomer.baml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\Login.baml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\MainWindow.baml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\MessageDialog.baml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\Notice.baml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\ShoppingBasket.baml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\SignUp.baml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\StockReturn.baml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\UI_ColorTool.baml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\UI_FullText.baml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\UI_FullText2.baml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\UI_Notice.baml
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\MBStore_MVC.g.resources
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\MBStore_MVC.Properties.Resources.resources
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\MBStore_MVC.csproj.GenerateResource.cache
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\MBStore_MVC.csproj.CoreCompileInputs.cache
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\MBStore_MVC.csproj.CopyComplete
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\MBStore_MVC.exe
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\MBStore_MVC.pdb
+\\192.168.1.14\shared_sim\MBStore_MVC_UI\MBStore_MVC\obj\Release\MBStore_MVC.csprojAssemblyReference.cache

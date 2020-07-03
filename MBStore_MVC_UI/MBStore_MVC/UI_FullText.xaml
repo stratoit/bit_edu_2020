@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="MBStore_MVC.UI_FullText"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:MBStore_MVC"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid Margin="10 0 10 0">
+        <GroupBox  VerticalAlignment="Stretch"
+                   Style="{DynamicResource MaterialDesignCardGroupBox}"
+                                  VerticalContentAlignment="Stretch">
+            <GroupBox.Header>
+                <Grid Height="30">
+                    <Button HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="{x:Null}"
+                    Width="50" Height="50" Style="{DynamicResource MaterialDesignFlatAccentButton}"
+                    Command="{x:Static materialDesign:Transitioner.MovePreviousCommand}">
+                        <materialDesign:PackIcon   Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" 
+                                           HorizontalAlignment="Center" Kind="ArrowLeft" Height="22" Width="40"  />
+                    </Button>
+                    <TextBlock HorizontalAlignment="Center"
+                               FontWeight="Bold"
+                       Foreground="{DynamicResource SecondaryAccentForegroundBrush}"
+                       VerticalAlignment="Center"
+                       FontSize="24">이달의 우수사원</TextBlock>
+                </Grid>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="230"></RowDefinition>
+                    <RowDefinition Height="45"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="0.15*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="" x:Name="tb_date" Grid.Row="0" Foreground="{DynamicResource MaterialDesignBody}"  />
+                <TextBlock Text="" x:Name="tb_name" Grid.Row="0" HorizontalAlignment="Right" Foreground="{DynamicResource MaterialDesignBody}"  />
+
+
+                <Image Source="http://20.41.81.89/notice/장마철.jpg" 
+                    Grid.Row="1"
+              x:Name="img_emp_image"
+              Height="auto" MaxHeight="230"
+            VerticalAlignment="Center"
+              Width="auto" MaxWidth="300" Stretch="Fill" />
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" Grid.Row="2" FontWeight="Bold" VerticalAlignment="Center"
+                         x:Name="tb_title" HorizontalAlignment="Center" FontSize="19" Height="auto" Margin="0 1 0 0" IsReadOnly="True"
+                         Foreground="{DynamicResource MaterialDesignBody}" Text=""/>
+                <TextBox Grid.Row="3" VerticalScrollBarVisibility="Auto" FontSize="17" FontWeight="Black" Margin="0 1 0 0"
+                     Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                     Foreground="{DynamicResource MaterialDesignBody}" Text=""
+                     AcceptsReturn="True" AcceptsTab="True" TextWrapping="WrapWithOverflow" IsReadOnly="True"
+             x:Name="tb_text"/>
+                <StackPanel  Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="btn_editMode" FontSize="13" Margin="2,0,2,0" Content="편집 모드" VerticalAlignment="Bottom" Click="btn_editMode_Click"/>
+                    <Button x:Name="btn_update" FontSize="13" Margin="2,0,2,0" Content="적용" VerticalAlignment="Bottom" Click="btn_update_Click"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>
