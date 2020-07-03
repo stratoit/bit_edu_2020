@@ -28,6 +28,7 @@ namespace MBStore_MVP.Presenter
 
     interface ILogin
     {
+        string ComputeSha256Hash(string str);
         Employee SelectEmpId(string id);
     }
 
@@ -44,8 +45,9 @@ namespace MBStore_MVP.Presenter
 
     interface ISignUp
     {
+        string ComputeSha256Hash(string str);
         bool Check_empID(string id);
-        bool Insert_SignUp(string name, string id, string pw, string gender, string social_number, string phone, string address, string email, DateTime sign_date);
+        bool Insert_SignUp(string name, string id, string pw, string gender, string social_number, string phone, string post, string address, string email, DateTime sign_date);
     }
 
     interface IStockReturn

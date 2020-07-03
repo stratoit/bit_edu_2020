@@ -35,14 +35,11 @@ namespace MBStore_MVP.View
             this.product = product;
             this.mainWindow = mainWindow;
 
-            string replace_uri = uri.Replace("ftp","http");
-            replace_uri = replace_uri.Remove(replace_uri.Length - 3, 3);
-
-            img_sb_phone_f.Source = presenter.GetPhoneImage(replace_uri + "/phone/", product.Name.Replace("+", "plus"), product.Color, "_F.JPG", UriKind.Absolute);
-            img_sb_phone_b.Source = presenter.GetPhoneImage(replace_uri + "/phone/", product.Name.Replace("+", "plus"), product.Color, "_B.JPG", UriKind.Absolute);
+            img_sb_phone_f.Source = presenter.GetPhoneImage(uri + "/phone/", product.Name.Replace("+", "plus"), product.Color, "_F.JPG", UriKind.Absolute);
+            img_sb_phone_b.Source = presenter.GetPhoneImage(uri + "/phone/", product.Name.Replace("+", "plus"), product.Color, "_B.JPG", UriKind.Absolute);
             lb_sb_name.Content = product.Name;
             lb_sb_color.Content = "(" + product.Color + ")";
-            img_sb_brand.Source = presenter.GetBrandImage("http://20.41.81.89/brand/", product.Brand, ".png", UriKind.Absolute);
+            img_sb_brand.Source = presenter.GetBrandImage(uri + "/brand/", product.Brand, ".png", UriKind.Absolute);
             lb_sb_manufacture.Content = ((DateTime)product.Manufacture).ToString("yyyy. MM");
             lb_sb_inch.Content = product.Inch + " inch";
             lb_sb_ram.Content = product.Ram + " GB";

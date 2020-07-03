@@ -1,0 +1,43 @@
+﻿<Window x:Class="MBStore_MVVM.Login"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MBStore_MVVM.Model"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        mc:Ignorable="d"
+        WindowStyle ="None"
+        Height="600" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Background="#FF0051F0">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="PreviewMouseDown">
+                <i:InvokeCommandAction Command="{Binding Login_MouseLeftDownCommand}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="1*"></RowDefinition>
+            <RowDefinition Height="0.8*"></RowDefinition>
+            <RowDefinition Height="0.8*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" >
+            <TextBlock Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontStyle="Italic" FontSize="50" FontWeight="Bold" Text="PROTEC" />
+            <Button Command="{Binding Btn_closeCommand}" Margin="371,0,0,144" Background="#FF0051F0" Foreground="White" FontWeight="Bold"  Content="X" BorderBrush="{x:Null}" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <TextBlock  Foreground="White" FontSize="20" Margin="44,21,46,3">Name</TextBlock>
+            <TextBox Text="{Binding Tb_login_idContent}" FontSize="22" Height="50" Width="300" Margin="50,59,50,24"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <TextBlock Foreground="White" FontSize="20" Margin="44,0,46,0">Password</TextBlock>
+            <TextBox Text="{Binding Tb_login_passwordContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="22" Height="50" Width="300" Margin="50,37,50,46" />
+            <CheckBox IsChecked="{Binding Cb_autoContent}" HorizontalAlignment="Left" Margin="50,99,0,9" />
+            <TextBlock Foreground="White" FontSize="16" Margin="70,95,248,0">Auto Login</TextBlock>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Button Command="{Binding Btn_loginCommand}" FontSize="24" FontWeight="Bold" Foreground="White" Content="Login" BorderBrush="{x:Null}" Background="{x:Null}" Margin="216,9,88,122" />
+            <Button Command="{Binding Btn_signupCommand}" FontSize="23" FontWeight="Bold" Foreground="White" Content="Sign Up" BorderBrush="{x:Null}" Background="{x:Null}" Margin="88,9,205,122" />
+            <Button Command="{Binding Btn_findidCommand}" FontSize="11" FontWeight="Bold" Foreground="White" Margin="134,64,129,77" Content="forgot your password?" BorderBrush="{x:Null}" Background="{x:Null}"/>
+        </Grid>
+    </Grid>
+</Window>

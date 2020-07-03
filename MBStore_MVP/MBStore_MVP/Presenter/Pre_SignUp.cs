@@ -12,6 +12,7 @@ namespace MBStore_MVP.Presenter
         #region Fileds
         private readonly ISignUp_view view;
         mbDB mbdb = new mbDB();
+        Sha256 sha256 = new Sha256();
         #endregion
 
         #region Constructor
@@ -23,13 +24,17 @@ namespace MBStore_MVP.Presenter
         #endregion
 
         #region Create IPresenter method
+        public string ComputeSha256Hash(string str)
+        {
+            return sha256.ComputeSha256Hash(str);
+        }
         bool ISignUp.Check_empID(string id)
         {
             return mbdb.Check_empID(id);
         }
-        bool ISignUp.Insert_SignUp(string name, string id, string pw, string gender, string social_number, string phone, string address, string email, DateTime sign_date)
+        bool ISignUp.Insert_SignUp(string name, string id, string pw, string gender, string social_number, string phone, string post, string address, string email, DateTime sign_date)
         {
-            return mbdb.Insert_SignUp(name, id, pw, gender, social_number, phone, address, email, sign_date);
+            return mbdb.Insert_SignUp(name, id, pw, gender, social_number, phone, post, address, email, sign_date);
         }
         #endregion
     }

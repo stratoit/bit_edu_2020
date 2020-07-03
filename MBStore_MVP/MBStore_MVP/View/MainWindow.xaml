@@ -1822,10 +1822,10 @@
                                             <ImageBrush Stretch="Fill" x:Name="img_su_emp" AlignmentY="Top" AlignmentX="Center"/>
                                         </Border.Background>
                                     </Border>
-                                    <Button Grid.Row="7" Grid.ColumnSpan="2" Click="btn_su_upload_img_Click" Height="30" MaxHeight="30" Width="95" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="74,0">사진 변경</Button>
+                                    <Button Grid.Row="7" Grid.ColumnSpan="2" x:Name="btn_su_emp_img" Click="btn_su_upload_img_Click" Height="30" MaxHeight="30" Width="95" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="74,0" IsEnabled="False">사진 변경</Button>
                                     <TextBox x:Name="tb_su_emp_img" Visibility="Hidden"></TextBox>
                                     <Label Margin="10,10,10,11" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Right">아이디</Label>
-                                    <TextBox x:Name="tb_su_em_login_id" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Margin="10" MaxHeight="30" MinWidth="100"></TextBox>
+                                    <TextBox x:Name="tb_su_em_login_id" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Margin="10" MaxHeight="30" MinWidth="100" IsReadOnly="True"></TextBox>
                                     <TextBlock x:Name="tb_su_em_login_id_check" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="5" FontWeight="Bold" Margin="0,16,0,15"/>
 
                                     <Label Margin="10,11,10,10" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Right">비밀번호</Label>
@@ -1833,7 +1833,7 @@
 
 
                                     <Label Margin="10,10,10,11" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Right">직무</Label>
-                                    <ComboBox x:Name="cb_su_em_rank"  Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Margin="10">
+                                    <ComboBox x:Name="cb_su_em_rank"  Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Margin="10" IsEnabled="False">
                                         <ComboBoxItem>관리자</ComboBoxItem>
                                         <ComboBoxItem>지원팀</ComboBoxItem>
                                         <ComboBoxItem>판매팀</ComboBoxItem>
@@ -1847,52 +1847,52 @@
 
                                     <Label Margin="10,11,10,10" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Right">이름</Label>
                                     <StackPanel Grid.Row="5" Grid.Column="3" Orientation="Horizontal">
-                                        <TextBox x:Name="tb_su_em_name"  TextChanged="su_em_valid_name_check" Margin="10" MaxHeight="50" MinWidth="80" ></TextBox>
+                                        <TextBox x:Name="tb_su_em_name"  TextChanged="su_em_valid_name_check" Margin="10" MaxHeight="50" MinWidth="80" IsReadOnly="True"></TextBox>
                                         <TextBlock x:Name="tb_su_name_check"  VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold"/>
                                     </StackPanel>
                                     <StackPanel Grid.Row="5" Grid.Column="4"  Grid.ColumnSpan="2" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,1,0,0">
                                         <Label Margin="10" Grid.Row="4" Grid.Column="4" VerticalAlignment="Center" HorizontalContentAlignment="Left">성별</Label>
-                                        <RadioButton x:Name="rb_su_em_gender1" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender">남자</RadioButton>
-                                        <RadioButton x:Name="rb_su_em_gender2" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender">여자</RadioButton>
+                                        <RadioButton x:Name="rb_su_em_gender1" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender" IsEnabled="False">남성</RadioButton>
+                                        <RadioButton x:Name="rb_su_em_gender2" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender" IsEnabled="False">여성</RadioButton>
                                         <TextBlock x:Name="tb_su_gender_check" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold"/>
                                     </StackPanel>
                                     <Label Margin="10,10,10,11" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Right">주민등록번호</Label>
                                     <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="3" Grid.ColumnSpan="2">
-                                        <TextBox x:Name="tb_su_em_social_n1"  MaxHeight="30" MinWidth="80" Margin="10" TextChanged="su_em_social1_textChange_event"/>
+                                        <TextBox x:Name="tb_su_em_social_n1"  MaxHeight="30" MinWidth="80" Margin="10" TextChanged="su_em_social1_textChange_event" IsReadOnly="True"/>
                                         <Label VerticalAlignment="Center">-</Label>
-                                        <TextBox x:Name="tb_su_em_social_n2"   MaxHeight="30" MinWidth="80" Margin="10" TextChanged="su_em_social1_textChange_event"/>
+                                        <TextBox x:Name="tb_su_em_social_n2"   MaxHeight="30" MinWidth="80" Margin="10" TextChanged="su_em_social1_textChange_event" IsReadOnly="True"/>
                                         <TextBlock x:Name="tb_su_em_social_check" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold"/>
                                     </StackPanel>
                                     <Label Margin="10,11,10,10" Grid.Row="7" Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Right">휴대폰</Label>
                                     <StackPanel Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal">
-                                        <TextBox x:Name="tb_su_em_phone1" TextChanged="su_em_valid_phone_check" Margin="3" MaxHeight="30" MinWidth="50"></TextBox>
+                                        <TextBox x:Name="tb_su_em_phone1" TextChanged="su_em_valid_phone_check" Margin="3" MaxHeight="30" MinWidth="50" IsReadOnly="True"></TextBox>
                                         <Label Content="-" VerticalAlignment="Center"/>
-                                        <TextBox x:Name="tb_su_em_phone2" TextChanged="su_em_valid_phone_check"  Margin="3" MaxHeight="30" MinWidth="60"></TextBox>
+                                        <TextBox x:Name="tb_su_em_phone2" TextChanged="su_em_valid_phone_check"  Margin="3" MaxHeight="30" MinWidth="60" IsReadOnly="True"></TextBox>
                                         <Label Content="-" VerticalAlignment="Center"/>
-                                        <TextBox x:Name="tb_su_em_phone3" TextChanged="su_em_valid_phone_check"  Margin="3" MaxHeight="30" MinWidth="60"></TextBox>
+                                        <TextBox x:Name="tb_su_em_phone3" TextChanged="su_em_valid_phone_check"  Margin="3" MaxHeight="30" MinWidth="60" IsReadOnly="True"></TextBox>
                                         <TextBlock x:Name="tb_su_phone_check" VerticalAlignment="Center" HorizontalAlignment="Right" Width="10" FontWeight="Bold"/>
                                     </StackPanel>
 
                                     <Label Margin="10,10,10,11" Grid.Row="8" Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Right">이메일</Label>
                                     <StackPanel Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal">
-                                        <TextBox x:Name="tb_su_em_email" TextChanged="su_em_valid_email_check" Margin="10" MaxHeight="30" MinWidth="195"></TextBox>
+                                        <TextBox x:Name="tb_su_em_email" TextChanged="su_em_valid_email_check" Margin="10" MaxHeight="30" MinWidth="195" IsReadOnly="True"></TextBox>
                                         <TextBlock x:Name="tb_su_email_check" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold"/>
                                     </StackPanel>
                                     <Label Margin="10,11,10,10" Grid.Row="9" Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Right">주소</Label>
                                     <StackPanel Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal">
-                                        <TextBox x:Name="tb_su_em_adress" TextChanged="su_em_valid_address_check" Margin="10" MaxHeight="30" MinWidth="195"></TextBox>
+                                        <TextBox x:Name="tb_su_em_adress" TextChanged="su_em_valid_address_check" Margin="10" MaxHeight="30" MinWidth="195" IsReadOnly="True"></TextBox>
                                         <TextBlock x:Name="tb_su_adress_check" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold"/>
                                     </StackPanel>
 
                                     <Label Margin="10,10,10,11" Grid.Row="8" VerticalAlignment="Center" HorizontalContentAlignment="Right" >입사일</Label>
                                     <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal">
-                                        <TextBox x:Name="tb_su_em_start" Margin="10" MaxHeight="30" MinWidth="80"></TextBox>
+                                        <TextBox x:Name="tb_su_em_start" Margin="10" MaxHeight="30" MinWidth="80" IsReadOnly="True"></TextBox>
                                         <TextBlock x:Name="tb_su_start_check" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold"/>
                                     </StackPanel>
 
                                     <Label Margin="10,11,10,10" Grid.Row="9" VerticalAlignment="Center" HorizontalContentAlignment="Right">퇴사일</Label>
                                     <StackPanel Grid.Row="9" Grid.Column="1" Orientation="Horizontal">
-                                        <TextBox x:Name="tb_su_em_end" Grid.Row="8" Grid.Column="1" Margin="10" MaxHeight="30" MinWidth="80"></TextBox>
+                                        <TextBox x:Name="tb_su_em_end" Grid.Row="8" Grid.Column="1" Margin="10" MaxHeight="30" MinWidth="80" IsReadOnly="True"></TextBox>
                                         <TextBlock x:Name="tb_su_end_check" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold"/>
                                     </StackPanel>
 

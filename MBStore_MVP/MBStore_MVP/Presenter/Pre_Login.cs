@@ -12,6 +12,7 @@ namespace MBStore_MVP.Presenter
         #region Fileds
         private readonly ILogin_view view;
         mbDB mbdb = new mbDB();
+        Sha256 sha256 = new Sha256();
         #endregion
 
         #region Constructor
@@ -22,6 +23,12 @@ namespace MBStore_MVP.Presenter
         #endregion
 
         #region Create IPresenter method
+
+        public string ComputeSha256Hash(string str)
+        {
+            return sha256.ComputeSha256Hash(str);
+        }
+
         public Employee SelectEmpId(string id)
         {
             return mbdb.SelectEmpId(id);

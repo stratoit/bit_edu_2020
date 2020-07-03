@@ -52,6 +52,8 @@ namespace MBStore_MVP
         private TempDelegate tempDelegate;
         private Timer _timer = null;
         private string uri;
+        private string ftp_uri;
+        private string http_uri;
 
         Employee emp;
 
@@ -76,10 +78,12 @@ namespace MBStore_MVP
             this.Show();
             InitializeComponent();
             presenter = new Pre_MainWindow(this);
-            uri = "ftp://20.41.81.89:21";
+            uri = "//20.41.81.89";
+            http_uri = "http:" + uri;
+            ftp_uri = "ftp:" + uri + ":21";
             emp = employee;
             tb_main.Text = "환영합니다 " + emp.Name + "[" + emp.Rank + "] 님.";
-            Print_Notice("전체공지");
+            Print_Notice("공지사항");
             InitTimer();
             #region 통계자료 초기화
             PointLabel = chartPoint =>
@@ -432,7 +436,7 @@ namespace MBStore_MVP
             product = (Product)lv_se_product_info.SelectedItems[0];
 
             ShoppingBasket shoppingBasket_w = new ShoppingBasket();
-            shoppingBasket_w.SetProduct(product, this, uri);
+            shoppingBasket_w.SetProduct(product, this, http_uri);
             shoppingBasket_w.ShowDialog();
         }
         #endregion
@@ -714,9 +718,9 @@ namespace MBStore_MVP
                     try
                     {
                         if (rb_su_em_gender32.IsChecked == false && rb_su_em_gender42.IsChecked == true)
-                        { gen = "여자"; }
+                        { gen = "여성"; }
                         else if (rb_su_em_gender32.IsChecked == true && rb_su_em_gender42.IsChecked == false)
-                        { gen = "남자"; }
+                        { gen = "남성"; }
 
                         if (tb_su_cus_search_saving2.Text == "")
                         {
@@ -738,9 +742,9 @@ namespace MBStore_MVP
                     try
                     {
                         if (rb_su_em_gender32.IsChecked == false && rb_su_em_gender42.IsChecked == true)
-                        { gen = "여자"; }
+                        { gen = "여성"; }
                         else if (rb_su_em_gender32.IsChecked == true && rb_su_em_gender42.IsChecked == false)
-                        { gen = "남자"; }
+                        { gen = "남성"; }
 
                         presenter.Update_Cus_Info(int.Parse(tb_se_cus_search_cus_id.Text), tb_se_cus_search_name.Text, gen, dtp_su_cus_search_birth2.SelectedDate
                             , tb_su_cus_search_phone2.Text, long.Parse(tb_su_cus_search_saving2.Text));
@@ -1152,6 +1156,7 @@ namespace MBStore_MVP
                             lv_lo_input_addList.Items.RemoveAt(i);
                             lv_lo_input_addList.Items.Refresh();
                             check = false;
+                            break;
                         }
                     }
                     catch (Exception ex)
@@ -1202,6 +1207,7 @@ namespace MBStore_MVP
                                 lv_lo_input_addList.Items.RemoveAt(i);
                                 lv_lo_input_addList.Items.Refresh();
                                 check = false;
+                                break;
                             }
                         }
                         catch (Exception ex)
@@ -1299,15 +1305,16 @@ namespace MBStore_MVP
                             }
                             else check[i] = false;
                         }
-                        presenter.input_transaction(inputdata, check, newstock);
+
                         for (int i = 0; i < inputdata.Count; i++)
                         {
                             if (check[i] == false)
                             {
                                 string product_name = presenter.Select_productname_id(inputdata[i].Product_id);
-                                presenter.FtpUploadFile(inputdata[i].Image_dir, uri + "/phone/" + product_name + "_" + inputdata[i].Color + "_F.JPG");
+                                presenter.FtpUploadFile(inputdata[i].Image_dir, ftp_uri + "/phone/" + product_name + "_" + inputdata[i].Color + "_F.JPG");
                             }
                         }
+                        presenter.input_transaction(inputdata, check, newstock);
 
                         MessageBox.Show("등록완료");
 
@@ -1428,6 +1435,7 @@ namespace MBStore_MVP
         #endregion
 
         #endregion
+
 
         #region 지원팀
 
@@ -1550,6 +1558,18 @@ namespace MBStore_MVP
             img_su_emp.ImageSource = null;
             tb_su_emp_img.Clear();
             cb_su_em_rank.Text = null;
+            img_su_emp.ImageSource = null;
+            tb_su_emp_img.Text = null;
+
+            cb_su_em_rank.IsEnabled = false;
+            tb_su_em_name.IsReadOnly = true;
+            tb_su_em_phone1.IsReadOnly = true;
+            tb_su_em_phone2.IsReadOnly = true;
+            tb_su_em_phone3.IsReadOnly = true;
+            tb_su_em_email.IsReadOnly = true;
+            tb_su_em_adress.IsReadOnly = true;
+            tb_su_em_end.IsReadOnly = true;
+            btn_su_emp_img.IsEnabled = false;
             X_or_V();
         }
 
@@ -1773,7 +1793,7 @@ namespace MBStore_MVP
                     su_em_Reset_text();
                     tb_su_em_login_id.Text = employee.Login_id;
                     tb_su_em_name.Text = employee.Name;
-                    if (employee.Gender == "남자")
+                    if (employee.Gender == "남성")
                     {
                         rb_su_em_gender1.IsChecked = true;
                         rb_su_em_gender2.IsChecked = false;
@@ -1823,7 +1843,17 @@ namespace MBStore_MVP
                     X_or_V();
                     tb_su_em_login_id.IsEnabled = false;
                     tb_su_em_start.IsEnabled = false;
-                    img_su_emp.ImageSource = new BitmapImage(new Uri(@"http://20.41.81.89/employee/" + employee.Login_id + "_" + employee.Rank + "_" + employee.Name + ".JPG", UriKind.Absolute));
+                    img_su_emp.ImageSource = new BitmapImage(new Uri(http_uri+"/employee/" + employee.Login_id + "_" + employee.Rank + "_" + employee.Name + ".JPG", UriKind.Absolute));
+
+                    cb_su_em_rank.IsEnabled = true;
+                    tb_su_em_name.IsReadOnly = false;
+                    tb_su_em_phone1.IsReadOnly = false;
+                    tb_su_em_phone2.IsReadOnly = false;
+                    tb_su_em_phone3.IsReadOnly = false;
+                    tb_su_em_email.IsReadOnly = false;
+                    tb_su_em_adress.IsReadOnly = false;
+                    tb_su_em_end.IsReadOnly = false;
+                    btn_su_emp_img.IsEnabled = true;
                 }
                 catch
                 {
@@ -1835,8 +1865,6 @@ namespace MBStore_MVP
         private void Btn_su_text_reset(object sender, RoutedEventArgs e)// 지원 -> 직원관리 -> 리셋버튼
         {
             su_em_Reset_text();
-            img_su_emp.ImageSource = null;
-            tb_su_emp_img.Text = null;
         }
 
         private void Btn_su_employee_change(object sender, RoutedEventArgs e) // 직원 -> 직원관리 -> 조회버튼
@@ -1858,7 +1886,7 @@ namespace MBStore_MVP
                     presenter.Update_Emp_Info(tb_su_em_login_id.Text, cb_su_em_rank.Text, tb_su_em_name.Text,
                     rb_gender_check, social_1and2, phone, tb_su_em_email.Text, tb_su_em_adress.Text, end_d);
                     if (tb_su_emp_img.Text != "")
-                        presenter.FtpUploadFile(tb_su_emp_img.Text, uri + "/employee/" + tb_su_em_login_id.Text + "_" + cb_su_em_rank.Text + "_" + tb_su_em_name.Text + ".JPG");
+                        presenter.FtpUploadFile(tb_su_emp_img.Text, ftp_uri + "/employee/" + tb_su_em_login_id.Text + "_" + cb_su_em_rank.Text + "_" + tb_su_em_name.Text + ".JPG");
                     MessageBox.Show("완료");
                 }
                 else
@@ -1948,9 +1976,9 @@ namespace MBStore_MVP
                 try
                 {
                     if (rb_su_em_gender3.IsChecked == false && rb_su_em_gender4.IsChecked == true)
-                    { gen = "여자"; }
+                    { gen = "여성"; }
                     else if (rb_su_em_gender3.IsChecked == true && rb_su_em_gender4.IsChecked == false)
-                    { gen = "남자"; }
+                    { gen = "남성"; }
 
                     if (tb_su_cus_search_saving.Text == "")
                     {
@@ -1972,9 +2000,9 @@ namespace MBStore_MVP
                 try
                 {
                     if (rb_su_em_gender3.IsChecked == false && rb_su_em_gender4.IsChecked == true)
-                    { gen = "여자"; }
+                    { gen = "여성"; }
                     else if (rb_su_em_gender3.IsChecked == true && rb_su_em_gender4.IsChecked == false)
-                    { gen = "남자"; }
+                    { gen = "남성"; }
 
                     presenter.Update_Cus_Info(int.Parse(tb_su_cus_search_cus_id.Text), tb_su_cus_search_name.Text, gen, dtp_su_cus_search_birth.SelectedDate
                         , tb_su_cus_search_phone.Text, long.Parse(tb_su_cus_search_saving.Text));

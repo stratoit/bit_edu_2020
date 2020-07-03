@@ -159,13 +159,14 @@ namespace MBStore_MVP.View
                 }
 
 
-                string pw = pb_checkPW.Password;
+                string pw = presenter.ComputeSha256Hash(checked_id + pb_checkPW.Password);
                 string social = tb_inputSocial_1.Text + "-" + tb_inputSocial_2.Password;
                 string phone = cb_phone.Text + tb_inputPhone_1.Text + tb_inputPhone_2.Text;
-                string address = tb_inputAddress_1.Text + "#" + tb_inputAddress_2.Text;
+                string post = tb_inputAddress_1.Text;
+                string address = tb_inputAddress_2.Text;
                 string email = tb_inputEmail_1.Text + "@" + tb_inputEmail_2.Text;
                 string name = tb_inputName.Text;
-                if (presenter.Insert_SignUp(name, checked_id, pw, gender, social, phone, address, email, DateTime.Now))
+                if (presenter.Insert_SignUp(name, checked_id, pw, gender, social, phone, post, address, email, DateTime.Now))
                 {
                     MessageBox.Show("성공적으로 가입신청 되었습니다.");
                     checked_id = "";

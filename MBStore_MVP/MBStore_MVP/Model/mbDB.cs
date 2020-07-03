@@ -82,7 +82,7 @@ namespace MBStore_MVP.Model
 
             }
         }
-        public bool Insert_SignUp(string name, string id, string pw, string gender, string social_number, string phone, string address, string email, DateTime sign_date)
+        public bool Insert_SignUp(string name, string id, string pw, string gender, string social_number, string phone, string post, string address, string email, DateTime sign_date)
         {
 
             using (conn = new SqlConnection())
@@ -91,8 +91,8 @@ namespace MBStore_MVP.Model
                     ConfigurationManager.ConnectionStrings["UserDB"].ToString();
                 conn.Open();    //  데이터베이스 연결  
 
-                string sql = "insert into signup(name,login_id,login_pw,gender,social_number,phone,address,email,sign_date) " +
-                    "values(@name,@id,@pw,@gender,@social_number,@phone,@address,@email,@sign_date)";
+                string sql = "insert into signup(name,login_id,login_pw,gender,social_number,phone,post_number,address,email,sign_date) " +
+                    "values(@name,@id,@pw,@gender,@social_number,@phone,@post,@address,@email,@sign_date)";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
@@ -113,6 +113,9 @@ namespace MBStore_MVP.Model
 
                 SqlParameter param_phone = new SqlParameter("@phone", phone);
                 cmd.Parameters.Add(param_phone);
+
+                SqlParameter param_post = new SqlParameter("@post", post);
+                cmd.Parameters.Add(param_post);
 
                 SqlParameter param_address = new SqlParameter("@address", address);
                 cmd.Parameters.Add(param_address);
@@ -183,7 +186,7 @@ namespace MBStore_MVP.Model
                 conn.ConnectionString =
                     ConfigurationManager.ConnectionStrings["UserDB"].ToString();
                 conn.Open();    //  데이터베이스 연결           
-                string sql = "select n.notice_id, e.name, n.last_date, n.title, n.text, n.views " +
+                string sql = "select n.notice_id, e.name, n.last_date, n.title, n.text " +
                     "from employee e join notice n on n.employee_id = e.employee_id " +
                     "where n.category = @part order by n.notice_id desc";
 
@@ -204,8 +207,6 @@ namespace MBStore_MVP.Model
                         notice.Date = myDataReader.GetDateTime(2);
                         notice.Title = myDataReader.GetString(3);
                         notice.Text = myDataReader.GetString(4);
-                        notice.Views = myDataReader.GetInt32(5);
-
 
                         noticeList.Add(notice);
                     }
@@ -1948,11 +1949,12 @@ namespace MBStore_MVP.Model
         }
 
         //지원에서 직원관리 -> 비밀번호 리셋 버튼 구현
-        public bool Reset_PW_EMP(string login_id) //11
+        public bool Reset_PW_EMP(string login_id)
         {
             using (conn = new SqlConnection())
             {
-                string set_pw = "1234";
+                Sha256 sha256 = new Sha256();
+                string set_pw = sha256.ComputeSha256Hash(login_id + "1234");
                 string sql = "update employee set login_pw=@login_pw where login_id=@login_id";
                 conn.ConnectionString =
                     ConfigurationManager.ConnectionStrings["UserDB"].ToString();

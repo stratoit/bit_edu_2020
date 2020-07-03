@@ -68,12 +68,12 @@
     <Compile Include="Model\Chart_Sellproduct.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Employee.cs" />
-    <Compile Include="Model\FTPConnector.cs" />
     <Compile Include="Model\mbDB.cs" />
     <Compile Include="Model\Notices.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Return_Info.cs" />
     <Compile Include="Model\Sell_Info.cs" />
+    <Compile Include="Model\Sha256.cs" />
     <Compile Include="Model\Sign_up.cs" />
     <Compile Include="Presenter\IPresenter.cs" />
     <Compile Include="Presenter\IView.cs" />

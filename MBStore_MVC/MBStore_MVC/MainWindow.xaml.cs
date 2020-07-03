@@ -50,6 +50,8 @@ namespace MBStore_MVC
         private TempDelegate tempDelegate;
         private Timer _timer = null;
         private string uri;
+        private string ftp_uri;
+        private string http_uri;
 
         Employee emp;
 
@@ -90,10 +92,12 @@ namespace MBStore_MVC
         {
             this.Show();
             InitializeComponent();
-            uri = "ftp://20.41.81.89:21";
+            uri = "//20.41.81.89";
+            http_uri = "http:" + uri;
+            ftp_uri = "ftp:" + uri +":21";
             emp = employee;
             tb_main.Text = "환영합니다 " + emp.Name + "[" + emp.Rank + "] 님.";
-            Print_Notice("전체공지");
+            Print_Notice("공지사항");
             InitTimer();
             #region 통계자료 초기화
             PointLabel = chartPoint =>
@@ -469,7 +473,7 @@ namespace MBStore_MVC
             product = (Product)lv_se_product_info.SelectedItems[0];
 
             ShoppingBasket shoppingBasket_w = new ShoppingBasket();
-            shoppingBasket_w.SetProduct(product, this, uri);
+            shoppingBasket_w.SetProduct(product, this, http_uri);
             shoppingBasket_w.ShowDialog();
         }
         #endregion
@@ -751,9 +755,9 @@ namespace MBStore_MVC
                     try
                     {
                         if (rb_su_em_gender32.IsChecked == false && rb_su_em_gender42.IsChecked == true)
-                        { gen = "여자"; }
+                        { gen = "여성"; }
                         else if (rb_su_em_gender32.IsChecked == true && rb_su_em_gender42.IsChecked == false)
-                        { gen = "남자"; }
+                        { gen = "남성"; }
 
                         if (tb_su_cus_search_saving2.Text == "")
                         {
@@ -775,9 +779,9 @@ namespace MBStore_MVC
                     try
                     {
                         if (rb_su_em_gender32.IsChecked == false && rb_su_em_gender42.IsChecked == true)
-                        { gen = "여자"; }
+                        { gen = "여성"; }
                         else if (rb_su_em_gender32.IsChecked == true && rb_su_em_gender42.IsChecked == false)
-                        { gen = "남자"; }
+                        { gen = "남성"; }
 
                         db.Update_Cus_Info(int.Parse(tb_se_cus_search_cus_id.Text), tb_se_cus_search_name.Text, gen, dtp_su_cus_search_birth2.SelectedDate
                             , tb_su_cus_search_phone2.Text, long.Parse(tb_su_cus_search_saving2.Text));
@@ -1146,7 +1150,8 @@ namespace MBStore_MVC
             if (lv_lo_input_objectList.Items.Count == 0)
                 MessageBox.Show("데이터가 존재하지 않습니다");
         }
-        //입고 : 물품번호 목록 가져오기
+        //입고 : DropDownOpend, SelectionChanged
+        //물품번호
         private void cb_lo_input_productNumber_DropDownOpened(object sender, EventArgs e)
         {
             List<Int32> productdata;
@@ -1154,6 +1159,55 @@ namespace MBStore_MVC
             productdata = db.Get_Lo_Input_ProductNumList();
             cb_lo_input_productNumber.ItemsSource = productdata;
         }
+        private void cb_lo_productIdChanged(object sender, EventArgs e)
+        {
+            cb_lo_input_color.IsEditable = true;
+            cb_lo_input_color.Text = "";
+            tb_lo_input_rgb.Text = "";
+
+            ComboBox combo = sender as ComboBox;
+            string selected_id = combo.SelectedValue.ToString();
+
+            List<Product> productdata;
+            productdata = db.Get_Lo_Input_ProductColor(int.Parse(selected_id));
+
+            List<string> ColorList = new List<string>();
+            for (int i = 0; i < productdata.Count; i++)
+            {
+                ColorList.Add(productdata[i].Color);
+            }
+
+            cb_lo_input_color.ItemsSource = ColorList;
+
+            if (productdata.Count == 0)
+            {
+                tb_lo_input_rgb.IsReadOnly = false;
+            }
+            else
+            {
+                tb_lo_input_rgb.IsReadOnly = true;
+            }
+        }
+        
+        //물품색상
+        private void cb_lo_productColorChanged(object sender, EventArgs e)
+        {
+            tb_lo_input_rgb.IsReadOnly = false;
+
+            for (int i=0; i< cb_lo_input_color.Items.Count; i++)
+            {
+                if (cb_lo_input_color.Items[i].ToString() == cb_lo_input_color.Text)
+                {
+                    tb_lo_input_rgb.IsReadOnly = true;
+                    tb_lo_input_rgb.Text = "";
+                    break;
+                }
+            }
+        }
+
+            
+        //물품색상
+
         //입고 : 추가버튼
         private void btn_lo_input_listAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -1161,25 +1215,25 @@ namespace MBStore_MVC
             bool check = true;
             bool duple;
 
-            if (cb_lo_input_productNumber.SelectedIndex == -1 || tb_lo_input_color.Text == "")
+            if (cb_lo_input_productNumber.SelectedIndex == -1 || cb_lo_input_color.Text == "")
             {
                 MessageBox.Show("입력 오류");
             }
             //기존에 입고된 상품일경우
-            else if (duple = db.DupleCheck_stock_product(int.Parse(cb_lo_input_productNumber.Text), tb_lo_input_color.Text) && tb_lo_input_numberOf.Text != "" && dp_lo_input_inputDate.SelectedDate.ToString() != "" && cb_lo_input_inOutput.SelectedIndex != -1)
+            else if (duple = db.DupleCheck_stock_product(int.Parse(cb_lo_input_productNumber.Text), cb_lo_input_color.Text) && tb_lo_input_numberOf.Text != "" && dp_lo_input_inputDate.SelectedDate.ToString() != "" && cb_lo_input_inOutput.SelectedIndex != -1)
             {
                 for (int i = 0; i < lv_lo_input_addList.Items.Count; i++)
                 {
                     try
                     {   //기존에 있는 항목인 경우. DB가 아닌 로컬로 추가하므로 여기에서 Add
                         cus.Add((Product)lv_lo_input_addList.Items[i]);
-                        if (cb_lo_input_productNumber.SelectedItem.ToString() == cus[i].Product_id.ToString() && tb_lo_input_color.Text == cus[i].Color && dp_lo_input_inputDate.SelectedDate.Value == cus[i].Trade_date)
+                        if (cb_lo_input_productNumber.SelectedItem.ToString() == cus[i].Product_id.ToString() && cb_lo_input_color.Text == cus[i].Color && dp_lo_input_inputDate.SelectedDate.Value == cus[i].Trade_date)
                         {
                             plusStock = Convert.ToInt32(Convert.ToInt32(tb_lo_input_numberOf.Text) + cus[i].Stock);
                             lv_lo_input_addList.Items.Add(new Product()
                             {
                                 Product_id = Convert.ToInt32(cb_lo_input_productNumber.Text),
-                                Color = tb_lo_input_color.Text,
+                                Color = cb_lo_input_color.Text,
                                 Stock = plusStock,
                                 //ColorValue = "#" + tb_lo_input_rgb.Text,
                                 Employee_id = Convert.ToInt32(tb_lo_input_employeeID.Text),
@@ -1189,6 +1243,7 @@ namespace MBStore_MVC
                             lv_lo_input_addList.Items.RemoveAt(i);
                             lv_lo_input_addList.Items.Refresh();
                             check = false;
+                            break;
                         }
                     }
                     catch (Exception ex)
@@ -1202,7 +1257,7 @@ namespace MBStore_MVC
                     lv_lo_input_addList.Items.Add(new Product()
                     {
                         Product_id = Convert.ToInt32(cb_lo_input_productNumber.Text),
-                        Color = tb_lo_input_color.Text,
+                        Color = cb_lo_input_color.Text,
                         Stock = plusStock,
                         Employee_id = Convert.ToInt32(tb_lo_input_employeeID.Text),
                         Trade_date = Convert.ToDateTime(dp_lo_input_inputDate.SelectedDate),
@@ -1222,13 +1277,13 @@ namespace MBStore_MVC
                         try
                         {   //기존에 있는 항목인 경우. DB가 아닌 로컬로 추가하므로 여기에서 Add
                             cus.Add((Product)lv_lo_input_addList.Items[i]);
-                            if (cb_lo_input_productNumber.SelectedItem.ToString() == cus[i].Product_id.ToString() && tb_lo_input_color.Text == cus[i].Color && dp_lo_input_inputDate.SelectedDate.Value == cus[i].Trade_date)
+                            if (cb_lo_input_productNumber.SelectedItem.ToString() == cus[i].Product_id.ToString() && cb_lo_input_color.Text == cus[i].Color && dp_lo_input_inputDate.SelectedDate.Value == cus[i].Trade_date)
                             {
                                 plusStock = Convert.ToInt32(Convert.ToInt32(tb_lo_input_numberOf.Text) + cus[i].Stock);
                                 lv_lo_input_addList.Items.Add(new Product()
                                 {
                                     Product_id = Convert.ToInt32(cb_lo_input_productNumber.Text),
-                                    Color = tb_lo_input_color.Text,
+                                    Color = cb_lo_input_color.Text,
                                     Stock = plusStock,
                                     ColorValue = "#" + tb_lo_input_rgb.Text,
                                     Employee_id = Convert.ToInt32(tb_lo_input_employeeID.Text),
@@ -1239,6 +1294,7 @@ namespace MBStore_MVC
                                 lv_lo_input_addList.Items.RemoveAt(i);
                                 lv_lo_input_addList.Items.Refresh();
                                 check = false;
+                                break;
                             }
                         }
                         catch (Exception ex)
@@ -1252,7 +1308,7 @@ namespace MBStore_MVC
                         lv_lo_input_addList.Items.Add(new Product()
                         {
                             Product_id = Convert.ToInt32(cb_lo_input_productNumber.Text),
-                            Color = tb_lo_input_color.Text,
+                            Color = cb_lo_input_color.Text,
                             Stock = plusStock,
                             ColorValue = "#" + tb_lo_input_rgb.Text,
                             Employee_id = Convert.ToInt32(tb_lo_input_employeeID.Text),
@@ -1275,11 +1331,13 @@ namespace MBStore_MVC
         //입고 : 삭제버튼
         private void btn_lo_input_remove_Click(object sender, RoutedEventArgs e)
         {
-            tb_lo_input_color.Text = "";
             tb_lo_input_numberOf.Text = "";
             tb_lo_input_rgb.Text = "";
             dp_lo_input_inputDate.Text = "";
             cb_lo_input_productNumber.SelectedIndex = -1;
+            cb_lo_input_color.SelectedIndex = -1;
+            cb_lo_input_color.IsEditable = false;
+            tb_lo_input_rgb.IsReadOnly = true;
         }
         //입고 : 등록버튼
         private void btn_lo_input_register_Click(object sender, RoutedEventArgs e)
@@ -1336,19 +1394,21 @@ namespace MBStore_MVC
                             }
                             else check[i] = false;
                         }
-                        db.input_transaction(inputdata, check, newstock);
+
                         for(int i=0; i<inputdata.Count;i++)
                         {
                             if (check[i] == false) 
                             {
                                 string product_name = db.Select_productname_id(inputdata[i].Product_id);
-                                FtpUploadFile(inputdata[i].Image_dir, uri + "/phone/" + product_name + "_" + inputdata[i].Color + "_F.JPG");
+                                FtpUploadFile(inputdata[i].Image_dir, ftp_uri + "/phone/" + product_name + "_" + inputdata[i].Color + "_F.JPG");
                             }
                         }
+                        db.input_transaction(inputdata, check, newstock);
+
                         MessageBox.Show("등록완료");
                         
                         cb_lo_input_productNumber.SelectedIndex = -1;
-                        tb_lo_input_color.Text = "";
+                        cb_lo_input_color.Text = "";
                         tb_lo_input_numberOf.Text = "";
                         tb_lo_input_rgb.Text = "";
                         dp_lo_input_inputDate.Text = "";
@@ -1816,7 +1876,7 @@ namespace MBStore_MVC
                     su_em_Reset_text();
                     tb_su_em_login_id.Text = employee.Login_id;
                     tb_su_em_name.Text = employee.Name;
-                    if (employee.Gender == "남자")
+                    if (employee.Gender == "남성")
                     {
                         rb_su_em_gender1.IsChecked = true;
                         rb_su_em_gender2.IsChecked = false;
@@ -1864,9 +1924,26 @@ namespace MBStore_MVC
                     tb_su_em_email.Text = employee.Email;
                     cb_su_em_rank.Text = employee.Rank;
                     X_or_V();
-                    tb_su_em_login_id.IsEnabled = false;
-                    tb_su_em_start.IsEnabled = false;
-                    img_su_emp.ImageSource = new BitmapImage(new Uri(@"http://20.41.81.89/employee/" + employee.Login_id + "_" + employee.Rank + "_" + employee.Name + ".JPG", UriKind.Absolute));
+                    tb_su_em_login_id.IsReadOnly = true;
+                    tb_su_em_start.IsReadOnly = true;
+                    rb_su_em_gender1.IsEnabled = false;
+                    rb_su_em_gender2.IsEnabled = false;
+                    
+                    tb_su_em_social_n1.IsReadOnly = true;
+                    tb_su_em_social_n2.IsReadOnly = true;
+
+                    tb_su_em_phone1.IsReadOnly = false;
+                    tb_su_em_phone2.IsReadOnly = false;
+                    tb_su_em_phone3.IsReadOnly = false;
+                    tb_su_em_end.IsReadOnly = false;
+                    tb_su_em_adress.IsReadOnly = false;
+                    tb_su_em_email.IsReadOnly = false;
+                    tb_su_em_name.IsReadOnly = false;
+                    cb_su_em_rank.IsEnabled = true;
+                    btn_su_emp_img.IsEnabled = true;
+
+
+                    img_su_emp.ImageSource = new BitmapImage(new Uri(@http_uri+"/employee/" + employee.Login_id + "_" + employee.Rank + "_" + employee.Name + ".JPG", UriKind.Absolute));
                 }
                 catch
                 {
@@ -1880,6 +1957,15 @@ namespace MBStore_MVC
             su_em_Reset_text();
             img_su_emp.ImageSource = null;
             tb_su_emp_img.Text = null;
+            tb_su_em_phone1.IsReadOnly = true;
+            tb_su_em_phone2.IsReadOnly = true;
+            tb_su_em_phone3.IsReadOnly = true;
+            tb_su_em_end.IsReadOnly = true;
+            tb_su_em_adress.IsReadOnly = true;
+            tb_su_em_email.IsReadOnly = true;
+            tb_su_em_name.IsReadOnly = true;
+            cb_su_em_rank.IsEnabled = false;
+            btn_su_emp_img.IsEnabled = false;
         }
 
         private void Btn_su_employee_change(object sender, RoutedEventArgs e) // 직원 -> 직원관리 -> 조회버튼
@@ -1901,7 +1987,7 @@ namespace MBStore_MVC
                     db.Update_Emp_Info(tb_su_em_login_id.Text, cb_su_em_rank.Text, tb_su_em_name.Text,
                     rb_gender_check, social_1and2, phone, tb_su_em_email.Text, tb_su_em_adress.Text, end_d);
                     if(tb_su_emp_img.Text!="")
-                        FtpUploadFile(tb_su_emp_img.Text, uri+"/employee/" + tb_su_em_login_id.Text + "_" + cb_su_em_rank.Text + "_" + tb_su_em_name.Text + ".JPG");
+                        FtpUploadFile(tb_su_emp_img.Text, ftp_uri+"/employee/" + tb_su_em_login_id.Text + "_" + cb_su_em_rank.Text + "_" + tb_su_em_name.Text + ".JPG");
                     MessageBox.Show("완료");
                 }
                 else
@@ -1939,10 +2025,8 @@ namespace MBStore_MVC
 
         private void Btn_su_emp_signup(object sender, RoutedEventArgs e) // 지원 -> 직원관리 -> 회원등록 조회버튼
         {
-            List<Sign_up> emp_signup;
             lv_employee_sign_list.ItemsSource = null;
-            emp_signup = db.GetList_Sign_Up_Emp();
-            lv_employee_sign_list.ItemsSource = emp_signup;
+            lv_employee_sign_list.ItemsSource = db.GetList_Sign_Up_Emp();
         }
 
         public void Lv_su_item_emp_signup_DoubleClick(object sender, MouseButtonEventArgs e)//지원-> 직원관리-> 리스트 더블클릭 시 폼이동
@@ -1967,7 +2051,6 @@ namespace MBStore_MVC
             // Display OpenFileDialog by calling ShowDialog method 
             Nullable<bool> result = dlg.ShowDialog();
 
-
             // Get the selected file name and display in a TextBox 
             if (result == true)
             {
@@ -1991,9 +2074,9 @@ namespace MBStore_MVC
                 try
                 {
                     if (rb_su_em_gender3.IsChecked == false && rb_su_em_gender4.IsChecked == true)
-                    { gen = "여자"; }
+                    { gen = "여성"; }
                     else if (rb_su_em_gender3.IsChecked == true && rb_su_em_gender4.IsChecked == false)
-                    { gen = "남자"; }
+                    { gen = "남성"; }
 
                     if (tb_su_cus_search_saving.Text == "")
                     {
@@ -2015,9 +2098,9 @@ namespace MBStore_MVC
                 try
                 {
                     if (rb_su_em_gender3.IsChecked == false && rb_su_em_gender4.IsChecked == true)
-                    { gen = "여자"; }
+                    { gen = "여성"; }
                     else if (rb_su_em_gender3.IsChecked == true && rb_su_em_gender4.IsChecked == false)
-                    { gen = "남자"; }
+                    { gen = "남성"; }
 
                     db.Update_Cus_Info(int.Parse(tb_su_cus_search_cus_id.Text), tb_su_cus_search_name.Text, gen, dtp_su_cus_search_birth.SelectedDate
                         , tb_su_cus_search_phone.Text, long.Parse(tb_su_cus_search_saving.Text));
@@ -2501,10 +2584,10 @@ namespace MBStore_MVC
                 pieChart3.Series = piechartData_3;
                 pieChart3.LegendLocation = LegendLocation.Right;
             }
-        #endregion
 
         #endregion
 
+        #endregion
 
     }
 }
