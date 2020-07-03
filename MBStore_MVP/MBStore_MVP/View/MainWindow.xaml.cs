@@ -712,8 +712,8 @@ namespace MBStore_MVP
         {
             {
                 string gen = string.Empty;
-
-                if (res_change_check2 == 0)//신규등록
+                
+                if (res_change_check == 0 && tb_se_cus_search_name.Text != "" && (rb_su_em_gender32.IsChecked != false || rb_su_em_gender42.IsChecked != false) && tb_su_cus_search_phone2.Text != "")//신규등록
                 {
                     try
                     {
@@ -737,7 +737,7 @@ namespace MBStore_MVP
                         MessageBox.Show("입력되지 않은 값이 있습니다");
                     }
                 }
-                else
+                else if (res_change_check == 1 && tb_se_cus_search_name.Text != "" && (rb_su_em_gender32.IsChecked != false || rb_su_em_gender42.IsChecked != false) && tb_su_cus_search_phone2.Text != "")
                 {
                     try
                     {
@@ -755,6 +755,10 @@ namespace MBStore_MVP
                     {
                         MessageBox.Show("입력되지 않은 값이 있습니다");
                     }
+                }
+                else
+                {
+                    MessageBox.Show("입력되지 않은 값이 있습니다");
                 }
             }
         }
@@ -1971,7 +1975,7 @@ namespace MBStore_MVP
         {
             string gen = string.Empty;
 
-            if (res_change_check == 0)//신규등록
+            if (res_change_check == 0 && tb_su_cus_search_name.Text != "" && (rb_su_em_gender3.IsChecked != false || rb_su_em_gender4.IsChecked != false) && tb_su_cus_search_phone.Text != "")//신규등록
             {
                 try
                 {
@@ -1995,7 +1999,7 @@ namespace MBStore_MVP
                     MessageBox.Show("입력되지 않은 값이 있습니다");
                 }
             }
-            else
+            else if (res_change_check == 1 && tb_su_cus_search_name.Text != "" && (rb_su_em_gender3.IsChecked != false || rb_su_em_gender4.IsChecked != false) && tb_su_cus_search_phone.Text != "")
             {
                 try
                 {
@@ -2014,7 +2018,10 @@ namespace MBStore_MVP
                     MessageBox.Show("입력되지 않은 값이 있습니다");
                 }
             }
-
+            else
+            {
+                MessageBox.Show("입력되지 않은 값이 있습니다");
+            }
 
         }
 

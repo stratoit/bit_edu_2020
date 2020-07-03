@@ -747,52 +747,53 @@ namespace MBStore_MVC
 
         private void Btn_se_cus_register(object sender, RoutedEventArgs e)
         {
+            string gen = string.Empty;
+            if (res_change_check2 == 0 && tb_se_cus_search_name.Text!=""&&(rb_su_em_gender32.IsChecked!=false|| rb_su_em_gender42.IsChecked!=false)&& tb_su_cus_search_phone2.Text!="")//신규등록
             {
-                string gen = string.Empty;
-
-                if (res_change_check2 == 0)//신규등록
+                try
                 {
-                    try
-                    {
-                        if (rb_su_em_gender32.IsChecked == false && rb_su_em_gender42.IsChecked == true)
-                        { gen = "여성"; }
-                        else if (rb_su_em_gender32.IsChecked == true && rb_su_em_gender42.IsChecked == false)
-                        { gen = "남성"; }
+                    if (rb_su_em_gender32.IsChecked == false && rb_su_em_gender42.IsChecked == true)
+                    { gen = "여성"; }
+                    else if (rb_su_em_gender32.IsChecked == true && rb_su_em_gender42.IsChecked == false)
+                    { gen = "남성"; }
 
-                        if (tb_su_cus_search_saving2.Text == "")
-                        {
-                            tb_su_cus_search_saving2.Text = "0";
-                        }
-
-                        db.Insert_Cus_Info(tb_se_cus_search_name.Text, gen, dtp_su_cus_search_birth2.SelectedDate
-                            , tb_su_cus_search_phone2.Text, long.Parse(tb_su_cus_search_saving2.Text));
-                        su_cus_All_Clear2();
-                        MessageBox.Show("완료");
-                    }
-                    catch
+                    if (tb_su_cus_search_saving2.Text == "")
                     {
-                        MessageBox.Show("입력되지 않은 값이 있습니다");
+                        tb_su_cus_search_saving2.Text = "0";
                     }
+
+                    db.Insert_Cus_Info(tb_se_cus_search_name.Text, gen, dtp_su_cus_search_birth2.SelectedDate
+                        , tb_su_cus_search_phone2.Text, long.Parse(tb_su_cus_search_saving2.Text));
+                    su_cus_All_Clear2();
+                    MessageBox.Show("완료");
                 }
-                else
+                catch
                 {
-                    try
-                    {
-                        if (rb_su_em_gender32.IsChecked == false && rb_su_em_gender42.IsChecked == true)
-                        { gen = "여성"; }
-                        else if (rb_su_em_gender32.IsChecked == true && rb_su_em_gender42.IsChecked == false)
-                        { gen = "남성"; }
-
-                        db.Update_Cus_Info(int.Parse(tb_se_cus_search_cus_id.Text), tb_se_cus_search_name.Text, gen, dtp_su_cus_search_birth2.SelectedDate
-                            , tb_su_cus_search_phone2.Text, long.Parse(tb_su_cus_search_saving2.Text));
-                        MessageBox.Show("완료");
-                        su_cus_All_Clear2();
-                    }
-                    catch
-                    {
-                        MessageBox.Show("입력되지 않은 값이 있습니다");
-                    }
+                    MessageBox.Show("입력되지 않은 값이 있습니다");
                 }
+            }
+            else if (res_change_check2 == 1 && tb_se_cus_search_name.Text != "" && (rb_su_em_gender32.IsChecked != false || rb_su_em_gender42.IsChecked != false) && tb_su_cus_search_phone2.Text != "")
+            {
+                try
+                {
+                    if (rb_su_em_gender32.IsChecked == false && rb_su_em_gender42.IsChecked == true)
+                    { gen = "여성"; }
+                    else if (rb_su_em_gender32.IsChecked == true && rb_su_em_gender42.IsChecked == false)
+                    { gen = "남성"; }
+
+                    db.Update_Cus_Info(int.Parse(tb_se_cus_search_cus_id.Text), tb_se_cus_search_name.Text, gen, dtp_su_cus_search_birth2.SelectedDate
+                        , tb_su_cus_search_phone2.Text, long.Parse(tb_su_cus_search_saving2.Text));
+                    MessageBox.Show("완료");
+                    su_cus_All_Clear2();
+                }
+                catch
+                {
+                    MessageBox.Show("입력되지 않은 값이 있습니다");
+                }
+            }
+            else
+            {
+                MessageBox.Show("입력되지 않은 값이 있습니다");
             }
         }
 
@@ -2069,7 +2070,7 @@ namespace MBStore_MVC
         {
             string gen = string.Empty;
 
-            if (res_change_check == 0)//신규등록
+            if (res_change_check == 0 && tb_su_cus_search_name.Text!="" && (rb_su_em_gender3.IsChecked!=false || rb_su_em_gender4.IsChecked!=false)&& tb_su_cus_search_phone.Text!="")//신규등록
             {
                 try
                 {
@@ -2093,7 +2094,7 @@ namespace MBStore_MVC
                     MessageBox.Show("입력되지 않은 값이 있습니다");
                 }
             }
-            else
+            else if(res_change_check == 1 && tb_su_cus_search_name.Text != "" && (rb_su_em_gender3.IsChecked != false || rb_su_em_gender4.IsChecked != false) && tb_su_cus_search_phone.Text != "")
             {
                 try
                 {
@@ -2112,8 +2113,10 @@ namespace MBStore_MVC
                     MessageBox.Show("입력되지 않은 값이 있습니다");
                 }
             }
-
-
+            else
+            {
+                MessageBox.Show("입력되지 않은 값이 있습니다");
+            }
         }
 
         private void Lv_su_item_cus_info_DoubleClick(object sender, MouseButtonEventArgs e)

@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\bit\Desktop\bit_edu_2020\MBStore_MVC\MBStore_MVC\obj\Debug\
+\\192.168.1.14\shared_sim\MBStore_MVC\MBStore_MVC\obj\Debug\
 MBStore_MVC
 none
 false
 DEBUG;TRACE
-C:\Users\bit\Desktop\bit_edu_2020\MBStore_MVC\MBStore_MVC\App.xaml
+\\192.168.1.14\shared_sim\MBStore_MVC\MBStore_MVC\App.xaml
 9-400646193
 
 26-1141665075
-161818235189
+16418328640
 Emp_Sign_up.xaml;FindAddress.xaml;InputCustomer.xaml;Login.xaml;MainWindow.xaml;Notice.xaml;ShoppingBasket.xaml;SignUp.xaml;StockReturn.xaml;
 
 False

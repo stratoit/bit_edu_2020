@@ -43,9 +43,6 @@ namespace MBStore_MVC
             lb_sb_camera.Content = product.Camera + " MP";
             lb_sb_weight.Content = product.Weight + " g";
             lb_sb_mah.Content = product.MAh + " mAh";
-
-            //MainWindow main = new MainWindow();
-            //main.emp
         }
         private void Btn_se_basket_enroll(object sender, RoutedEventArgs e)
         {

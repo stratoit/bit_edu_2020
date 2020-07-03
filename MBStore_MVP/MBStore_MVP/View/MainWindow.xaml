@@ -1473,35 +1473,32 @@
                                         </Grid.RowDefinitions>
 
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Label VerticalAlignment="Center" Margin="5">고객 이름</Label>
-                                            <TextBox x:Name="tb_se_cus_search_name" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100"></TextBox>
+
+                                        <Label VerticalAlignment="Center" Margin="5">고객 이름</Label>
+                                        <TextBox x:Name="tb_se_cus_search_name" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100"></TextBox>
+
+                                        <Label VerticalAlignment="Center" Grid.Column="2" Margin="5">성별</Label>
+                                        <StackPanel Grid.Column="3" VerticalAlignment="Center" Orientation="Horizontal">
+                                            <RadioButton x:Name="rb_su_em_gender32" Grid.Column="3" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender">남성</RadioButton>
+                                            <RadioButton x:Name="rb_su_em_gender42" Grid.Column="3" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender">여성</RadioButton>
                                         </StackPanel>
 
-                                        <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                            <Label VerticalAlignment="Center" Margin="5">성별</Label>
-                                            <RadioButton x:Name="rb_su_em_gender32" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender">남성</RadioButton>
-                                            <RadioButton x:Name="rb_su_em_gender42" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender">여성</RadioButton>
-                                        </StackPanel>
+                                        <Label VerticalAlignment="Center" Grid.Column="4" Margin="5">휴대폰</Label>
+                                        <TextBox x:Name="tb_su_cus_search_phone2" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100"></TextBox>
 
-                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
-                                            <Label VerticalAlignment="Center" Margin="5">휴대폰</Label>
-                                            <TextBox x:Name="tb_su_cus_search_phone2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100"></TextBox>
-                                        </StackPanel>
+                                        <Label VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Right" Margin="5">생일</Label>
+                                        <DatePicker x:Name="dtp_su_cus_search_birth2" HorizontalAlignment="Left" MinHeight="30" Width="100" Grid.Row="1" Grid.Column="1" Height="30" Margin="5"></DatePicker>
+                                        
+                                        <Label VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Margin="5" IsEnabled="False">적립금</Label>
+                                        <TextBox x:Name="tb_su_cus_search_saving2" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100" IsEnabled="False"></TextBox>
 
-                                        <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                            <Label VerticalAlignment="Center" Margin="5">생일</Label>
-                                            <DatePicker x:Name="dtp_su_cus_search_birth2" Height="30" Margin="5"></DatePicker>
-                                        </StackPanel>
-
-                                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                                            <Label VerticalAlignment="Center" Margin="5" IsEnabled="False">적립금</Label>
-                                            <TextBox x:Name="tb_su_cus_search_saving2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100" IsEnabled="False"></TextBox>
-                                        </StackPanel>
 
                                     </Grid>
 
@@ -1865,7 +1862,7 @@
                                     </StackPanel>
                                     <Label Margin="10,11,10,10" Grid.Row="7" Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Right">휴대폰</Label>
                                     <StackPanel Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="2" Orientation="Horizontal">
-                                        <TextBox x:Name="tb_su_em_phone1" TextChanged="su_em_valid_phone_check" Margin="3" MaxHeight="30" MinWidth="50" IsReadOnly="True"></TextBox>
+                                        <TextBox x:Name="tb_su_em_phone1" IsReadOnly="True" TextChanged="su_em_valid_phone_check" Margin="10" MaxHeight="30" MinWidth="50"></TextBox>
                                         <Label Content="-" VerticalAlignment="Center"/>
                                         <TextBox x:Name="tb_su_em_phone2" TextChanged="su_em_valid_phone_check"  Margin="3" MaxHeight="30" MinWidth="60" IsReadOnly="True"></TextBox>
                                         <Label Content="-" VerticalAlignment="Center"/>
@@ -1968,16 +1965,43 @@
                                         </Grid.RowDefinitions>
 
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Label VerticalAlignment="Center" Margin="5">고객 이름</Label>
-                                            <TextBox x:Name="tb_su_cus_search_name" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100"></TextBox>
+
+                                        <Label VerticalAlignment="Center" Margin="5">고객 이름</Label>
+                                        <TextBox x:Name="tb_su_cus_search_name" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100"></TextBox>
+
+                                        <Label VerticalAlignment="Center" Grid.Column="2" Margin="5">성별</Label>
+
+                                        <StackPanel Grid.Column="3" VerticalAlignment="Center" Orientation="Horizontal">
+                                            <RadioButton x:Name="rb_su_em_gender3" Grid.Column="3" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender">남성</RadioButton>
+                                            <RadioButton x:Name="rb_su_em_gender4" Grid.Column="3" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender">여성</RadioButton>
                                         </StackPanel>
 
-                                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+
+                                        <Label VerticalAlignment="Center" Grid.Column="4" Margin="5">휴대폰</Label>
+                                        <TextBox x:Name="tb_su_cus_search_phone" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100"></TextBox>
+
+
+
+                                        <Label VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Right" Margin="5">생일</Label>
+                                        <DatePicker x:Name="dtp_su_cus_search_birth" HorizontalAlignment="Left" MinHeight="30" Width="100" Grid.Row="1" Grid.Column="1" Height="30" Margin="5"></DatePicker>
+
+                                        <Label VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Margin="5" IsEnabled="False">적립금</Label>
+                                        <TextBox x:Name="tb_su_cus_search_saving" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100" IsEnabled="False"></TextBox>
+
+
+                                        <!--<StackPanel Orientation="Horizontal">
+                                            <Label VerticalAlignment="Center" Margin="5">고객 이름</Label>
+                                            <TextBox x:Name="tb_su_cus_search_name" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100"></TextBox>
+                                        </StackPanel>-->
+
+                                        <!--<StackPanel Grid.Column="1" Orientation="Horizontal">
                                             <Label VerticalAlignment="Center" Margin="5">성별</Label>
                                             <RadioButton x:Name="rb_su_em_gender3" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender">남성</RadioButton>
                                             <RadioButton x:Name="rb_su_em_gender4" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" GroupName="gender">여성</RadioButton>
@@ -1996,7 +2020,7 @@
                                         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                                             <Label VerticalAlignment="Center" Margin="5" IsEnabled="False">적립금</Label>
                                             <TextBox x:Name="tb_su_cus_search_saving" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100" IsEnabled="False"></TextBox>
-                                        </StackPanel>
+                                        </StackPanel>-->
 
                                     </Grid>
 
