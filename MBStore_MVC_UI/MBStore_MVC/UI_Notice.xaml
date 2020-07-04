@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:MBStore_MVC"
+             
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Resources>
@@ -45,7 +46,7 @@
                                                     Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
                                                     Foreground="{DynamicResource SecondaryAccentForegroundBrush}"
                                                      FontSize="18"
-                                                    FontWeight="Bold"
+                                                    
                                                     Text="공지와 새소식" />
                     </StackPanel>
                 </DataTemplate>
@@ -84,7 +85,7 @@
                                                 MaxHeight="300"
                                                 Margin="5 20 5 0"
                                                 TextWrapping="Wrap"
-                                                FontSize="16"
+                                                FontSize="18"
                                                 TextTrimming="CharacterEllipsis"
                                                 VerticalAlignment="Center"/>
                     </StackPanel>
@@ -93,7 +94,7 @@
                                                                      HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="30" Height="30"
                                                                      Margin="8" Grid.Row="2">
                         <StackPanel>
-                            <Button ToolTip="전체 목록 보기" >
+                            <Button ToolTip="신규 글 작성" >
                                 <materialDesign:PackIcon Kind="FormatListBulleted" Height="20" Width="20" />
                             </Button>
                             <Button ToolTip="전문 보기"
@@ -147,7 +148,7 @@
                                                     Foreground="{DynamicResource SecondaryAccentForegroundBrush}"
                                                     Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
                                                      FontSize="18"
-                                                    FontWeight="Bold"
+                                                   
                                                     Text="이달의 우수사원" />
                     </StackPanel>
                 </DataTemplate>
@@ -189,8 +190,8 @@
                                                 Foreground="{DynamicResource MaterialDesignBody}"
                                                 TextWrapping="Wrap"
                                                 HorizontalAlignment="Center"
-                                                FontSize="18"
-                                                FontWeight="Bold"/>
+                                                FontSize="20"
+                                               />
 
 
                         <TextBlock
@@ -201,7 +202,7 @@
                                                 MaxHeight="250"
                                                 Margin="5 20 5 0"
                                                 TextWrapping="Wrap"
-                                                FontSize="14"
+                                                FontSize="16"
                                                 TextTrimming="CharacterEllipsis"
                                                 VerticalAlignment="Center"/>
                     </StackPanel>

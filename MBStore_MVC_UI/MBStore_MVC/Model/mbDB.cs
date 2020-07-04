@@ -62,7 +62,7 @@ namespace MBStore_MVC.Model
                         emp.Phone = myDataReader.GetString(7);
                         emp.Email = myDataReader.GetString(8);
                     }
-                    catch (Exception e) { }
+                    catch  { }
                     return emp;
                 }
             }

@@ -48,7 +48,7 @@
                 <TextBox Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" Grid.Row="2" FontWeight="Bold" VerticalAlignment="Center"
                          x:Name="tb_title" HorizontalAlignment="Center" FontSize="19" Height="auto" Margin="0 1 0 0" IsReadOnly="True"
                          Foreground="{DynamicResource MaterialDesignBody}" Text=""/>
-                <TextBox Grid.Row="3" VerticalScrollBarVisibility="Auto" FontSize="17" FontWeight="Black" Margin="0 1 0 0"
+                <TextBox Grid.Row="3" VerticalScrollBarVisibility="Auto" FontSize="17" Margin="0 1 0 0"
                      Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
                      Foreground="{DynamicResource MaterialDesignBody}" Text=""
                      AcceptsReturn="True" AcceptsTab="True" TextWrapping="WrapWithOverflow" IsReadOnly="True"

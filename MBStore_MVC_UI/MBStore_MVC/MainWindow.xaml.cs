@@ -76,7 +76,7 @@ namespace MBStore_MVC
         {
             this.Show();
             InitializeComponent();
-            //InitTimer();
+            InitTimer();
             uri = "20.41.81.89";
             http_uri = "http://" + uri;
             ftp_uri = "ftp://" + uri + ":21";
@@ -161,27 +161,27 @@ namespace MBStore_MVC
         }
 
         #region 타이머
-        //private void InitTimer()
-        //{
-        //    if (_timer != null)
-        //        return;
-        //    TimerCallback tcb = new TimerCallback(ThreadFunc);
-        //    _timer = new Timer(tcb, null, 0, 1000);
-        //}
+        private void InitTimer()
+        {
+            if (_timer != null)
+                return;
+            TimerCallback tcb = new TimerCallback(ThreadFunc);
+            _timer = new Timer(tcb, null, 0, 1000);
+        }
 
-        //public void ThreadFunc(Object stateInfo)
-        //{
-        //    if (this.Dispatcher.Thread != Thread.CurrentThread)
-        //    {
-        //        tempDelegate += new TempDelegate(SetTextBox);
-        //        Dispatcher.Invoke(DispatcherPriority.Normal, tempDelegate);
-        //    }
-        //}
+        public void ThreadFunc(Object stateInfo)
+        {
+            if (this.Dispatcher.Thread != Thread.CurrentThread)
+            {
+                tempDelegate += new TempDelegate(SetTextBox);
+                Dispatcher.Invoke(DispatcherPriority.Normal, tempDelegate);
+            }
+        }
 
-        //private void SetTextBox()
-        //{
-        //   // text.Text = DateTime.Now.ToString();
-        //}
+        private void SetTextBox()
+        {
+             text.Text = DateTime.Now.ToString();
+        }
         #endregion
 
         private void Window_Closed(object sender, EventArgs e)

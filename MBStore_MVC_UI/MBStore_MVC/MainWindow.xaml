@@ -9,8 +9,8 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"     
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         
-        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"     
-        
+      
+        FontFamily="./Resources/#배달의민족 도현"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="13"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -19,7 +19,7 @@
         
         Background="{DynamicResource MaterialDesignPaper}"
         mc:Ignorable="d" 
-        Title="모바일기기 매장관리 시스템 v0.2" Height="768" Width="1024" Closed="Window_Closed">
+        Title="모바일기기 매장관리 시스템 v1.0" Height="768" Width="1024" Closed="Window_Closed">
 
     <Window.Resources>
         <!-- Color Resource-->
@@ -46,7 +46,7 @@
     <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="1.15*"></RowDefinition>
                 <RowDefinition Height="15*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
@@ -57,13 +57,14 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="95"></ColumnDefinition>
+                    <ColumnDefinition Width="110"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-
-                <TextBlock Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontStyle="Italic" FontSize="38" FontWeight="Bold" Margin="0 0 60 0"  Text="PRO"  />
-                <TextBlock Foreground="{DynamicResource SecondaryAccentForegroundBrush}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontStyle="Italic" FontSize="38" FontWeight="Bold" Margin="80 0 0 0" Text="TEC"  />
-                <TextBlock  Foreground="{DynamicResource SecondaryAccentForegroundBrush}" Grid.Column="1" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"  Margin="134,0,178,0" >모바일기기 매장관리 시스템</TextBlock>
-                <TextBlock Foreground="{DynamicResource SecondaryAccentForegroundBrush}" TextWrapping="Wrap" HorizontalAlignment="Center" Grid.Column="2" x:Name="text" FontSize="15">Time</TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="5 0 0 0 " VerticalAlignment="Center">
+                <TextBlock Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" VerticalAlignment="Bottom" Width="86" FontStyle="Italic" FontSize="38" FontWeight="Bold"   Text="PRO"  />
+                <TextBlock Foreground="{DynamicResource SecondaryAccentForegroundBrush}" VerticalAlignment="Bottom" Width="86" Margin="-5 0 0 0" FontStyle="Italic" FontSize="38" FontWeight="Bold" Text="TEC"  />
+                </StackPanel>
+                 <TextBlock  Foreground="{DynamicResource SecondaryAccentForegroundBrush}" Grid.Column="1" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"  Margin="134,0,178,0" >모바일기기 매장관리 시스템</TextBlock>
+                <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource SecondaryAccentForegroundBrush}" TextWrapping="Wrap" HorizontalAlignment="Center" Grid.Column="2" x:Name="text" FontSize="15">Time</TextBlock>
 
 
 
@@ -163,7 +164,7 @@
                                                     </Border.Background>
                                                 </Border>
                                                 <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Stretch">
-                                                    <TextBlock FontWeight="Bold" FontSize="16" Foreground="{DynamicResource SecondaryAccentForegroundBrush}" x:Name="text_myinfo_name"/>
+                                                    <TextBlock FontWeight="Bold" FontSize="18" Foreground="{DynamicResource SecondaryAccentForegroundBrush}" x:Name="text_myinfo_name"/>
 
                                                     <Button 
                                                     Style="{StaticResource MaterialDesignFlatButton}"
@@ -355,7 +356,7 @@
                                                 Grid.Row="1"
                                                 Effect="{DynamicResource MaterialDesignShadowDepth5}">
                                                     <TextBlock
-                                                    FontWeight="Bold"
+                                                    FontSize="14"
                                                     Margin="16">
                                                     오늘의 메모 추가
                                                     </TextBlock>
@@ -1229,14 +1230,14 @@
                                             </StackPanel>
                                         </Grid>
                                         <Grid Row="1" Column="0">
-                                            <StackPanel Orientation="Horizontal" Margin="0,0,-21,0">
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                                                 <Label Margin="34,6,0,2" Height="25">가격 :</Label>
                                                 <TextBox Foreground="{DynamicResource MaterialDesignBody}" Width="80" Height="Auto" Margin="0,0,0,0" x:Name="tb_se_price" KeyDown="KeyDown_se_search_product"/>
                                                 <Button Click="Btn_se_price" x:Name="btn_se_price" Margin="10,6,-10,0" Height="Auto" Content="▲" Width="Auto"/>
                                             </StackPanel>
                                         </Grid>
                                         <Grid Row="1" Column="1">
-                                            <StackPanel Orientation="Horizontal" Margin="29,0,-58,0">
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                                                 <Label Margin="10,6,0,3" Height="25">출시일 :</Label>
                                                 <DatePicker 
                                                     Foreground="{DynamicResource MaterialDesignBody}" 
@@ -1251,7 +1252,7 @@
                                             </StackPanel>
                                         </Grid>
                                         <Grid Row="1" Column="2">
-                                            <StackPanel Orientation="Horizontal" Margin="80,0,-41,0">
+                                            <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
                                                 <Label Margin="0,5,0,2" Height="25">RAM :</Label>
                                                 <ComboBox Foreground="{DynamicResource MaterialDesignBody}" Width="100" Height="Auto" Margin="0,0,0,0" x:Name="cb_se_ram" IsEditable="True" DisplayMemberPath="{Binding Ram}" KeyDown="KeyDown_se_search_product " DropDownOpened="cb_se_ram_DropDownOpened"></ComboBox>
                                             </StackPanel>
@@ -1488,7 +1489,7 @@
                                         <Grid Row="0" Column="1">
                                             <StackPanel Orientation="Horizontal">
                                                 <Label Margin="0,0,0,2" Height="25">판매자:</Label>
-                                                <TextBox Foreground="{DynamicResource MaterialDesignBody}" Width="90" Height="Auto" Margin="0,0,0,0" x:Name="tb_se_employee_name" KeyDown="KeyDown_se_search_history"></TextBox>
+                                                <TextBox Foreground="{DynamicResource MaterialDesignBody}" Width="100" Height="Auto" Margin="0,0,0,0" x:Name="tb_se_employee_name" KeyDown="KeyDown_se_search_history"></TextBox>
                                             </StackPanel>
                                         </Grid>
                                         <Grid Row="0" Column="2" Grid.ColumnSpan="2">
@@ -1512,8 +1513,8 @@
                                         <Grid Row="1" Column="0">
                                             <StackPanel Orientation="Horizontal">
                                                 <Label Margin="10,7,0,-2" Height="25">구분:</Label>
-                                                <ComboBox Name="cb_se_type" Width="84" Height="Auto" Margin="0,5,0,0" IsEditable="True" IsReadOnly="True" Text="모두" KeyDown="KeyDown_se_search_history" Foreground="{DynamicResource MaterialDesignBody}">
-                                                    <ComboBoxItem>모두</ComboBoxItem>
+                                                <ComboBox  Name="cb_se_type" Width="92" Height="Auto" Margin="0,5,0,0" IsEditable="True" IsReadOnly="True" Text="모두" KeyDown="KeyDown_se_search_history" Foreground="{DynamicResource MaterialDesignBody}">
+                                                    <ComboBoxItem >모두</ComboBoxItem>
                                                     <ComboBoxItem>판매</ComboBoxItem>
                                                     <ComboBoxItem>환불</ComboBoxItem>
                                                 </ComboBox>
@@ -1522,7 +1523,7 @@
                                         <Grid Row="1" Column="1" Grid.ColumnSpan="2">
                                             <StackPanel Orientation="Horizontal">
                                                 <Label Margin="0,0,0,2" Height="25">제품명:</Label>
-                                                <ComboBox Width="140" Height="Auto" Margin="0,0,0,0" x:Name="cb_se_histroy_name" KeyDown="KeyDown_se_search_history" IsEditable="True" DisplayMemberPath="{Binding Product_id}" DropDownOpened="cb_se_history_product_name_DropDownOpened" Foreground="{DynamicResource MaterialDesignBody}"/>
+                                                <ComboBox MinWidth="120" Width="auto" Height="Auto" Margin="0,0,0,0" x:Name="cb_se_histroy_name" KeyDown="KeyDown_se_search_history" IsEditable="True" DisplayMemberPath="{Binding Product_id}" DropDownOpened="cb_se_history_product_name_DropDownOpened" Foreground="{DynamicResource MaterialDesignBody}"/>
                                             </StackPanel>
                                         </Grid>
 
@@ -1622,7 +1623,7 @@
                                             <TextBlock Foreground="{DynamicResource SecondaryAccentForegroundBrush}">고객관리</TextBlock>
                                         </StackPanel>
                                     </TabItem.Header>
-                                    <Grid Margin="-3" Background="{DynamicResource MaterialDesignPaper}">
+                                    <Grid Background="{DynamicResource MaterialDesignPaper}" Margin="-3" >
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
@@ -1643,8 +1644,8 @@
                                             <Label x:Name="label_cus_id2" Margin="10" Visibility="Hidden">Customer ID</Label>
                                             <TextBox Foreground="{DynamicResource MaterialDesignBody}" x:Name="tb_se_cus_search_cus_id" Visibility="Hidden" IsEnabled="False" Margin="2,10,10,10" MinWidth="100" Height="30"></TextBox>
                                         </StackPanel>
-                                        <Button x:Name="btn_se_cus_search_res" Click="Btn_se_cus_register" Margin="10" Grid.Row="1" Grid.Column="1" Content="등록"/>
-                                        <Button x:Name="btn_se_cus_search_reset" Click="Btn_se_cus_reset" Margin="10" Grid.Row="1" Grid.Column="2">초기화</Button>
+                                        <Button x:Name="btn_se_cus_search_res" Click="Btn_su_cus_register" Margin="10" Grid.Row="1" Grid.Column="1" Content="등록"/>
+                                        <Button x:Name="btn_se_cus_search_reset" Click="Btn_su_cus_reset" Margin="10" Grid.Row="1" Grid.Column="2">초기화</Button>
 
                                         <Grid Row="2" Column="0">
                                             <Grid.RowDefinitions>
@@ -1659,7 +1660,7 @@
                                             </Grid.ColumnDefinitions>
                                             <StackPanel Orientation="Horizontal">
                                                 <Label VerticalAlignment="Center" Margin="5">고객 이름</Label>
-                                                <TextBox  Foreground="{DynamicResource MaterialDesignBody}" x:Name="tb_se_cus_search_name" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100"></TextBox>
+                                                <TextBox x:Name="tb_se_cus_search_name" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100" Foreground="{DynamicResource MaterialDesignBody}"></TextBox>
                                             </StackPanel>
 
                                             <StackPanel Grid.Column="1" Orientation="Horizontal">
@@ -1670,42 +1671,42 @@
 
                                             <StackPanel Grid.Column="2" Orientation="Horizontal">
                                                 <Label VerticalAlignment="Center" Margin="5">휴대폰</Label>
-                                                <TextBox Foreground="{DynamicResource MaterialDesignBody}" x:Name="tb_su_cus_search_phone2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100"></TextBox>
+                                                <TextBox  x:Name="tb_su_cus_search_phone2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100" Foreground="{DynamicResource MaterialDesignBody}"></TextBox>
                                             </StackPanel>
 
                                             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                                <Label VerticalAlignment="Center" Margin="5">생일</Label>
-                                                <DatePicker Foreground="{DynamicResource MaterialDesignBody}"
+                                                <Label VerticalAlignment="Center" Margin="36,24,5,25">생일</Label>
+                                                <DatePicker x:Name="dtp_su_cus_search_birth2" 
                                                             materialDesign:HintAssist.Hint="BIRTH DAY"
-                                                            x:Name="dtp_su_cus_search_birth2"
-                                                            Height="30" Margin="5"></DatePicker>
+                                                            Height="30" Margin="5" MinWidth="100"
+                                                            Foreground="{DynamicResource MaterialDesignBody}"></DatePicker>
                                             </StackPanel>
 
                                             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                                                 <Label VerticalAlignment="Center" Margin="5" IsEnabled="False">적립금</Label>
-                                                <TextBox  Foreground="{DynamicResource MaterialDesignBody}" x:Name="tb_su_cus_search_saving2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100" IsEnabled="False"></TextBox>
+                                                <TextBox Foreground="{DynamicResource MaterialDesignBody}"  x:Name="tb_su_cus_search_saving2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" MinHeight="30" MinWidth="100" IsEnabled="False"></TextBox>
                                             </StackPanel>
 
                                         </Grid>
-
-                                        <Grid Row="3" Column="0">
+                                        <Border Grid.Row="3" Grid.ColumnSpan="3" VerticalAlignment="Top" BorderThickness="0.4"  BorderBrush="{DynamicResource MaterialDesignBody}" />
+                                        <Grid Row="3" Column="0" >
                                             <StackPanel Orientation="Horizontal">
                                                 <Label Margin="15,0,0,2" Height="25">고객이름:</Label>
                                                 <TextBox Foreground="{DynamicResource MaterialDesignBody}" x:Name="tb_se_cusName2" Margin="5,0,0,2" Height="30" MinWidth="100"></TextBox>
-                                                <ComboBox Foreground="{DynamicResource MaterialDesignBody}" Width="60" Height="30" Margin="15,0,0,2"  IsEditable="True" IsReadOnly="True" Text="모두" x:Name="cb_su_sex2">
+                                                <ComboBox Foreground="{DynamicResource MaterialDesignBody}" Width="60" Height="Auto" Margin="15,0,0,2"  IsEditable="True" IsReadOnly="True" Text="모두" x:Name="cb_su_sex2">
                                                     <ComboBoxItem>모두</ComboBoxItem>
                                                     <ComboBoxItem>남성</ComboBoxItem>
                                                     <ComboBoxItem>여성</ComboBoxItem>
                                                 </ComboBox>
                                                 <Label Margin="15,0,0,2" VerticalAlignment="Center">연락처:</Label>
-                                                <TextBox Foreground="{DynamicResource MaterialDesignBody}" Width="100" Margin="5,0,0,2" x:Name="tb_se_phone2" Height="30" ></TextBox>
+                                                <TextBox Foreground="{DynamicResource MaterialDesignBody}"  Width="100" Margin="5,0,0,2" x:Name="tb_se_phone2" Height="30" ></TextBox>
                                             </StackPanel>
                                         </Grid>
                                         <Grid Row="3" Column="2" >
                                             <Button Click="btn_se_cu_search" Margin="10,10,10,10" MinHeight="30" >조회</Button>
                                         </Grid>
 
-                                        <Grid Row="4" Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3">
+                                        <Grid Row="4" Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" >
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="10*"/>
                                                 <ColumnDefinition/>
@@ -1713,7 +1714,7 @@
 
                                             <ListView Name="lv_cus_search2" Margin="10,10,10,10" Grid.ColumnSpan="2">
                                                 <ListView.ItemContainerStyle>
-                                                    <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource MaterialDesignGridViewItem}">
+                                                    <Style TargetType="{x:Type ListViewItem}">
                                                         <!--리스트뷰 가운데 정렬-->
                                                         <Setter Property="HorizontalContentAlignment" Value="Center"/>
                                                         <Setter Property="Height" Value="30"/>
@@ -2132,8 +2133,8 @@
                                             <Label x:Name="label_cus_id" Margin="10" Visibility="Hidden">Customer ID</Label>
                                             <TextBox Foreground="{DynamicResource MaterialDesignBody}" x:Name="tb_su_cus_search_cus_id" Visibility="Hidden" IsEnabled="False" Margin="2,10,10,10" MinWidth="100" Height="30"></TextBox>
                                         </StackPanel>
-                                        <Button x:Name="btn_su_cus_search_res" Click="Btn_su_cus_register" Margin="10" Grid.Row="1" Grid.Column="1" Content="등록"/>
-                                        <Button x:Name="btn_su_cus_search_reset" Click="Btn_su_cus_reset" Margin="10" Grid.Row="1" Grid.Column="2">초기화</Button>
+                                        <Button x:Name="btn_su_cus_search_res" Click="Btn_se_cus_register" Margin="10" Grid.Row="1" Grid.Column="1" Content="등록"/>
+                                        <Button x:Name="btn_su_cus_search_reset" Click="Btn_se_cus_reset" Margin="10" Grid.Row="1" Grid.Column="2">초기화</Button>
 
                                         <Grid Row="2" Column="0">
                                             <Grid.RowDefinitions>
