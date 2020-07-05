@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBStore_MVVM", "MBStore_MVVM\MBStore_MVVM.csproj", "{1248C983-41C3-43CF-B175-8B562E107A21}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1248C983-41C3-43CF-B175-8B562E107A21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1248C983-41C3-43CF-B175-8B562E107A21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1248C983-41C3-43CF-B175-8B562E107A21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1248C983-41C3-43CF-B175-8B562E107A21}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BBD76F72-7C2B-4934-8D97-95C18F10F584}
+	EndGlobalSection
+EndGlobal
