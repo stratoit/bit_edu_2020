@@ -556,7 +556,7 @@ namespace MBStore_MVC
 
         private void Btn_se_sell_list_remove(object sender, RoutedEventArgs e)
         {
-            lv_se_expect_sell.Items.Clear();
+            lv_se_expect_sell.ItemsSource = null;
             la_se_sell_total_price.Content = "0 원";
         }
 

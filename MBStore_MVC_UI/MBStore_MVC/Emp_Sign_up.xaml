@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MBStore_MVC"
+               FontFamily="./Resources/#배달의민족 도현"
         mc:Ignorable="d"
         Title="Emp_Sign_up"  Height="200" Width="300"  WindowStartupLocation="CenterOwner">
     <Grid>

@@ -1198,8 +1198,8 @@
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="1.3*"/>
+                                            <ColumnDefinition Width="1.3*"/>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="60"/>
@@ -1232,8 +1232,8 @@
                                         <Grid Row="1" Column="0">
                                             <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                                                 <Label Margin="34,6,0,2" Height="25">가격 :</Label>
-                                                <TextBox Foreground="{DynamicResource MaterialDesignBody}" Width="80" Height="Auto" Margin="0,0,0,0" x:Name="tb_se_price" KeyDown="KeyDown_se_search_product"/>
-                                                <Button Click="Btn_se_price" x:Name="btn_se_price" Margin="10,6,-10,0" Height="Auto" Content="▲" Width="Auto"/>
+                                                <TextBox Margin="0 0 5 0" Foreground="{DynamicResource MaterialDesignBody}" Width="80" Height="Auto" x:Name="tb_se_price" KeyDown="KeyDown_se_search_product"/>
+                                                <Button Click="Btn_se_price"  x:Name="btn_se_price" Content="▲"/>
                                             </StackPanel>
                                         </Grid>
                                         <Grid Row="1" Column="1">
@@ -1244,11 +1244,11 @@
                                                     materialDesign:HintAssist.Hint="INPUT DATE"
                                                     x:Name="dtp_se_manufac" 
                                                     Height="Auto" 
-                                                    Margin="1,3,0,0" 
+                                                    Margin="1,3,5,0" 
                                                     HorizontalAlignment="Right"
                                                     VerticalAlignment="Top"
                                                     KeyDown="KeyDown_se_search_product"/>
-                                                <Button Click="Btn_se_manufacture" x:Name="btn_se_manufacture" Margin="10,6,-5,0" Height="Auto" Width="Auto" Content="▲"/>
+                                                <Button Click="Btn_se_manufacture" x:Name="btn_se_manufacture" Content="▲"/>
                                             </StackPanel>
                                         </Grid>
                                         <Grid Row="1" Column="2">
