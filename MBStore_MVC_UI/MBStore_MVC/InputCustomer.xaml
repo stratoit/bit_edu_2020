@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MBStore_MVC"
         mc:Ignorable="d"
+        FontFamily="./Resources/#배달의민족 도현"
         Background="{DynamicResource MaterialDesignPaper}"
         Title="InputCustomer" Height="400" Width="700" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Margin="10,10,10,10">

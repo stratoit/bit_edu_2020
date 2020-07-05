@@ -1585,6 +1585,44 @@ namespace MBStore_MVC.Model
             return productList;
         }
 
+        //입고 : 과거의 입고된 물품번호의 상품출력
+        public List<Product> Get_Lo_Input_ProductColor(int product_id)
+        {
+            List<Product> productList = new List<Product>();
+            try
+            {
+                using (conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["userDB"].ToString();
+                    conn.Open();    //  데이터베이스 연결   
+
+                    string sql = "select distinct color, color_value from stock_product where product_id = @Product_id order by color";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    SqlParameter param_product_id = new SqlParameter("@Product_id", product_id);
+                    param_product_id.SqlDbType = System.Data.SqlDbType.Int;
+                    cmd.Parameters.Add(param_product_id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Product product = new Product();
+                            product.Color = reader.GetString(0);
+                            product.ColorValue = reader.GetString(1);
+                            productList.Add(product);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return productList;
+        }
+
+
         //입고된 제품목록 출력
         public List<Product> Select_Lo_Pse_stockProduct(string query)
         {
