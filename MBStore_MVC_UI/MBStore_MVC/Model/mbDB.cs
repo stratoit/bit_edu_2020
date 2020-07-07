@@ -147,6 +147,43 @@ namespace MBStore_MVC.Model
 
         #region 공지사항
 
+        //공지사항 : 공지사항 id로 게시물 출력
+        public Notices SelectNotice_noticeid(int notice_id)
+        {
+            Notices notice = new Notices();
+
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결           
+                string sql = "SELECT notice_id, emp.employee_id, emp.name AS name, last_date, title, text, url FROM notice " +
+                    "JOIN employee emp ON emp.employee_id = notice.employee_id " +
+                    "WHERE notice_id = @Notice_id";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                SqlParameter param_notice_id = new SqlParameter("@Notice_id", notice_id);
+                param_notice_id.SqlDbType = System.Data.SqlDbType.Int;
+                cmd.Parameters.Add(param_notice_id);
+
+                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                {
+                    while (myDataReader.Read())
+                    {
+                        notice.Notice_id = myDataReader.GetInt32(0);
+                        notice.Employee_id = myDataReader.GetInt32(1);
+                        notice.Name = myDataReader.GetString(2);
+                        notice.Date = myDataReader.GetDateTime(3);
+                        notice.Title = myDataReader.GetString(4);
+                        notice.Text = myDataReader.GetString(5);
+                        notice.Url = myDataReader.GetString(6);
+                    }
+                }
+            }
+            return notice;
+        }
+
         //공지사항 : 가장 최신 게시물 출력
         public List<Notices> SelectRecentNotice()
         {
@@ -294,6 +331,30 @@ namespace MBStore_MVC.Model
                 }
             }
             return NoticeList;
+        }
+        //공지사항 : 최신 글 id 출력
+        public int Select_LastNoticeid()
+        {
+            int notice_id = 0;
+
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결           
+                string sql = "SELECT TOP 1 notice_id FROM notice ORDER BY notice_id DESC";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                {
+                    while (myDataReader.Read())
+                    {
+                        notice_id = myDataReader.GetInt32(0);
+                    }
+                }
+            }
+            return notice_id;
         }
 
         //공지사항 : 글 작성
@@ -1117,6 +1178,42 @@ namespace MBStore_MVC.Model
         //_refund_ : 반품 영역
 
         #region 제품등록
+        //제품등록 : 중복제품 체크 함수
+        public List<string> Check_Lo_Reg_Overlap()
+        {
+            List<string> checkproductList = new List<string>();
+            try
+            {
+                using (conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["userDB"].ToString();
+                    conn.Open();    //  데이터베이스 연결   
+
+                    string sql = "select name from product order by product_id asc";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string product;
+                            product = reader.GetString(0);
+                            checkproductList.Add(product);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var MessageDialog = new MessageDialog
+                {
+                    Message = { Text = ex.Message }
+                };
+                DialogHost.Show(MessageDialog, "RootDialog");
+            }
+            return checkproductList;
+        }
         //제품등록 : 제품등록 함수
         public void Add_Lo_Reg_Product(string name, DateTime manufacture, string cpu, string inch, int mAh, int ram, string brand, int camera, int weight, Int64 price, string display, int memory)
         {
@@ -2586,7 +2683,6 @@ namespace MBStore_MVC.Model
                 SqlParameter param_address = new SqlParameter("@address", address);
                 cmd.Parameters.Add(param_address);
 
-                password = sha256.ComputeSha256Hash(emp_id + password);
                 SqlParameter param_login_pw = new SqlParameter("@login_pw", password);
                 cmd.Parameters.Add(param_login_pw);
 

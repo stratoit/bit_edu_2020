@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:MBStore_MVC"
         FontFamily="./Resources/#배달의민족 도현"
         mc:Ignorable="d" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterOwner"
-        Height="450" Width="500">
+        Height="465" Width="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="165"></RowDefinition>
-            <RowDefinition Height="257"></RowDefinition>
+            <RowDefinition Height="267"></RowDefinition>
 
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Background="{DynamicResource PrimaryHueMidBrush}" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
@@ -30,12 +30,12 @@
             </StackPanel>
             <StackPanel Margin=" 0 7 0 0" Orientation="Horizontal">
                 <TextBlock Margin="-11 0 10 0" Text="비밀번호 :" />
-                    <PasswordBox MinWidth="150" KeyboardNavigation.TabIndex="1"   MaxLength="16" BorderBrush="DimGray" x:Name="pb_inputPW" PasswordChanged="pb_inputPW_PasswordChanged" MouseEnter="pb_inputPW_MouseEnter" />
+                    <PasswordBox MinWidth="150" KeyboardNavigation.TabIndex="1"   MaxLength="16" x:Name="pb_inputPW" PasswordChanged="pb_inputPW_PasswordChanged"/>
                     <TextBlock Margin="10 0 0 0" x:Name="text_pw" Foreground="Red" Grid.Row="0" Text="[4~16 자리]" />
             </StackPanel>
                 <StackPanel  Margin=" 0 7 0 0" Orientation="Horizontal">
                 <TextBlock Margin="-37 0 10 0" Text="비밀번호 확인 :" />
-                    <PasswordBox MinWidth="150" KeyboardNavigation.TabIndex="2"  MaxLength="16" BorderBrush="DimGray" x:Name="pb_checkPW"   PasswordChanged="pb_checkPW_PasswordChanged" MouseEnter="pb_checkPW_MouseEnter"/>
+                    <PasswordBox MinWidth="150" KeyboardNavigation.TabIndex="2"  MaxLength="16"  x:Name="pb_checkPW"   PasswordChanged="pb_checkPW_PasswordChanged"/>
                     <TextBlock Margin="10 0 0 0" x:Name="text_checkpw"  FontWeight="Bold" Foreground="Red" Grid.Row="0" />
             </StackPanel>
             </StackPanel>
@@ -43,7 +43,7 @@
 
         </Grid>
         <Grid Grid.Row="2">
-            <GroupBox Margin="10 -10 10 31"/>
+            <GroupBox Margin="10 -10 10 42"/>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 -20 0 0">
             <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="-18 3 7 0" Text="이    름 :" Height="auto" />
@@ -88,7 +88,7 @@
 
 
 
-            <Button x:Name="btn_signup" Margin="0 0 10 0" VerticalAlignment="Bottom" Content="가입신청" HorizontalAlignment="Right" Click="btn_signup_Click" />
+            <Button  x:Name="btn_signup" Margin="0 0 10 5" VerticalAlignment="Bottom" Content="가입신청" HorizontalAlignment="Right" Click="btn_signup_Click" />
         </Grid>
     </Grid>
 </Window>

@@ -1,20 +1,13 @@
 ﻿using MaterialDesignThemes.Wpf;
 using MBStore_MVC.Model;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace MBStore_MVC
 {
@@ -234,6 +227,7 @@ namespace MBStore_MVC
                     tb_inputEmail_1.Text = "";
                     tb_inputEmail_2.Text = "";
                     tb_inputName.Text = "";
+                    text_checkpw.Text = "";
 
                 }
                 else
@@ -245,18 +239,6 @@ namespace MBStore_MVC
                     DialogHost.Show(MessageDialog, "RootDialog");
                 }
             }
-        }
-
-        private void pb_inputPW_MouseEnter(object sender, MouseEventArgs e)
-        {
-            pb_inputPW.BorderBrush = Brushes.DimGray;
-            pb_inputPW.BorderThickness = new Thickness(1);
-        }
-
-        private void pb_checkPW_MouseEnter(object sender, MouseEventArgs e)
-        {
-            pb_checkPW.BorderBrush = Brushes.DimGray;
-            pb_checkPW.BorderThickness = new Thickness(1);
         }
 
         private void tb_inputSocial_1_PreviewTextInput(object sender, TextCompositionEventArgs e)

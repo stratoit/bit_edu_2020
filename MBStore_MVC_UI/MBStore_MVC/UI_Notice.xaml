@@ -94,21 +94,21 @@
                                                                      HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="30" Height="30"
                                                                      Margin="8" Grid.Row="2">
                         <StackPanel>
-                            <Button ToolTip="신규 글 작성" >
-                                <materialDesign:PackIcon Kind="FormatListBulleted" Height="20" Width="20" />
+                            <Button ToolTip="신규 글 작성" x:Name="btn_notice_write" Click="btn_notice_write_Click" >
+                                <materialDesign:PackIcon Kind="TextBoxPlusOutline" Height="25" Width="25" />
                             </Button>
-                            <Button ToolTip="전문 보기"
+                            <Button ToolTip="전문 보기" Click="btn_notice_all_Click"
                                                             Background="{DynamicResource PrimaryHueMidBrush}"
                                                             Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
                                      Command="{x:Static materialDesign:Transitioner.MoveLastCommand}">
-                                <materialDesign:PackIcon Kind="Checkbook" />
+                                <materialDesign:PackIcon Width="25" Height="25" Kind="Magnify" />
                             </Button>
 
                             <Button ToolTip="이전 소식 보기" x:Name="btn_Prev" Click="btn_Prev_Click"
                                                             Background="{DynamicResource SecondaryAccentBrush}"
                                                             Foreground="{DynamicResource SecondaryAccentForegroundBrush}"
                                                             >
-                                <materialDesign:PackIcon Kind="ArrowLeftThick" />
+                                <materialDesign:PackIcon Width="25" Height="25" Kind="ArrowLeftThick" />
                             </Button>
                             <Button ToolTip="다음 소식 보기" x:Name="btn_Next" Click="btn_Next_Click" >
                                 <Button.Background>
@@ -117,7 +117,7 @@
                                 <Button.Foreground>
                                     <SolidColorBrush Color="{StaticResource GreenPrimary200Foreground}" />
                                 </Button.Foreground>
-                                <materialDesign:PackIcon Kind="ArrowRightThick" />
+                                <materialDesign:PackIcon Width="25" Height="25" Kind="ArrowRightThick" />
                             </Button>
                         </StackPanel>
                     </materialDesign:PopupBox>
@@ -168,7 +168,7 @@
                                             Stretch="UniformToFill" />
                     <Button
                         x:Name="btn_emp_print"
-                        Click="btn_emp_print_Click"
+                                            Click="btn_notice_all_Click2"
                                             Grid.Row="0"
                                             ToolTip="전문 보기"
                         

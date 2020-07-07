@@ -3,46 +3,62 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MBStore_MVC"
+        xmlns:local="clr-namespace:MBStore_MVC" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        FontFamily="./Resources/#배달의민족 도현"
+       
         mc:Ignorable="d" ResizeMode="NoResize" WindowStyle="None" 
-         Height="500" Width="700">
-    <Grid>
-
+         Height="710" Width="700">
+    <Grid Background="{DynamicResource MaterialDesignPaper}">
+        
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"></RowDefinition>
-            <RowDefinition Height="55"></RowDefinition>
-            <RowDefinition Height="390"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="75"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition Height="350"></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{DynamicResource PrimaryHueMidBrush}" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 <ColumnDefinition Width="1.2*"></ColumnDefinition>
                 <ColumnDefinition Width="0.3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock VerticalAlignment="Center" Foreground="White" Grid.Column="1" Text="공지작성"/>
-            <Button x:Name="btn_minimum" Background="{DynamicResource PrimaryHueMidBrush}" Foreground="White" FontWeight="Bold" Grid.Column="2" Content="___" Margin="40,0,60,0" BorderBrush="{x:Null}" />
-            <Button x:Name="btn_maximum" Background="{DynamicResource PrimaryHueMidBrush}" Foreground="White" FontWeight="Bold" Grid.Column="2" Content="□" Margin="70,0,30,0" BorderBrush="{x:Null}" />
-            <Button x:Name="btn_close" Background="{DynamicResource PrimaryHueMidBrush}" Foreground="White" FontWeight="Bold" Grid.Column="2" Content="X" Margin="100,0,0,0" BorderBrush="{x:Null}" Click="btn_close_Click" />
+            <TextBlock Foreground="{DynamicResource SecondaryAccentForegroundBrush}" Margin="20 0 0 0" VerticalAlignment="Center" Grid.Column="0" FontSize="14" Text="신규 글 작성"/>
+            <Button x:Name="btn_close" HorizontalAlignment="Right" Background="{DynamicResource PrimaryHueMidBrush}" Foreground="White" FontWeight="Bold" Grid.Column="2" Content="X" BorderBrush="{x:Null}" Click="btn_close_Click" />
         </Grid>
-        <Grid Grid.Row="1" Background="#FFE8E8E8"  >
+        <Border Grid.RowSpan="5" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1"/>
+        <Grid Grid.Row="1"  >
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="0.2*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Border Grid.Row="0" Grid.Column="0" BorderBrush="DimGray" BorderThickness="0.5"/>
             <Border Grid.Row="1" Grid.Column="0" BorderBrush="DimGray" BorderThickness="0.5"/>
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="제  목"/>
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="부  서"/>
-            <TextBox x:Name="tb_title" Grid.Row="0" Grid.Column="1" Background="#FFE8E8E8" />
-            <ComboBox x:Name="cb_part" Grid.Row="1" Grid.Column="1" Background="#FFE8E8E8" IsEnabled="False"/>
+            <TextBlock Foreground="{DynamicResource MaterialDesignBody}" VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="제      목"/>
+            <TextBlock Foreground="{DynamicResource MaterialDesignBody}" VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="카테고리"/>
+            <TextBox Foreground="{DynamicResource MaterialDesignBody}" VerticalAlignment="Bottom" FontSize="14" x:Name="tb_title" Grid.Row="0" Grid.Column="1" />
+            <ComboBox Foreground="{DynamicResource MaterialDesignBody}" FontSize="14" VerticalAlignment="Bottom" x:Name="cb_part" Grid.Row="1" Grid.Column="1" Margin="0,0,10,0"/>
         </Grid>
-        <TextBox x:Name="tb_text" Grid.Row="2"/>
-        <Button x:Name="btn_post" Grid.Row="3" Width="70" Margin="3" Content="공지작성" HorizontalAlignment="Right" Click="btn_post_Click" />
-    </Grid>
-</Window>
+        <materialDesign:ColorZone Grid.Row="2" Margin="5" Mode="Custom"  MaxWidth="290" Height="200" Background="Gray">
+            <materialDesign:PackIcon Kind="AccountCircle" Foreground="White" Height="128" Width="128"  VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </materialDesign:ColorZone>
+        <Border  Width="300" Height="200" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{DynamicResource MaterialDesignBody}" BorderThickness="2">
+            <Border.Background>
+                <ImageBrush  Stretch="Fill" x:Name="img_su_emp" AlignmentY="Top" AlignmentX="Center"/>
+            </Border.Background>
+        </Border>
+        <StackPanel Grid.Row="3">
+            <Button Grid.Row="2" Click="btn_su_emp_img" HorizontalAlignment="Center"  VerticalAlignment="Top" Content="사진 변경"/>
+            <TextBox Grid.Row="2" Visibility="Hidden" x:Name="tb_img_source"/>
+            <TextBox Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" 
+                     Foreground="{DynamicResource MaterialDesignBody}" Margin="5" FontSize="14" x:Name="tb_text" VerticalScrollBarVisibility="Auto" Grid.Row="3" MaxHeight="350" MaxWidth="700" AcceptsReturn="True" AcceptsTab="True" TextWrapping="WrapWithOverflow"/>
+        </StackPanel>
 
+        <Button x:Name="btn_post" Grid.Row="4" Margin="0 0 15 0"  Content="공지작성" HorizontalAlignment="Right" Click="btn_post_Click" />
+
+    </Grid>
+
+</Window>

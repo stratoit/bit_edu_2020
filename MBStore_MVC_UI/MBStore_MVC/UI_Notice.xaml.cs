@@ -86,9 +86,23 @@ namespace MBStore_MVC
             }
         }
 
-        private void btn_emp_print_Click(object sender, RoutedEventArgs e)
+
+        private void btn_notice_write_Click(object sender, RoutedEventArgs e)
         {
-          
+            Notice noti = new Notice(this);
+            noti.Show();
+        }
+
+        private void btn_notice_all_Click(object sender, RoutedEventArgs e)
+        {
+            UI_FullText2.ui_fulltext2.ui_noti = this;
+            UI_FullText2.ui_fulltext2.print();
+        }
+
+        private void btn_notice_all_Click2(object sender, RoutedEventArgs e)
+        {
+            UI_FullText.ui_fulltext.ui_noti = this;
+            UI_FullText.ui_fulltext.print();
         }
     }
 }

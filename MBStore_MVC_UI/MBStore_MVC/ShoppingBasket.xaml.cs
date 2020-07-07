@@ -25,16 +25,16 @@ namespace MBStore_MVC
             InitializeComponent();
             tb_se_basket_quantity.Focus();
         }
-        public void SetProduct(Product product, MainWindow mainWindow)
+        public void SetProduct(Product product, MainWindow mainWindow, string uri)
         {
             this.product = product;
             this.mainWindow = mainWindow;
 
-            img_sb_phone_f.Source = new BitmapImage(new Uri(@"http://20.41.81.89/phone/" + product.Name + "_" + product.Color + "_F.JPG", UriKind.Absolute));
-            img_sb_phone_b.Source = new BitmapImage(new Uri(@"http://20.41.81.89/phone/" + product.Name + "_" + product.Color + "_B.JPG", UriKind.Absolute));
+            img_sb_phone_f.Source = new BitmapImage(new Uri(uri + "/phone/" + product.Name.Replace("+", "plus") + "_" + product.Color + "_F.JPG", UriKind.Absolute));
+            img_sb_phone_b.Source = new BitmapImage(new Uri(uri + "/phone/" + product.Name.Replace("+", "plus") + "_" + product.Color + "_B.JPG", UriKind.Absolute));
             lb_sb_name.Content = product.Name;
             lb_sb_color.Content = "(" + product.Color + ")";
-            img_sb_brand.Source = new BitmapImage(new Uri(@"http://20.41.81.89/brand/" + product.Brand + ".png", UriKind.Absolute));
+            img_sb_brand.Source = new BitmapImage(new Uri(@uri + "/brand/" + product.Brand + ".png", UriKind.Absolute));
             lb_sb_manufacture.Content = ((DateTime)product.Manufacture).ToString("yyyy. MM");
             lb_sb_inch.Content = product.Inch + " inch";
             lb_sb_ram.Content = product.Ram + " GB";
@@ -91,3 +91,4 @@ namespace MBStore_MVC
         }
     }
 }
+

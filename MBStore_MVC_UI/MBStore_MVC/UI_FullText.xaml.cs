@@ -25,8 +25,8 @@ namespace MBStore_MVC
     {
         mbDB db = new mbDB();
         bool edit = false;
-        UI_Notice ui_noti = new UI_Notice();
-
+        public UI_Notice ui_noti = new UI_Notice();
+        public static UI_FullText ui_fulltext;
         public void print()
         {
             tb_text.Text = ui_noti.noticeList[1].Text;
@@ -39,7 +39,7 @@ namespace MBStore_MVC
         public UI_FullText()
         {
             InitializeComponent();
-
+            ui_fulltext = this;
             print();
         }
 
@@ -71,12 +71,17 @@ namespace MBStore_MVC
             {
                 if (db.Update_Notice(MainWindow.emp.Employee_id, ui_noti.noticeList[1].Notice_id, tb_title.Text, tb_text.Text, ui_noti.noticeList[1].Url))
                 {
+                    ui_noti.noticeList[1] = db.SelectNotice_noticeid(ui_noti.noticeList[1].Notice_id);
+                    ui_noti.loaded_notice();
+
                     var MessageDialog = new MessageDialog
                     {
                         Message = { Text = "변경한 내용이 적용됐습니다." }
                     };
                     DialogHost.Show(MessageDialog, "RootDialog");
                     btn_editMode_Click(sender, e);
+
+                 
                 }
 
 

@@ -19,7 +19,7 @@
         
         Background="{DynamicResource MaterialDesignPaper}"
         mc:Ignorable="d" 
-        Title="모바일기기 매장관리 시스템 v1.0" Height="768" Width="1024" Closed="Window_Closed">
+        Title="모바일기기 매장관리 시스템 v1.0" Height="768" Width="1224" Closed="Window_Closed">
 
     <Window.Resources>
         <!-- Color Resource-->
@@ -148,17 +148,17 @@
                                         <RowDefinition Height="1*"></RowDefinition>
                                     </Grid.RowDefinitions>
 
-                                    <materialDesign:Flipper HorizontalAlignment="Center" VerticalAlignment="Center" Height="405" Width="265"  Style="{StaticResource MaterialDesignCardFlipper}" >
+                                    <materialDesign:Flipper  VerticalAlignment="Center" Height="405" Width="auto"  Style="{StaticResource MaterialDesignCardFlipper}" >
                                         <materialDesign:Flipper.FrontContent >
                                             <Grid  Background="{DynamicResource PrimaryHueMidBrush}" >
                                                 <Grid.RowDefinitions >
                                                     <RowDefinition Height="290" />
                                                     <RowDefinition Height="*" />
                                                 </Grid.RowDefinitions>
-                                                <materialDesign:ColorZone   Margin="10" Mode="Custom"  VerticalAlignment="Stretch" Background="Gray">
+                                                <materialDesign:ColorZone   Margin="10" Mode="Custom"  MaxWidth="250" Background="Gray">
                                                     <materialDesign:PackIcon Kind="AccountCircle" Foreground="White" Height="128" Width="128"  VerticalAlignment="Center" HorizontalAlignment="Center" />
                                                 </materialDesign:ColorZone>
-                                                <Border Margin="10" VerticalAlignment="Stretch" >
+                                                <Border Margin="10" VerticalAlignment="Stretch" MaxWidth="250" >
                                                     <Border.Background>
                                                         <ImageBrush  Stretch="Fill" x:Name="img_main_emp"  AlignmentY="Center" AlignmentX="Center"/>
                                                     </Border.Background>
@@ -252,30 +252,30 @@
                                                               materialDesign:HintAssist.IsFloating="True"
                                                               Margin="0 6 0 0">
                                                     </TextBox>
-                                                    <TextBox
+                                                    <PasswordBox
                                                     Foreground="{DynamicResource MaterialDesignBody}"
-                                                       x:Name="tb_myinfo_newPw"
+                                                       x:Name="pb_myinfo_newPw"
                                                     Grid.Row="3"
                                                     materialDesign:HintAssist.Hint="변경할 비밀번호"
                                                               materialDesign:HintAssist.IsFloating="True"
                                                               Margin="0 6 0 0">
-                                                    </TextBox>
-                                                    <TextBox
+                                                    </PasswordBox>
+                                                    <PasswordBox
                                                     Foreground="{DynamicResource MaterialDesignBody}"
-                                                       x:Name="tb_myinfo_NewPw_Check"
+                                                       x:Name="pb_myinfo_NewPw_Check"
                                                     Grid.Row="4"
                                                     materialDesign:HintAssist.Hint="변경할 비밀번호 확인"
                                                               materialDesign:HintAssist.IsFloating="True"
                                                               Margin="0 6 0 0">
-                                                    </TextBox>
-                                                    <TextBox
+                                                    </PasswordBox>
+                                                    <PasswordBox
                                                     Foreground="{DynamicResource MaterialDesignBody}"
-                                                       x:Name="tb_myinfo_usePw"
+                                                       x:Name="pb_myinfo_usePw"
                                                     Grid.Row="5"
                                                     materialDesign:HintAssist.Hint="기존 비밀번호"
                                                               materialDesign:HintAssist.IsFloating="True"
                                                               Margin="0 6 0 0">
-                                                    </TextBox>
+                                                    </PasswordBox>
                                                     <Button
                                                     x:Name="btn_myinfo_update"
                                                     Grid.Row="6"
@@ -1989,7 +1989,7 @@
 
                                         <Border  Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="5" Margin="10" BorderBrush="{DynamicResource MaterialDesignBody}" BorderThickness="2">
                                             <Border.Background>
-                                                <ImageBrush Stretch="Fill" x:Name="img_su_emp" AlignmentY="Top" AlignmentX="Center"/>
+                                                <ImageBrush  Stretch="Fill" x:Name="img_su_emp" AlignmentY="Top" AlignmentX="Center"/>
                                             </Border.Background>
                                         </Border>
                                         <Button Grid.Row="7" x:Name="btn_su_emp_img" Grid.ColumnSpan="2" Click="btn_su_upload_img_Click" Height="30" MaxHeight="30" Width="95" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="74,0">사진 변경</Button>

@@ -1,4 +1,5 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using MaterialDesignColors;
+using MaterialDesignThemes.Wpf;
 using MBStore_MVC.Model;
 using System;
 using System.Collections.Generic;
@@ -26,11 +27,31 @@ namespace MBStore_MVC
     public partial class Login : Window
     {
         string path = @"autoloing.txt";
+        string path2 = @"theme.txt";
         Employee emp = new Employee();
         Sha256 sha256 = new Sha256();
         public Login()
         {
             InitializeComponent();
+
+            //테마
+            if (File.Exists(path2))
+            {
+                string[] value = File.ReadAllText(path2).Split('/');
+                var convert = new ColorConverter();
+                var paletteHelper = new PaletteHelper();
+
+                ITheme theme = paletteHelper.GetTheme();
+
+                //theme.SetPrimaryColor(Colors.Red);
+                //theme.SetSecondaryColor(Colors.Blue);
+
+                theme.PrimaryMid = new ColorPair((Color)convert.ConvertFrom(value[0]), (Color)convert.ConvertFrom(value[1]));
+                theme.SecondaryMid = new ColorPair((Color)convert.ConvertFrom(value[2]), (Color)convert.ConvertFrom(value[3]));
+
+                paletteHelper.SetTheme(theme);
+            }
+            //자동로그인
             if (File.Exists(path))
             {
                 string[] value = File.ReadAllText(path).Split('#');
@@ -38,6 +59,7 @@ namespace MBStore_MVC
             }
             tb_id.DataContext = emp;
                
+
         }
         private void Path_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -85,8 +107,10 @@ namespace MBStore_MVC
                         value = tb_id.Text + "#" + sha256.ComputeSha256Hash(tb_id.Text + tb_pw.Password);
                         File.WriteAllText(path, value, Encoding.Default);
                     }
+                    this.Visibility = Visibility.Hidden;
+
                     MainWindow main = new MainWindow(emp);
-                    this.Close();
+
                 }
                 else
                 {

@@ -60,7 +60,6 @@ namespace MBStore_MVC
         private string ftp_uri;
 
         public static Employee emp;
-
         public static Snackbar Snackbar;
         mbDB db = new mbDB();
 
@@ -126,24 +125,7 @@ namespace MBStore_MVC
             UI_ColorTool color = new UI_ColorTool();  
             ti_setting.Content = color;
 
-            string path = @"theme.txt";
-
-            if (File.Exists(path))
-            {
-                string[] value = File.ReadAllText(path).Split('/');
-                var convert = new ColorConverter();
-                var paletteHelper = new PaletteHelper();
-
-                ITheme theme = paletteHelper.GetTheme();
-
-                //theme.SetPrimaryColor(Colors.Red);
-                //theme.SetSecondaryColor(Colors.Blue);
-
-                theme.PrimaryMid = new ColorPair((Color)convert.ConvertFrom(value[0]), (Color)convert.ConvertFrom(value[1]));
-                theme.SecondaryMid = new ColorPair((Color)convert.ConvertFrom(value[2]), (Color)convert.ConvertFrom(value[3]));
-
-                paletteHelper.SetTheme(theme);
-            }
+            
 
 
 
@@ -192,14 +174,15 @@ namespace MBStore_MVC
         }
 
 
-        //로그인 버튼
+        //로그아웃 버튼
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string path = @"autoloing.txt";
             File.Delete(path);
             Login log = new Login();
-            this.Hide();
-            log.Show();
+            this.Visibility = Visibility.Collapsed;
+            log.ShowDialog();
+
         }
 
         private static void ModifyTheme(Action<ITheme> modificationAction)
@@ -520,7 +503,7 @@ namespace MBStore_MVC
             product = (Product)lv_se_product_info.SelectedItems[0];
 
             ShoppingBasket shoppingBasket_w = new ShoppingBasket();
-            shoppingBasket_w.SetProduct(product, this);
+            shoppingBasket_w.SetProduct(product, this, http_uri);
             shoppingBasket_w.ShowDialog();
         }
         #endregion
@@ -530,22 +513,36 @@ namespace MBStore_MVC
         public void Set_Sell_listview(Product product, int quantity)
         {
             List<Sell_Info> sell_Info_list = new List<Sell_Info>();
+            bool duple = false;
             for (int i = 0; i < lv_se_expect_sell.Items.Count; i++)
             {
                 Sell_Info sell_Info = (Sell_Info)lv_se_expect_sell.Items[i];
                 sell_Info_list.Add(sell_Info);
             }
-
-            sell_Info_list.Add(new Sell_Info()
+            for (int i = 0; i < sell_Info_list.Count; i++)
             {
-                Stock_product = product.Stock_product,
-                Product_id = product.Product_id,
-                Product_name = product.Name,
-                Color = product.Color,
-                ColorValue = product.ColorValue,
-                Quantity = quantity,
-                Total_price = product.Price * quantity
-            });
+                if (sell_Info_list[i].Stock_product == product.Stock_product)
+                {
+                    sell_Info_list[i].Quantity += quantity;
+                    sell_Info_list[i].Total_price = sell_Info_list[i].Quantity * product.Price;
+                    duple = true;
+                    break;
+                }
+            }
+
+            if (!duple)
+            {
+                sell_Info_list.Add(new Sell_Info()
+                {
+                    Stock_product = product.Stock_product,
+                    Product_id = product.Product_id,
+                    Product_name = product.Name,
+                    Color = product.Color,
+                    ColorValue = product.ColorValue,
+                    Quantity = quantity,
+                    Total_price = product.Price * quantity
+                });
+            }
             lv_se_expect_sell.ItemsSource = sell_Info_list;
 
             string str_total_price = la_se_sell_total_price.Content.ToString();
@@ -1046,8 +1043,22 @@ namespace MBStore_MVC
                 {
                     if (Convert.ToInt32(tb_lo_reg_objectmAh.Text) > 0 && Convert.ToInt32(tb_lo_reg_objectRAM.Text) > 0 && Convert.ToInt32(tb_lo_reg_objectCamera.Text) > 0 && Convert.ToInt32(tb_lo_reg_objectWeight.Text) > 0 && Convert.ToInt32(tb_lo_reg_objectPrice.Text) > 0 && Convert.ToInt32(tb_lo_reg_objectMemory.Text) > 0)
                     {
-                        if (MessageBox.Show("등록하시겠습니까?", "알림", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                            db.Add_Lo_Reg_Product(tb_lo_reg_objectName.Text, DateTime.Parse(dp_lo_reg_inputDate.SelectedDate.Value.ToString()), tb_lo_reg_objectCPU.Text, tb_lo_reg_objectInch.Text, Int16.Parse(tb_lo_reg_objectmAh.Text), Int16.Parse(tb_lo_reg_objectRAM.Text), tb_lo_reg_objectBrand.Text, Int16.Parse(tb_lo_reg_objectCamera.Text), Int16.Parse(tb_lo_reg_objectWeight.Text), Int64.Parse(tb_lo_reg_objectPrice.Text), tb_lo_reg_objectDisplay.Text, Int16.Parse(tb_lo_reg_objectMemory.Text));
+                        List<string> checkOverlap = db.Check_Lo_Reg_Overlap();
+                        bool check = false;
+
+                        for (int i = 0; i < checkOverlap.Count; i++)
+                        {
+                            if (checkOverlap[i] == tb_lo_reg_objectName.Text)
+                                check = true;
+                        }
+
+                        if (!check)
+                        {
+                            if (MessageBox.Show("등록하시겠습니까?", "알림", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                                db.Add_Lo_Reg_Product(tb_lo_reg_objectName.Text, DateTime.Parse(dp_lo_reg_inputDate.SelectedDate.Value.ToString()), tb_lo_reg_objectCPU.Text, tb_lo_reg_objectInch.Text, Int16.Parse(tb_lo_reg_objectmAh.Text), Int16.Parse(tb_lo_reg_objectRAM.Text), tb_lo_reg_objectBrand.Text, Int16.Parse(tb_lo_reg_objectCamera.Text), Int16.Parse(tb_lo_reg_objectWeight.Text), Int64.Parse(tb_lo_reg_objectPrice.Text), tb_lo_reg_objectDisplay.Text, Int16.Parse(tb_lo_reg_objectMemory.Text));
+                        }
+                        else if (check)
+                            MessageBox.Show("이미 존재하는 제품입니다");
                     }
                 }
                 else
@@ -1825,9 +1836,13 @@ namespace MBStore_MVC
                 cb_su_sex.SelectedIndex = 0;
                 tb_se_phone.Clear();
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("실패");
+                var MessageDialog = new MessageDialog
+                {
+                    Message = { Text = ex.Message}
+                };
+                DialogHost.Show(MessageDialog, "RootDialog");
             }
             qr = "";
             and_ck = 0;
@@ -2122,7 +2137,11 @@ namespace MBStore_MVC
             Employee employee = new Employee();
             if (tb_su_em_id.Text == "")
             {
-                MessageBox.Show("ID를 입력해주세요");
+                var MessageDialog = new MessageDialog
+                {
+                    Message = { Text = "ID를 입력해 주세요" }
+                };
+                DialogHost.Show(MessageDialog, "RootDialog");
                 tb_su_em_id.Clear();
             }
             else
@@ -2206,7 +2225,11 @@ namespace MBStore_MVC
                 }
                 catch
                 {
-                    MessageBox.Show("등록되지 않은 직원입니다\n지원팀에 문의해주세요");
+                    var MessageDialog = new MessageDialog
+                    {
+                        Message = { Text = "등록되지 않은 직원입니다\n지원팀에 문의해주세요" }
+                    };
+                    DialogHost.Show(MessageDialog, "RootDialog");
                 }
             }
         }
@@ -2254,17 +2277,25 @@ namespace MBStore_MVC
                     rb_gender_check, social_1and2, phone, tb_su_em_email.Text, tb_su_em_adress.Text, end_d);
                     if (tb_su_emp_img.Text != "")
                         FtpUploadFile(tb_su_emp_img.Text, ftp_uri + "/employee/" + tb_su_em_login_id.Text + "_" + cb_su_em_rank.Text + "_" + tb_su_em_name.Text + ".JPG");
-                    MessageBox.Show("완료");
+                    
                     su_All_Reset();
                 }
                 else
                 {
-                    MessageBox.Show("값이 채워지지 않음");
+                    var MessageDialog = new MessageDialog
+                    {
+                        Message = { Text = "입력되지 않은 값이 있습니다" }
+                    };
+                    DialogHost.Show(MessageDialog, "RootDialog");
                 }
             }
             catch
             {
-                MessageBox.Show("비어있는 값이 있습니다");
+                var MessageDialog = new MessageDialog
+                {
+                    Message = { Text = "입력되지 않은 값이 있습니다" }
+                };
+                DialogHost.Show(MessageDialog, "RootDialog");
             }
         }
 
@@ -2280,11 +2311,25 @@ namespace MBStore_MVC
                     {
                         employee = db.Get_Employee_info(int.Parse(tb_su_em_id.Text));
                         db.Reset_PW_EMP(employee.Login_id);
-                        MessageBox.Show("비밀번호 변경완료");
+                        Task.Factory.StartNew(() =>
+                        {
+                            Thread.Sleep(500);
+                        }).ContinueWith(t =>
+                        {
+                            sb_main.MessageQueue.Enqueue("비밀번호 변경 완료.");
+                        }, TaskScheduler.FromCurrentSynchronizationContext());
+                        sb_main.DataContext = sb_main.MessageQueue;
+
+                        Snackbar = this.sb_main;
+
                     }
                     catch
                     {
-                        MessageBox.Show("비밀번호 변경불가");
+                        var MessageDialog = new MessageDialog
+                        {
+                            Message = { Text = "비밀번호 변경이 불가능합니다." }
+                        };
+                        DialogHost.Show(MessageDialog, "RootDialog");
                     }
                 }
             }
@@ -2507,7 +2552,11 @@ namespace MBStore_MVC
             }
             catch (Exception e)
             {
-                MessageBox.Show(e + " ");
+                var MessageDialog = new MessageDialog
+                {
+                    Message = { Text = e.Message }
+                };
+                DialogHost.Show(MessageDialog, "RootDialog");
             }
         }
 
@@ -2526,7 +2575,11 @@ namespace MBStore_MVC
             }
             catch (Exception e)
             {
-                MessageBox.Show(e + " ");
+                var MessageDialog = new MessageDialog
+                {
+                    Message = { Text = e.Message }
+                };
+                DialogHost.Show(MessageDialog, "RootDialog");
             }
         }
 
@@ -2544,7 +2597,11 @@ namespace MBStore_MVC
             }
             catch (Exception e)
             {
-                MessageBox.Show(e + " ");
+                var MessageDialog = new MessageDialog
+                {
+                    Message = { Text = e.Message }
+                };
+                DialogHost.Show(MessageDialog, "RootDialog");
             }
         }
 
@@ -2590,7 +2647,11 @@ namespace MBStore_MVC
             }
             catch
             {
-                MessageBox.Show("다시 선택");
+                var MessageDialog = new MessageDialog
+                {
+                    Message = { Text = "다시 선택해 주세요" }
+                };
+                DialogHost.Show(MessageDialog, "RootDialog");
             }
         }
 
@@ -2637,7 +2698,11 @@ namespace MBStore_MVC
             }
             catch
             {
-                MessageBox.Show("다시 선택");
+                var MessageDialog = new MessageDialog
+                {
+                    Message = { Text = "다시 선택해 주세요" }
+                };
+                DialogHost.Show(MessageDialog, "RootDialog");
             }
         }
 
@@ -2684,7 +2749,11 @@ namespace MBStore_MVC
             }
             catch
             {
-                MessageBox.Show("다시 선택");
+                var MessageDialog = new MessageDialog
+                {
+                    Message = { Text = "다시 선택해 주세요" }
+                };
+                DialogHost.Show(MessageDialog, "RootDialog");
             }
         }
 
@@ -2768,7 +2837,11 @@ namespace MBStore_MVC
             }
             catch
             {
-                MessageBox.Show("다시 선택");
+                var MessageDialog = new MessageDialog
+                {
+                    Message = { Text = "다시 선택해 주세요" }
+                };
+                DialogHost.Show(MessageDialog, "RootDialog");
             }
         }
 
@@ -2883,15 +2956,20 @@ namespace MBStore_MVC
 
         private void btn_myinfo_update_Click(object sender, RoutedEventArgs e)
         {
-            if(tb_myinfo_usePw.Text == "")
+            Sha256 sha256 = new Sha256();
+            string strPw = sha256.ComputeSha256Hash(emp.Login_id + pb_myinfo_usePw.Password);
+
+            if (pb_myinfo_usePw.Password == "")
             {
                 var MessageDialog = new MessageDialog
                 {
                     Message = { Text = "현재 비밀번호를 입력해주세요." }
                 };
                 DialogHost.Show(MessageDialog, "RootDialog");
-            }else if(tb_myinfo_usePw.Text != emp.Login_pw)
+            }else if(strPw != emp.Login_pw)
             {
+                
+
                 var MessageDialog = new MessageDialog
                 {
                     Message = { Text = "기존 비밀번호가 일치하지 않습니다." }
@@ -2913,10 +2991,10 @@ namespace MBStore_MVC
                     emp.Address = strTemp[1];
                 }
 
-                if(tb_myinfo_newPw.Text != "")
+                if(pb_myinfo_newPw.Password != "")
                 {
-                    if(tb_myinfo_newPw.Text == tb_myinfo_NewPw_Check.Text)
-                        emp.Login_pw = tb_myinfo_newPw.Text;
+                    if(pb_myinfo_newPw.Password == pb_myinfo_NewPw_Check.Password)
+                        strPw =  pb_myinfo_newPw.Password;
                     else
                     {
                         var MessageDialog_check = new MessageDialog
@@ -2928,15 +3006,15 @@ namespace MBStore_MVC
                     }
                 }
 
-                db.Update_MyInfo(emp.Employee_id, emp.Phone, emp.Email, emp.Post_number, emp.Address, emp.Login_pw);
+                db.Update_MyInfo(emp.Employee_id, emp.Phone, emp.Email, emp.Post_number, emp.Address,sha256.ComputeSha256Hash(emp.Login_id + strPw));
                 var MessageDialog = new MessageDialog
                 {
                     Message = { Text = "개인정보 변경에 성공했습니다." }
                 };
                 DialogHost.Show(MessageDialog, "RootDialog");
-                tb_myinfo_usePw.Text = "";
-                tb_myinfo_newPw.Text = "";
-                tb_myinfo_NewPw_Check.Text = "";
+                pb_myinfo_usePw.Password = "";
+                pb_myinfo_newPw.Password = "";
+                pb_myinfo_NewPw_Check.Password = "";
 
             }
         }
