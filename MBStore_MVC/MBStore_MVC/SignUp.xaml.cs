@@ -157,14 +157,15 @@ namespace MBStore_MVC
                     gender = "여성";
                 }
 
-
-                string pw = pb_checkPW.Password;
+                Sha256 sha256 = new Sha256();
+                string pw = sha256.ComputeSha256Hash(checked_id + pb_checkPW.Password);
                 string social = tb_inputSocial_1.Text + "-" + tb_inputSocial_2.Password;
                 string phone = cb_phone.Text + tb_inputPhone_1.Text + tb_inputPhone_2.Text;
-                string address = tb_inputAddress_1.Text + "#" + tb_inputAddress_2.Text;
+                string post = tb_inputAddress_1.Text;
+                string address = tb_inputAddress_2.Text;
                 string email = tb_inputEmail_1.Text + "@" + tb_inputEmail_2.Text;
                 string name = tb_inputName.Text;
-                if (db.Insert_SignUp(name, checked_id, pw, gender, social, phone, address, email, DateTime.Now))
+                if (db.Insert_SignUp(name, checked_id, pw, gender, social, phone, post, address, email, DateTime.Now))
                 {
                     MessageBox.Show("성공적으로 가입신청 되었습니다.");
                     checked_id = "";

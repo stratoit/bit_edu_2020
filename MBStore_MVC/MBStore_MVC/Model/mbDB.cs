@@ -82,7 +82,7 @@ namespace MBStore_MVC.Model
 
             }
         }
-        public bool Insert_SignUp(string name, string id, string pw, string gender, string social_number, string phone, string address, string email ,DateTime sign_date)
+        public bool Insert_SignUp(string name, string id, string pw, string gender, string social_number, string phone, string post, string address, string email ,DateTime sign_date)
         {
 
             using (conn = new SqlConnection())
@@ -91,8 +91,8 @@ namespace MBStore_MVC.Model
                     ConfigurationManager.ConnectionStrings["UserDB"].ToString();
                 conn.Open();    //  데이터베이스 연결  
 
-                string sql = "insert into signup(name,login_id,login_pw,gender,social_number,phone,address,email,sign_date) " +
-                    "values(@name,@id,@pw,@gender,@social_number,@phone,@address,@email,@sign_date)";
+                string sql = "insert into signup(name,login_id,login_pw,gender,social_number,phone,post_number,address,email,sign_date) " +
+                    "values(@name,@id,@pw,@gender,@social_number,@phone,@post,@address,@email,@sign_date)";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
@@ -113,6 +113,9 @@ namespace MBStore_MVC.Model
 
                 SqlParameter param_phone = new SqlParameter("@phone", phone);
                 cmd.Parameters.Add(param_phone);
+
+                SqlParameter param_post = new SqlParameter("@post", post);
+                cmd.Parameters.Add(param_post);
 
                 SqlParameter param_address = new SqlParameter("@address", address);
                 cmd.Parameters.Add(param_address);
@@ -183,7 +186,7 @@ namespace MBStore_MVC.Model
                 conn.ConnectionString =
                     ConfigurationManager.ConnectionStrings["UserDB"].ToString();
                 conn.Open();    //  데이터베이스 연결           
-                string sql = "select n.notice_id, e.name, n.last_date, n.title, n.text, n.views " +
+                string sql = "select n.notice_id, e.name, n.last_date, n.title, n.text " +
                     "from employee e join notice n on n.employee_id = e.employee_id " +
                     "where n.category = @part order by n.notice_id desc";
 
@@ -204,8 +207,6 @@ namespace MBStore_MVC.Model
                         notice.Date = myDataReader.GetDateTime(2);
                         notice.Title = myDataReader.GetString(3);
                         notice.Text = myDataReader.GetString(4);
-                        notice.Views = myDataReader.GetInt32(5);
-
 
                         noticeList.Add(notice);
                     }
@@ -1344,6 +1345,43 @@ namespace MBStore_MVC.Model
             return productList;
         }
 
+        //입고 : 현재 선택된 product가 가지고 있는 색상,색상값 목록 출력
+        public List<Product> Get_Lo_Input_ProductColor(int product_id)
+        {
+            List<Product> productList = new List<Product>();
+            try
+            {
+                using (conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["userDB"].ToString();
+                    conn.Open();    //  데이터베이스 연결   
+
+                    string sql = "select distinct color, color_value from stock_product where product_id = @Product_id order by color";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    SqlParameter param_product_id = new SqlParameter("@Product_id", product_id);
+                    param_product_id.SqlDbType = System.Data.SqlDbType.Int;
+                    cmd.Parameters.Add(param_product_id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Product product = new Product();
+                            product.Color = reader.GetString(0);
+                            product.ColorValue = reader.GetString(1);
+                            productList.Add(product);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return productList;
+        }
+
         //입고된 제품목록 출력
         public List<Product> Select_Lo_Pse_stockProduct(string query)
         {
@@ -1948,11 +1986,12 @@ namespace MBStore_MVC.Model
         }
 
         //지원에서 직원관리 -> 비밀번호 리셋 버튼 구현
-        public bool Reset_PW_EMP(string login_id) //11
+        public bool Reset_PW_EMP(string login_id)
         {
             using (conn = new SqlConnection())
             {
-                string set_pw = "1234";
+                Sha256 sha256 = new Sha256();
+                string set_pw = sha256.ComputeSha256Hash(login_id + "1234");
                 string sql = "update employee set login_pw=@login_pw where login_id=@login_id";
                 conn.ConnectionString =
                     ConfigurationManager.ConnectionStrings["UserDB"].ToString();
