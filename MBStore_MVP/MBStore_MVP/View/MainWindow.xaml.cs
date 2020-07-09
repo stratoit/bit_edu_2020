@@ -487,7 +487,7 @@ namespace MBStore_MVP
 
         private void Btn_se_sell_list_remove(object sender, RoutedEventArgs e)
         {
-            lv_se_expect_sell.Items.Clear();
+            lv_se_expect_sell.ItemsSource = null;
             la_se_sell_total_price.Content = "0 원";
         }
 
@@ -882,12 +882,40 @@ namespace MBStore_MVP
             try
             {
                 //비어있는 항목이 없는지 검사
-                if (tb_lo_reg_objectName.Text != "" && dp_lo_reg_inputDate.SelectedDate.Value.ToString() != "" && tb_lo_reg_objectCPU.Text != "" && tb_lo_reg_objectInch.Text != "" && tb_lo_reg_objectmAh.Text != "" && tb_lo_reg_objectRAM.Text != "" && tb_lo_reg_objectBrand.Text != "" && tb_lo_reg_objectCamera.Text != "" && tb_lo_reg_objectWeight.Text != "" && tb_lo_reg_objectPrice.Text != "" && tb_lo_reg_objectDisplay.Text != "" && tb_lo_reg_objectMemory.Text != "")
+               if (tb_lo_reg_objectName.Text != "" && dp_lo_reg_inputDate.SelectedDate.Value.ToString() != "" && tb_lo_reg_objectCPU.Text != "" && tb_lo_reg_objectInch.Text != "" && tb_lo_reg_objectmAh.Text != "" && tb_lo_reg_objectRAM.Text != "" && tb_lo_reg_objectBrand.Text != "" && tb_lo_reg_objectCamera.Text != "" && tb_lo_reg_objectWeight.Text != "" && tb_lo_reg_objectPrice.Text != "" && tb_lo_reg_objectDisplay.Text != "" && tb_lo_reg_objectMemory.Text != "")
                 {
-                    if (Convert.ToInt32(tb_lo_reg_objectmAh.Text) > 0 && Convert.ToInt32(tb_lo_reg_objectRAM.Text) > 0 && Convert.ToInt32(tb_lo_reg_objectCamera.Text) > 0 && Convert.ToInt32(tb_lo_reg_objectWeight.Text) > 0 && Convert.ToInt32(tb_lo_reg_objectPrice.Text) > 0 && Convert.ToInt32(tb_lo_reg_objectMemory.Text) > 0)
+                    List<string> checkOverlap = presenter.Check_Lo_Reg_Overlap();
+                    bool check = false;
+
+                    for (int i = 0; i < checkOverlap.Count; i++)
+                    {
+                        if (checkOverlap[i] == tb_lo_reg_objectName.Text)
+                            check = true;
+                    }
+                    if(check==true)
+                    {
+                        MessageBox.Show("이미 존재하는 제품입니다");
+                    }
+                    else if (Convert.ToInt32(tb_lo_reg_objectmAh.Text) > 0 && Convert.ToInt32(tb_lo_reg_objectRAM.Text) > 0 && Convert.ToInt32(tb_lo_reg_objectCamera.Text) > 0 && Convert.ToInt32(tb_lo_reg_objectWeight.Text) > 0 && Convert.ToInt32(tb_lo_reg_objectPrice.Text) > 0 && Convert.ToInt32(tb_lo_reg_objectMemory.Text) > 0)
                     {
                         if (MessageBox.Show("등록하시겠습니까?", "알림", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        {
                             presenter.Add_Lo_Reg_Product(tb_lo_reg_objectName.Text, DateTime.Parse(dp_lo_reg_inputDate.SelectedDate.Value.ToString()), tb_lo_reg_objectCPU.Text, tb_lo_reg_objectInch.Text, Int16.Parse(tb_lo_reg_objectmAh.Text), Int16.Parse(tb_lo_reg_objectRAM.Text), tb_lo_reg_objectBrand.Text, Int16.Parse(tb_lo_reg_objectCamera.Text), Int16.Parse(tb_lo_reg_objectWeight.Text), Int64.Parse(tb_lo_reg_objectPrice.Text), tb_lo_reg_objectDisplay.Text, Int16.Parse(tb_lo_reg_objectMemory.Text));
+                            tb_lo_reg_objectName.Text = "";
+                            dp_lo_reg_inputDate.SelectedDate = DateTime.Now;
+                            dp_lo_reg_inputDate.SelectedDate = null;
+                            tb_lo_reg_objectCPU.Text = "";
+                            tb_lo_reg_objectInch.Text = "";
+                            tb_lo_reg_objectmAh.Text = "";
+                            tb_lo_reg_objectRAM.Text = "";
+                            tb_lo_reg_objectBrand.Text = "";
+                            tb_lo_reg_objectCamera.Text = "";
+                            tb_lo_reg_objectWeight.Text = "";
+                            tb_lo_reg_objectPrice.Text = "";
+                            tb_lo_reg_objectDisplay.Text = "";
+                            tb_lo_reg_objectMemory.Text = "";
+                        }
+
                     }
                 }
                 else MessageBox.Show("입력을 완료하세요");
@@ -1117,7 +1145,9 @@ namespace MBStore_MVP
             if (lv_lo_input_objectList.Items.Count == 0)
                 MessageBox.Show("데이터가 존재하지 않습니다");
         }
-        //입고 : 물품번호 목록 가져오기
+
+        //입고 : DropDownOpend, SelectionChanged
+        //물품번호
         private void cb_lo_input_productNumber_DropDownOpened(object sender, EventArgs e)
         {
             List<Int32> productdata;
@@ -1125,6 +1155,54 @@ namespace MBStore_MVP
             productdata = presenter.Get_Lo_Input_ProductNumList();
             cb_lo_input_productNumber.ItemsSource = productdata;
         }
+        private void cb_lo_productIdChanged(object sender, EventArgs e)
+        {
+            cb_lo_input_color.IsEditable = true;
+            cb_lo_input_color.Text = "";
+            tb_lo_input_rgb.Text = "";
+
+            ComboBox combo = sender as ComboBox;
+            if (combo.SelectedValue != null)
+            {
+                string selected_id = combo.SelectedValue.ToString();
+
+                List<Product> productdata;
+                productdata = presenter.Get_Lo_Input_ProductColor(int.Parse(selected_id));
+                List<string> ColorList = new List<string>();
+                for (int i = 0; i < productdata.Count; i++)
+                {
+                    ColorList.Add(productdata[i].Color);
+                }
+
+                cb_lo_input_color.ItemsSource = ColorList;
+
+                if (productdata.Count == 0)
+                {
+                    tb_lo_input_rgb.IsReadOnly = false;
+                }
+                else
+                {
+                    tb_lo_input_rgb.IsReadOnly = true;
+                }
+            }
+        }
+
+        //물품색상
+        private void cb_lo_productColorChanged(object sender, EventArgs e)
+        {
+            tb_lo_input_rgb.IsReadOnly = false;
+
+            for (int i = 0; i < cb_lo_input_color.Items.Count; i++)
+            {
+                if (cb_lo_input_color.Items[i].ToString() == cb_lo_input_color.Text)
+                {
+                    tb_lo_input_rgb.IsReadOnly = true;
+                    tb_lo_input_rgb.Text = "";
+                    break;
+                }
+            }
+        }
+
         //입고 : 추가버튼
         private void btn_lo_input_listAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -1132,25 +1210,25 @@ namespace MBStore_MVP
             bool check = true;
             bool duple;
 
-            if (cb_lo_input_productNumber.SelectedIndex == -1 || tb_lo_input_color.Text == "")
+            if (cb_lo_input_productNumber.SelectedIndex == -1 || cb_lo_input_color.Text == "")
             {
                 MessageBox.Show("입력 오류");
             }
             //기존에 입고된 상품일경우
-            else if (duple = presenter.DupleCheck_stock_product(int.Parse(cb_lo_input_productNumber.Text), tb_lo_input_color.Text) && tb_lo_input_numberOf.Text != "" && dp_lo_input_inputDate.SelectedDate.ToString() != "" && cb_lo_input_inOutput.SelectedIndex != -1)
+            else if (duple = presenter.DupleCheck_stock_product(int.Parse(cb_lo_input_productNumber.Text), cb_lo_input_color.Text) && tb_lo_input_numberOf.Text != "" && dp_lo_input_inputDate.SelectedDate.ToString() != "" && cb_lo_input_inOutput.SelectedIndex != -1)
             {
                 for (int i = 0; i < lv_lo_input_addList.Items.Count; i++)
                 {
                     try
                     {   //기존에 있는 항목인 경우. db. 아닌 로컬로 추가하므로 여기에서 Add
                         cus.Add((Product)lv_lo_input_addList.Items[i]);
-                        if (cb_lo_input_productNumber.SelectedItem.ToString() == cus[i].Product_id.ToString() && tb_lo_input_color.Text == cus[i].Color && dp_lo_input_inputDate.SelectedDate.Value == cus[i].Trade_date)
+                        if (cb_lo_input_productNumber.SelectedItem.ToString() == cus[i].Product_id.ToString() && cb_lo_input_color.Text == cus[i].Color && dp_lo_input_inputDate.SelectedDate.Value == cus[i].Trade_date)
                         {
                             plusStock = Convert.ToInt32(Convert.ToInt32(tb_lo_input_numberOf.Text) + cus[i].Stock);
                             lv_lo_input_addList.Items.Add(new Product()
                             {
                                 Product_id = Convert.ToInt32(cb_lo_input_productNumber.Text),
-                                Color = tb_lo_input_color.Text,
+                                Color = cb_lo_input_color.Text,
                                 Stock = plusStock,
                                 //ColorValue = "#" + tb_lo_input_rgb.Text,
                                 Employee_id = Convert.ToInt32(tb_lo_input_employeeID.Text),
@@ -1174,7 +1252,7 @@ namespace MBStore_MVP
                     lv_lo_input_addList.Items.Add(new Product()
                     {
                         Product_id = Convert.ToInt32(cb_lo_input_productNumber.Text),
-                        Color = tb_lo_input_color.Text,
+                        Color = cb_lo_input_color.Text,
                         Stock = plusStock,
                         Employee_id = Convert.ToInt32(tb_lo_input_employeeID.Text),
                         Trade_date = Convert.ToDateTime(dp_lo_input_inputDate.SelectedDate),
@@ -1194,13 +1272,13 @@ namespace MBStore_MVP
                         try
                         {   //기존에 있는 항목인 경우. db. 아닌 로컬로 추가하므로 여기에서 Add
                             cus.Add((Product)lv_lo_input_addList.Items[i]);
-                            if (cb_lo_input_productNumber.SelectedItem.ToString() == cus[i].Product_id.ToString() && tb_lo_input_color.Text == cus[i].Color && dp_lo_input_inputDate.SelectedDate.Value == cus[i].Trade_date)
+                            if (cb_lo_input_productNumber.SelectedItem.ToString() == cus[i].Product_id.ToString() && cb_lo_input_color.Text == cus[i].Color && dp_lo_input_inputDate.SelectedDate.Value == cus[i].Trade_date)
                             {
                                 plusStock = Convert.ToInt32(Convert.ToInt32(tb_lo_input_numberOf.Text) + cus[i].Stock);
                                 lv_lo_input_addList.Items.Add(new Product()
                                 {
                                     Product_id = Convert.ToInt32(cb_lo_input_productNumber.Text),
-                                    Color = tb_lo_input_color.Text,
+                                    Color = cb_lo_input_color.Text,
                                     Stock = plusStock,
                                     ColorValue = "#" + tb_lo_input_rgb.Text,
                                     Employee_id = Convert.ToInt32(tb_lo_input_employeeID.Text),
@@ -1225,7 +1303,7 @@ namespace MBStore_MVP
                         lv_lo_input_addList.Items.Add(new Product()
                         {
                             Product_id = Convert.ToInt32(cb_lo_input_productNumber.Text),
-                            Color = tb_lo_input_color.Text,
+                            Color = cb_lo_input_color.Text,
                             Stock = plusStock,
                             ColorValue = "#" + tb_lo_input_rgb.Text,
                             Employee_id = Convert.ToInt32(tb_lo_input_employeeID.Text),
@@ -1248,11 +1326,14 @@ namespace MBStore_MVP
         //입고 : 삭제버튼
         private void btn_lo_input_remove_Click(object sender, RoutedEventArgs e)
         {
-            tb_lo_input_color.Text = "";
             tb_lo_input_numberOf.Text = "";
             tb_lo_input_rgb.Text = "";
             dp_lo_input_inputDate.Text = "";
             cb_lo_input_productNumber.SelectedIndex = -1;
+            cb_lo_input_color.SelectedIndex = -1;
+            cb_lo_input_color.IsEditable = false;
+            tb_lo_input_rgb.IsReadOnly = true;
+            tb_lo_reg_img.Text = "";
         }
         //입고 : 등록버튼
         private void btn_lo_input_register_Click(object sender, RoutedEventArgs e)
@@ -1323,7 +1404,7 @@ namespace MBStore_MVP
                         MessageBox.Show("등록완료");
 
                         cb_lo_input_productNumber.SelectedIndex = -1;
-                        tb_lo_input_color.Text = "";
+                        cb_lo_input_color.Text = "";
                         tb_lo_input_numberOf.Text = "";
                         tb_lo_input_rgb.Text = "";
                         dp_lo_input_inputDate.Text = "";

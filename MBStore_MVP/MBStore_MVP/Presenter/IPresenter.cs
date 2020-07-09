@@ -85,11 +85,13 @@ namespace MBStore_MVP.Presenter
         #endregion
 
         #region 물류팀
+        List<string> Check_Lo_Reg_Overlap();
         List<Product> Get_Lo_Reg_RegistProductList();
         void Add_Lo_Reg_Product(string name, DateTime manufacture, string cpu, string inch, int mAh, int ram, string brand, int camera, int weight, Int64 price, string display, int memory);
         List<Product> Select_Lo_Pse_Product(int stock_product, int product_id, string product_name, string color, string query);
         List<Product> Get_Lo_Rse_ProductList(int productid, string tradetype, int tradehistoryID, string color, string name, DateTime startDay, DateTime endDay, string query);
         List<Int32> Get_Lo_Input_ProductNumList();
+        List<Product> Get_Lo_Input_ProductColor(int product_id);
         bool DupleCheck_stock_product(int product_id, string color);
         List<Product> Select_Lo_Pse_stockProduct(string query);
         bool input_transaction(List<Product> inputdata, bool[] check, int[] newstock);

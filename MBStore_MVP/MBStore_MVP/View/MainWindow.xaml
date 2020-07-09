@@ -433,13 +433,13 @@
                                     <Grid Row="0" Column="0">
                                         <StackPanel Orientation="Horizontal" Margin="2,0,0,0">
                                             <Label Height="25" Margin="5,0,5,0">물품ID :</Label>
-                                            <ComboBox Name="cb_lo_input_productNumber" Width="70" Height="20" DropDownOpened="cb_lo_input_productNumber_DropDownOpened" DisplayMemberPath="{Binding Product_id}" Margin="0,3,0,0" VerticalAlignment="Top"/>
+                                            <ComboBox Name="cb_lo_input_productNumber" Width="70" Height="20" DropDownOpened="cb_lo_input_productNumber_DropDownOpened" DisplayMemberPath="{Binding Product_id}" SelectionChanged="cb_lo_productIdChanged" Margin="0,3,0,0" VerticalAlignment="Top"/>
                                             <Label Height="25" Margin="5,0,5,0" Content="색   상 :"></Label>
-                                            <TextBox Name="tb_lo_input_color" Height="20" Width="100" Margin="-1,0,0,0"></TextBox>
+                                            <ComboBox Name="cb_lo_input_color" Height="20" Width="100" Margin="-1,0,0,0" DisplayMemberPath="{Binding Color}" TextBoxBase.TextChanged="cb_lo_productColorChanged" IsEditable="False"></ComboBox>
+                                            <Label Margin="5,0,0,0" Content="RGB : #"/>
+                                            <TextBox Name="tb_lo_input_rgb" Height="20" Width="60" MaxLength="6" IsReadOnly="True"></TextBox>
                                             <Label Margin="5,0,5,0" Content="수량 :"></Label>
                                             <TextBox Name="tb_lo_input_numberOf" Width="30" Height="20" Margin="-1,0,0,0"></TextBox>
-                                            <Label Margin="5,0,0,0" Content="RGB : #"/>
-                                            <TextBox Name="tb_lo_input_rgb" MaxLength="6" Height="20" Width="60"></TextBox>
                                             <Button Name="btn_lo_input_listAdd" Margin="10,0,0,0" Height="20" Width="50" Content="추가" Click="btn_lo_input_listAdd_Click"/>
                                             <Button Name="btn_lo_input_remove" Margin="10,0,0,0" Height="20" Width="50" Content="삭제" Click="btn_lo_input_remove_Click"/>
                                         </StackPanel>

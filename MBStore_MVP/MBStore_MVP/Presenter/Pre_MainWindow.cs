@@ -140,6 +140,11 @@ namespace MBStore_MVP.Presenter
         #endregion
 
         #region 물류팀
+
+        public List<string> Check_Lo_Reg_Overlap()
+        {
+            return mbdb.Check_Lo_Reg_Overlap();
+        }
         public List<Product> Get_Lo_Reg_RegistProductList()
         {
             return mbdb.Get_Lo_Reg_RegistProductList();
@@ -163,6 +168,11 @@ namespace MBStore_MVP.Presenter
         public List<int> Get_Lo_Input_ProductNumList()
         {
             return mbdb.Get_Lo_Input_ProductNumList();
+        }
+
+        public List<Product> Get_Lo_Input_ProductColor(int product_id)
+        {
+            return mbdb.Get_Lo_Input_ProductColor(product_id);
         }
 
         public bool DupleCheck_stock_product(int product_id, string color)

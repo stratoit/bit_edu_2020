@@ -914,6 +914,32 @@ namespace MBStore_MVP.Model
         //_refund_ : 반품 영역
 
         #region 제품등록
+        //제품등록 : 중복제품 체크 함수
+        public List<string> Check_Lo_Reg_Overlap()
+        {
+            List<string> checkproductList = new List<string>();
+            using (conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["userDB"].ToString();
+                conn.Open();    //  데이터베이스 연결   
+
+                string sql = "select name from product order by product_id asc";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string product;
+                        product = reader.GetString(0);
+                        checkproductList.Add(product);
+                    }
+                }
+            }
+            return checkproductList;
+        }
+
         //제품등록 : 제품등록 함수
         public void Add_Lo_Reg_Product(string name, DateTime manufacture, string cpu, string inch, int mAh, int ram, string brand, int camera, int weight, Int64 price, string display, int memory)
         {
@@ -1333,6 +1359,43 @@ namespace MBStore_MVP.Model
                         {
                             int product;
                             product = reader.GetInt32(0);
+                            productList.Add(product);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return productList;
+        }
+
+        //입고 : 현재 선택된 product가 가지고 있는 색상,색상값 목록 출력
+        public List<Product> Get_Lo_Input_ProductColor(int product_id)
+        {
+            List<Product> productList = new List<Product>();
+            try
+            {
+                using (conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["userDB"].ToString();
+                    conn.Open();    //  데이터베이스 연결   
+
+                    string sql = "select distinct color, color_value from stock_product where product_id = @Product_id order by color";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    SqlParameter param_product_id = new SqlParameter("@Product_id", product_id);
+                    param_product_id.SqlDbType = System.Data.SqlDbType.Int;
+                    cmd.Parameters.Add(param_product_id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Product product = new Product();
+                            product.Color = reader.GetString(0);
+                            product.ColorValue = reader.GetString(1);
                             productList.Add(product);
                         }
                     }
