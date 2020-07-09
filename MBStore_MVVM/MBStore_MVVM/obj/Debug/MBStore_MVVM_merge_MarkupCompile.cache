@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\
 MBStore_MVVM_merge
 none
 false
 DEBUG;TRACE
-\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\App.xaml
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\App.xaml
 9-400646193
 
-28-402007199
-126-1638305627
+27558992619
+126500759211
 Emp_Sign_up.xaml;FindAddress.xaml;InputCustomer.xaml;Login.xaml;MainWindow.xaml;Notice.xaml;ShoppingBasket.xaml;SignUp.xaml;StockReturn.xaml;
 
-True
+False
 

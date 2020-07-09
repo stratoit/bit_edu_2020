@@ -2233,6 +2233,30 @@ namespace MBStore_MVVM.ViewModel
 
         #region 물류
 
+        #region 물류 - 제품등록 - 리셋버튼
+        private ICommand btn_lo_reg_resetCommand;
+        public ICommand Btn_Lo_Reg_ResetCommand
+        {
+            get { return (this.btn_lo_reg_resetCommand) ?? (this.btn_lo_reg_resetCommand = new DelegateCommand(Lo_Reg_Reset)); }
+        }
+        private void Lo_Reg_Reset()
+        {
+            Tb_Lo_Reg_ObjectNameContent = "";
+            Dp_Lo_Reg_InputDateText = DateTime.Now.ToString();
+            Dp_Lo_Reg_InputDateText = "";
+            Tb_Lo_Reg_ObjectCPUContent = "";
+            Tb_Lo_Reg_ObjectInchContent = "";
+            Tb_Lo_Reg_ObjectmAhContent = "";
+            Tb_Lo_Reg_ObjectRAMContent = "";
+            Tb_Lo_Reg_ObjectBrandContent = "";
+            Tb_Lo_Reg_ObjectCameraContent = "";
+            Tb_Lo_Reg_ObjectWeightContent = "";
+            Tb_Lo_Reg_ObjectPriceContent = "";
+            Tb_Lo_Reg_ObjectDisplayContent = "";
+            Tb_Lo_Reg_ObjectMemoryContent = "";
+        }
+        #endregion
+
         #region 물류 - 제품등록 - 등록버튼
         private ICommand btn_lo_reg_registCommand;
         public ICommand Btn_Lo_Reg_RegistCommand
@@ -2242,6 +2266,7 @@ namespace MBStore_MVVM.ViewModel
         private void Lo_Reg_Regist()
         {
             List<Product> list = new List<Product>();
+            List<string> namelist = new List<string>();
 
             if (Tb_Lo_Reg_ObjectNameContent == "")
                 Tb_Lo_Reg_ObjectNameContent = null;
@@ -2269,14 +2294,31 @@ namespace MBStore_MVVM.ViewModel
                 Tb_Lo_Reg_ObjectMemoryContent = null;
 
 
-            if (Tb_Lo_Reg_ObjectNameContent != null || Dp_Lo_Reg_InputDateContent != null || Tb_Lo_Reg_ObjectCPUContent != null || Tb_Lo_Reg_ObjectInchContent != null || Tb_Lo_Reg_ObjectmAhContent != null || Tb_Lo_Reg_ObjectRAMContent != null || Tb_Lo_Reg_ObjectBrandContent != null || Tb_Lo_Reg_ObjectCameraContent != null || Tb_Lo_Reg_ObjectWeightContent != null || Tb_Lo_Reg_ObjectPriceContent != null || Tb_Lo_Reg_ObjectDisplayContent != null || Tb_Lo_Reg_ObjectMemoryContent != null)
+            if (Tb_Lo_Reg_ObjectNameContent != null && Dp_Lo_Reg_InputDateContent != null && Tb_Lo_Reg_ObjectCPUContent != null && Tb_Lo_Reg_ObjectInchContent != null && Tb_Lo_Reg_ObjectmAhContent != null && Tb_Lo_Reg_ObjectRAMContent != null && Tb_Lo_Reg_ObjectBrandContent != null && Tb_Lo_Reg_ObjectCameraContent != null && Tb_Lo_Reg_ObjectWeightContent != null && Tb_Lo_Reg_ObjectPriceContent != null && Tb_Lo_Reg_ObjectDisplayContent != null && Tb_Lo_Reg_ObjectMemoryContent != null)
             {
                 try
                 {
-                    db.Add_Lo_Reg_Product(Tb_Lo_Reg_ObjectNameContent, Convert.ToDateTime(Dp_Lo_Reg_InputDateContent), Tb_Lo_Reg_ObjectCPUContent, Tb_Lo_Reg_ObjectInchContent, Convert.ToInt32(Tb_Lo_Reg_ObjectmAhContent), Convert.ToInt32(Tb_Lo_Reg_ObjectRAMContent), Tb_Lo_Reg_ObjectBrandContent, Convert.ToInt32(Tb_Lo_Reg_ObjectCameraContent), Convert.ToInt32(Tb_Lo_Reg_ObjectWeightContent), Convert.ToInt64(Tb_Lo_Reg_ObjectPriceContent), Tb_Lo_Reg_ObjectDisplayContent, Convert.ToInt32(Tb_Lo_Reg_ObjectMemoryContent));
-                    Dp_Lo_Reg_InputDateText = DateTime.Now.ToString();
-                    Dp_Lo_Reg_InputDateText = null;
-                    MessageBox.Show("등록 완료");
+                    namelist = db.Check_Lo_Reg_Overlap();
+                    bool check = false;
+
+                    for (int i = 0; i < namelist.Count; i++)
+                    {
+                        if (namelist[i] == Tb_Lo_Reg_ObjectNameContent)
+                            check = true;
+                    }
+
+                    if (!check)
+                    {
+                        if (MessageBox.Show("등록하시겠습니까?", "알림", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        {
+                            db.Add_Lo_Reg_Product(Tb_Lo_Reg_ObjectNameContent, Convert.ToDateTime(Dp_Lo_Reg_InputDateContent), Tb_Lo_Reg_ObjectCPUContent, Tb_Lo_Reg_ObjectInchContent, Convert.ToInt32(Tb_Lo_Reg_ObjectmAhContent), Convert.ToInt32(Tb_Lo_Reg_ObjectRAMContent), Tb_Lo_Reg_ObjectBrandContent, Convert.ToInt32(Tb_Lo_Reg_ObjectCameraContent), Convert.ToInt32(Tb_Lo_Reg_ObjectWeightContent), Convert.ToInt64(Tb_Lo_Reg_ObjectPriceContent), Tb_Lo_Reg_ObjectDisplayContent, Convert.ToInt32(Tb_Lo_Reg_ObjectMemoryContent));
+                            Dp_Lo_Reg_InputDateText = DateTime.Now.ToString();
+                            Dp_Lo_Reg_InputDateText = null;
+                            MessageBox.Show("등록 완료");
+                        }
+                    }
+                    else if (check)
+                        MessageBox.Show("이미 존재하는 제품입니다");
                 }
                 catch (Exception ex)
                 {
@@ -2495,6 +2537,7 @@ namespace MBStore_MVVM.ViewModel
                     MessageBox.Show("제품번호를 먼저 선택하세요");
                 else if (Cb_Lo_Input_ProductNumberContent > -1)
                 {
+                    Cb_Lo_Input_ColorEdit = true;
                     query += Cb_Lo_Input_ProductNumberItem;
                     Cb_Lo_Input_ColorSource = db.Get_Lo_Input_ColorList(query);
                 }
@@ -2503,6 +2546,7 @@ namespace MBStore_MVVM.ViewModel
                 {
                     MessageBox.Show("등록된 색상이 없습니다");
                     Tb_Lo_Input_RGB_ReadOnly = false;
+                    Cb_Lo_Input_ColorEdit = true;
                 }
             }
             catch (Exception ex)
@@ -2522,9 +2566,10 @@ namespace MBStore_MVVM.ViewModel
         {
             try
             {
-                Cb_Lo_Input_ColorEdit = true;
+                Cb_Lo_Input_ColorEdit = false;
                 Tb_Lo_Input_RGB_ReadOnly = true;
                 Tb_Lo_Input_RGBContent = "";
+                Tb_Lo_Input_ImgContent = "";
             }
             catch (Exception ex)
             {
@@ -2702,6 +2747,7 @@ namespace MBStore_MVVM.ViewModel
                                 item.Employee_id = Convert.ToInt32(Tb_Lo_Input_EmployeeNumContent);
                                 item.Trade_date = Convert.ToDateTime(Dp_Lo_Input_InputDateContent);
                                 item.Trade_type = Cb_Lo_Input_InOutputSelected;
+                                item.Image_dir = Tb_Lo_Input_ImgContent;
 
                                 Lv_Lo_Input_AddListSource.Add(item);
                                 Lv_Lo_Input_AddListSource.RemoveAt(i);
@@ -2718,6 +2764,7 @@ namespace MBStore_MVVM.ViewModel
                             item.Employee_id = Convert.ToInt32(Tb_Lo_Input_EmployeeNumContent);
                             item.Trade_date = Convert.ToDateTime(Dp_Lo_Input_InputDateContent);
                             item.Trade_type = Cb_Lo_Input_InOutputSelected;
+                            item.Image_dir = Tb_Lo_Input_ImgContent;
 
                             Lv_Lo_Input_AddListSource.Add(item);
                         }
@@ -2760,6 +2807,7 @@ namespace MBStore_MVVM.ViewModel
                                     item.Employee_id = Convert.ToInt32(Tb_Lo_Input_EmployeeNumContent);
                                     item.Trade_date = Convert.ToDateTime(Dp_Lo_Input_InputDateContent);
                                     item.Trade_type = Cb_Lo_Input_InOutputSelected;
+                                    item.Image_dir = Tb_Lo_Input_ImgContent;
 
                                     Lv_Lo_Input_AddListSource.Add(item);
                                     Lv_Lo_Input_AddListSource.RemoveAt(i);
@@ -2777,6 +2825,7 @@ namespace MBStore_MVVM.ViewModel
                                 item.Employee_id = Convert.ToInt32(Tb_Lo_Input_EmployeeNumContent);
                                 item.Trade_date = Convert.ToDateTime(Dp_Lo_Input_InputDateContent);
                                 item.Trade_type = Cb_Lo_Input_InOutputSelected;
+                                item.Image_dir = Tb_Lo_Input_ImgContent;
 
                                 Lv_Lo_Input_AddListSource.Add(item);
                             }

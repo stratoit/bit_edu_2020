@@ -132,11 +132,12 @@
                                             <Label Height="25" Margin="4,0,4,0">출시일 :</Label>
                                             <DatePicker Width="100" Height="25" SelectedDate="{Binding Dp_Lo_Reg_InputDateContent}" Text="{Binding Dp_Lo_Reg_InputDateText}"></DatePicker>
                                             <Label Margin="4,0,4,0">CPU :</Label>
-                                            <TextBox Width="170" Height="20" Text="{Binding Tb_Lo_Reg_ObjectCPUContent}"></TextBox>
+                                            <TextBox Width="150" Height="20" Text="{Binding Tb_Lo_Reg_ObjectCPUContent}"></TextBox>
                                             <Label Margin="4,0,4,0">크기 :</Label>
                                             <TextBox Height="20" Grid.Column="4" Width="30" Text="{Binding Tb_Lo_Reg_ObjectInchContent}"></TextBox>
                                             <Label Margin="4,0,4,0">배터리 :</Label>
                                             <TextBox Height="20" Grid.Column="4" Width="40" Text="{Binding Tb_Lo_Reg_ObjectmAhContent}"></TextBox>
+                                            <Button Margin="8,3,0,3" Height="Auto" Width="50" Content="초기화" Command="{Binding Btn_Lo_Reg_ResetCommand}"/>
                                         </StackPanel>
                                         <StackPanel Grid.Row="1" Orientation="Horizontal">
                                             <Label Margin="8,0,4,0">RAM :</Label>

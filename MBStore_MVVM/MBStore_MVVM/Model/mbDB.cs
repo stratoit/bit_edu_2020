@@ -917,6 +917,38 @@ namespace MBStore_MVVM.Model
         //_refund_ : 반품 영역
 
         #region 제품등록
+        //제품등록 : 중복제품 체크 함수
+        public List<string> Check_Lo_Reg_Overlap()
+        {
+            List<string> checkproductList = new List<string>();
+            try
+            {
+                using (conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["userDB"].ToString();
+                    conn.Open();    //  데이터베이스 연결   
+
+                    string sql = "select name from product order by product_id asc";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string product;
+                            product = reader.GetString(0);
+                            checkproductList.Add(product);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return checkproductList;
+        }
         //제품등록 : 제품등록 함수
         public void Add_Lo_Reg_Product(string name, DateTime manufacture, string cpu, string inch, int mAh, int ram, string brand, int camera, int weight, Int64 price, string display, int memory)
         {
