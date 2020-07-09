@@ -92,7 +92,7 @@
 
                     <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
                                                                      HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="30" Height="30"
-                                                                     Margin="8" Grid.Row="2">
+                                                                     Margin="5" Grid.Row="2">
                         <StackPanel>
                             <Button ToolTip="신규 글 작성" x:Name="btn_notice_write" Click="btn_notice_write_Click" >
                                 <materialDesign:PackIcon Kind="TextBoxPlusOutline" Height="25" Width="25" />

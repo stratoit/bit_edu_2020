@@ -24,7 +24,6 @@ namespace MBStore_MVC
         }
 
 
-
         #region 숫자 여부 확인
         public bool IsNumeric(string source)
         {
@@ -71,31 +70,23 @@ namespace MBStore_MVC
         {
             if (tb_inputID.Text == "")
             {
-                var MessageDialog = new MessageDialog
-                {
-                    Message = { Text = "아이디를 입력해주세요" }
-                };
-                DialogHost.Show(MessageDialog, "RootDialog");
+                MessageBox.Show("아이디를 입력해주세요");
+
+             
                 tb_inputID.Focus();
             }
             else if (tb_inputID.Text.Length < 4)
             {
-                var MessageDialog = new MessageDialog
-                {
-                    Message = { Text = "아이디는 4자 이상 16자 이하로 입력해주세요" }
-                };
-                DialogHost.Show(MessageDialog, "RootDialog");
+                MessageBox.Show("아이디는 4자 이상 16자 이하로 입력해주세요");
+
                 tb_inputID.Focus();
             }
             else
             {
                 if (db.Check_empID(tb_inputID.Text))
                 {
-                    var MessageDialog = new MessageDialog
-                    {
-                        Message = { Text = "사용 가능한 ID 입니다" }
-                    };
-                    DialogHost.Show(MessageDialog, "RootDialog");
+                    MessageBox.Show("사용 가능한 ID 입니다");
+
                     checked_id = tb_inputID.Text;
                     btn_checkID.BorderBrush = Brushes.Black;
                     btn_checkID.BorderThickness = new Thickness(1);
@@ -103,11 +94,7 @@ namespace MBStore_MVC
                 }
                 else
                 {
-                    var MessageDialog = new MessageDialog
-                    {
-                        Message = { Text = "이미 존재하는 ID 입니다." }
-                    };
-                    DialogHost.Show(MessageDialog, "RootDialog");
+                    MessageBox.Show("이미 존재하는 ID 입니다.");
                     tb_inputID.Focus();
                 }
             }
@@ -118,73 +105,44 @@ namespace MBStore_MVC
         {
             if (checked_id == "")
             {
-                var MessageDialog = new MessageDialog
-                {
-                    Message = { Text = "아이디 중복확인이 필요합니다" }
-                };
-                DialogHost.Show(MessageDialog, "RootDialog");
+                MessageBox.Show("아이디 중복확인이 필요합니다");
                 btn_checkID.BorderBrush = Brushes.Red;
                 btn_checkID.BorderThickness = new Thickness(2);
             }
             else if (pb_inputPW.Password == "")
             {
-                var MessageDialog = new MessageDialog
-                {
-                    Message = { Text = "비밀번호를 입력해주세요" }
-                };
-                DialogHost.Show(MessageDialog, "RootDialog");
+                MessageBox.Show("비밀번호를 입력해주세요");
                 pb_inputPW.BorderBrush = Brushes.Red;
                 pb_inputPW.BorderThickness = new Thickness(2);
             }
             else if (text_checkpw.Text == "" || text_checkpw.Text == "X")
             {
-                var MessageDialog = new MessageDialog
-                {
-                    Message = { Text = "비밀번호가 일치하지 않습니다" }
-                };
-                DialogHost.Show(MessageDialog, "RootDialog");
+                MessageBox.Show("비밀번호가 일치하지 않습니다");
+
                 pb_checkPW.BorderBrush = Brushes.Red;
                 pb_checkPW.BorderThickness = new Thickness(2);
             }
             else if (tb_inputName.Text == "")
             {
-                var MessageDialog = new MessageDialog
-                {
-                    Message = { Text = "이름을 정확하게 입력해주세요" }
-                };
-                DialogHost.Show(MessageDialog, "RootDialog");
+                MessageBox.Show("이름을 정확하게 입력해주세요");
+
             }
             else if (tb_inputSocial_1.Text == "" || tb_inputSocial_2.Password == "")
             {
-                var MessageDialog = new MessageDialog
-                {
-                    Message = { Text = "주민등록번호를 정확하게 입력해주세요" }
-                };
-                DialogHost.Show(MessageDialog, "RootDialog");
+                MessageBox.Show("주민등록번호를 정확하게 입력해주세요");
+
             }
             else if (tb_inputAddress_1.Text == "" || tb_inputAddress_2.Text == "")
             {
-                var MessageDialog = new MessageDialog
-                {
-                    Message = { Text = "주소를 정확하게 입력해주세요" }
-                };
-                DialogHost.Show(MessageDialog, "RootDialog");
+                MessageBox.Show("주소를 정확하게 입력해주세요");
             }
             else if (tb_inputPhone_1.Text == "" || tb_inputPhone_2.Text == "")
             {
-                var MessageDialog = new MessageDialog
-                {
-                    Message = { Text = "휴대전화번호를 정확하게 입력해주세요" }
-                };
-                DialogHost.Show(MessageDialog, "RootDialog");
+                MessageBox.Show("휴대전화번호를 정확하게 입력해주세요");
             }
             else if (tb_inputEmail_1.Text == "" || tb_inputEmail_2.Text == "")
             {
-                var MessageDialog = new MessageDialog
-                {
-                    Message = { Text = "이메일을 정확하게 입력해주세요" }
-                };
-                DialogHost.Show(MessageDialog, "RootDialog");
+                MessageBox.Show("이메일을 정확하게 입력해주세요");
             }
             else
             {
@@ -209,11 +167,8 @@ namespace MBStore_MVC
                 string name = tb_inputName.Text;
                 if (db.Insert_SignUp(name, checked_id, pw, post_num, gender, social, phone, address, email, DateTime.Now))
                 {
-                    var MessageDialog = new MessageDialog
-                    {
-                        Message = { Text = "성공적으로 가입신청 되었습니다" }
-                    };
-                    DialogHost.Show(MessageDialog, "RootDialog");
+                    MessageBox.Show("성공적으로 가입신청 되었습니다");
+
                     checked_id = "";
                     tb_inputID.Text = "";
                     pb_inputPW.Password = "";
@@ -232,11 +187,7 @@ namespace MBStore_MVC
                 }
                 else
                 {
-                    var MessageDialog = new MessageDialog
-                    {
-                        Message = { Text = "가입신청에 실패했습니다!" }
-                    };
-                    DialogHost.Show(MessageDialog, "RootDialog");
+                    MessageBox.Show("성공적으로 가입신청 되었습니다");
                 }
             }
         }

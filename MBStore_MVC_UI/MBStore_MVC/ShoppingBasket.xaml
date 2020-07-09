@@ -7,7 +7,7 @@
         FontFamily="./Resources/#배달의민족 도현"
         mc:Ignorable="d"
         Background="{DynamicResource MaterialDesignPaper}"
-        Title="sell" Height="800" Width="700" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="sell" Height="700" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="12*"/>

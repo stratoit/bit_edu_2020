@@ -32,6 +32,59 @@ namespace MBStore_MVC.Model
         }
 
         #region 로그인
+
+        //테마 업데이트
+        public bool Update_Theme(string th, int emp_id)
+        {
+            using (conn = new SqlConnection())
+            {
+                string sql = "update employee set theme=@th where employee_id=@emp_id";
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결           
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                SqlParameter param_theme = new SqlParameter("@th", th);
+                cmd.Parameters.Add(param_theme);
+
+                SqlParameter param_emp_id = new SqlParameter("@emp_id", emp_id);
+                param_emp_id.SqlDbType = System.Data.SqlDbType.Int;
+                cmd.Parameters.Add(param_emp_id);
+
+                if (cmd.ExecuteNonQuery() >= 1)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        //테마 가져오기
+        public string Get_Theme(int emp_id)
+        {
+            string get_th;
+            using (conn = new SqlConnection())
+            {
+                string sql = "select theme from employee where employee_id=@emp_id";
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["UserDB"].ToString();
+                conn.Open();    //  데이터베이스 연결           
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                SqlParameter param_emp_id = new SqlParameter("@emp_id", emp_id);
+                param_emp_id.SqlDbType = System.Data.SqlDbType.Int;
+                cmd.Parameters.Add(param_emp_id);
+
+                using (SqlDataReader myDataReader = cmd.ExecuteReader())
+                {
+                    myDataReader.Read();
+                    get_th = myDataReader.GetString(0);
+                }
+            }
+            return get_th;
+        }
+
         public Employee SelectEmpId(string id)
         {
             Employee emp = new Employee();
@@ -1991,11 +2044,11 @@ namespace MBStore_MVC.Model
         }
 
         public bool Update_Emp_Info(string login_id, string rank, string name, string gender,
-            string social_num, string phone, string email, string address, DateTime? end_date)
+             string phone, string email, string address, DateTime? end_date)
         {
             using (conn = new SqlConnection())
             {
-                string sql = "update employee set rank=@rank, name=@name, gender=@gender, social_number=@social_number, " +
+                string sql = "update employee set rank=@rank, name=@name, gender=@gender, " +
                     "phone=@phone, email=@email, address=@address, end_date=@end_date where login_id=@login_id";
                 conn.ConnectionString =
                     ConfigurationManager.ConnectionStrings["UserDB"].ToString();
@@ -2014,9 +2067,6 @@ namespace MBStore_MVC.Model
 
                 SqlParameter param_gender = new SqlParameter("@gender", gender);
                 cmd.Parameters.Add(param_gender);
-
-                SqlParameter param_social_num = new SqlParameter("@social_number", social_num);
-                cmd.Parameters.Add(param_social_num);
 
                 SqlParameter param_phone = new SqlParameter("@phone", phone);
                 cmd.Parameters.Add(param_phone);
@@ -2169,7 +2219,7 @@ namespace MBStore_MVC.Model
                         sign_up.Login_id = myDataReader.GetString(0);
                         sign_up.Gender = myDataReader.GetString(1);
                         sign_up.Name = myDataReader.GetString(2);
-                        sign_up.Social_number = myDataReader.GetString(3);
+                        sign_up.Social_number = (myDataReader.GetString(3)).Substring(0, 6);
                         sign_up.Phone = myDataReader.GetString(4);
                         sign_up.Email = myDataReader.GetString(5);
                         sign_up.Post_number = myDataReader.GetString(6);
@@ -2256,9 +2306,9 @@ namespace MBStore_MVC.Model
             {
                 string sql = "insert into employee (employee_id, login_id, login_pw, " +
                     "name, gender, social_number, phone, address, start_date, end_date, " +
-                    "rank, email, post_number) values (@emp_id, @login_id, @login_pw, @name, " +
+                    "rank, email, post_number, theme) values (@emp_id, @login_id, @login_pw, @name, " +
                     " @gender, @social_number, @phone, @address, @start_date, @end_date, " +
-                    "@rank, @email, @post_number)";
+                    "@rank, @email, @post_number, @theme)";
                 conn.ConnectionString =
                     ConfigurationManager.ConnectionStrings["UserDB"].ToString();
                 conn.Open();    //  데이터베이스 연결           
@@ -2308,6 +2358,9 @@ namespace MBStore_MVC.Model
 
                 SqlParameter param_post = new SqlParameter("@post_number", sign.Post_number);
                 cmd.Parameters.Add(param_post);
+
+                SqlParameter param_theme = new SqlParameter("@theme", "#8d6e63/#fdd835/#bcaaa4/#fff9c4");
+                cmd.Parameters.Add(param_theme);
 
                 if (cmd.ExecuteNonQuery() >= 1)
                     return true;
@@ -2408,7 +2461,7 @@ namespace MBStore_MVC.Model
                         employee.Login_pw = myDataReader.GetString(2);
                         employee.Name = myDataReader.GetString(3);
                         employee.Gender = myDataReader.GetString(4);
-                        employee.Social_number = myDataReader.GetString(5);
+                        employee.Social_number = (myDataReader.GetString(5)).Substring(0, 6);
                         employee.Phone = myDataReader.GetString(6);
                         employee.Address = myDataReader.GetString(7);
                         employee.Start_date = myDataReader.IsDBNull(8) ? "없음" : myDataReader.GetDateTime(8).ToShortDateString();

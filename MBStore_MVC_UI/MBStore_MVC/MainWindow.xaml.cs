@@ -82,6 +82,7 @@ namespace MBStore_MVC
             emp =  employee;
             img_main_emp.ImageSource = new BitmapImage(new Uri(@http_uri + "/employee/" + employee.Login_id + "_" + employee.Rank + "_" + employee.Name + ".JPG", UriKind.Absolute));
             text_myinfo_name.Text = emp.Name + " [" + emp.Rank + "]";
+            lb_user.Content = "[" + emp.Rank + "]" + " " + emp.Name;
             #region 통계자료 초기화
             PointLabel = chartPoint =>
                    string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
@@ -103,8 +104,7 @@ namespace MBStore_MVC
             Labels = new[] { "Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec." };
             DataContext = this;
             #endregion
-
-            
+         
             #region 스낵메세지
 
             Task.Factory.StartNew(() =>
@@ -135,9 +135,7 @@ namespace MBStore_MVC
 
             tb_myinfo_address.Text = emp.Post_number +"/" + emp.Address;
             tb_myinfo_email.Text = emp.Email;
-            tb_myinfo_phone.Text = emp.Phone;
-            
-            
+            tb_myinfo_phone.Text = emp.Phone;           
             
             #endregion
         }
@@ -162,7 +160,7 @@ namespace MBStore_MVC
 
         private void SetTextBox()
         {
-             text.Text = DateTime.Now.ToString();
+            text.Text = DateTime.Now.ToString("yyyy/MM/dd");
         }
         #endregion
 
@@ -1055,7 +1053,23 @@ namespace MBStore_MVC
                         if (!check)
                         {
                             if (MessageBox.Show("등록하시겠습니까?", "알림", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                            {
                                 db.Add_Lo_Reg_Product(tb_lo_reg_objectName.Text, DateTime.Parse(dp_lo_reg_inputDate.SelectedDate.Value.ToString()), tb_lo_reg_objectCPU.Text, tb_lo_reg_objectInch.Text, Int16.Parse(tb_lo_reg_objectmAh.Text), Int16.Parse(tb_lo_reg_objectRAM.Text), tb_lo_reg_objectBrand.Text, Int16.Parse(tb_lo_reg_objectCamera.Text), Int16.Parse(tb_lo_reg_objectWeight.Text), Int64.Parse(tb_lo_reg_objectPrice.Text), tb_lo_reg_objectDisplay.Text, Int16.Parse(tb_lo_reg_objectMemory.Text));
+
+                                tb_lo_reg_objectName.Text = "";
+                                dp_lo_reg_inputDate.SelectedDate = DateTime.Now;
+                                dp_lo_reg_inputDate.SelectedDate = null;
+                                tb_lo_reg_objectCPU.Text = "";
+                                tb_lo_reg_objectInch.Text = "";
+                                tb_lo_reg_objectmAh.Text = "";
+                                tb_lo_reg_objectRAM.Text = "";
+                                tb_lo_reg_objectBrand.Text = "";
+                                tb_lo_reg_objectCamera.Text = "";
+                                tb_lo_reg_objectWeight.Text = "";
+                                tb_lo_reg_objectPrice.Text = "";
+                                tb_lo_reg_objectDisplay.Text = "";
+                                tb_lo_reg_objectMemory.Text = "";
+                            }
                         }
                         else if (check)
                             MessageBox.Show("이미 존재하는 제품입니다");
@@ -1091,7 +1105,7 @@ namespace MBStore_MVC
 
             // Set filter for file extension and default file extension 
             dlg.DefaultExt = ".png";
-            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+            dlg.Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif";
 
             // Display OpenFileDialog by calling ShowDialog method 
             Nullable<bool> result = dlg.ShowDialog();
@@ -1916,7 +1930,6 @@ namespace MBStore_MVC
             rb_su_em_gender1.IsChecked = false;
             rb_su_em_gender2.IsChecked = false;
             tb_su_em_social_n1.Clear();
-            tb_su_em_social_n2.Clear();
             tb_su_em_phone1.Clear();
             tb_su_em_phone2.Clear();
             tb_su_em_phone3.Clear();
@@ -2003,7 +2016,7 @@ namespace MBStore_MVC
                 tb_su_gender_check.Foreground = Brushes.Red;
             }
 
-            if (tb_su_em_social_n1.Text != "" && tb_su_em_social_n2.Text != "")
+            if (tb_su_em_social_n1.Text != "")
             {
                 tb_su_em_social_check.Text = "V";
                 tb_su_em_social_check.Foreground = Brushes.Green;
@@ -2100,10 +2113,8 @@ namespace MBStore_MVC
         private void su_em_social1_textChange_event(object sender, TextChangedEventArgs e)//주민등록번호가 올바른지 확인
         {
             string social1_str = "";
-            string social2_str = "";
             social1_str = tb_su_em_social_n1.Text;
-            social2_str = tb_su_em_social_n2.Text;
-            if (social1_str.Length == 6 && social2_str.Length == 7)
+            if (social1_str.Length == 6)
             {
                 tb_su_em_social_check.Text = "V";
                 tb_su_em_social_check.Foreground = Brushes.Green;
@@ -2132,7 +2143,7 @@ namespace MBStore_MVC
         private void Btn_su_employee_search(object sender, RoutedEventArgs e) // 지원-> 직원관리 -> 직원id조회버튼
         {
             int flag = 0;
-            string social_n = string.Empty, social_n1 = string.Empty, social_n2 = string.Empty, str = string.Empty;
+            string social_n = string.Empty, social_n1 = string.Empty, str = string.Empty;
 
             Employee employee = new Employee();
             if (tb_su_em_id.Text == "")
@@ -2164,22 +2175,10 @@ namespace MBStore_MVC
                         rb_su_em_gender1.IsChecked = false;
                         rb_su_em_gender2.IsChecked = true;
                     }
-                    social_n = employee.Social_number;
-                    social_n1 = "";
-                    social_n2 = "";
+                    social_n = (employee.Social_number).Substring(0, 6);
                     flag = 0;
-                    for (int i = 0; i < social_n.Length; i++)
-                    {
-                        if (social_n[i] == '-')
-                        {
-                            flag = 1;
-                            continue;
-                        }
-                        if (flag == 0) social_n1 += social_n[i];
-                        else social_n2 += social_n[i];
-                    }
-                    tb_su_em_social_n1.Text = social_n1;
-                    tb_su_em_social_n2.Text = social_n2;
+                 
+                    tb_su_em_social_n1.Text = social_n;
 
 
                     str = employee.Phone;
@@ -2208,7 +2207,6 @@ namespace MBStore_MVC
                     rb_su_em_gender2.IsEnabled = false;
 
                     tb_su_em_social_n1.IsReadOnly = true;
-                    tb_su_em_social_n2.IsReadOnly = true;
 
                     tb_su_em_phone1.IsReadOnly = false;
                     tb_su_em_phone2.IsReadOnly = false;
@@ -2260,24 +2258,33 @@ namespace MBStore_MVC
         private void Btn_su_employee_change(object sender, RoutedEventArgs e) // 직원 -> 직원관리 -> 조회버튼
         {
             string rb_gender_check = string.Empty;
-            string social_1and2 = string.Empty;
             string phone = string.Empty;
             DateTime? end_d = null;
             if (rb_su_em_gender1.IsChecked == true) rb_gender_check = "남성";
             else if (rb_su_em_gender2.IsChecked == true) rb_gender_check = "여성";
-            social_1and2 = tb_su_em_social_n1.Text + "-" + tb_su_em_social_n2.Text;
             phone = tb_su_em_phone1.Text + tb_su_em_phone2.Text + tb_su_em_phone3.Text;
 
             if (tb_su_em_end.Text == "해당사항없음") end_d = null;
+            else end_d = DateTime.Parse(tb_su_em_end.Text);
             try
             {
                 if (V_check() == true)
                 {
                     db.Update_Emp_Info(tb_su_em_login_id.Text, cb_su_em_rank.Text, tb_su_em_name.Text,
-                    rb_gender_check, social_1and2, phone, tb_su_em_email.Text, tb_su_em_adress.Text, end_d);
+                    rb_gender_check, phone, tb_su_em_email.Text, tb_su_em_adress.Text, end_d);
                     if (tb_su_emp_img.Text != "")
                         FtpUploadFile(tb_su_emp_img.Text, ftp_uri + "/employee/" + tb_su_em_login_id.Text + "_" + cb_su_em_rank.Text + "_" + tb_su_em_name.Text + ".JPG");
-                    
+
+                    Task.Factory.StartNew(() =>
+                    {
+                        Thread.Sleep(500);
+                    }).ContinueWith(t =>
+                    {
+                        sb_main.MessageQueue.Enqueue("직원정보 변경 완료.");
+                    }, TaskScheduler.FromCurrentSynchronizationContext());
+                    sb_main.DataContext = sb_main.MessageQueue;
+
+                    Snackbar = this.sb_main;
                     su_All_Reset();
                 }
                 else
@@ -2429,7 +2436,16 @@ namespace MBStore_MVC
 
                     db.Update_Cus_Info(int.Parse(tb_su_cus_search_cus_id.Text), tb_su_cus_search_name.Text, gen, dtp_su_cus_search_birth.SelectedDate
                         , tb_su_cus_search_phone.Text, long.Parse(tb_su_cus_search_saving.Text));
-                    MessageBox.Show("완료");
+                    Task.Factory.StartNew(() =>
+                    {
+                        Thread.Sleep(500);
+                    }).ContinueWith(t =>
+                    {
+                        sb_main.MessageQueue.Enqueue("고객 정보가 변경되었습니다.");
+                    }, TaskScheduler.FromCurrentSynchronizationContext());
+                    sb_main.DataContext = sb_main.MessageQueue;
+
+                    Snackbar = this.sb_main;
                     su_cus_All_Clear();
                 }
                 catch

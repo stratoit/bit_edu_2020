@@ -30,27 +30,22 @@ namespace MBStore_MVC
         string path2 = @"theme.txt";
         Employee emp = new Employee();
         Sha256 sha256 = new Sha256();
+        mbDB db = new mbDB();
         public Login()
         {
             InitializeComponent();
 
-            //테마
-            if (File.Exists(path2))
-            {
-                string[] value = File.ReadAllText(path2).Split('/');
-                var convert = new ColorConverter();
-                var paletteHelper = new PaletteHelper();
+            string[] color = { "#8d6e63", "#fdd835", "#bcaaa4", "#fff9c4" };
+            var convert = new ColorConverter();
+            var paletteHelper = new PaletteHelper();
 
-                ITheme theme = paletteHelper.GetTheme();
+            ITheme theme = paletteHelper.GetTheme();
 
-                //theme.SetPrimaryColor(Colors.Red);
-                //theme.SetSecondaryColor(Colors.Blue);
+            theme.PrimaryMid = new ColorPair((Color)convert.ConvertFrom(color[0]), (Color)convert.ConvertFrom(color[1]));
+            theme.SecondaryMid = new ColorPair((Color)convert.ConvertFrom(color[2]), (Color)convert.ConvertFrom(color[3]));
 
-                theme.PrimaryMid = new ColorPair((Color)convert.ConvertFrom(value[0]), (Color)convert.ConvertFrom(value[1]));
-                theme.SecondaryMid = new ColorPair((Color)convert.ConvertFrom(value[2]), (Color)convert.ConvertFrom(value[3]));
+            paletteHelper.SetTheme(theme);
 
-                paletteHelper.SetTheme(theme);
-            }
             //자동로그인
             if (File.Exists(path))
             {
@@ -75,11 +70,8 @@ namespace MBStore_MVC
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var MessageDialog = new MessageDialog
-            {
-                Message = { Text = "계정 생성문의나 비밀번호를 잊어버리신 경우 지원팀에 문의하십시오." }
-            };
-            DialogHost.Show(MessageDialog, "RootDialog");
+            MessageBox.Show("계정 생성문의나 비밀번호를 잊어버리신 경우 지원팀에 문의하십시오.");
+            
         }
 
         private void PasswordBox_KeyDown(object sender, KeyEventArgs e)
@@ -90,7 +82,6 @@ namespace MBStore_MVC
         #region 로그인 함수
         private void func_login(string id, string pw)
         {
-            mbDB db = new mbDB();
             Employee emp = new Employee();
 
             emp = db.SelectEmpId(id);
@@ -110,24 +101,30 @@ namespace MBStore_MVC
                     this.Visibility = Visibility.Hidden;
 
                     MainWindow main = new MainWindow(emp);
+                    //테마
+
+                    string[] value1 = db.Get_Theme(emp.Employee_id).Split('/');
+                    var convert = new ColorConverter();
+                    var paletteHelper = new PaletteHelper();
+
+                    ITheme theme = paletteHelper.GetTheme();
+
+                    theme.PrimaryMid = new ColorPair((Color)convert.ConvertFrom(value1[0]), (Color)convert.ConvertFrom(value1[1]));
+                    theme.SecondaryMid = new ColorPair((Color)convert.ConvertFrom(value1[2]), (Color)convert.ConvertFrom(value1[3]));
+
+                    paletteHelper.SetTheme(theme);
 
                 }
                 else
                 {
-                    var MessageDialog = new MessageDialog
-                    {
-                        Message = { Text = "아이디나 비밀번호가 일치하지 않습니다" }
-                    };
-                    DialogHost.Show(MessageDialog, "RootDialog");
+                    MessageBox.Show("아이디나 비밀번호가 일치하지 않습니다");
+
+                    
                 }
             }
             catch
             {
-                var MessageDialog = new MessageDialog
-                {
-                    Message = { Text = "아이디와 비밀번호를 정확하게 입력해주세요." }
-                };
-                DialogHost.Show(MessageDialog, "RootDialog");
+                MessageBox.Show("아이디와 비밀번호를 정확하게 입력해주세요");
             }
         }
         #endregion

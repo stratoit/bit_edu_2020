@@ -1,4 +1,5 @@
 ﻿using MaterialDesignThemes.Wpf;
+using MBStore_MVC.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,16 +27,17 @@ namespace MBStore_MVC
         {
             this.DataContext = new Model.ColorTool();
             InitializeComponent();
-            
         }
+
+        mbDB db = new mbDB();
 
         private async void btn_SaveColor_Click(object sender, RoutedEventArgs e)
         {
-            string path = @"theme.txt";
+            //string path = @"theme.txt";
             string value;
             value = tb_PrimaryColor.Text + "/" + tb_PrimaryColor_Font.Text + "/" + tb_SecondaryColor.Text + "/" + tb_SecondaryColor_Font.Text;
-
-            File.WriteAllText(path, value, Encoding.Default);
+            db.Update_Theme(value, MainWindow.emp.Employee_id);
+            //File.WriteAllText(path, value, Encoding.Default);
 
             var MessageDialog = new MessageDialog
             {

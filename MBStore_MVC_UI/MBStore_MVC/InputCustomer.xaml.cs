@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
 using MBStore_MVC.Model;
 namespace MBStore_MVC
 {
@@ -60,16 +61,30 @@ namespace MBStore_MVC
                     if (cusList.Count != 0)
                         lv_se_basket_expect_cutom_info.ItemsSource = cusList;
                     else
-                        MessageBox.Show("찾으시는 데이터가 없습니다");
+                    {
+                        var MessageDialog = new MessageDialog
+                        {
+                            Message = { Text = "찾으시는 데이터가 없습니다" }
+                        };
+                        DialogHost.Show(MessageDialog, "RootDialog");
+                    }
                 }
                 catch
                 {
-                    MessageBox.Show("DB오류");
+                    var MessageDialog = new MessageDialog
+                    {
+                        Message = { Text = "DB오류" }
+                    };
+                    DialogHost.Show(MessageDialog, "RootDialog");
                 }
             }
             catch
             {
-                MessageBox.Show("잘못 입력하셨습니다");
+                var MessageDialog = new MessageDialog
+                {
+                    Message = { Text = "잘못 입력하셨습니다" }
+                };
+                DialogHost.Show(MessageDialog, "RootDialog");
             }
         }
 
@@ -103,16 +118,32 @@ namespace MBStore_MVC
 
                         db.sell_transaction(sell_list, customer_info.Id, userid, DateTime.Now, saving);
 
-                        MessageBox.Show("판매가 완료 되었습니다", "알림창");
+                        var MessageDialog = new MessageDialog
+                        {
+                            Message = { Text = "판매가 완료 되었습니다" }
+                        };
+                        DialogHost.Show(MessageDialog, "RootDialog");
                         mainWindow.lv_se_expect_sell.ItemsSource = null;
                         mainWindow.la_se_sell_total_price.Content = "0 원";
                     }
                     catch (Exception ex)
                     {
                         if (ex.Message == "재고")
-                            MessageBox.Show("재고부족");
+                        {
+                            var MessageDialog = new MessageDialog
+                            {
+                                Message = { Text = "재고부족" }
+                            };
+                            DialogHost.Show(MessageDialog, "RootDialog");
+                        }
                         else
-                            MessageBox.Show("오류");
+                        {
+                            var MessageDialog = new MessageDialog
+                            {
+                                Message = { Text = "오류" }
+                            };
+                            DialogHost.Show(MessageDialog, "RootDialog");
+                        }
                         mainWindow.lv_se_expect_sell.Items.Clear();
                     }
                     this.Close();
