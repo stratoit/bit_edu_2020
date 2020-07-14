@@ -1,0 +1,30 @@
+﻿<Window x:Class="MBStore_MVC.StockReturn"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MBStore_MVC"
+        mc:Ignorable="d"
+        Title="StockReturn" Height="200" Width="600" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="제품" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" x:Name="lo_pse_basket_product_info" BorderThickness="5" BorderBrush="Black" IsEnabled="False" Margin="0,15,10,15" FontSize="20" VerticalContentAlignment="Center"></TextBox>
+        <Label Grid.Row="1" Grid.Column="0" Content="수량" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="lo_pse_basket_quantity" Margin="0,18,5,18" Text="1" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" KeyDown="KeyDown_lo_quantity">
+        </TextBox>
+        <Label Grid.Row="1" Grid.Column="2" VerticalContentAlignment="Center" x:Name="lo_pse_basket_stock" FontSize="20"></Label>
+        <Button Margin="0,0,15,0" Grid.ColumnSpan="2" x:Name="btn_return" Grid.Row="1" Grid.Column="3"  Height="50" Content="반품등록" FontSize="20" Click="Button_Click" RenderTransformOrigin="0.5,0.504"></Button>
+    </Grid>
+</Window>

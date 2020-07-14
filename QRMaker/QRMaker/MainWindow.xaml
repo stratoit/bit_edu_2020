@@ -1,0 +1,105 @@
+﻿<Window x:Class="QRMaker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        FontFamily="./Resources/#배달의민족 도현"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="13"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Icon="Resources/qricon.ico"
+        mc:Ignorable="d"
+        Title="QRMaker" Height="400" Width="300">
+    <Grid Background="#FFF0F0F0">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0 0 10 0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Margin="0 0 10 0" Content="제품명 :"/>
+                <TextBox  x:Name="tb_name" Height="25" Width="200" 
+                          materialDesign:HintAssist.Hint="ex ) Iphone 11 promax(64)"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Margin="0 0 10 0" Content="출시일 :" />
+                <DatePicker  x:Name="dp_manufacture" Height="25" Width="200"
+                             materialDesign:HintAssist.Hint="ex ) 2019/11/01"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                <Label Margin="0 0 10 0" Content="CPU :" />
+                <TextBox  x:Name="tb_cpu" Height="25" Width="200" 
+                          materialDesign:HintAssist.Hint="ex ) Octa-core 2.8 GHz"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Margin="0 0 10 0" Content="크  기 :" />
+                <TextBox  x:Name="tb_inch" Height="25" Width="200" 
+                          materialDesign:HintAssist.Hint="ex ) 6.5"
+                          PreviewTextInput="tb_inch_PreviewTextInput"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Margin="0 0 10 0" Content="배터리 :" />
+                <TextBox  x:Name="tb_mah" Height="25" Width="200" 
+                          materialDesign:HintAssist.Hint="ex ) 3300"
+                          PreviewTextInput="tb_mah_PreviewTextInput"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Margin="0 0 10 0" Content="RAM :" />
+                <TextBox  x:Name="tb_ram" Height="25" Width="200" 
+                          materialDesign:HintAssist.Hint="ex ) 4"
+                          PreviewTextInput="tb_ram_PreviewTextInput"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Margin="0 0 10 0" Content="제조사 :" />
+                <TextBox  x:Name="tb_brand" Height="25" Width="200" 
+                          materialDesign:HintAssist.Hint="ex ) Samsung"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Margin="0 0 10 0" Content="카메라 :" />
+                <TextBox  x:Name="tb_camera" Height="25" Width="200" 
+                          materialDesign:HintAssist.Hint="ex ) 12"
+                          PreviewTextInput="tb_camera_PreviewTextInput"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Margin="0 0 10 0" Content="무  게 :" />
+                <TextBox  x:Name="tb_weight" Height="25" Width="200" 
+                          materialDesign:HintAssist.Hint="ex ) 195"
+                          PreviewTextInput="tb_weight_PreviewTextInput"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Margin="0 0 10 0" Content="가  격 :" />
+                <TextBox  x:Name="tb_price" Height="25" Width="200" 
+                          materialDesign:HintAssist.Hint="ex ) 1550000"
+                          PreviewTextInput="tb_price_PreviewTextInput"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Margin="0 0 10 0" Content="Display :" />
+                <TextBox  x:Name="tb_display" Height="25" Width="200" 
+                          materialDesign:HintAssist.Hint="ex ) 2960x1440"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Margin="0 0 10 0" Content="메모리 :" />
+                <TextBox  x:Name="tb_memory" Height="25" Width="200" 
+                          materialDesign:HintAssist.Hint="ex ) 64"
+                          PreviewTextInput="tb_memory_PreviewTextInput"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Background="#FFE8DCDC" x:Name="btn_read" Content="불러오기" Margin="0 20 50 0" Click="btn_read_Click"/>
+                <Button Background="#FFE8DCDC" x:Name="btn_print" Content="생성" Margin="0 20 10 0" Click="btn_print_Click" />
+            </StackPanel>
+        </StackPanel>
+
+
+    </Grid>
+</Window>

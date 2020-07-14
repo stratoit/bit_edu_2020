@@ -468,7 +468,9 @@
                                                 <TextBox Foreground="{DynamicResource MaterialDesignBody}" x:Name="tb_lo_reg_objectDisplay" Height="Auto" Grid.Column="4" Width="80"></TextBox>
                                                 <Label Margin="2,0,4,0">메모리 :</Label>
                                                 <TextBox Foreground="{DynamicResource MaterialDesignBody}" x:Name="tb_lo_reg_objectMemory" Height="Auto" Grid.Column="4" Width="40"></TextBox>
+                                                
                                             </StackPanel>
+                                            <Button x:Name="btn_read_QR" Content="QR코드로 불러오기" Click="btn_read_QR_Click" Grid.RowSpan="2" HorizontalAlignment="Right" Height="auto" Margin="0 5 0 0"/>
                                         </Grid>
                                         <Grid Row="0" Column="1">
                                             <Button Name="btn_lo_reg_regist" Margin="10,2.8,10,31.2" Height="Auto" Click="btn_lo_reg_regist_Click">등록</Button>
@@ -1259,7 +1261,11 @@
                                                 <ComboBox Foreground="{DynamicResource MaterialDesignBody}" Width="100" Height="Auto" Margin="0,0,0,0" x:Name="cb_se_ram" IsEditable="True" DisplayMemberPath="{Binding Ram}" KeyDown="KeyDown_se_search_product " DropDownOpened="cb_se_ram_DropDownOpened"></ComboBox>
                                             </StackPanel>
                                         </Grid>
-
+                                        <Grid Row="1" Column="3">
+                                            <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
+                                                <Button Click="Btn_se_recommend" Content="제품추천" Width="100" Height="auto" Margin="0,5,0,0"></Button>
+                                            </StackPanel>
+                                        </Grid>
                                         <Grid Row="0" Column="4" Grid.RowSpan="2">
                                             <Button Click="Btn_se_Search" Margin="-30,19,31,9">조회</Button>
                                         </Grid>

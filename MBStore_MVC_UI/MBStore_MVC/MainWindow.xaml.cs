@@ -28,8 +28,9 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 
 using MaterialDesignColors;
-
-
+using Microsoft.Win32;
+using System.Drawing;
+using Brushes = System.Windows.Media.Brushes;
 
 namespace MBStore_MVC
 {
@@ -71,7 +72,7 @@ namespace MBStore_MVC
         {
 
         }
-        public MainWindow(Employee employee): base()
+        public MainWindow(Employee employee) : base()
         {
             this.Show();
             InitializeComponent();
@@ -79,7 +80,7 @@ namespace MBStore_MVC
             uri = "20.41.81.89";
             http_uri = "http://" + uri;
             ftp_uri = "ftp://" + uri + ":21";
-            emp =  employee;
+            emp = employee;
             img_main_emp.ImageSource = new BitmapImage(new Uri(@http_uri + "/employee/" + employee.Login_id + "_" + employee.Rank + "_" + employee.Name + ".JPG", UriKind.Absolute));
             text_myinfo_name.Text = emp.Name + " [" + emp.Rank + "]";
             lb_user.Content = "[" + emp.Rank + "]" + " " + emp.Name;
@@ -104,7 +105,7 @@ namespace MBStore_MVC
             Labels = new[] { "Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec." };
             DataContext = this;
             #endregion
-         
+
             #region 스낵메세지
 
             Task.Factory.StartNew(() =>
@@ -122,10 +123,10 @@ namespace MBStore_MVC
 
             #region UI_ColorTool + 테마 불러오기
 
-            UI_ColorTool color = new UI_ColorTool();  
+            UI_ColorTool color = new UI_ColorTool();
             ti_setting.Content = color;
 
-            
+
 
 
 
@@ -133,10 +134,10 @@ namespace MBStore_MVC
 
             #region MyInfo 불러오기
 
-            tb_myinfo_address.Text = emp.Post_number +"/" + emp.Address;
+            tb_myinfo_address.Text = emp.Post_number + "/" + emp.Address;
             tb_myinfo_email.Text = emp.Email;
-            tb_myinfo_phone.Text = emp.Phone;           
-            
+            tb_myinfo_phone.Text = emp.Phone;
+
             #endregion
         }
 
@@ -233,7 +234,7 @@ namespace MBStore_MVC
                     present = VisualTreeHelper.GetParent((DependencyObject)present);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 var MessageDialog = new MessageDialog
                 {
@@ -241,7 +242,7 @@ namespace MBStore_MVC
                 };
                 DialogHost.Show(MessageDialog, "RootDialog");
             }
-            
+
             listview = (ListView)present;
             if (listview.Items.Count != 0)
             {
@@ -313,7 +314,7 @@ namespace MBStore_MVC
         }
         #endregion
 
-    #region 판매팀
+        #region 판매팀
         #region 물품조회
         private void Btn_se_Search(object sender, RoutedEventArgs e)
         {
@@ -471,6 +472,13 @@ namespace MBStore_MVC
             btn_se_price.Content = "▲";
 
             lv_se_product_info.ItemsSource = null;
+        }
+
+        private void Btn_se_recommend(object sender, RoutedEventArgs e)
+        {
+            Recommend recommend = new Recommend();
+            recommend.SetRecommend(this);
+            recommend.ShowDialog();
         }
 
         private void Btn_se_price(object sender, RoutedEventArgs e)
@@ -887,7 +895,7 @@ namespace MBStore_MVC
                 DialogHost.Show(MessageDialog, "RootDialog");
             }
         }
-      
+
 
         private void Btn_se_cus_reset(object sender, RoutedEventArgs e)
         {
@@ -927,7 +935,7 @@ namespace MBStore_MVC
                 qr2 += " phone like @phone";
             }
 
-            if (qr2 != "") 
+            if (qr2 != "")
                 ap = " where" + qr2;
 
             try
@@ -991,7 +999,7 @@ namespace MBStore_MVC
 
         #endregion
 
-    #region 물류팀
+        #region 물류팀
         //함수 이름예시
         //_Lo_, _lo_ : 물류팀 (Logistics)
         //_Reg_, _reg_ : 제품등록 영역
@@ -1306,7 +1314,7 @@ namespace MBStore_MVC
                 tb_lo_rse_tradeHistoryID.Text = "";
                 cb_lo_rse_inOutput.SelectedIndex = 0;
                 dp_lo_rse_startDate.SelectedDate = Convert.ToDateTime(DateTime.Now.Year + "-" + DateTime.Now.Month + "-01");
-                
+
                 dp_lo_rse_endDate.SelectedDate = DateTime.Today;
             }
             catch (Exception ex)
@@ -1380,7 +1388,7 @@ namespace MBStore_MVC
             tb_lo_input_rgb.Text = "";
 
             ComboBox combo = sender as ComboBox;
-            if(combo.SelectedValue != null)
+            if (combo.SelectedValue != null)
             {
                 string selected_id = combo.SelectedValue.ToString();
 
@@ -1634,7 +1642,7 @@ namespace MBStore_MVC
                             if (check[i] == false)
                             {
                                 string product_name = db.Select_productname_id(inputdata[i].Product_id);
-                                FtpUploadFile(inputdata[i].Image_dir,ftp_uri +  "/phone/" + product_name + "_" + inputdata[i].Color + "_F.JPG");
+                                FtpUploadFile(inputdata[i].Image_dir, ftp_uri + "/phone/" + product_name + "_" + inputdata[i].Color + "_F.JPG");
                             }
                         }
                         Task.Factory.StartNew(() =>
@@ -1850,11 +1858,11 @@ namespace MBStore_MVC
                 cb_su_sex.SelectedIndex = 0;
                 tb_se_phone.Clear();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 var MessageDialog = new MessageDialog
                 {
-                    Message = { Text = ex.Message}
+                    Message = { Text = ex.Message }
                 };
                 DialogHost.Show(MessageDialog, "RootDialog");
             }
@@ -2177,7 +2185,7 @@ namespace MBStore_MVC
                     }
                     social_n = (employee.Social_number).Substring(0, 6);
                     flag = 0;
-                 
+
                     tb_su_em_social_n1.Text = social_n;
 
 
@@ -2982,9 +2990,10 @@ namespace MBStore_MVC
                     Message = { Text = "현재 비밀번호를 입력해주세요." }
                 };
                 DialogHost.Show(MessageDialog, "RootDialog");
-            }else if(strPw != emp.Login_pw)
+            }
+            else if (strPw != emp.Login_pw)
             {
-                
+
 
                 var MessageDialog = new MessageDialog
                 {
@@ -3000,17 +3009,17 @@ namespace MBStore_MVC
                 if (tb_myinfo_email.Text != emp.Email)
                     emp.Email = tb_myinfo_email.Text;
 
-                if(tb_myinfo_address.Text != emp.Post_number + "/" + emp.Address)
+                if (tb_myinfo_address.Text != emp.Post_number + "/" + emp.Address)
                 {
                     string[] strTemp = tb_myinfo_address.Text.Split('/');
                     emp.Post_number = strTemp[0];
                     emp.Address = strTemp[1];
                 }
 
-                if(pb_myinfo_newPw.Password != "")
+                if (pb_myinfo_newPw.Password != "")
                 {
-                    if(pb_myinfo_newPw.Password == pb_myinfo_NewPw_Check.Password)
-                        strPw =  pb_myinfo_newPw.Password;
+                    if (pb_myinfo_newPw.Password == pb_myinfo_NewPw_Check.Password)
+                        strPw = pb_myinfo_newPw.Password;
                     else
                     {
                         var MessageDialog_check = new MessageDialog
@@ -3022,7 +3031,7 @@ namespace MBStore_MVC
                     }
                 }
 
-                db.Update_MyInfo(emp.Employee_id, emp.Phone, emp.Email, emp.Post_number, emp.Address,sha256.ComputeSha256Hash(emp.Login_id + strPw));
+                db.Update_MyInfo(emp.Employee_id, emp.Phone, emp.Email, emp.Post_number, emp.Address, sha256.ComputeSha256Hash(emp.Login_id + strPw));
                 var MessageDialog = new MessageDialog
                 {
                     Message = { Text = "개인정보 변경에 성공했습니다." }
@@ -3043,6 +3052,42 @@ namespace MBStore_MVC
             if (!string.IsNullOrWhiteSpace(ScheduleTextBox.Text))
                 ScheduleListBox.Items.Add(ScheduleTextBox.Text.Trim());
         }
+
+        private void btn_read_QR_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ZXing.BarcodeReader barcodeReader = new ZXing.BarcodeReader();
+
+                //string deskPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                OpenFileDialog dlg = new OpenFileDialog();
+                dlg.DefaultExt = ".jpeg";
+                dlg.Filter = "Image files (*.jpeg)|*.jpeg";
+
+                if (dlg.ShowDialog() == true)
+                {
+                    var barcodeBitmap = (Bitmap)System.Drawing.Image.FromFile(dlg.FileName);
+                    string[] result = barcodeReader.Decode(barcodeBitmap).Text.Split('#');
+                    tb_lo_reg_objectName.Text = result[0];
+                    dp_lo_reg_inputDate.Text = result[1];
+                    tb_lo_reg_objectCPU.Text = result[2];
+                    tb_lo_reg_objectInch.Text = result[3];
+                    tb_lo_reg_objectmAh.Text = result[4];
+                    tb_lo_reg_objectRAM.Text = result[5];
+                    tb_lo_reg_objectBrand.Text = result[6];
+                    tb_lo_reg_objectCamera.Text = result[7];
+                    tb_lo_reg_objectWeight.Text = result[8];
+                    tb_lo_reg_objectPrice.Text = result[9];
+                    tb_lo_reg_objectDisplay.Text = result[10];
+                    tb_lo_reg_objectMemory.Text = result[11];
+                }
+            }
+            catch
+            {
+                MessageBox.Show("형식이 일치하지 않은 QR코드 입니다.");
+            }
+        }
     }
 }
+
 

@@ -1,0 +1,255 @@
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\MBStore_MVVM_merge.exe.config
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\MBStore_MVVM_merge.exe
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\MBStore_MVVM_merge.pdb
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\CommonServiceLocator.dll
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.dll
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.dll
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.Wpf.dll
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\Microsoft.Expression.Interactions.dll
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\System.Windows.Interactivity.dll
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.pdb
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.xml
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.pdb
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.xml
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.Wpf.pdb
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.Wpf.xml
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\Microsoft.Expression.Interactions.xml
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\Emp_Sign_up.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\FindAddress.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\InputCustomer.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\Login.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MainWindow.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\Notice.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\ShoppingBasket.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\SignUp.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\StockReturn.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\App.g.cs
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge_MarkupCompile.cache
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge_MarkupCompile.lref
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\Emp_Sign_up.baml
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\FindAddress.baml
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\InputCustomer.baml
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\Login.baml
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MainWindow.baml
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\Notice.baml
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\ShoppingBasket.baml
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\SignUp.baml
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\StockReturn.baml
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.g.resources
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.Properties.Resources.resources
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csproj.GenerateResource.cache
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csproj.CoreCompileInputs.cache
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csproj.CopyComplete
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.exe
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.pdb
+\\192.168.1.14\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csprojAssemblyReference.cache
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\MBStore_MVVM_merge.exe.config
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\MBStore_MVVM_merge.exe
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\MBStore_MVVM_merge.pdb
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\CommonServiceLocator.dll
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.dll
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.dll
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.Wpf.dll
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\Microsoft.Expression.Interactions.dll
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\System.Windows.Interactivity.dll
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.pdb
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.xml
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.pdb
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.xml
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.Wpf.pdb
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.Wpf.xml
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\bin\Debug\Microsoft.Expression.Interactions.xml
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csprojAssemblyReference.cache
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\Emp_Sign_up.g.cs
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\FindAddress.g.cs
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\InputCustomer.g.cs
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\Login.g.cs
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MainWindow.g.cs
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\Notice.g.cs
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\ShoppingBasket.g.cs
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\SignUp.g.cs
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\StockReturn.g.cs
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\App.g.cs
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge_MarkupCompile.cache
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge_MarkupCompile.lref
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\Emp_Sign_up.baml
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\FindAddress.baml
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\InputCustomer.baml
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\Login.baml
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MainWindow.baml
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\Notice.baml
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\ShoppingBasket.baml
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\SignUp.baml
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\StockReturn.baml
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.g.resources
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.Properties.Resources.resources
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csproj.GenerateResource.cache
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csproj.CoreCompileInputs.cache
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csproj.CopyComplete
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.exe
+D:\shared_sim\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.pdb
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\MBStore_MVVM_merge.exe.config
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\MBStore_MVVM_merge.exe
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\MBStore_MVVM_merge.pdb
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\CommonServiceLocator.dll
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.dll
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.dll
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.Wpf.dll
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\Microsoft.Expression.Interactions.dll
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\System.Windows.Interactivity.dll
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.pdb
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.xml
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.pdb
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.xml
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.Wpf.pdb
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.Wpf.xml
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\Microsoft.Expression.Interactions.xml
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csprojAssemblyReference.cache
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\Emp_Sign_up.g.cs
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\FindAddress.g.cs
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\InputCustomer.g.cs
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\Login.g.cs
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MainWindow.g.cs
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\Notice.g.cs
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\ShoppingBasket.g.cs
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\SignUp.g.cs
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\StockReturn.g.cs
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\App.g.cs
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge_MarkupCompile.cache
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge_MarkupCompile.lref
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\Emp_Sign_up.baml
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\FindAddress.baml
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\InputCustomer.baml
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\Login.baml
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MainWindow.baml
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\Notice.baml
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\ShoppingBasket.baml
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\SignUp.baml
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\StockReturn.baml
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.g.resources
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.Properties.Resources.resources
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csproj.GenerateResource.cache
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csproj.CoreCompileInputs.cache
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csproj.CopyComplete
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.exe
+D:\shared_sim\MBC,MVP,MVVM 아마최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.pdb
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\MBStore_MVVM_merge.exe.config
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\MBStore_MVVM_merge.exe
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\MBStore_MVVM_merge.pdb
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\CommonServiceLocator.dll
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.dll
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.dll
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.Wpf.dll
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\Microsoft.Expression.Interactions.dll
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\System.Windows.Interactivity.dll
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.pdb
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.xml
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.pdb
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.xml
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.Wpf.pdb
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.Wpf.xml
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\bin\Debug\Microsoft.Expression.Interactions.xml
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csprojAssemblyReference.cache
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\Emp_Sign_up.g.cs
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\FindAddress.g.cs
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\InputCustomer.g.cs
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\Login.g.cs
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\MainWindow.g.cs
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\Notice.g.cs
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\ShoppingBasket.g.cs
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\SignUp.g.cs
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\StockReturn.g.cs
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\App.g.cs
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge_MarkupCompile.cache
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge_MarkupCompile.lref
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\Emp_Sign_up.baml
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\FindAddress.baml
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\InputCustomer.baml
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\Login.baml
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\MainWindow.baml
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\Notice.baml
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\ShoppingBasket.baml
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\SignUp.baml
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\StockReturn.baml
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.g.resources
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.Properties.Resources.resources
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csproj.GenerateResource.cache
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csproj.CoreCompileInputs.cache
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csproj.CopyComplete
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.exe
+E:\Project\Resources\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.pdb
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\MBStore_MVVM_merge.exe.config
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\MBStore_MVVM_merge.exe
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\MBStore_MVVM_merge.pdb
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\CommonServiceLocator.dll
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.dll
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.dll
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.Wpf.dll
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\Microsoft.Expression.Interactions.dll
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\System.Windows.Interactivity.dll
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.pdb
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.xml
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.pdb
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.xml
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.Wpf.pdb
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\LiveCharts.Wpf.xml
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\bin\Debug\Microsoft.Expression.Interactions.xml
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csprojAssemblyReference.cache
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\Emp_Sign_up.g.cs
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\FindAddress.g.cs
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\InputCustomer.g.cs
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\Login.g.cs
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MainWindow.g.cs
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\Notice.g.cs
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\ShoppingBasket.g.cs
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\SignUp.g.cs
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\StockReturn.g.cs
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\App.g.cs
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge_MarkupCompile.cache
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge_MarkupCompile.lref
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\Emp_Sign_up.baml
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\FindAddress.baml
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\InputCustomer.baml
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\Login.baml
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MainWindow.baml
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\Notice.baml
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\ShoppingBasket.baml
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\SignUp.baml
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\StockReturn.baml
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.g.resources
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.Properties.Resources.resources
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csproj.GenerateResource.cache
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csproj.CoreCompileInputs.cache
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM.csproj.CopyComplete
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.exe
+D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVVM\MBStore_MVVM\obj\Debug\MBStore_MVVM_merge.pdb

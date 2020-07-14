@@ -108,3 +108,182 @@ D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBSto
 D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.csproj.CopyComplete
 D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.exe
 D:\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.pdb
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MBStore_MVC.exe.config
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MBStore_MVC.exe
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MBStore_MVC.pdb
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.dll
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.Wpf.dll
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MaterialDesignColors.dll
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MaterialDesignThemes.Wpf.dll
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.pdb
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.xml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.Wpf.pdb
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.Wpf.xml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MaterialDesignColors.pdb
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MaterialDesignThemes.Wpf.pdb
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MaterialDesignThemes.Wpf.xml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.csprojAssemblyReference.cache
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Emp_Sign_up.g.cs
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\FindAddress.g.cs
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\InputCustomer.g.cs
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Login.g.cs
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MainWindow.g.cs
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MessageDialog.g.cs
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Notice.g.cs
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\ShoppingBasket.g.cs
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\SignUp.g.cs
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\StockReturn.g.cs
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_ColorTool.g.cs
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_FullText.g.cs
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_FullText2.g.cs
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_Notice.g.cs
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\App.g.cs
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC_MarkupCompile.cache
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC_MarkupCompile.lref
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\App.baml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Emp_Sign_up.baml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\FindAddress.baml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\InputCustomer.baml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Login.baml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MainWindow.baml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MessageDialog.baml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Notice.baml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\ShoppingBasket.baml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\SignUp.baml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\StockReturn.baml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_ColorTool.baml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_FullText.baml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_FullText2.baml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_Notice.baml
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.g.resources
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.Properties.Resources.resources
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.csproj.GenerateResource.cache
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.csproj.CoreCompileInputs.cache
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.csproj.CopyComplete
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.exe
+\\192.168.1.4\shared_sim\MBC,MVP,MVVM 최신\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.pdb
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MBStore_MVC.exe.config
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MBStore_MVC.exe
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MBStore_MVC.pdb
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.dll
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.Wpf.dll
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MaterialDesignColors.dll
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.pdb
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.xml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.Wpf.pdb
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.Wpf.xml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MaterialDesignColors.pdb
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.csprojAssemblyReference.cache
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Emp_Sign_up.g.cs
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\FindAddress.g.cs
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\InputCustomer.g.cs
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Login.g.cs
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MainWindow.g.cs
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MessageDialog.g.cs
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Notice.g.cs
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\ShoppingBasket.g.cs
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\SignUp.g.cs
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\StockReturn.g.cs
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_ColorTool.g.cs
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_FullText.g.cs
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_FullText2.g.cs
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_Notice.g.cs
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\App.g.cs
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC_MarkupCompile.cache
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC_MarkupCompile.lref
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\App.baml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Emp_Sign_up.baml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\FindAddress.baml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\InputCustomer.baml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Login.baml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MainWindow.baml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MessageDialog.baml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Notice.baml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\ShoppingBasket.baml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\SignUp.baml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\StockReturn.baml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_ColorTool.baml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_FullText.baml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_FullText2.baml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_Notice.baml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.g.resources
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.Properties.Resources.resources
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.csproj.GenerateResource.cache
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.csproj.CoreCompileInputs.cache
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.csproj.CopyComplete
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.exe
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.pdb
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\zxing.dll
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\zxing.presentation.dll
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\zxing.pdb
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\zxing.xml
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\zxing.presentation.pdb
+C:\Users\cs950\Downloads\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\zxing.presentation.xml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MBStore_MVC.exe.config
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MBStore_MVC.exe
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MBStore_MVC.pdb
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.dll
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.Wpf.dll
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MaterialDesignColors.dll
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\zxing.dll
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\zxing.presentation.dll
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.pdb
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.xml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.Wpf.pdb
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\LiveCharts.Wpf.xml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MaterialDesignColors.pdb
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\zxing.pdb
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\zxing.xml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\zxing.presentation.pdb
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\bin\x86\Debug\zxing.presentation.xml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.csprojAssemblyReference.cache
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Emp_Sign_up.g.cs
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\FindAddress.g.cs
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\InputCustomer.g.cs
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Login.g.cs
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MainWindow.g.cs
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MessageDialog.g.cs
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Notice.g.cs
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\ShoppingBasket.g.cs
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\SignUp.g.cs
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\StockReturn.g.cs
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_ColorTool.g.cs
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_FullText.g.cs
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_FullText2.g.cs
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_Notice.g.cs
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\App.g.cs
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC_MarkupCompile.cache
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC_MarkupCompile.lref
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\App.baml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Emp_Sign_up.baml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\FindAddress.baml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\InputCustomer.baml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Login.baml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MainWindow.baml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MessageDialog.baml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Notice.baml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\ShoppingBasket.baml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\SignUp.baml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\StockReturn.baml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_ColorTool.baml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_FullText.baml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_FullText2.baml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\UI_Notice.baml
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.g.resources
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.Properties.Resources.resources
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.csproj.GenerateResource.cache
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.csproj.CoreCompileInputs.cache
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.csproj.CopyComplete
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.exe
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\MBStore_MVC.pdb
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Recommend.g.cs
+C:\Users\bit\Desktop\bit_project\MBStore_MVC_UI\MBStore_MVC\obj\x86\Debug\Recommend.baml
